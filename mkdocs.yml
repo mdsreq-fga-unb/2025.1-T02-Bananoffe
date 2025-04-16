@@ -1,0 +1,41 @@
+site_name:  Bananoffee Doceria
+site_description: Documentação oficial do projeto
+site_author: Equipe BananaTech
+repo_url: https://github.com/mdsreq-fga-unb/2025.1-T02-Bananoffe
+repo_name: 2025.1-T02-Bananoffe
+
+theme:
+  name: material
+  language: pt-BR
+  favicon: assets/logoUnb.svg
+  logo: assets/logoUnbPreta.png
+  icon: 
+    repo: fontawesome/brands/github
+  palette:
+    - scheme: default
+      primary: yellow
+      accent: brown
+      toggle:
+        icon: material/toggle-switch-off-outline
+        name: Modo escuro
+    - scheme: slate
+      primary: yellow
+      accent: brown
+      toggle:
+        icon: material/toggle-switch
+        name: Modo claro
+  features:
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+    - repo.icon
+
+nav:
+  - Início: index.md
+  - Visão do Produto e Projeto:
+      - Cenário atual do cliente e do negócio: pages/visaoDoProduto/cenarioAtual.md
+      - Solução proposta: visao/objetivos.md
+      - Campo 3: visao/publico_alvo.md
+  - Entregas:
+      - Unidade 1: unidade.md
