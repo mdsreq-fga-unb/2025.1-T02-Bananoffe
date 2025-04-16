@@ -44,7 +44,7 @@ de um funcionário para atendimento e organização dos pedidos, o que reduz a e
 operação. Além disso, ao utilizar plataformas de delivery de grande porte, há uma redução significativa nas
 margens de lucro devido às taxas cobradas por esses serviços.
 
-![Diagrama de Ishikawa](../../assets/Diagrama%20de%20Ishikawa%20(espinha%20de%20peixe)_page-0001.jpg)
+![Diagrama de Ishikawa](../../assets/Diagrama%20de%20Ishikawa.jpg)
 
 
 ## Desafios do Projeto
@@ -72,4 +72,3 @@ a porta” e compram regularmente, seja para consumo no dia a dia ou pequenas co
 O segundo perfil é formado pelos clientes externos, igualmente atraídos pelas postagens no Instagram; esses
 consumidores podem retirar o pedido na portaria, solicitar via iFood ou usar serviços como Uber Flash. Ainda
 que não se disponha de dados formais sobre faixa etária, observa-se um público predominantemente adulto.
-## testando pra ver se vai rodar o actions
