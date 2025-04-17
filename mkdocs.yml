@@ -7,8 +7,8 @@ repo_name: 2025.1-T02-Bananoffe
 theme:
   name: material
   language: pt-BR
-  favicon: assets/logoUnb.svg
-  logo: assets/logoUnbPreta.png
+  favicon: assets/logounb.svg
+  logo: assets/logoBananoffee.png
   icon: 
     repo: fontawesome/brands/github
   palette:
@@ -35,7 +35,6 @@ nav:
   - Início: index.md
   - Visão do Produto e Projeto:
       - Cenário atual do cliente e do negócio: pages/visaoDoProduto/cenarioAtual.md
-      - Solução proposta: visao/objetivos.md
-      - Campo 3: visao/publico_alvo.md
+      - Solução proposta: pages/visaoDoProduto/solucaoProposta.md
   - Entregas:
-      - Unidade 1: unidade.md
+      - Unidade 1: pages/entregas/unidade1.md
