@@ -35,7 +35,7 @@ Com base na análise comparativa entre os modelos **RAD** e **Scrum/XP**, escolh
 
 3. **Leveza e escalabilidade do processo**  
    - O Scrum/XP oferece uma estrutura enxuta — com papéis bem definidos (*Product Owner*, *Scrum Master*, time de desenvolvimento) e cerimônias objetivas — ao mesmo tempo em que permanece flexível para mudanças de prioridade.  
-   - À medida que o projeto evoluir, é possível escalar o framework (por exemplo, por meio de práticas como Scrum of Scrums) mantendo a agilidade e a transparência dos fluxos.
+   - À medida que o projeto evoluir, é possível escalar o framework mantendo a agilidade e a transparência dos fluxos.
 
 Além disso, o Scrum/XP permite lidar com os desafios específicos do projeto Bananoffee, como:
 
