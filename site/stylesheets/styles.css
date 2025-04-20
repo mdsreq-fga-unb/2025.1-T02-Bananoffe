@@ -1,0 +1,10 @@
+.md-header {
+  background-color: #f1dd2f;
+}
+
+/* Customização das tabelas */
+.md-typeset table:not([class]) th {
+  background-color: #f1dd2f;
+  color: #895023;
+  font-weight: bold;
+}
