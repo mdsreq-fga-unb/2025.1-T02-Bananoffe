@@ -1,12 +1,12 @@
 # SOLUÇÃO PROPOSTA
 
-## Objetivos do Produto
+### Objetivos do Produto
 
-O objetivo do produto é automatizar partes do processo de venda dos produtos da empresa Bananoffe Doceria, visando agilizar e organizar o atendimento e os pedidos, além de reduzir o tempo e o esforço gastos com a comunicação manual via WhatsApp. Com a plataforma proposta, etapas como a exibição do cardápio, a seleção dos produtos e o envio do pedido serão realizadas diretamente pelo cliente, sem a necessidade de um colaborador intermediar esse atendimento inicial. Além disso, o pagamento via Pix também poderá ser realizado de forma automática através do site, eliminando a necessidade de troca de mensagens para envio de dados bancários ou confirmação de valores.
+O objetivo do produto é automatizar partes do processo de venda dos produtos da empresa Bananoffee Doceria, visando agilizar e organizar o atendimento e os pedidos, além de reduzir o tempo e o esforço gastos com a comunicação manual via WhatsApp. Com a plataforma proposta, etapas como a exibição do cardápio, a seleção dos produtos e o envio do pedido serão realizadas diretamente pelo cliente, sem a necessidade de um colaborador intermediar esse atendimento inicial. Além disso, o pagamento via Pix também poderá ser realizado de forma automática através do site, eliminando a necessidade de troca de mensagens para envio de dados bancários ou confirmação de valores.
 
 Com a implementação de uma plataforma própria de delivery, espera-se automatizar esse fluxo e alavancar a quantidade de vendas.
 
-## Características da Solução
+### Características da Solução
 
 Como o principal conjunto de características iniciais para solucionar o problema da empresa, temos:
 
@@ -19,7 +19,7 @@ Como o principal conjunto de características iniciais para solucionar o problem
 - O site terá um design simples e intuitivo para facilitar a navegação do usuário e do gestor da empresa.
 - Notificações e confirmações automáticas, reduzindo a dependência de respostas via WhatsApp.
 
-## Tecnologias a Serem Utilizadas
+### Tecnologias a Serem Utilizadas
 
 A solução será desenvolvida com base em tecnologias modernas e consolidadas no mercado, garantindo desempenho, escalabilidade e facilidade de manutenção.
 
@@ -29,13 +29,13 @@ As principais tecnologias a serem utilizadas são:
 - **NestJS**: Framework Node.js para o desenvolvimento da API e da lógica de negócios (backend), com arquitetura modular e robusta, ideal para aplicações escaláveis.
 - **MongoDB**: banco de dados NoSQL, que oferece flexibilidade no armazenamento de dados e facilidade de integração.
 
-## Pesquisa de Mercado e Análise Competitiva
+### Pesquisa de Mercado e Análise Competitiva
 
-A solução digital proposta para a Bananoffe Doceria — um sistema de pedidos online com catálogo digital, gestão de estoque e suporte a pronta-entrega — insere-se em um cenário competitivo que vai além da confeitaria local. Nesse contexto, é essencial considerar tanto os concorrentes diretos (outras docerias artesanais) quanto os concorrentes funcionais (plataformas e sistemas que oferecem soluções similares à que será desenvolvida).
+A solução digital proposta para a Bananoffee Doceria — um sistema de pedidos online com catálogo digital, gestão de estoque e suporte a pronta-entrega — insere-se em um cenário competitivo que vai além da confeitaria local. Nesse contexto, é essencial considerar tanto os concorrentes diretos (outras docerias artesanais) quanto os concorrentes funcionais (plataformas e sistemas que oferecem soluções similares à que será desenvolvida).
 
 ### Concorrência Local
 
-A Bananoffe atua em um mercado de confeitaria artesanal dentro de um condomínio, onde diversas iniciativas similares compartilham o mesmo público-alvo. A maioria dessas docerias opera de forma enxuta e artesanal, utilizando o grupo de WhatsApp do condomínio como canal principal de divulgação e captação de pedidos. Dentre os concorrentes diretos, destaca-se a Tem Delícia, que mantém presença ativa no Instagram e trabalha com encomendas de bolos personalizados, brigadeiros e cupcakes. No entanto, não oferece pronta-entrega e exige pedidos com antecedência.
+A Bananoffee atua em um mercado de confeitaria artesanal dentro de um condomínio, onde diversas iniciativas similares compartilham o mesmo público-alvo. A maioria dessas docerias opera de forma enxuta e artesanal, utilizando o grupo de WhatsApp do condomínio como canal principal de divulgação e captação de pedidos. Dentre os concorrentes diretos, destaca-se a Tem Delícia, que mantém presença ativa no Instagram e trabalha com encomendas de bolos personalizados, brigadeiros e cupcakes. No entanto, não oferece pronta-entrega e exige pedidos com antecedência.
 
 As principais fragilidades observadas nessas concorrentes locais são:
 
@@ -53,13 +53,13 @@ Esse sistema oferece funcionalidades que, muitas vezes, não estão alinhadas co
 
 ### Diferenciais da Solução Proposta
 
-A solução da Bananoffe se destaca por:
+A solução da Bananoffee se destaca por:
 
 - Oferecer um catálogo digital acessível por link, facilitando a visualização dos produtos e ampliando a divulgação fora do grupo do condomínio.
 - Permitir controle de estoque em tempo real, com destaque para a disponibilidade de produtos para pronta-entrega.
 - Automatizar parte do processo de pedidos, reduzindo o tempo gasto com atendimento manual via WhatsApp e aumentando a eficiência da operação.
 
-## Análise de Viabilidade
+### Análise de Viabilidade
 
 A viabilidade técnica do projeto é alta, considerando que a equipe já possui experiência comprovada nas tecnologias que serão utilizadas, como Next.js para o frontend, NestJS para o backend e MongoDB para o banco de dados.
 
@@ -67,9 +67,9 @@ O prazo estimado para o desenvolvimento é de três meses, considerado viável p
 
 A equipe já participou de projetos similares e possui autonomia para tomar decisões técnicas. O uso de frameworks modernos e conhecidos também contribui para a viabilidade do projeto, reduzindo riscos técnicos. Além disso, o fato de o projeto não depender de muitas integrações externas complexas neste primeiro momento favorece a execução dentro do prazo.
 
-## Impacto da Solução
+### Impacto da Solução
 
-A implementação da nova plataforma de pedidos online para a Bananoffe Doceria deverá gerar uma série de impactos positivos, tanto operacionais quanto estratégicos.
+A implementação da nova plataforma de pedidos online para a Bananoffee Doceria deverá gerar uma série de impactos positivos, tanto operacionais quanto estratégicos.
 
 - **Agilidade no atendimento:** A automatização do processo de pedidos elimina a necessidade de interações manuais constantes via WhatsApp, permitindo que o cliente finalize seu pedido de forma autônoma, escolhendo produtos, horário de retirada e método de pagamento em poucos cliques. Isso reduz o tempo médio de atendimento, elimina gargalos de comunicação e libera os funcionários para ficarem na produção e entrega.
 
@@ -84,3 +84,10 @@ A implementação da nova plataforma de pedidos online para a Bananoffe Doceria 
 - **Redução de custos com pessoas intermediárias:** Com a nova plataforma, a dependência de plataformas terceirizadas como iFood e Uber Flash pode ser reduzida significativamente, assim como os custos com taxas e comissões. A venda direta pelo site permite repassar melhores preços ao consumidor final e preservar maior margem de lucro para a empresa.
 
 - **Fortalecimento da Marca e Fidelização de Clientes:** A criação de um canal próprio de vendas aumenta a percepção de profissionalismo e credibilidade da marca. Com o cadastro de clientes e registros de compras, torna-se possível desenvolver ações de fidelização, como promoções direcionadas, ofertas personalizadas e campanhas sazonais — fortalecendo o vínculo com os consumidores e incentivando recompras.
+
+---
+## Histórico de Versão
+| Data     | Versão | Descrição             | Autor          |
+| -------- | ------ | --------------------- | -------------- |
+| 17/04/25 | 1.0    | Criação do Documento  | Marcos Bezerra |
+| 19/04/25 | 1.1    | Ajustes e estilização | Bruno Cruz     |

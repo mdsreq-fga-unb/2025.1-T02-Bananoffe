@@ -5,7 +5,7 @@ Este projeto foi desenvolvido como parte da disciplina de **Requisitos de Softwa
 
 ## Introdução
 
-O presente trabalho tem como objetivo propor, documentar e planejar a implementação de um sistema personalizado para a empresa **Bananoffe Doceria**, especializada na produção e venda de tortas artesanais sob encomenda e para pronta entrega. 
+O presente trabalho tem como objetivo propor, documentar e planejar a implementação de um sistema personalizado para a empresa **Bananoffee Doceria**, especializada na produção e venda de tortas artesanais sob encomenda e para pronta entrega. 
 
 O foco do projeto está no **levantamento e especificação de requisitos** para a construção de uma plataforma digital (site) que permitirá a automatização e organização dos pedidos, reservas, pagamentos e gestão administrativa da empresa.
 
@@ -76,3 +76,12 @@ A iniciativa busca substituir o atual fluxo de atendimento, realizado manualment
     <p style="color: #555;">Desenvolvedor Backend</p>
   </div>
 </a> 
+
+</div>
+
+---
+## Histórico de Versão
+| Data     | Versão | Descrição             | Autor          |
+| -------- | ------ | --------------------- | -------------- |
+| 17/04/25 | 1.0    | Criação do Documento  | Marcos Bezerra |
+| 19/04/25 | 1.1    | Ajustes e estilização | Bruno Cruz     |
