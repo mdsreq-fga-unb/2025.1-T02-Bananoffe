@@ -1,4 +1,3 @@
-
 # CENÁRIO ATUAL DO CLIENTE E DO NEGÓCIO
 
 ### Introdução ao Negócio e Contexto
@@ -19,7 +18,6 @@ cada pedido, o que garante flexibilidade na escolha de sabores e horários, mas 
 esforço operacional e está sujeito a falhas humanas. No iFood, o processo é mais automatizado, mas as
 comissões da plataforma elevam o valor ao consumidor e reduzem a margem de lucro.
 
-
 ### Identificação da Oportunidade ou Problema
 
 A principal limitação da Bananoffee Doceria está na comunicação e organização de pedidos, hoje totalmente
@@ -32,8 +30,8 @@ até desistências de clientes durante o processo de compra.
 Esse cenário se agrava em datas de pico, como Páscoa e Natal, quando toda a capacidade produtiva é
 direcionada às tortas inteiras e não há fatias à pronta‑entrega. A dependência exclusiva do WhatsApp e de
 plataformas de delivery expõe a Bananoffee a perda de vendas potenciais e dificuldade de escalar a operação
-sem comprometer a qualidade artesanal. Com um site próprio, será possível centralizar e organizar melhor as
-informações dos pedidos, além de eliminar as taxas cobradas pelos plataformas de delivery, neste caso o Ifood,
+sem comprometer a qualidade artesanal. Com um site próprio, será possível centralizar as
+informações dos pedidos de forma eficiente, além de eliminar as taxas cobradas pelos plataformas de delivery, neste caso o Ifood,
 aumentando a margem de lucro.
 
 O uso do WhatsApp como principal canal de comunicação com os clientes exige a dedicação quase exclusiva
@@ -42,7 +40,6 @@ operação. Além disso, ao utilizar plataformas de delivery de grande porte, h�
 margens de lucro devido às taxas cobradas por esses serviços.
 
 ![Diagrama de Ishikawa](../../assets/Diagrama%20de%20Ishikawa.jpg)
-
 
 ### Desafios do Projeto
 
@@ -54,8 +51,7 @@ gerador de código QR para pagamentos via pix.
 No âmbito operacional, a transição de um processo manual e centralizado no WhatsApp para uma outra
 plataforma digital, um site próprio, deve ocorrer sem interromper as vendas atuais, evitando perda de pedidos
 ou confusão na equipe. Como a Bananoffee conta apenas com os dois sócios, será necessário um programa de
-treinamento rápido e objetivo para adoção rápida da ferramenta.
-
+treinamento rápido e objetivo para garantir a adoção eficiente da nova ferramenta.
 
 ### Segmentação de Clientes
 
@@ -71,8 +67,12 @@ consumidores podem retirar o pedido na portaria, solicitar via iFood ou usar ser
 que não se disponha de dados formais sobre faixa etária, observa-se um público predominantemente adulto.
 
 ---
+
 ### Histórico de Versão
-| Data     | Versão | Descrição             | Autor          |
-| -------- | ------ | --------------------- | -------------- |
-| 17/04/25 | 1.0    | Criação do Documento  | Marcos Bezerra |
-| 19/04/25 | 1.1    | Ajustes e estilização | Bruno Cruz     |
+
+| Data     | Versão | Descrição               | Autor              |
+| -------- | ------ | ----------------------- | ------------------ |
+| 17/04/25 | 1.0    | Criação do Documento    | Marcos Bezerra     |
+| 19/04/25 | 1.1    | Ajustes e estilização   | Bruno Cruz         |
+| 21/04/25 | 1.2    | Atualização do diagrama | Guilherme Zanella  |
+| 21/04/25 | 1.3    | Ajustes                 | Anne de Capdeville |
