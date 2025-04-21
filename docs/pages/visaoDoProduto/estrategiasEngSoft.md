@@ -1,20 +1,3 @@
-![logo bananoffee](assets/banner.png)
-
-# Projeto Bananoffee
-
-Este projeto foi desenvolvido como parte da disciplina de **Requisitos de Software** do curso de Engenharia de Software, semestre **2025/1**, **Turma 2**, ministrada pelo docente George Marsciano Correa.
-Expandir
-message.txt
-5 KB
-# CENÁRIO ATUAL DO CLIENTE E DO NEGÓCIO
-
-### Introdução ao Negócio e Contexto
-
-A Bananoffee Doceria é uma confeitaria de pequeno porte sediada no Gama, em Brasília, especializada na
-produção artesanal de banoffes — tortas de massa crocante, banana e doce de leite — e suas variações com
-Expandir
-message.txt
-6 KB
 # ESTRATÉGIAS DE ENGENHARIA DE SOFTWARE
 
 ## ESTRATÉGIA PRIORIZADA
@@ -78,14 +61,8 @@ Em resumo, o **Scrum/XP** combina rapidez de entrega, qualidade técnica e adapt
 
 ## Histórico de Versão
 
-| Data     | Versão | Descrição                             | Autor        |
-| -------- | ------ | ------------------------------------- | ------------ |
-| 19/04/25 | 1.0    | Criação do Documento                  | Bruno Garcia |
-| 20/04/25 | 1.1    | Estratégias de Engenharia de Software | Fábio Araújo |
-Recolher
-message.txt
-8 KB
-﻿
-anne
-nane_capde
- 
+| Data     | Versão | Descrição                             | Autor              |
+| -------- | ------ | ------------------------------------- | ------------------ |
+| 19/04/25 | 1.0    | Criação do Documento                  | Bruno Garcia       |
+| 20/04/25 | 1.1    | Estratégias de Engenharia de Software | Fábio Araújo       |
+| 21/04/25 | 1.2    | Referências                           | Anne de Capdeville |
