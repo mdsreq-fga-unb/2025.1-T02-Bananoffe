@@ -1,24 +1,3 @@
-Guilherme Zanella
-refrivoante
-Não perturbar
-
-anne — 12/09/2024 17:23
-https://www.canva.com/design/DAGQlNHd3Gw/mTn1ym1EG9iJqdnsMig5Nw/edit?utm_content=DAGQlNHd3Gw&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
-Guilherme Zanella — 12/09/2024 17:46
-git status
-git add .
-git commit -m "atualização classes sla"
-git push origin Main
-Guilherme Zanella — 07/04/2025 21:25
-manda o link
-do discord
-o do grupo expirou
-anne — 07/04/2025 21:26
-https://discord.gg/apEH3sDZ
-Guilherme Zanella — 19:24
-Co-authored-by: Mateus Maia mateusmaiamaia@hotmail.com
-anne — 19:25
-Co-authored-by: Anne Capdeville annecapdeville22@gmail.com
 ![logo bananoffee](assets/banner.png)
 
 # Projeto Bananoffee
