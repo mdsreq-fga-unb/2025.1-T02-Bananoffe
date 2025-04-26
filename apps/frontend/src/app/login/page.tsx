@@ -14,21 +14,76 @@ import {
 } from "@chakra-ui/react";
 import { PasswordInput } from "@/components/ui/password-input";
 import { useForm } from "react-hook-form";
-import React from "react";
+import React, { useState } from "react";
+import { useRouter } from "next/navigation";
+import axios from "axios";
 
 interface FormValues {
   email: string;
   password: string;
 }
+interface LoginResponse {
+  token: string;
+  role: 'ADMIN' | 'CLIENTE';
+}
 
 function Login() {
+  const router = useRouter();
+  // const toast = useToast(); 
+  const [isLoading, setIsLoading] = useState(false);
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<FormValues>();
 
-  const onSubmit = handleSubmit((data: any) => console.log(data));
+
+  const onSubmit = async (data: FormValues) => {
+    setIsLoading(true);
+    try {
+      // Chamada à API de login
+      const response = await axios.post<LoginResponse>('/api/login', data);
+      
+      // Armazenar o token (pode ser localStorage, cookie, etc.)
+      localStorage.setItem('authToken', response.data.token);
+      
+      // Redirecionar de acordo com o role
+      if (response.data.role === 'ADMIN') {
+        router.push('/admin/dashboard');
+      } else {
+        router.push('/cliente/home');
+      }
+      
+      // Feedback visual para o usuário
+      // toast({
+      //   title: 'Login realizado com sucesso!',
+      //   status: 'success',
+      //   duration: 3000,
+      //   isClosable: true,
+      // });
+      
+    } catch (error) {
+      console.error('Erro no login:', error);
+      
+      // Exibir mensagem de erro genérica ou específica da API
+      let errorMessage = 'Erro ao fazer login. Tente novamente.';
+      if (axios.isAxiosError(error) && error.response) {
+        errorMessage = error.response.data.message || errorMessage;
+      }
+      
+      // toast({
+      //   title: 'Erro no login',
+      //   description: errorMessage,
+      //   status: 'error',
+      //   duration: 5000,
+      //   isClosable: true,
+      // });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
 
   return (
     <Box height="100vh">
@@ -59,9 +114,9 @@ function Login() {
           </Stack>
           <Separator size="md" />
           <Container padding={"30px 30px 30px 30px"} width={"80%"}>
-            <form onSubmit={onSubmit}>
+            <form onSubmit={handleSubmit(onSubmit)}>
               <Center>
-                <Stack gap="4">
+                <Stack gap="4" width="100%">
                   <Field.Root invalid={!!errors.email}>
                     <Field.Label htmlFor="email" color={"black"}>Email</Field.Label>
                     <Input
@@ -104,10 +159,13 @@ function Login() {
                   <Button
                     type="submit"
                     bgColor={"#895023"}
-                    color={"black"}
+                    color={"white"}
                     size="md"
                     width={"40%"}
                     alignSelf={"center"}
+                    loading={isLoading}
+                    loadingText="Entrando..."
+                    _hover={{ bgColor: "#6a3d1a" }}
                   >
                     Entrar
                   </Button>
