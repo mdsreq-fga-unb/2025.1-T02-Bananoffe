@@ -1,4 +1,5 @@
 "use client";
+
 import {
   Box,
   Flex,
@@ -16,7 +17,7 @@ import {
 import { PasswordInput } from "@/components/ui/password-input";
 import { useForm } from "react-hook-form";
 import React, { useState } from "react";
-import { useAuth } from "@/hooks/useAuth";
+import { useAuth } from "../context/AuthContext";
 
 interface FormValues {
   email: string;

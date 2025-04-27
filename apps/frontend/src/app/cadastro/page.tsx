@@ -16,7 +16,7 @@ import {
 import { PasswordInput } from "@/components/ui/password-input";
 import { useForm } from "react-hook-form";
 import React, { useState } from "react";
-import { useAuth } from "@/hooks/useAuth";
+import { useAuth } from "@/hooks/useUsers";
 
 interface FormValues {
   nome: string;
