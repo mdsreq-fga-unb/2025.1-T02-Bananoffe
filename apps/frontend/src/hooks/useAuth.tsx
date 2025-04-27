@@ -81,5 +81,63 @@ export const useAuth = () => {
     }
   };
 
-  return { login, isLoading };
+  const signup = async (nome: string, email: string, senha: string, dataNascimento: string, telefone: string) => {
+    setIsLoading(true);
+    try {
+      // 1. Faz a chamada para a API de cadastro
+      const response = await axios.post('/api/auth/signup', { 
+        nome, 
+        email, 
+        senha, 
+        dataNascimento, 
+        telefone 
+      });
+
+      // 2. Mostra mensagem de sucesso
+      toaster.create({
+        title: 'Cadastro realizado com sucesso',
+        description: 'Você já pode fazer login.',
+        type: 'success',
+      });
+      
+      // 3. Redireciona para a página de login
+      router.push('/login');
+      
+      return true;
+    } catch (error) {
+      // 4. Trata diferentes tipos de erro
+      if (axios.isAxiosError(error)) {
+        if (error.response?.status === 409) {
+          toaster.create({
+            title: 'Email já cadastrado',
+            description: 'Por favor, use outro email ou faça login.',
+            type: 'error',
+          });
+        } else if (error.response?.status === 400) {
+          toaster.create({
+            title: 'Dados inválidos',
+            description: 'Verifique os campos e tente novamente.',
+            type: 'error',
+          });
+        } else {
+          toaster.create({
+            title: 'Erro ao cadastrar',
+            description: 'Tente novamente mais tarde.',
+            type: 'error',
+          });
+        }
+      } else {
+        toaster.create({
+          title: 'Erro ao cadastrar',
+          description: 'Ocorreu um erro inesperado.',
+          type: 'error',
+        });
+      }
+      return false;
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  return { login, signup, isLoading };
 };

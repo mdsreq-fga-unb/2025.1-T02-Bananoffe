@@ -19,12 +19,15 @@ import React, { useState } from "react";
 import { useAuth } from "@/hooks/useAuth";
 
 interface FormValues {
+  nome: string;
   email: string;
-  password: string;
+  senha: string;
+  dataNascimento: string;
+  telefone: string;
 }
 
-function Login() {
-  const { login, isLoading } = useAuth();
+function Cadastro() {
+  const { signup, isLoading } = useAuth();
 
   const {
     register,
@@ -35,7 +38,7 @@ function Login() {
   });
 
   const onSubmit = async (data: FormValues) => {
-    await login(data.email, data.password);
+    await signup(data.nome, data.email, data.senha, data.dataNascimento, data.telefone);
   };
 
   return (
@@ -43,14 +46,14 @@ function Login() {
       <Flex height="100%">
         <Box flex="0.5" position="relative">
           <Image
-            src="/ImgBanoffeeLogin.png"
-            alt="Banoffee"
+            src="/ImgBanoffeeCadastro.png" // Imagem para a página de cadastro
+            alt="Banoffee Boxes"
             objectFit="cover"
             width="100%"
             height="100%"
           />
         </Box>
-        <Stack flex={"0.5"} backgroundColor={" #F1DD2F"}>
+        <Stack flex={"0.5"} backgroundColor={"#F1DD2F"}>
           <Stack
             gap={"5px"}
             alignItems={"center"}
@@ -58,10 +61,10 @@ function Login() {
             padding={"60px 30px 30px 30px"}
           >
             <Text textStyle={"3xl"} fontWeight={"semibold"} color={"black"}>
-              Login
+              Criar Nova Conta
             </Text>
             <Text textStyle={"lg"} color={"black"}>
-              Entre para continuar
+              Já tem cadastro? <Link href="/login" color={"#895023"}>Login</Link>
             </Text>
           </Stack>
           <Separator size="md" />
@@ -69,16 +72,35 @@ function Login() {
             <form onSubmit={handleSubmit(onSubmit)}>
               <Center>
                 <Stack gap="4" width="100%" maxW="md">
-                  <Field.Root invalid={!!errors.email}>
-                    <Field.Label htmlFor="email" color={"black"}>
-                      Email
+                  <Field.Root invalid={!!errors.nome}>
+                    <Field.Label htmlFor="nome" color={"black"}>
+                      Nome
                     </Field.Label>
                     <Input
                       variant="subtle"
-                      bgColor=" #D9D9D9"
+                      bgColor="#D9D9D9"
+                      color={"black"}
+                      size="lg"
+                      type="text"
+                      placeholder="Primeiro"
+                      {...register("nome", {
+                        required: "Nome é obrigatório",
+                      })}
+                    />
+                    <Field.ErrorText>{errors.nome?.message}</Field.ErrorText>
+                  </Field.Root>
+
+                  <Field.Root invalid={!!errors.email}>
+                    <Field.Label htmlFor="email" color={"black"}>
+                      E-mail
+                    </Field.Label>
+                    <Input
+                      variant="subtle"
+                      bgColor="#D9D9D9"
                       color={"black"}
                       size="lg"
                       type="email"
+                      placeholder="novousuario@gmail.com"
                       {...register("email", {
                         required: "Email é obrigatório",
                         pattern: {
@@ -90,14 +112,15 @@ function Login() {
                     <Field.ErrorText>{errors.email?.message}</Field.ErrorText>
                   </Field.Root>
 
-                  <Field.Root invalid={!!errors.password}>
+                  <Field.Root invalid={!!errors.senha}>
                     <Field.Label color={"black"}>Senha</Field.Label>
                     <PasswordInput
                       variant="subtle"
-                      bgColor=" #D9D9D9"
+                      bgColor="#D9D9D9"
                       color={"black"}
                       size="lg"
-                      {...register("password", {
+                      placeholder="******"
+                      {...register("senha", {
                         required: "Senha é obrigatória",
                         minLength: {
                           value: 5,
@@ -106,35 +129,62 @@ function Login() {
                       })}
                     />
                     <Field.ErrorText>
-                      {errors.password?.message}
+                      {errors.senha?.message}
                     </Field.ErrorText>
                   </Field.Root>
-                  
-                  {/* Link de "Esqueceu a senha?" */}
-                  <Link 
-                    href="/recuperar-senha" 
-                    color="#3182CE" 
-                    alignSelf="flex-start" 
-                    fontSize="sm"
-                    _hover={{ textDecoration: "underline" }}
-                  >
-                    Esqueceu a senha?
-                  </Link>
+
+                  <Field.Root invalid={!!errors.dataNascimento}>
+                    <Field.Label color={"black"}>Data de Nascimento</Field.Label>
+                    <Input
+                      variant="subtle"
+                      bgColor="#D9D9D9"
+                      color={"black"}
+                      size="lg"
+                      type="date"
+                      {...register("dataNascimento", {
+                        required: "Data de nascimento é obrigatória",
+                      })}
+                    />
+                    <Field.ErrorText>
+                      {errors.dataNascimento?.message}
+                    </Field.ErrorText>
+                  </Field.Root>
+
+                  <Field.Root invalid={!!errors.telefone}>
+                    <Field.Label color={"black"}>Número de Telefone</Field.Label>
+                    <Input
+                      variant="subtle"
+                      bgColor="#D9D9D9"
+                      color={"black"}
+                      size="lg"
+                      type="tel"
+                      placeholder="61 999999999"
+                      {...register("telefone", {
+                        required: "Telefone é obrigatório",
+                        pattern: {
+                          value: /^\d{2}\s\d{8,9}$/,
+                          message: "Telefone inválido. Use o formato: 61 999999999",
+                        },
+                      })}
+                    />
+                    <Field.ErrorText>
+                      {errors.telefone?.message}
+                    </Field.ErrorText>
+                  </Field.Root>
 
                   <Button
                     type="submit"
                     bgColor={"#895023"}
                     color={"white"}
                     size="md"
-                    width={"40%"}
+                    width={"100%"}
                     alignSelf={"center"}
                     loading={isLoading}
-                    loadingText="Entrando..."
+                    loadingText="Criando conta..."
                     _hover={{ bgColor: "#6a3d1a" }}
                     disabled={!isValid}
-                    mt={4}  // Adicionei um margin-top para espaçamento após o link
                   >
-                    Entrar
+                    ENTRAR
                   </Button>
                 </Stack>
               </Center>
@@ -146,4 +196,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default Cadastro;
