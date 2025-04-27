@@ -133,23 +133,6 @@ function Cadastro() {
                     </Field.ErrorText>
                   </Field.Root>
 
-                  <Field.Root invalid={!!errors.dataNascimento}>
-                    <Field.Label color={"black"}>Data de Nascimento</Field.Label>
-                    <Input
-                      variant="subtle"
-                      bgColor="#D9D9D9"
-                      color={"black"}
-                      size="lg"
-                      type="date"
-                      {...register("dataNascimento", {
-                        required: "Data de nascimento é obrigatória",
-                      })}
-                    />
-                    <Field.ErrorText>
-                      {errors.dataNascimento?.message}
-                    </Field.ErrorText>
-                  </Field.Root>
-
                   <Field.Root invalid={!!errors.telefone}>
                     <Field.Label color={"black"}>Número de Telefone</Field.Label>
                     <Input
@@ -169,6 +152,23 @@ function Cadastro() {
                     />
                     <Field.ErrorText>
                       {errors.telefone?.message}
+                    </Field.ErrorText>
+                  </Field.Root>
+
+                  <Field.Root invalid={!!errors.dataNascimento}>
+                    <Field.Label color={"black"}>
+                      Data de Nascimento <span style={{ fontStyle: 'italic', fontSize: '0.8em' }}>*opcional</span>
+                    </Field.Label>
+                    <Input
+                      variant="subtle"
+                      bgColor="#D9D9D9"
+                      color={"black"}
+                      size="lg"
+                      type="date"
+                      {...register("dataNascimento")}
+                    />
+                    <Field.ErrorText>
+                      {errors.dataNascimento?.message}
                     </Field.ErrorText>
                   </Field.Root>
 

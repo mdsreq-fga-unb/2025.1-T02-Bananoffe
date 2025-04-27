@@ -11,20 +11,20 @@ import {
   Container,
   Button,
   Center,
-  Link,
 } from "@chakra-ui/react";
-import { PasswordInput } from "@/components/ui/password-input";
 import { useForm } from "react-hook-form";
 import React, { useState } from "react";
-import { useAuth } from "@/hooks/useAuth";
+import axios from "axios";
+import { useRouter } from "next/navigation";
+import { toaster } from "@/components/ui/toaster";
 
 interface FormValues {
   email: string;
-  password: string;
 }
 
-function Login() {
-  const { login, isLoading } = useAuth();
+function RecuperarSenha() {
+  const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
 
   const {
     register,
@@ -35,7 +35,33 @@ function Login() {
   });
 
   const onSubmit = async (data: FormValues) => {
-    await login(data.email, data.password);
+    setIsLoading(true);
+    try {
+      // Chamar a API para enviar o link de redefinição de senha
+      await axios.post('/api/auth/recuperar-senha', { email: data.email });
+      
+      // Mostrar mensagem de sucesso
+      toaster.create({
+        title: 'Link enviado com sucesso',
+        description: 'Verifique seu e-mail para redefinir sua senha.',
+        type: 'success',
+      });
+      
+      // Redirecionar para a página de login após alguns segundos
+      setTimeout(() => {
+        router.push('/login');
+      }, 3000);
+      
+    } catch (error) {
+      // Tratar erros
+      toaster.create({
+        title: 'Erro ao enviar link',
+        description: 'Verifique se o e-mail está correto e tente novamente.',
+        type: 'error',
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -43,25 +69,25 @@ function Login() {
       <Flex height="100%">
         <Box flex="0.5" position="relative">
           <Image
-            src="/ImgBanoffeeLogin.png"
-            alt="Banoffee"
+            src="/ImgBanoffeeEsqueciSenha.png" // Imagem do produto como mostrado na sua referência
+            alt="Banoffee Dessert"
             objectFit="cover"
             width="100%"
             height="100%"
           />
         </Box>
-        <Stack flex={"0.5"} backgroundColor={" #F1DD2F"}>
+        <Stack flex={"0.5"} backgroundColor={"#F1DD2F"}>
           <Stack
             gap={"5px"}
             alignItems={"center"}
             justifyItems="center"
             padding={"60px 30px 30px 30px"}
           >
-            <Text textStyle={"3xl"} fontWeight={"semibold"} color={"black"}>
-              Login
+            <Text textStyle={"3xl"} fontWeight={"semibold"} color={"black"} textAlign="center">
+              Redefina sua senha:
             </Text>
-            <Text textStyle={"lg"} color={"black"}>
-              Entre para continuar
+            <Text textStyle={"lg"} color={"black"} textAlign="center" maxW="400px">
+              Digite o endereço de e-mail que você usa no site para enviarmos um link de redefinição de senha.
             </Text>
           </Stack>
           <Separator size="md" />
@@ -71,11 +97,11 @@ function Login() {
                 <Stack gap="4" width="100%" maxW="md">
                   <Field.Root invalid={!!errors.email}>
                     <Field.Label htmlFor="email" color={"black"}>
-                      Email
+                      Endereço de e-mail:
                     </Field.Label>
                     <Input
                       variant="subtle"
-                      bgColor=" #D9D9D9"
+                      bgColor="#FFFFFF"
                       color={"black"}
                       size="lg"
                       type="email"
@@ -90,51 +116,20 @@ function Login() {
                     <Field.ErrorText>{errors.email?.message}</Field.ErrorText>
                   </Field.Root>
 
-                  <Field.Root invalid={!!errors.password}>
-                    <Field.Label color={"black"}>Senha</Field.Label>
-                    <PasswordInput
-                      variant="subtle"
-                      bgColor=" #D9D9D9"
-                      color={"black"}
-                      size="lg"
-                      {...register("password", {
-                        required: "Senha é obrigatória",
-                        minLength: {
-                          value: 5,
-                          message: "Senha deve ter pelo menos 5 caracteres",
-                        },
-                      })}
-                    />
-                    <Field.ErrorText>
-                      {errors.password?.message}
-                    </Field.ErrorText>
-                  </Field.Root>
-                  
-                  {/* Link de "Esqueceu a senha?" */}
-                  <Link 
-                    href="/recuperar_senha" 
-                    color="#3182CE" 
-                    alignSelf="flex-start" 
-                    fontSize="sm"
-                    _hover={{ textDecoration: "underline" }}
-                  >
-                    Esqueceu a senha?
-                  </Link>
-
                   <Button
                     type="submit"
                     bgColor={"#895023"}
                     color={"white"}
                     size="md"
-                    width={"40%"}
+                    width={"100%"}
                     alignSelf={"center"}
                     loading={isLoading}
-                    loadingText="Entrando..."
+                    loadingText="Enviando..."
                     _hover={{ bgColor: "#6a3d1a" }}
                     disabled={!isValid}
-                    mt={4}  // Adicionei um margin-top para espaçamento após o link
+                    mt={4}
                   >
-                    Entrar
+                    ENVIAR
                   </Button>
                 </Stack>
               </Center>
@@ -146,4 +141,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default RecuperarSenha;
