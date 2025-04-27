@@ -1,6 +1,10 @@
-import { Controller, Post, Body, Get, Delete } from '@nestjs/common';
+import { Controller, Post, Body, Get, Delete, UseGuards } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { CreateUsuarioDto, DeletarUsuarioDto } from './auth.dto';
+import { CreateUsuarioDto, DeletarUsuarioDto, LoginUsuarioDto } from './auth.dto';
+import { JwtAuthGuard } from './jwt-auth.guard';
+import { RolesGuard } from './roles/roles.guard';
+import { Role } from 'src/types/role';
+import { Roles } from './roles/roles.decorator';
 
 @Controller('auth')
 export class AuthController {
@@ -13,6 +17,11 @@ export class AuthController {
             message: 'Usuário criado com sucesso!',
             novoUsuario
         };
+    }
+
+    @Post('login')
+    async login(@Body() dto: LoginUsuarioDto) {
+        return this.authService.login(dto);
     }
 
     @Get('listar')

@@ -28,3 +28,18 @@ export class DeletarUsuarioDto{
   @IsNotEmpty({message:"ID não pode estar em branco."})
   id: string
 }
+
+export class LoginUsuarioDto {
+  @IsEmail()
+  @IsNotEmpty({message:"Email não pode estar em branco."})
+  email: string;
+  
+  @IsNotEmpty({message:"Senha não pode estar em branco."})
+  senha: string;
+}
+
+export class JwtPayload {
+  id: string;
+  nome: string;
+  role: string;
+}

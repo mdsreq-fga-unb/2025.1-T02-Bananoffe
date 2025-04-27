@@ -1,13 +1,17 @@
-import { Injectable, BadRequestException } from '@nestjs/common';
+import { Injectable, BadRequestException, UnauthorizedException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { CreateUsuarioDto } from './auth.dto';
+import { CreateUsuarioDto, LoginUsuarioDto } from './auth.dto';
 import { Usuario, UsuarioDocument } from 'src/schemas/user.schema';
 import * as bcrypt from 'bcrypt';
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class AuthService {
-    constructor(@InjectModel(Usuario.name) private userModel: Model<UsuarioDocument>) { }
+    constructor(
+        @InjectModel(Usuario.name) private userModel: Model<UsuarioDocument>,
+        private jwtService: JwtService,
+    ) { }
 
     async create(createDto: CreateUsuarioDto): Promise<Usuario> {
         const emailExistente = await this.userModel.findOne({ email: createDto.email });
@@ -33,9 +37,39 @@ export class AuthService {
     }
 
     async deletarUsuario(dto: { id: string }) {
-        const usuario = await this.userModel.findByIdAndDelete({_id:dto.id});
+        const usuario = await this.userModel.findByIdAndDelete({ _id: dto.id });
         if (!usuario) {
             throw new BadRequestException('Usuário não encontrado.');
         }
+    }
+
+    async login(dto: LoginUsuarioDto) {
+        const usuario = await this.userModel.findOne({ email: dto.email });
+
+        if (!usuario) {
+            throw new UnauthorizedException('Email ou senha incorretos.');
+        }
+
+        const senhaValida = await bcrypt.compare(dto.senha, usuario.senha);
+
+        if (!senhaValida) {
+            throw new UnauthorizedException('Email ou senha incorretos.');
+        }
+
+        const payload = {
+            sub: usuario._id,
+            email: usuario.email,
+            role: usuario.role
+        };
+
+        const token = this.jwtService.sign(payload);
+
+        return {
+            message: 'Login realizado com sucesso!',
+            access_token: token,
+            id: usuario._id,
+            nome: usuario.nome,
+            role: usuario.role,
+        };
     }
 }
