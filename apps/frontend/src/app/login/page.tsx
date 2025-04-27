@@ -15,80 +15,31 @@ import {
 import { PasswordInput } from "@/components/ui/password-input";
 import { useForm } from "react-hook-form";
 import React, { useState } from "react";
-import { useRouter } from "next/navigation";
-import axios from "axios";
+import { useAuth } from "@/hooks/useAuth";
 
 interface FormValues {
   email: string;
   password: string;
 }
-interface LoginResponse {
-  token: string;
-  role: 'ADMIN' | 'CLIENTE';
-}
 
 function Login() {
-  const router = useRouter();
-  // const toast = useToast(); 
-  const [isLoading, setIsLoading] = useState(false);
+  const { login, isLoading } = useAuth();
 
   const {
     register,
     handleSubmit,
-    formState: { errors },
-  } = useForm<FormValues>();
-
+    formState: { errors, isValid },
+  } = useForm<FormValues>({
+    mode: "onChange",
+  });
 
   const onSubmit = async (data: FormValues) => {
-    setIsLoading(true);
-    try {
-      // Chamada à API de login
-      const response = await axios.post<LoginResponse>('/api/login', data);
-      
-      // Armazenar o token (pode ser localStorage, cookie, etc.)
-      localStorage.setItem('authToken', response.data.token);
-      
-      // Redirecionar de acordo com o role
-      if (response.data.role === 'ADMIN') {
-        router.push('/admin/dashboard');
-      } else {
-        router.push('/cliente/home');
-      }
-      
-      // Feedback visual para o usuário
-      // toast({
-      //   title: 'Login realizado com sucesso!',
-      //   status: 'success',
-      //   duration: 3000,
-      //   isClosable: true,
-      // });
-      
-    } catch (error) {
-      console.error('Erro no login:', error);
-      
-      // Exibir mensagem de erro genérica ou específica da API
-      let errorMessage = 'Erro ao fazer login. Tente novamente.';
-      if (axios.isAxiosError(error) && error.response) {
-        errorMessage = error.response.data.message || errorMessage;
-      }
-      
-      // toast({
-      //   title: 'Erro no login',
-      //   description: errorMessage,
-      //   status: 'error',
-      //   duration: 5000,
-      //   isClosable: true,
-      // });
-    } finally {
-      setIsLoading(false);
-    }
+    await login(data.email, data.password);
   };
-
 
   return (
     <Box height="100vh">
       <Flex height="100%">
-        {/* Image Section */}
         <Box flex="0.5" position="relative">
           <Image
             src="/ImgBanoffeeLogin.png"
@@ -116,9 +67,11 @@ function Login() {
           <Container padding={"30px 30px 30px 30px"} width={"80%"}>
             <form onSubmit={handleSubmit(onSubmit)}>
               <Center>
-                <Stack gap="4" width="100%">
+                <Stack gap="4" width="100%" maxW="md">
                   <Field.Root invalid={!!errors.email}>
-                    <Field.Label htmlFor="email" color={"black"}>Email</Field.Label>
+                    <Field.Label htmlFor="email" color={"black"}>
+                      Email
+                    </Field.Label>
                     <Input
                       variant="subtle"
                       bgColor=" #D9D9D9"
@@ -128,7 +81,7 @@ function Login() {
                       {...register("email", {
                         required: "Email é obrigatório",
                         pattern: {
-                          value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]+$/i,
+                          value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
                           message: "Email inválido",
                         },
                       })}
@@ -166,6 +119,7 @@ function Login() {
                     loading={isLoading}
                     loadingText="Entrando..."
                     _hover={{ bgColor: "#6a3d1a" }}
+                    disabled={!isValid}
                   >
                     Entrar
                   </Button>
