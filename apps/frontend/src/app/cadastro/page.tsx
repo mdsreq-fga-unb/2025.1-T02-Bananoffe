@@ -64,7 +64,10 @@ function Cadastro() {
               Criar Nova Conta
             </Text>
             <Text textStyle={"lg"} color={"black"}>
-              Já tem cadastro? <Link href="/login" color={"#895023"}>Login</Link>
+              Já tem cadastro?
+              <Link ml={2} href="/login" color={"#895023"} _hover={{ textDecoration: "underline" }}>
+                Login
+              </Link>
             </Text>
           </Stack>
           <Separator size="md" />
