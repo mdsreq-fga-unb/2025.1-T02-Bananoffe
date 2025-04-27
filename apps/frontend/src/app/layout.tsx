@@ -16,11 +16,15 @@ export const metadata: Metadata = {
   title: "Bananoffe",
 };
 
-export default function RootLayout({ children, }: Readonly<{ children: React.ReactNode; }>) {
+export default function RootLayout({
+  children,
+}: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <Provider>{children}</Provider>
+        <Provider initialColorMode="light">
+          {children}
+        </Provider>
       </body>
     </html>
   );
