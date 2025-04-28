@@ -9,3 +9,18 @@ export interface User {
   role: UserRole;
   senha?: string;
 }
+
+export interface CreateUserDto extends Omit<User, 'id' | 'role'> {
+  senha: string;
+}
+
+export interface UpdateUserDto extends Partial<Omit<User, 'senha'>> {
+  id: string;
+  senha?: string;
+}
+
+export interface ResetPasswordDto {
+  email: string;
+  codigo: string;
+  novaSenha: string;
+}

@@ -111,7 +111,6 @@ function Login() {
                     </Field.ErrorText>
                   </Field.Root>
                   
-                  {/* Link de "Esqueceu a senha?" */}
                   <Link 
                     href="/recuperar_senha" 
                     color="#3182CE" 
@@ -133,7 +132,7 @@ function Login() {
                     loadingText="Entrando..."
                     _hover={{ bgColor: "#6a3d1a" }}
                     disabled={!isValid}
-                    mt={4}  // Adicionei um margin-top para espaçamento após o link
+                    mt={4}  
                   >
                     Entrar
                   </Button>

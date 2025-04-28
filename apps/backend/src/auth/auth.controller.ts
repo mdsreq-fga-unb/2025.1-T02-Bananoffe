@@ -25,7 +25,7 @@ export class AuthController {
     }
 
     @Get('listar')
-    async listar(){
+    async listar() {
         return this.authService.listarUsuarios();
     }
 
@@ -33,4 +33,16 @@ export class AuthController {
     async deletarUsuario(@Body() dto: DeletarUsuarioDto) {
         return this.authService.deletarUsuario(dto);
     }
+
+    @Post('enviarCodigo')
+    async enviarCodigo(@Body() body: { email: string }) {
+      return this.authService.enviarCodigo(body.email);
+    }
+    
+    @Post('resetPassword')
+    async resetPassword(@Body() body: { email: string; codigo: string; novaSenha: string }) {
+      return this.authService.resetPassword(body.email, body.codigo, body.novaSenha);
+    }
+    
+
 }

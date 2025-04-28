@@ -59,7 +59,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         type: 'success',
       });
 
-      router.push(userData.role === 'admin' ? '/admin/dashboard' : '/cliente/home');
+      router.push(userData.role === 'admin' ? '/cadastro' : '/');
 
       return true;
     } catch (error) {
