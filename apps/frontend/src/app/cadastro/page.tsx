@@ -74,9 +74,11 @@ function Cadastro() {
             <Text textStyle="3xl" fontWeight="semibold" color="black">
               Criar Nova Conta
             </Text>
-            <Text textStyle="lg" color="black">
-              Já tem cadastro?{" "}
-              <Link href="/login" color="#895023">
+            
+            <Text textStyle={"lg"} color={"black"}>
+              Já tem cadastro?
+              <Link ml={2} href="/login" color={"#895023"} _hover={{ textDecoration: "underline" }}>
+
                 Login
               </Link>
             </Text>

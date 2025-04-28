@@ -55,7 +55,16 @@ export default function Home() {
               backgroundColor="orange.600"
               _hover={{ backgroundColor: "orange.700" }}
             >
-              <a href="/login">Login</a>
+              <a href="/cadastro">Cadastro</a>
+            </Button>
+            <Button
+              colorScheme="orange"
+              size="lg"
+              w={{ base: "full", sm: "auto" }}
+              backgroundColor="orange.600"
+              _hover={{ backgroundColor: "orange.700" }}
+            >
+              <a href="/recuperar_senha">Esqueci a Senha</a>
             </Button>
         </Stack>
       </VStack>

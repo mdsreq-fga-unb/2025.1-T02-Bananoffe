@@ -111,15 +111,26 @@ function Login() {
                     </Field.ErrorText>
                   </Field.Root>
                   
-                  <Link 
-                    href="/recuperar_senha" 
-                    color="#3182CE" 
-                    alignSelf="flex-start" 
-                    fontSize="sm"
-                    _hover={{ textDecoration: "underline" }}
-                  >
-                    Esqueceu a senha?
-                  </Link>
+                  {/* Link de "Esqueceu a senha?" */}
+                  <Flex justify="space-between" width="100%" fontSize="sm">
+                    <Link
+                      href="/recuperar_senha"
+                      color="#895023"
+                      _hover={{ textDecoration: "underline" }}
+                    >
+                      Esqueceu a senha?
+                    </Link>
+                    <Text color="black">
+                      Não possui cadastro?{" "}
+                      <Link
+                        href="/cadastro"
+                        color="#895023"
+                        _hover={{ textDecoration: "underline" }}
+                      >
+                        Cadastre-se
+                      </Link>
+                    </Text>
+                  </Flex>
 
                   <Button
                     type="submit"
