@@ -1,4 +1,5 @@
 "use client";
+
 import {
   Box,
   Flex,
@@ -16,7 +17,7 @@ import {
 import { PasswordInput } from "@/components/ui/password-input";
 import { useForm } from "react-hook-form";
 import React, { useState } from "react";
-import { useAuth } from "@/hooks/useAuth";
+import { useAuth } from "../context/AuthContext";
 
 interface FormValues {
   email: string;
@@ -109,7 +110,7 @@ function Login() {
                       {errors.password?.message}
                     </Field.ErrorText>
                   </Field.Root>
-
+                  
                   {/* Link de "Esqueceu a senha?" */}
                   <Flex justify="space-between" width="100%" fontSize="sm">
                     <Link
@@ -142,7 +143,7 @@ function Login() {
                     loadingText="Entrando..."
                     _hover={{ bgColor: "#6a3d1a" }}
                     disabled={!isValid}
-                    mt={4}  // Adicionei um margin-top para espaçamento após o link
+                    mt={4}  
                   >
                     Entrar
                   </Button>
