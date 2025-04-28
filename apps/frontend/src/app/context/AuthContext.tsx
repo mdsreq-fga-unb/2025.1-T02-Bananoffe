@@ -63,9 +63,15 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
       return true;
     } catch (error) {
+      let errorMessage = 'Verifique seus dados e tente novamente.';
+
+      if (axios.isAxiosError(error)) {
+        errorMessage = error.response?.data?.message || error.message;
+      }
+
       toaster.create({
         title: 'Erro ao fazer login',
-        description: 'Verifique seus dados e tente novamente.',
+        description: errorMessage,
         type: 'error',
       });
       return false;

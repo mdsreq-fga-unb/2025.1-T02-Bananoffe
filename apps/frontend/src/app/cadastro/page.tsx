@@ -17,6 +17,7 @@ import { PasswordInput } from "@/components/ui/password-input";
 import { useForm } from "react-hook-form";
 import React from "react";
 import { useUsers } from "@/hooks/useUsers";
+import { useHookFormMask  } from "use-mask-input"
 
 interface FormValues {
   nome: string;
@@ -28,7 +29,7 @@ interface FormValues {
 
 function Cadastro() {
   const { createUser, isLoading } = useUsers();
-
+  
   const {
     register,
     handleSubmit,
@@ -36,6 +37,8 @@ function Cadastro() {
   } = useForm<FormValues>({
     mode: "onChange",
   });
+
+  const registerWithMask = useHookFormMask(register);
 
   const onSubmit = async (data: FormValues) => {
     const sucesso = await createUser({
@@ -139,8 +142,8 @@ function Cadastro() {
                       {...register("senha", {
                         required: "Senha é obrigatória",
                         minLength: {
-                          value: 5,
-                          message: "Senha deve ter pelo menos 5 caracteres",
+                          value: 6,
+                          message: "Senha deve ter pelo menos 6 caracteres",
                         },
                       })}
                     />
@@ -155,13 +158,9 @@ function Cadastro() {
                       color="black"
                       size="lg"
                       type="tel"
-                      placeholder="61 999999999"
-                      {...register("telefone", {
-                        required: "Telefone é obrigatório",
-                        pattern: {
-                          value: /^\d{2}\s\d{8,9}$/,
-                          message: "Telefone inválido. Use o formato: 61 999999999",
-                        },
+                      placeholder="(99)99999-9999"
+                      {...registerWithMask("telefone", '(99)99999-9999', {
+                        required: true
                       })}
                     />
                     <Field.ErrorText>{errors.telefone?.message}</Field.ErrorText>

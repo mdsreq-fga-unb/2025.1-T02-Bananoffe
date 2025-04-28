@@ -38,10 +38,15 @@ function RecuperarSenha() {
   });
 
   const handleEnviarCodigo = async (data: { email: string }) => {
+    setIsLoading(true);
     const sucesso = await sendResetCode(data.email);
     if (sucesso) {
       setEmail(data.email);
       setStep(2);
+      setIsLoading(false);
+    }
+    if (!sucesso) {
+      setIsLoading(false);
     }
   };
 
@@ -124,21 +129,25 @@ function RecuperarSenha() {
                     onValueChange={(details) => setCodigoDigitado(details.value)}
                     gap="10px"
                   >
-                    {[...Array(6)].map((_, index) => (
-                      <PinInput.Input
-                        key={index}
-                        index={index}
-                        style={{
-                          backgroundColor: 'white',
-                          borderRadius: '8px',
-                          border: '1px solid black',
-                          width: '50px',
-                          height: '60px',
-                          fontSize: '2xl',
-                          textAlign: 'center'
-                        }}
-                      />
-                    ))}
+                    <PinInput.HiddenInput />
+                    <PinInput.Control>
+                      {[...Array(6)].map((_, index) => (
+                        <PinInput.Input
+                          key={index}
+                          index={index}
+                          style={{
+                            backgroundColor: 'white',
+                            color: 'black',
+                            borderRadius: '8px',
+                            border: '1px solid black',
+                            width: '50px',
+                            height: '60px',
+                            fontSize: '2xl',
+                            textAlign: 'center'
+                          }}
+                        />
+                      ))}
+                    </PinInput.Control>
                   </PinInput.Root>
                 </Center>
               </>
