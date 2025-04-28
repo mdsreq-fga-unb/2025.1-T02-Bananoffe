@@ -6,6 +6,11 @@ import { Usuario, UsuarioDocument } from 'src/schemas/user.schema';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
 import * as nodemailer from 'nodemailer';
+import { config } from 'dotenv';
+
+config({
+    path: '.env'
+})
 
 @Injectable()
 export class AuthService {
@@ -14,7 +19,7 @@ export class AuthService {
     constructor(
         @InjectModel(Usuario.name) private userModel: Model<UsuarioDocument>,
         private jwtService: JwtService,
-    ) {}
+    ) { }
 
     private gerarCodigo(): string {
         return Math.floor(100000 + Math.random() * 900000).toString();

@@ -12,6 +12,7 @@ import {
   Button,
   Center,
   PinInput,
+  Link,
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import React, { useState } from "react";
@@ -89,6 +90,22 @@ function RecuperarSenha() {
                 <Text textStyle="lg" color="black" textAlign="center" maxW="400px">
                   Digite o endereço de e-mail que você usa no site para enviarmos um código.
                 </Text>
+                <Flex justify="space-between" gap={100}>
+                  <Link
+                    href="/login"
+                    color="#895023"
+                    _hover={{ textDecoration: "underline" }}
+                  >
+                    Login
+                  </Link>
+                  <Link
+                    href="/cadastro"
+                    color="#895023"
+                    _hover={{ textDecoration: "underline" }}
+                  >
+                    Cadastre-se
+                  </Link>
+                </Flex>
               </>
             )}
 
