@@ -17,7 +17,8 @@ import { PasswordInput } from "@/components/ui/password-input";
 import { useForm } from "react-hook-form";
 import React from "react";
 import { useUsers } from "@/hooks/useUsers";
-import { useHookFormMask  } from "use-mask-input"
+import { useHookFormMask } from "use-mask-input"
+import { useRouter } from "next/navigation";
 
 interface FormValues {
   nome: string;
@@ -29,7 +30,8 @@ interface FormValues {
 
 function Cadastro() {
   const { createUser, isLoading } = useUsers();
-  
+  const router = useRouter();
+
   const {
     register,
     handleSubmit,
@@ -41,18 +43,20 @@ function Cadastro() {
   const registerWithMask = useHookFormMask(register);
 
   const onSubmit = async (data: FormValues) => {
-    const sucesso = await createUser({
+    const dados = {
       nome: data.nome,
       email: data.email,
       senha: data.senha,
       dataNascimento: data.dataNascimento || undefined,
       telefone: data.telefone,
-    });
+    }
+    const sucesso = await createUser(dados);
 
     if (sucesso) {
-      console.log("Usuário criado com sucesso!");
+      router.push('/login'); 
     }
   };
+
 
   return (
     <Box height="100vh">
@@ -77,7 +81,7 @@ function Cadastro() {
             <Text textStyle="3xl" fontWeight="semibold" color="black">
               Criar Nova Conta
             </Text>
-            
+
             <Text textStyle={"lg"} color={"black"}>
               Já tem cadastro?
               <Link ml={2} href="/login" color={"#895023"} _hover={{ textDecoration: "underline" }}>
