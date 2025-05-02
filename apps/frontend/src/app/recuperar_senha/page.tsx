@@ -76,7 +76,7 @@ function RecuperarSenha() {
   return (
     <Box height="100vh">
       <Flex height="100%">
-        <Box flex="0.5" position="relative">
+        <Box flex="0.5" position="relative" hideBelow={'md'}>
           <Image
             src="/ImgBanoffeeEsqueciSenha.png"
             alt="Banoffee Dessert"
@@ -85,7 +85,7 @@ function RecuperarSenha() {
             height="100%"
           />
         </Box>
-        <Stack flex={"0.5"} backgroundColor={"#F1DD2F"}>
+        <Stack flex={{ base: "1", md: "0.5" }} backgroundColor={"#F1DD2F"}>
           <Stack gap="5" alignItems="center" padding="60px 30px 30px 30px">
             {step === 1 && (
               <>

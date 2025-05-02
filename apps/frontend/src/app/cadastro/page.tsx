@@ -61,7 +61,7 @@ function Cadastro() {
   return (
     <Box height="100vh">
       <Flex height="100%">
-        <Box flex="0.5" position="relative">
+        <Box flex="0.5" position="relative" hideBelow={'md'}>
           <Image
             src="/ImgBanoffeeCadastro.png"
             alt="Banoffee Boxes"
@@ -71,7 +71,7 @@ function Cadastro() {
           />
         </Box>
 
-        <Stack flex="0.5" backgroundColor="#F1DD2F">
+        <Stack flex={{ base: "1", md: "0.5" }} backgroundColor="#F1DD2F">
           <Stack
             gap="5px"
             alignItems="center"
