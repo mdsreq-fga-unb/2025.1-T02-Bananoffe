@@ -23,9 +23,16 @@ export const useResetPassword = () => {
       return true;
     } catch (error) {
       console.error(error);
+
+      let errorMessage = 'Verifique seu e-mail e tente novamente.';
+
+      if (axios.isAxiosError(error)) {
+        errorMessage = error.response?.data?.message || error.message;
+      }
+
       toaster.create({
         title: 'Erro ao enviar código',
-        description: 'Verifique seu e-mail e tente novamente.',
+        description: errorMessage,
         type: 'error',
       });
       return false;
@@ -48,9 +55,16 @@ export const useResetPassword = () => {
       return true;
     } catch (error) {
       console.error(error);
+
+      let errorMessage = 'Tente novamente mais tarde.';
+
+      if (axios.isAxiosError(error)) {
+        errorMessage = error.response?.data?.message || error.message;
+      }
+
       toaster.create({
         title: 'Erro ao redefinir senha',
-        description: 'Tente novamente mais tarde.',
+        description: errorMessage,
         type: 'error',
       });
       return false;

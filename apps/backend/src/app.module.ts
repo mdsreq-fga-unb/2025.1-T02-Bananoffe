@@ -5,6 +5,8 @@ import { AuthController } from './auth/auth.controller';
 import { AuthModule } from './auth/auth.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { config } from 'dotenv';
+import { CardapioModule } from './cardapio/cardapio.module';
+import { CardapioController } from './cardapio/cardapio.controller';
 
 config({
   path:'.env'
@@ -14,8 +16,9 @@ config({
   imports: [
     AuthModule,
     MongooseModule.forRoot(process.env.MONGODB_URI!),
+    CardapioModule,
   ],
-  controllers: [AppController, AuthController],
+  controllers: [AppController, AuthController, CardapioController],
   providers: [AppService],
 })
 export class AppModule {}

@@ -12,6 +12,7 @@ import {
   Button,
   Center,
   PinInput,
+  Link,
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import React, { useState } from "react";
@@ -37,10 +38,15 @@ function RecuperarSenha() {
   });
 
   const handleEnviarCodigo = async (data: { email: string }) => {
+    setIsLoading(true);
     const sucesso = await sendResetCode(data.email);
     if (sucesso) {
       setEmail(data.email);
       setStep(2);
+      setIsLoading(false);
+    }
+    if (!sucesso) {
+      setIsLoading(false);
     }
   };
 
@@ -70,7 +76,7 @@ function RecuperarSenha() {
   return (
     <Box height="100vh">
       <Flex height="100%">
-        <Box flex="0.5" position="relative">
+        <Box flex="0.5" position="relative" hideBelow={'md'}>
           <Image
             src="/ImgBanoffeeEsqueciSenha.png"
             alt="Banoffee Dessert"
@@ -79,7 +85,7 @@ function RecuperarSenha() {
             height="100%"
           />
         </Box>
-        <Stack flex={"0.5"} backgroundColor={"#F1DD2F"}>
+        <Stack flex={{ base: "1", md: "0.5" }} backgroundColor={"#F1DD2F"}>
           <Stack gap="5" alignItems="center" padding="60px 30px 30px 30px">
             {step === 1 && (
               <>
@@ -89,6 +95,22 @@ function RecuperarSenha() {
                 <Text textStyle="lg" color="black" textAlign="center" maxW="400px">
                   Digite o endereço de e-mail que você usa no site para enviarmos um código.
                 </Text>
+                <Flex justify="space-between" gap={100}>
+                  <Link
+                    href="/login"
+                    color="#895023"
+                    _hover={{ textDecoration: "underline" }}
+                  >
+                    Login
+                  </Link>
+                  <Link
+                    href="/cadastro"
+                    color="#895023"
+                    _hover={{ textDecoration: "underline" }}
+                  >
+                    Cadastre-se
+                  </Link>
+                </Flex>
               </>
             )}
 
@@ -107,21 +129,25 @@ function RecuperarSenha() {
                     onValueChange={(details) => setCodigoDigitado(details.value)}
                     gap="10px"
                   >
-                    {[...Array(6)].map((_, index) => (
-                      <PinInput.Input
-                        key={index}
-                        index={index}
-                        style={{
-                          backgroundColor: 'white',
-                          borderRadius: '8px',
-                          border: '1px solid black',
-                          width: '50px',
-                          height: '60px',
-                          fontSize: '2xl',
-                          textAlign: 'center'
-                        }}
-                      />
-                    ))}
+                    <PinInput.HiddenInput />
+                    <PinInput.Control>
+                      {[...Array(6)].map((_, index) => (
+                        <PinInput.Input
+                          key={index}
+                          index={index}
+                          style={{
+                            backgroundColor: 'white',
+                            color: 'black',
+                            borderRadius: '8px',
+                            border: '1px solid black',
+                            width: '50px',
+                            height: '60px',
+                            fontSize: '2xl',
+                            textAlign: 'center'
+                          }}
+                        />
+                      ))}
+                    </PinInput.Control>
                   </PinInput.Root>
                 </Center>
               </>

@@ -40,13 +40,18 @@ export const useUsers = () => {
         type: 'success',
       });
 
-      await getUsers(); 
+      await getUsers();
       return true;
     } catch (error) {
-      console.error(error);
+      let errorMessage = 'Erro ao criar usuário';
+
+      if (axios.isAxiosError(error)) {
+        errorMessage = error.response?.data?.message || error.message;
+      }
+
       toaster.create({
-        title: 'Erro ao criar usuário',
-        description: 'Verifique os dados e tente novamente.',
+        title: 'Erro',
+        description: errorMessage,
         type: 'error',
       });
       return false;

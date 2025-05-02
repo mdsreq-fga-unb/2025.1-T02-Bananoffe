@@ -17,6 +17,8 @@ import { PasswordInput } from "@/components/ui/password-input";
 import { useForm } from "react-hook-form";
 import React from "react";
 import { useUsers } from "@/hooks/useUsers";
+import { useHookFormMask } from "use-mask-input"
+import { useRouter } from "next/navigation";
 
 interface FormValues {
   nome: string;
@@ -28,6 +30,7 @@ interface FormValues {
 
 function Cadastro() {
   const { createUser, isLoading } = useUsers();
+  const router = useRouter();
 
   const {
     register,
@@ -37,24 +40,28 @@ function Cadastro() {
     mode: "onChange",
   });
 
+  const registerWithMask = useHookFormMask(register);
+
   const onSubmit = async (data: FormValues) => {
-    const sucesso = await createUser({
+    const dados = {
       nome: data.nome,
       email: data.email,
       senha: data.senha,
       dataNascimento: data.dataNascimento || undefined,
       telefone: data.telefone,
-    });
+    }
+    const sucesso = await createUser(dados);
 
     if (sucesso) {
-      console.log("Usuário criado com sucesso!");
+      router.push('/login'); 
     }
   };
+
 
   return (
     <Box height="100vh">
       <Flex height="100%">
-        <Box flex="0.5" position="relative">
+        <Box flex="0.5" position="relative" hideBelow={'md'}>
           <Image
             src="/ImgBanoffeeCadastro.png"
             alt="Banoffee Boxes"
@@ -64,7 +71,7 @@ function Cadastro() {
           />
         </Box>
 
-        <Stack flex="0.5" backgroundColor="#F1DD2F">
+        <Stack flex={{ base: "1", md: "0.5" }} backgroundColor="#F1DD2F">
           <Stack
             gap="5px"
             alignItems="center"
@@ -74,7 +81,7 @@ function Cadastro() {
             <Text textStyle="3xl" fontWeight="semibold" color="black">
               Criar Nova Conta
             </Text>
-            
+
             <Text textStyle={"lg"} color={"black"}>
               Já tem cadastro?
               <Link ml={2} href="/login" color={"#895023"} _hover={{ textDecoration: "underline" }}>
@@ -139,8 +146,8 @@ function Cadastro() {
                       {...register("senha", {
                         required: "Senha é obrigatória",
                         minLength: {
-                          value: 5,
-                          message: "Senha deve ter pelo menos 5 caracteres",
+                          value: 6,
+                          message: "Senha deve ter pelo menos 6 caracteres",
                         },
                       })}
                     />
@@ -155,13 +162,9 @@ function Cadastro() {
                       color="black"
                       size="lg"
                       type="tel"
-                      placeholder="61 999999999"
-                      {...register("telefone", {
-                        required: "Telefone é obrigatório",
-                        pattern: {
-                          value: /^\d{2}\s\d{8,9}$/,
-                          message: "Telefone inválido. Use o formato: 61 999999999",
-                        },
+                      placeholder="(99)99999-9999"
+                      {...registerWithMask("telefone", '(99)99999-9999', {
+                        required: true
                       })}
                     />
                     <Field.ErrorText>{errors.telefone?.message}</Field.ErrorText>
