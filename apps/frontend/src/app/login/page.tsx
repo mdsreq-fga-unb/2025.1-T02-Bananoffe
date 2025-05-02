@@ -18,6 +18,7 @@ import { PasswordInput } from "@/components/ui/password-input";
 import { useForm } from "react-hook-form";
 import React, { useState } from "react";
 import { useAuth } from "../context/AuthContext";
+import { useRouter } from "next/navigation";
 
 interface FormValues {
   email: string;
@@ -25,6 +26,8 @@ interface FormValues {
 }
 
 function Login() {
+  const router = useRouter();
+
   const { login, isLoading } = useAuth();
 
   const {
@@ -35,9 +38,14 @@ function Login() {
     mode: "onChange",
   });
 
+
   const onSubmit = async (data: FormValues) => {
-    await login(data.email, data.password);
+    const sucesso = await login(data.email, data.password);
+    if (sucesso) {
+      router.push("/paginaInicial");
+    }
   };
+
 
   return (
     <Box height="100vh">
@@ -110,8 +118,7 @@ function Login() {
                       {errors.password?.message}
                     </Field.ErrorText>
                   </Field.Root>
-                  
-                  {/* Link de "Esqueceu a senha?" */}
+
                   <Flex justify="space-between" width="100%" fontSize="sm">
                     <Link
                       href="/recuperar_senha"
@@ -143,7 +150,7 @@ function Login() {
                     loadingText="Entrando..."
                     _hover={{ bgColor: "#6a3d1a" }}
                     disabled={!isValid}
-                    mt={4}  
+                    mt={4}
                   >
                     Entrar
                   </Button>
