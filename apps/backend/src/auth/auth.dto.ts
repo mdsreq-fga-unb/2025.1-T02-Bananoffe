@@ -1,4 +1,4 @@
-import { IsEmail, IsNotEmpty, IsOptional, IsEnum, MinLength } from 'class-validator';
+import { IsEmail, IsNotEmpty, IsOptional, IsEnum, IsString, MinLength } from 'class-validator';
 import { Role } from 'src/types/role';
 
 export class CreateUsuarioDto {
@@ -36,6 +36,23 @@ export class LoginUsuarioDto {
   
   @IsNotEmpty({message:"Senha não pode estar em branco."})
   senha: string;
+}
+
+export class UpdateUsuarioDto {
+  @IsOptional()
+  @IsString()
+  nome?: string;
+
+  @IsOptional()
+  @IsString()
+  telefone?: string;
+
+  @IsOptional()
+  dataNascimento?: string;
+
+  @IsOptional()
+  @MinLength(6)
+  senha?: string;
 }
 
 export class JwtPayload {
