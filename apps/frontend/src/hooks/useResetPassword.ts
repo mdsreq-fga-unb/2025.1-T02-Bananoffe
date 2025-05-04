@@ -8,6 +8,7 @@ const APIURL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080';
 
 export const useResetPassword = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const [codigoValidado, setCodigoValidado] = useState(false);
 
   const sendResetCode = async (email: string) => {
     setIsLoading(true);
@@ -41,7 +42,50 @@ export const useResetPassword = () => {
     }
   };
 
+  const validateCode = async (email: string, codigo: string) => {
+    setIsLoading(true);
+    try {
+      await axios.post(`${APIURL}/auth/validarCodigo`, { email, codigo });
+
+      toaster.create({
+        title: 'Código validado!',
+        description: 'Você pode redefinir sua senha.',
+        type: 'success',
+      });
+
+      setCodigoValidado(true);
+      return true;
+    } catch (error) {
+      console.error(error);
+
+      let errorMessage = 'Código inválido ou expirado.';
+
+      if (axios.isAxiosError(error)) {
+        errorMessage = error.response?.data?.message || error.message;
+      }
+
+      toaster.create({
+        title: 'Erro ao validar código',
+        description: errorMessage,
+        type: 'error',
+      });
+
+      return false;
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   const resetPassword = async (data: ResetPasswordDto) => {
+    if (!codigoValidado) {
+      toaster.create({
+        title: 'Código ainda não validado!',
+        description: 'Valide o código antes de redefinir a senha.',
+        type: 'warning',
+      });
+      return false;
+    }
+
     setIsLoading(true);
     try {
       await axios.post(`${APIURL}/auth/resetPassword`, data);
@@ -73,5 +117,5 @@ export const useResetPassword = () => {
     }
   };
 
-  return { sendResetCode, resetPassword, isLoading };
+  return { sendResetCode, validateCode, resetPassword, isLoading };
 };

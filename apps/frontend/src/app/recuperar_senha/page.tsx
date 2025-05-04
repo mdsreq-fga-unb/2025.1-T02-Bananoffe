@@ -29,7 +29,7 @@ function RecuperarSenha() {
   const [step, setStep] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
   const [codigoDigitado, setCodigoDigitado] = useState<string[]>([]);
-  const { sendResetCode, resetPassword } = useResetPassword();
+  const { sendResetCode, resetPassword, validateCode } = useResetPassword();
   const [email, setEmail] = useState('');
   const router = useRouter();
 
@@ -50,17 +50,25 @@ function RecuperarSenha() {
     }
   };
 
-  const handleValidarCodigo = () => {
-    if (codigoDigitado.length === 6) {
-      setStep(3);
-    } else {
+  const handleValidarCodigo = async () => {
+    if (codigoDigitado.length !== 6) {
       toaster.create({
-        title: 'Código inválido',
-        description: 'Preencha todos os dígitos corretamente.',
+        title: 'Código incompleto',
+        description: 'Preencha os 6 dígitos corretamente.',
         type: 'error',
       });
+      return;
+    }
+
+    setIsLoading(true);
+    const sucesso = await validateCode(email, codigoDigitado.join(''));
+    setIsLoading(false);
+
+    if (sucesso) {
+      setStep(3);
     }
   };
+
 
   const handleRedefinirSenha = async (data: { novaSenha: string }) => {
     const sucesso = await resetPassword({
