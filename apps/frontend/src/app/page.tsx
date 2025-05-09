@@ -66,6 +66,15 @@ export default function Home() {
             >
               <a href="/recuperar_senha">Esqueci a Senha</a>
             </Button>
+            <Button
+              colorScheme="orange"
+              size="lg"
+              w={{ base: "full", sm: "auto" }}
+              backgroundColor="orange.600"
+              _hover={{ backgroundColor: "orange.700" }}
+            >
+              <a href="/minha_conta">Minha conta</a>
+            </Button>
         </Stack>
       </VStack>
 

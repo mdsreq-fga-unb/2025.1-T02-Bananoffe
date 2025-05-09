@@ -12,6 +12,8 @@ interface AuthContextType {
   login: (email: string, password: string) => Promise<boolean>;
   logout: () => void;
   isLoading: boolean;
+  loadUser: () => Promise<void>; 
+  updateUser: (data: Partial<User>) => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -23,15 +25,70 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
-  useEffect(() => {
-    const token = localStorage.getItem('authToken');
-    if (token) {
-      const storedUser = localStorage.getItem('user');
-      if (storedUser) {
-        setUser(JSON.parse(storedUser));
-      }
+  const loadUser = async () => {
+    try {
+      const token = localStorage.getItem('authToken');
+      if (!token) return;
+
+      const response = await axios.get(`${APIURL}/auth/me`, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+
+      setUser(response.data);
+      localStorage.setItem('user', JSON.stringify(response.data));
+    } catch (error) {
+      logout();
     }
-  }, []);
+  };
+  
+    // Função de atualização movida para o contexto
+    const updateUser = async (data: Partial<User>) => {
+      setIsLoading(true);
+      try {
+        const token = localStorage.getItem('authToken');
+        const response = await axios.patch(`${APIURL}/auth/me`, data, {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
+  
+        setUser(prev => ({ ...prev, ...response.data }));
+        localStorage.setItem('user', JSON.stringify(response.data));
+  
+        toaster.create({
+          title: 'Dados atualizados!',
+          description: 'Suas informações foram salvas com sucesso',
+          type: 'success',
+        });
+      } catch (error) {
+        let errorMessage = 'Erro ao atualizar dados';
+        
+        if (axios.isAxiosError(error)) {
+          errorMessage = error.response?.data?.message || error.message;
+        }
+  
+        toaster.create({
+          title: 'Erro na atualização',
+          description: errorMessage,
+          type: 'error',
+        });
+        throw error;
+      } finally {
+        setIsLoading(false);
+      }
+    };
+  
+    useEffect(() => {
+      const initAuth = async () => {
+        const token = localStorage.getItem('authToken');
+        if (token) {
+          await loadUser();
+        }
+      };
+      initAuth();
+    }, []);
 
   const login = async (email: string, senha: string) => {
     setIsLoading(true);
@@ -88,7 +145,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, logout, isLoading }}>
+    <AuthContext.Provider value={{ user, login, logout, isLoading,loadUser, updateUser }}>
       {children}
     </AuthContext.Provider>
   );
