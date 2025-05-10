@@ -7,5 +7,5 @@ export interface Product {
   precoPedacoP: number;
   precoPedacoG: number;
   quantidade: number;
-  imagem?: Buffer;
+  imagem?: string;
 }

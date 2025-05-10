@@ -43,7 +43,7 @@ function Cardapio() {
 
   useEffect(() => {
     getProducts();
-  }, [getProducts]);
+  }, []);
 
   return (
     <Box minH="100vh" bgColor="#F1DD2F">
@@ -67,10 +67,6 @@ function Cardapio() {
               onChange={(e) => setSearchTerm(e.target.value)}
             />
           </InputGroup>
-
-          <Icon size="lg" color="#000" justifySelf={"end"} alignSelf="center">
-            <MdFilterList />
-          </Icon>
         </Flex>
 
         {isLoading ? (
@@ -78,15 +74,14 @@ function Cardapio() {
             <Spinner size="xl" color="#895023" />
           </Center>
         ) : (
-          <SimpleGrid columns={isMobile ? 1 : 2} gap={6}>
-            {filteredProducts.map((product) => (
+          <Stack>
+            {filteredProducts.map((product, index) => (
               <Box
-                key={product.id}
+                key={index}
                 bg="white"
                 borderRadius="xl"
                 p={4}
                 boxShadow="md"
-                _hover={{ transform: "scale(1.02)", transition: "all 0.2s" }}
               >
                 <Flex direction={isMobile ? "column" : "row"} gap={4}>
                   {/* Imagem do produto (se existir) */}
@@ -113,19 +108,19 @@ function Cardapio() {
 
                     {/* Preços */}
                     <Stack gap={1} mt={2}>
-                      <Text fontSize="sm">
+                      <Text fontSize="sm" color={"#000"}>
                         <strong>Torta Pequena:</strong> R${" "}
                         {product.precoTortaP.toFixed(2)}
                       </Text>
-                      <Text fontSize="sm">
+                      <Text fontSize="sm" color={"#000"}>
                         <strong>Torta Grande:</strong> R${" "}
                         {product.precoTortaG.toFixed(2)}
                       </Text>
-                      <Text fontSize="sm">
+                      <Text fontSize="sm" color={"#000"}>
                         <strong>Pedaço Pequeno:</strong> R${" "}
                         {product.precoPedacoP.toFixed(2)}
                       </Text>
-                      <Text fontSize="sm">
+                      <Text fontSize="sm" color={"#000"}>
                         <strong>Pedaço Grande:</strong> R${" "}
                         {product.precoPedacoG.toFixed(2)}
                       </Text>
@@ -134,7 +129,7 @@ function Cardapio() {
                 </Flex>
               </Box>
             ))}
-          </SimpleGrid>
+          </Stack>
         )}
         <NavBar />
       </Stack>
