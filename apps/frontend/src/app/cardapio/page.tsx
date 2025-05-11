@@ -33,16 +33,24 @@ function Cardapio() {
   }, []);
 
   return (
-    <Box minH="100vh" bgColor="#FEE" pb="130px">
+    <Box className="cardapio_full_page" minH="100vh" bgColor="#FEE">
       <Box
+        className="cardapio_container"
         bgColor="#F1DD2F"
         maxW={isMobile ? "100%" : "900px"}
         mx="auto"
         h="100vh"
         boxShadow="sm"
+        display="flex"
+        flexDirection="column"
       >
-        <Stack>
-          <Flex justifyContent={"space-between"} alignItems={"center"} pl={"8"}>
+        <Stack className="cardapio_content" h="100vh">
+          <Flex
+            className="texto_header"
+            justifyContent={"space-between"}
+            alignItems={"center"}
+            pl={"8"}
+          >
             <Text
               textStyle={isMobile ? "2xl" : "3xl"}
               fontWeight="semibold"
@@ -57,6 +65,7 @@ function Cardapio() {
             />
           </Flex>
           <Flex
+            className="cardapio_input"
             h="60px"
             bgColor="#FFF"
             w="100%"
@@ -73,74 +82,80 @@ function Cardapio() {
               />
             </InputGroup>
           </Flex>
+          <Box
+            className="procudt_list"
+            overflowY="auto"
+            flexGrow={1}
+            pb={isMobile ? "90px" : "110px"}
+          >
+            {isLoading ? (
+              <Center mt="20">
+                <Spinner size="xl" color="#895023" />
+              </Center>
+            ) : (
+              <Stack gap="1">
+                {filteredProducts.map((product, index) => (
+                  <Flex
+                    key={index}
+                    bg="white"
+                    py="2"
+                    justifyContent="space-between"
+                    paddingX="4"
+                    w="100%"
+                    minHeight="9.5rem"
+                  >
+                    <Stack gap={0} w="75%">
+                      <Text fontWeight="bold" fontSize="lg" color="#895023">
+                        {product.nome}
+                      </Text>
 
-          {isLoading ? (
-            <Center mt="20">
-              <Spinner size="xl" color="#895023" />
-            </Center>
-          ) : (
-            <Stack gap="1">
-              {filteredProducts.map((product, index) => (
-                <Flex
-                  key={index}
-                  bg="white"
-                  py="2"
-                  justifyContent="space-between"
-                  paddingX="4"
-                  w="100%"
-                  minHeight="9.5rem"
-                >
-                  <Stack gap={0} w="75%">
-                    <Text fontWeight="bold" fontSize="lg" color="#895023">
-                      {product.nome}
-                    </Text>
+                      <Text fontSize="sm" color="gray.600">
+                        {product.descricao}
+                      </Text>
 
-                    <Text fontSize="sm" color="gray.600">
-                      {product.descricao}
-                    </Text>
-
-                    <Stack gap={0.5} mt={1}>
-                      {product.precoPedacoP > 0 && (
-                        <Text fontSize="sm" color={"#000"}>
-                          <strong>Torta Pequena:</strong> R${" "}
-                          {product.precoTortaP.toFixed(2)}
-                        </Text>
-                      )}
-                      {product.precoPedacoG > 0 && (
-                        <Text fontSize="sm" color={"#000"}>
-                          <strong>Torta Grande:</strong> R${" "}
-                          {product.precoTortaG.toFixed(2)}
-                        </Text>
-                      )}
-                      {product.precoPedacoP > 0 && (
-                        <Text fontSize="sm" color={"#000"}>
-                          <strong>Pedaço Pequeno:</strong> R${" "}
-                          {product.precoPedacoP.toFixed(2)}
-                        </Text>
-                      )}
-                      {product.precoTortaG > 0 && (
-                        <Text fontSize="sm" color={"#000"}>
-                          <strong>Pedaço Grande:</strong> R${" "}
-                          {product.precoPedacoG.toFixed(2)}
-                        </Text>
-                      )}
+                      <Stack gap={0.5} mt={1}>
+                        {product.precoPedacoP > 0 && (
+                          <Text fontSize="sm" color={"#000"}>
+                            <strong>Torta Pequena:</strong> R${" "}
+                            {product.precoTortaP.toFixed(2)}
+                          </Text>
+                        )}
+                        {product.precoPedacoG > 0 && (
+                          <Text fontSize="sm" color={"#000"}>
+                            <strong>Torta Grande:</strong> R${" "}
+                            {product.precoTortaG.toFixed(2)}
+                          </Text>
+                        )}
+                        {product.precoPedacoP > 0 && (
+                          <Text fontSize="sm" color={"#000"}>
+                            <strong>Pedaço Pequeno:</strong> R${" "}
+                            {product.precoPedacoP.toFixed(2)}
+                          </Text>
+                        )}
+                        {product.precoTortaG > 0 && (
+                          <Text fontSize="sm" color={"#000"}>
+                            <strong>Pedaço Grande:</strong> R${" "}
+                            {product.precoPedacoG.toFixed(2)}
+                          </Text>
+                        )}
+                      </Stack>
                     </Stack>
-                  </Stack>
-                  {product.imagem && (
-                    <Image
-                      src={product.imagem}
-                      alt={product.nome}
-                      objectFit="cover"
-                      maxH={isMobile ? "8rem" : "9.5rem"}
-                      maxW={isMobile ? "8rem" : "9.5rem"}
-                      position="relative"
-                      borderRadius="lg"
-                    />
-                  )}
-                </Flex>
-              ))}
-            </Stack>
-          )}
+                    {product.imagem && (
+                      <Image
+                        src={product.imagem}
+                        alt={product.nome}
+                        objectFit="cover"
+                        maxH={isMobile ? "8rem" : "9.5rem"}
+                        maxW={isMobile ? "8rem" : "9.5rem"}
+                        position="relative"
+                        borderRadius="lg"
+                      />
+                    )}
+                  </Flex>
+                ))}
+              </Stack>
+            )}
+          </Box>
           <NavBar />
         </Stack>
       </Box>
