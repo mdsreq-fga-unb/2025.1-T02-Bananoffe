@@ -1,6 +1,15 @@
 "use client";
 import { usePathname } from "next/navigation";
-import { Stack, Center, Icon, Flex, Text, Box, Link } from "@chakra-ui/react";
+import {
+  Stack,
+  Center,
+  Icon,
+  Flex,
+  Text,
+  Box,
+  Link,
+  useBreakpointValue,
+} from "@chakra-ui/react";
 import {
   MdOutlineMenuBook,
   MdOutlineShoppingBag,
@@ -8,6 +17,7 @@ import {
   MdPerson,
 } from "react-icons/md";
 function NavBar() {
+  const isMobile = useBreakpointValue({ base: true, md: false });
   const RotaAtual = usePathname();
   const navItems = [
     { iconName: <MdOutlineMenuBook />, title: "Cardápio", rota: "/cardapio" },
@@ -34,16 +44,17 @@ function NavBar() {
   });
   return (
     <Box
+      maxW={isMobile ? "100%" : "75%"}
+      mx="auto"
       position="fixed" // Fixa na tela
       bottom="0" // Coloca no rodapé
       left="0" // Alinha à esquerda
       right="0" // Estica até a direita
       bg="white" // Fundo branco
-      borderTopRadius="2xl" // Bordas arredondadas apenas no topo
-      boxShadow="md" // Sombra para efeito de elevação
+      borderTopRadius="xl" // Bordas arredondadas apenas no topo
+      boxShadow="sm" // Sombra para efeito de elevação
       zIndex="sticky" // Garante que fique acima de outros elementos
-      pt={6} // Padding interno
-      pb={6}
+      py={isMobile ? "3" : "6"}
     >
       <Flex justifyContent="space-evenly">{icons}</Flex>
     </Box>

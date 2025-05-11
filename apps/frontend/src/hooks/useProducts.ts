@@ -14,17 +14,8 @@ export const useProducts = () => {
     setIsLoading(true);
     try {
       const response = await axios.get<Product[]>(`${APIURL}/cardapio/listar`);
-      // Converta a imagem de Buffer para base64 se existir
-      const adaptedProducts = response.data.map((item: any) => ({
-        ...item,
-        imagem: item.imagem
-          ? `data:image/jpeg;base64,${Buffer.from(item.imagem).toString(
-              "base64"
-            )}`
-          : undefined,
-      }));
-      setProducts(adaptedProducts);
-      return adaptedProducts;
+      setProducts(response.data);
+      return response.data;
     } catch (error) {
       console.error(error);
       toaster.create({
