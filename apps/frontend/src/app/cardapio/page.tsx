@@ -10,14 +10,18 @@ import {
   useBreakpointValue,
   Spinner,
   Image,
+  Link,
+  Button,
 } from "@chakra-ui/react";
 import { MdSearch, MdFilterList } from "react-icons/md";
 import { useState, useEffect } from "react";
 import NavBar from "@/components/NavBar";
 import { useProducts } from "@/hooks/useProducts";
+import { useAuth } from "@/app/context/AuthContext";
 
 function Cardapio() {
   const { products, getProducts, isLoading } = useProducts(); //~ hook busca os produtos
+  const { user, logout } = useAuth();
 
   const [searchTerm, setSearchTerm] = useState("");
   const isMobile = useBreakpointValue({ base: true, md: false });
@@ -45,43 +49,61 @@ function Cardapio() {
         flexDirection="column"
       >
         <Stack className="cardapio_content" h="100vh">
-          <Flex
-            className="texto_header"
-            justifyContent={"space-between"}
-            alignItems={"center"}
-            pl={"8"}
-          >
-            <Text
-              textStyle={isMobile ? "2xl" : "3xl"}
-              fontWeight="semibold"
-              color="black"
+          <Box borderBottomRadius={"md"}>
+            <Flex
+              className="cardapio_header"
+              justifyContent={"space-between"}
+              alignItems={"center"}
+              pl={"8"}
             >
-              Bananoffee Doceria
-            </Text>
-            <Image
-              src="/Logo Bananoffee - Sem Fundo-02.png"
-              maxHeight={isMobile ? "7rem" : "7.5rem"}
-              maxWidth={"7.5rem"}
-            />
-          </Flex>
-          <Flex
-            className="cardapio_input"
-            h="60px"
-            bgColor="#FFF"
-            w="100%"
-            alignContent="center"
-            justifyContent="space-between"
-          >
-            <InputGroup endElement={<MdSearch />} w="30%" ml="25px">
-              <Input
-                placeholder="Pesquise"
-                bgColor="#ededed"
-                color="#000"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
+              <Stack className="texto_header">
+                {/* <Button onClick={logout}>Botao</Button>  */}
+                <Text
+                  textStyle={isMobile ? "2xl" : "3xl"}
+                  fontWeight="semibold"
+                  color="black"
+                >
+                  Bananoffee Doceria
+                </Text>
+                {user ? (
+                  <Text fontSize="md" fontWeight="normal" color="gray.700">
+                    Olá, {user.nome}!
+                  </Text>
+                ) : (
+                  <Link
+                    color="black"
+                    variant="underline"
+                    href="https://xvideos.com.br"
+                  >
+                    Fazer login
+                  </Link>
+                )}
+              </Stack>
+              <Image
+                src="/Logo Bananoffee - Sem Fundo-02.png"
+                maxHeight={isMobile ? "7rem" : "7.5rem"}
+                maxWidth={"7.5rem"}
               />
-            </InputGroup>
-          </Flex>
+            </Flex>
+            <Flex
+              className="cardapio_input"
+              h="60px"
+              bgColor="#FFF"
+              w="100%"
+              alignContent="center"
+              justifyContent="space-between"
+            >
+              <InputGroup endElement={<MdSearch />} w="30%" ml="25px">
+                <Input
+                  placeholder="Pesquise"
+                  bgColor="#ededed"
+                  color="#000"
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                />
+              </InputGroup>
+            </Flex>
+          </Box>
           <Box
             className="procudt_list"
             overflowY="auto"
