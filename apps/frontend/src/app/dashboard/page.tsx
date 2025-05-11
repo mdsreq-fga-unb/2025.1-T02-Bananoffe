@@ -1,19 +1,17 @@
 "use client";
+
 import {
   Box,
   Flex,
   Heading,
   SimpleGrid,
   Icon,
-  Progress,
-  Thead,
-  Tr,
-  Th,
-  Td,
   Button,
+  Stat,
+  Text,
+  Table,
+  Progress,
 } from "@chakra-ui/react";
-import { Stat } from "@chakra-ui/react";
-import { Table } from "@chakra-ui/react"
 import {
   MdOutlineMenuBook,
   MdOutlineShoppingBag,
@@ -73,11 +71,11 @@ export default function Dashboard() {
 
   return (
     <Box p={4} pb={24} bg="gray.100" minH="100vh">
-      <SimpleGrid columns={{ base: 1, md: 2, xl: 4 }} spacing={4} mb={6}>
+      <SimpleGrid columns={{ base: 1, md: 2, xl: 4 }} gap={4} mb={6}>
         {cards.map((card, i) => (
-          <Stat
+          <Stat.Root
             key={i}
-            bg={'${card.color}.400'}
+            bg={`${card.color}.400`}
             color="white"
             rounded="md"
             shadow="md"
@@ -85,16 +83,16 @@ export default function Dashboard() {
           >
             <Flex align="center" gap={2}>
               <Icon as={card.icon} boxSize={6} />
-              <StatLabel fontSize="sm">{card.title}</StatLabel>
+              <Stat.Label fontSize="sm">{card.title}</Stat.Label>
             </Flex>
-            <StatNumber fontSize="xl">{card.value}</StatNumber>
-            <Progress
+            <Text fontSize="xl" fontWeight="bold">{card.value}</Text>
+            <Progress.Root
               mt={2}
               size="sm"
               value={card.progress}
               colorScheme="whiteAlpha"
             />
-          </Stat>
+          </Stat.Root>
         ))}
       </SimpleGrid>
 
@@ -102,34 +100,33 @@ export default function Dashboard() {
         <Heading size="md" mb={4}>
           Vendas do Dia
         </Heading>
-        <Table size="sm">
-          <Thead>
-            <Tr>
-              <Th>Número</Th>
-              <Th>Nome do Cliente</Th>
-              <Th>Categoria</Th>
-              <Th>Status</Th>
-              <Th>Valor</Th>
-              <Th>Horário</Th>
-              <Th>Forma de Pagamento</Th>
-            </Tr>
-          </Thead>
-          <Tbody>
+        <Table.Root size="sm">
+          <Table.Header>
+            <Table.Row>
+              <Table.ColumnHeader>Número</Table.ColumnHeader>
+              <Table.ColumnHeader>Nome do Cliente</Table.ColumnHeader>
+              <Table.ColumnHeader>Categoria</Table.ColumnHeader>
+              <Table.ColumnHeader>Status</Table.ColumnHeader>
+              <Table.ColumnHeader>Valor</Table.ColumnHeader>
+              <Table.ColumnHeader>Horário</Table.ColumnHeader>
+              <Table.ColumnHeader>Forma de Pagamento</Table.ColumnHeader>
+            </Table.Row>
+          </Table.Header>
+          <Table.Body>
             {vendas.map((venda) => (
-              <Tr key={venda.numero}>
-                <Td>{venda.numero}</Td>
-                <Td fontWeight="bold">{venda.nome}</Td>
-                <Td>{venda.categoria}</Td>
-                <Td>{venda.status}</Td>
-                <Td>{venda.valor}</Td>
-                <Td>{venda.horario}</Td>
-                <Td>{venda.pagamento}</Td>
-              </Tr>
+              <Table.Row key={venda.numero}>
+                <Table.Cell>{venda.numero}</Table.Cell>
+                <Table.Cell fontWeight="bold">{venda.nome}</Table.Cell>
+                <Table.Cell>{venda.categoria}</Table.Cell>
+                <Table.Cell>{venda.status}</Table.Cell>
+                <Table.Cell>{venda.valor}</Table.Cell>
+                <Table.Cell>{venda.horario}</Table.Cell>
+                <Table.Cell>{venda.pagamento}</Table.Cell>
+              </Table.Row>
             ))}
-          </Tbody>
-        </Table>
+          </Table.Body>
+        </Table.Root>
 
-        {/* Paginação */}
         <Flex justify="center" mt={4} gap={2} flexWrap="wrap">
           {Array.from({ length: totalPaginas }, (_, i) => (
             <Button
