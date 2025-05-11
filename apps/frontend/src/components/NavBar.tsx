@@ -44,7 +44,7 @@ function NavBar() {
   });
   return (
     <Box
-      maxW={isMobile ? "100%" : "75%"}
+      maxW={isMobile ? "100%" : "900px"}
       mx="auto"
       position="fixed" // Fixa na tela
       bottom="0" // Coloca no rodapé
@@ -52,7 +52,7 @@ function NavBar() {
       right="0" // Estica até a direita
       bg="white" // Fundo branco
       borderTopRadius="xl" // Bordas arredondadas apenas no topo
-      boxShadow="sm" // Sombra para efeito de elevação
+      boxShadow="md" // Sombra para efeito de elevação
       zIndex="sticky" // Garante que fique acima de outros elementos
       py={isMobile ? "3" : "6"}
     >

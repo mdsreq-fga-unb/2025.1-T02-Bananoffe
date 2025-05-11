@@ -36,14 +36,26 @@ function Cardapio() {
     <Box minH="100vh" bgColor="#FEE" pb="130px">
       <Box
         bgColor="#F1DD2F"
-        maxW={isMobile ? "100%" : "75%"}
+        maxW={isMobile ? "100%" : "900px"}
         mx="auto"
-        h={"100vh"}
+        h="100vh"
+        boxShadow="sm"
       >
         <Stack>
-          <Text textStyle="3xl" fontWeight="semibold" color="black" p="8">
-            Bananoffee Doceria
-          </Text>
+          <Flex justifyContent={"space-between"} alignItems={"center"} pl={"8"}>
+            <Text
+              textStyle={isMobile ? "2xl" : "3xl"}
+              fontWeight="semibold"
+              color="black"
+            >
+              Bananoffee Doceria
+            </Text>
+            <Image
+              src="/Logo Bananoffee - Sem Fundo-02.png"
+              maxHeight={isMobile ? "7rem" : "7.5rem"}
+              maxWidth={"7.5rem"}
+            />
+          </Flex>
           <Flex
             h="60px"
             bgColor="#FFF"
@@ -119,8 +131,8 @@ function Cardapio() {
                       src={product.imagem}
                       alt={product.nome}
                       objectFit="cover"
-                      w="9.5rem"
-                      h="9.5rem"
+                      maxH={isMobile ? "8rem" : "9.5rem"}
+                      maxW={isMobile ? "8rem" : "9.5rem"}
                       position="relative"
                       borderRadius="lg"
                     />
