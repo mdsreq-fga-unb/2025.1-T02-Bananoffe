@@ -42,7 +42,7 @@ function Login() {
   const onSubmit = async (data: FormValues) => {
     const sucesso = await login(data.email, data.password);
     if (sucesso) {
-      router.push("/paginaInicial");
+      router.push("/");
     }
   };
 
