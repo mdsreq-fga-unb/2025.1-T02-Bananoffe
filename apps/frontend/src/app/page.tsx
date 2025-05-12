@@ -10,21 +10,19 @@ import {
   useBreakpointValue,
   Spinner,
   Image,
-  Link,
-  Button,
+  SimpleGrid,
 } from "@chakra-ui/react";
-import { MdSearch, MdFilterList } from "react-icons/md";
+import { MdSearch } from "react-icons/md";
 import { useState, useEffect } from "react";
 import NavBar from "@/components/NavBar";
 import { useProducts } from "@/hooks/useProducts";
 import { useAuth } from "@/context/AuthContext";
+import Header from "@/components/Header";
 
 function Home() {
-  const { products, getProducts, isLoading } = useProducts(); //~ hook busca os produtos
-  const { user, logout } = useAuth();
-  console.log(user)
+  const { products, getProducts, isLoading } = useProducts();
+  const { user } = useAuth();
   const [searchTerm, setSearchTerm] = useState("");
-  const isMobile = useBreakpointValue({ base: true, md: false });
 
   const filteredProducts = products.filter(
     (product) =>
@@ -37,155 +35,94 @@ function Home() {
   }, []);
 
   return (
-    <Box className="cardapio_full_page" minH="100vh" bgColor="#FEE">
-      <Box
-        className="cardapio_container"
-        bgColor="#F1DD2F"
-        maxW={isMobile ? "100%" : "900px"}
-        mx="auto"
-        h="100vh"
-        boxShadow="sm"
-        display="flex"
-        flexDirection="column"
-      >
-        <Stack className="cardapio_content" h="100vh">
-          <Box borderBottomRadius={"md"}>
-            <Flex
-              className="cardapio_header"
-              justifyContent={"space-between"}
-              alignItems={"center"}
-              pl={"8"}
-            >
-              <Stack className="texto_header">
-                {/* <Button onClick={logout}>Botao</Button>  */}
-                <Text
-                  textStyle={isMobile ? "2xl" : "3xl"}
-                  fontWeight="semibold"
-                  color="black"
-                >
-                  Bananoffee Doceria
-                </Text>
-                {user ? (
-                  <Text fontSize="md" fontWeight="normal" color="gray.700">
-                    Olá, {user.nome}!
+    <Box minH="100vh" bgColor="#F1DD2F">
+      <Header />
+
+      <Box maxW="1200px" mx="auto" px={6} pt={6} pb="110px">
+
+        <InputGroup
+          w="100%"
+          endElement={<MdSearch color="gray.500" size={20} />}
+          mb={6}
+        >
+          <Input
+            placeholder="Buscar produto..."
+            bgColor="white"
+            borderRadius="full"
+            pl={4}
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            _focus={{ borderColor: "#895023" }}
+          />
+        </InputGroup>
+
+        {/* Produtos */}
+        {isLoading ? (
+          <Center mt={20}>
+            <Spinner size="xl" color="#895023" />
+          </Center>
+        ) : (
+          <SimpleGrid columns={{ base: 1, md: 2 }} gap={5}>
+            {filteredProducts.map((product) => (
+              <Flex
+                key={product._id}
+                bg="white"
+                borderRadius="2xl"
+                boxShadow="lg"
+                p={4}
+                align="center"
+                justify="space-between"
+                gap={4}
+              >
+                <Box flex="1">
+                  <Text fontWeight="bold" fontSize="lg" color="#895023" mb={1}>
+                    {product.nome}
                   </Text>
-                ) : (
-                  <Link color="black" variant="underline" href="/login">
-                    Fazer login
-                  </Link>
-                )}
-              </Stack>
-              <Image
-                src="/Logo Bananoffee - Sem Fundo-02.png"
-                maxHeight={isMobile ? "7rem" : "7.5rem"}
-                maxWidth={"7.5rem"}
-              />
-            </Flex>
-            <Flex
-              className="cardapio_input"
-              h="60px"
-              bgColor="#FFF"
-              w="100%"
-              alignContent="center"
-              justifyContent="space-between"
-            >
-              <InputGroup endElement={<MdSearch />} w="30%" ml="25px">
-                <Input
-                  placeholder="Pesquise"
-                  bgColor="#ededed"
-                  color="#000"
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                />
-              </InputGroup>
-            </Flex>
-          </Box>
-          <Box
-            className="procudt_list"
-            overflowY="auto"
-            flexGrow={1}
-            pb={isMobile ? "90px" : "110px"}
-          >
-            {isLoading ? (
-              <Center mt="20">
-                <Spinner size="xl" color="#895023" />
-              </Center>
-            ) : (
-              <Stack gap="1">
-                {filteredProducts.map((product) => (
-                  <Flex
-                    key={product._id}
-                    bg="white"
-                    py="2"
-                    justifyContent="space-between"
-                    paddingX="4"
-                    w="100%"
-                    minHeight="9.5rem"
-                  >
-                    <Stack gap={0} w="75%">
-                      <Text fontWeight="bold" fontSize="lg" color="#895023">
-                        {product.nome}
+                  <Text fontSize="sm" color="gray.600" mb={2}>
+                    {product.descricao}
+                  </Text>
+                  <Stack gap={0.5} fontSize="sm" color="gray.700">
+                    {product.precoTortaP > 0 && (
+                      <Text>
+                        <strong>Torta Pequena:</strong> R$ {product.precoTortaP.toFixed(2)}
                       </Text>
-
-                      <Text fontSize="sm" color="gray.600">
-                        {product.descricao}
-                      </Text>
-
-                      <Stack gap={0.5} mt={1}>
-                        {product.precoPedacoP > 0 && (
-                          <Text fontSize="sm" color={"#000"}>
-                            <strong>Torta Pequena:</strong> R${" "}
-                            {product.precoTortaP.toFixed(2)}
-                          </Text>
-                        )}
-                        {product.precoPedacoG > 0 && (
-                          <Text fontSize="sm" color={"#000"}>
-                            <strong>Torta Grande:</strong> R${" "}
-                            {product.precoTortaG.toFixed(2)}
-                          </Text>
-                        )}
-                        {product.precoPedacoP > 0 && (
-                          <Text fontSize="sm" color={"#000"}>
-                            <strong>Pedaço Pequeno:</strong> R${" "}
-                            {product.precoPedacoP.toFixed(2)}
-                          </Text>
-                        )}
-                        {product.precoTortaG > 0 && (
-                          <Text fontSize="sm" color={"#000"}>
-                            <strong>Pedaço Grande:</strong> R${" "}
-                            {product.precoPedacoG.toFixed(2)}
-                          </Text>
-                        )}
-                      </Stack>
-                    </Stack>
-                    {product.imagem && (
-                      <Image
-                        src={product.imagem}
-                        alt={product.nome}
-                        objectFit="cover"
-                        maxH={isMobile ? "8rem" : "9.5rem"}
-                        maxW={isMobile ? "8rem" : "9.5rem"}
-                        position="relative"
-                        borderRadius="lg"
-                      />
                     )}
-                  </Flex>
-                ))}
-              </Stack>
-            )}
-          </Box>
-          <NavBar />
-          <Button
-            colorScheme="orange"
-            size="lg"
-            w={{ base: "full", sm: "auto" }}
-            backgroundColor="orange.600"
-            _hover={{ backgroundColor: "orange.700" }}
-          >
-            <a href="/minha_conta">Minha conta</a>
-          </Button>
-        </Stack>
+                    {product.precoTortaG > 0 && (
+                      <Text>
+                        <strong>Torta Grande:</strong> R$ {product.precoTortaG.toFixed(2)}
+                      </Text>
+                    )}
+                    {product.precoPedacoP > 0 && (
+                      <Text>
+                        <strong>Pedaço Pequeno:</strong> R$ {product.precoPedacoP.toFixed(2)}
+                      </Text>
+                    )}
+                    {product.precoPedacoG > 0 && (
+                      <Text>
+                        <strong>Pedaço Grande:</strong> R$ {product.precoPedacoG.toFixed(2)}
+                      </Text>
+                    )}
+                  </Stack>
+                </Box>
+
+                {product.imagem && (
+                  <Image
+                    src={product.imagem}
+                    alt={product.nome}
+                    objectFit="cover"
+                    borderRadius="xl"
+                    boxShadow="md"
+                    w="6.5rem"
+                    h="6.5rem"
+                  />
+                )}
+              </Flex>
+            ))}
+          </SimpleGrid>
+        )}
       </Box>
+
+      <NavBar />
     </Box>
   );
 }

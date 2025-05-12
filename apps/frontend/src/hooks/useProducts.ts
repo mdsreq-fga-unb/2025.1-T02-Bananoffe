@@ -3,18 +3,22 @@ import { useState } from "react";
 import axios from "axios";
 import { toaster } from "@/components/ui/toaster";
 import { Product } from "@/types/Product.type";
+import { useSession } from "next-auth/react";
 
 const APIURL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080";
 
 export const useProducts = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [products, setProducts] = useState<Product[]>([]);
+  const { data: session } = useSession();
 
   const getProducts = async () => {
     setIsLoading(true);
+    
     try {
       const response = await axios.get<Product[]>(`${APIURL}/cardapio/listar`);
       setProducts(response.data);
+      
       return response.data;
     } catch (error) {
       console.error(error);
@@ -28,11 +32,17 @@ export const useProducts = () => {
       setIsLoading(false);
     }
   };
+
   const createProduct = async (data: Product) => {
     setIsLoading(true);
     console.log(data);
     try {
-      await axios.post(`${APIURL}/cardapio/adicionar`, data);
+      await axios.post(`${APIURL}/cardapio/adicionar`, data, {
+        headers: {
+          Authorization: `Bearer ${session?.user.accessToken}`,
+        },
+      });
+      
 
       toaster.create({
         title: "Produto criado com sucesso!",
@@ -58,6 +68,7 @@ export const useProducts = () => {
       setIsLoading(false);
     }
   };
+  
   const updateUser = async (data: Product) => {
     setIsLoading(true);
     try {
