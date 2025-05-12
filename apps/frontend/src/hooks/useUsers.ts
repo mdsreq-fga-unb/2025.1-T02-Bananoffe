@@ -1,10 +1,10 @@
-'use client';
-import { useState } from 'react';
-import axios from 'axios';
-import { toaster } from '@/components/ui/toaster';
-import { CreateUserDto, UpdateUserDto, User } from '@/types/User.type';
+"use client";
+import { useState } from "react";
+import axios from "axios";
+import { toaster } from "@/components/ui/toaster";
+import { CreateUserDto, UpdateUserDto, User } from "@/types/User.type";
 
-const APIURL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080';
+const APIURL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080";
 
 export const useUsers = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -19,9 +19,9 @@ export const useUsers = () => {
     } catch (error) {
       console.error(error);
       toaster.create({
-        title: 'Erro ao buscar usuários',
-        description: 'Tente novamente mais tarde.',
-        type: 'error',
+        title: "Erro ao buscar usuários",
+        description: "Tente novamente mais tarde.",
+        type: "error",
       });
       return [];
     } finally {
@@ -31,28 +31,28 @@ export const useUsers = () => {
 
   const createUser = async (data: CreateUserDto) => {
     setIsLoading(true);
-    console.log(data)
+    console.log(data);
     try {
       await axios.post(`${APIURL}/auth/cadastrar`, data);
 
       toaster.create({
-        title: 'Usuário criado com sucesso!',
-        type: 'success',
+        title: "Usuário criado com sucesso!",
+        type: "success",
       });
 
       await getUsers();
       return true;
     } catch (error) {
-      let errorMessage = 'Erro ao criar usuário';
+      let errorMessage = "Erro ao criar usuário";
 
       if (axios.isAxiosError(error)) {
         errorMessage = error.response?.data?.message || error.message;
       }
 
       toaster.create({
-        title: 'Erro',
+        title: "Erro",
         description: errorMessage,
-        type: 'error',
+        type: "error",
       });
       return false;
     } finally {
@@ -66,8 +66,8 @@ export const useUsers = () => {
       await axios.patch(`${APIURL}/auth/${data.id}`, data);
 
       toaster.create({
-        title: 'Usuário atualizado com sucesso!',
-        type: 'success',
+        title: "Usuário atualizado com sucesso!",
+        type: "success",
       });
 
       await getUsers();
@@ -75,9 +75,9 @@ export const useUsers = () => {
     } catch (error) {
       console.error(error);
       toaster.create({
-        title: 'Erro ao atualizar usuário',
-        description: 'Verifique os dados e tente novamente.',
-        type: 'error',
+        title: "Erro ao atualizar usuário",
+        description: "Verifique os dados e tente novamente.",
+        type: "error",
       });
       return false;
     } finally {
@@ -91,8 +91,8 @@ export const useUsers = () => {
       await axios.delete(`${APIURL}/auth/${id}`);
 
       toaster.create({
-        title: 'Usuário deletado com sucesso!',
-        type: 'success',
+        title: "Usuário deletado com sucesso!",
+        type: "success",
       });
 
       await getUsers();
@@ -100,9 +100,9 @@ export const useUsers = () => {
     } catch (error) {
       console.error(error);
       toaster.create({
-        title: 'Erro ao deletar usuário',
-        description: 'Tente novamente mais tarde.',
-        type: 'error',
+        title: "Erro ao deletar usuário",
+        description: "Tente novamente mais tarde.",
+        type: "error",
       });
       return false;
     } finally {
