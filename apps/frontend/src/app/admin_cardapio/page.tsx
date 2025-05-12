@@ -36,7 +36,7 @@ function adminCardapio() {
   return (
     <Box className="pageContainer" p={5} bg="gray.50" minH="100vh">
       <Stack className="pageContent" gap="2">
-        <InputGroup endElement={<MdSearch />} w="30%">
+        <InputGroup endElement={<MdSearch />} w={isMobile ? "100%" : "30%"}>
           <Input
             placeholder="Pesquise"
             bgColor="#ededed"
@@ -71,8 +71,8 @@ function adminCardapio() {
               </Table.Row>
             </Table.Header>
             <Table.Body>
-              {filteredProducts.map((item, index) => (
-                <Table.Row key={index}>
+              {filteredProducts.map((item) => (
+                <Table.Row key={item._id}>
                   <Table.Cell>{item.nome}</Table.Cell>
                   <Table.Cell>{item.descricao}</Table.Cell>
                   <Table.Cell>{item.precoPedacoP}</Table.Cell>

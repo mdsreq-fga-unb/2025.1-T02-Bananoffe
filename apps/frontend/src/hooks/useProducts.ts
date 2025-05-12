@@ -28,7 +28,7 @@ export const useProducts = () => {
       setIsLoading(false);
     }
   };
-
+  console.log(products);
   return {
     products,
     getProducts,
