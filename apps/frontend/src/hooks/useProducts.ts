@@ -33,6 +33,7 @@ export const useProducts = () => {
     }
   };
 
+  console.log("session", session);
   const createProduct = async (data: Product) => {
     setIsLoading(true);
     console.log(data);
@@ -69,7 +70,7 @@ export const useProducts = () => {
     }
   };
   
-  const updateUser = async (data: Product) => {
+  const updateProduct  = async (data: Product) => {
     setIsLoading(true);
     try {
       await axios.patch(`${APIURL}/cardapio/${data._id}`, data);
@@ -94,7 +95,7 @@ export const useProducts = () => {
     }
   };
 
-  const deleteUser = async (id: string) => {
+  const deleteProduct  = async (id: string) => {
     setIsLoading(true);
     try {
       await axios.delete(`${APIURL}/cardapio/${id}`);
@@ -122,6 +123,9 @@ export const useProducts = () => {
   return {
     products,
     getProducts,
+    createProduct,
+    updateProduct,
+    deleteProduct,
     isLoading,
   };
 };
