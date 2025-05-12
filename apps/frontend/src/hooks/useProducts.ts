@@ -14,11 +14,11 @@ export const useProducts = () => {
 
   const getProducts = async () => {
     setIsLoading(true);
-    
+
     try {
       const response = await axios.get<Product[]>(`${APIURL}/cardapio/listar`);
       setProducts(response.data);
-      
+
       return response.data;
     } catch (error) {
       console.error(error);
@@ -43,7 +43,6 @@ export const useProducts = () => {
           Authorization: `Bearer ${session?.user.accessToken}`,
         },
       });
-      
 
       toaster.create({
         title: "Produto criado com sucesso!",
@@ -69,11 +68,15 @@ export const useProducts = () => {
       setIsLoading(false);
     }
   };
-  
-  const updateProduct  = async (data: Product) => {
+
+  const updateProduct = async (data: Product) => {
     setIsLoading(true);
     try {
-      await axios.patch(`${APIURL}/cardapio/${data._id}`, data);
+      await axios.patch(`${APIURL}/cardapio/${data._id}`, data, {
+        headers: {
+          Authorization: `Bearer ${session?.user.accessToken}`,
+        },
+      });
 
       toaster.create({
         title: "Produto atualizado com sucesso!",
@@ -95,10 +98,14 @@ export const useProducts = () => {
     }
   };
 
-  const deleteProduct  = async (id: string) => {
+  const deleteProduct = async (id: string) => {
     setIsLoading(true);
     try {
-      await axios.delete(`${APIURL}/cardapio/${id}`);
+      await axios.delete(`${APIURL}/cardapio/${id}`, {
+        headers: {
+          Authorization: `Bearer ${session?.user.accessToken}`,
+        },
+      });
 
       toaster.create({
         title: "Produto deletado com sucesso!",

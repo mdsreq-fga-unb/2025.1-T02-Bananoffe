@@ -17,7 +17,6 @@ import {
   Flex,
   useDisclosure,
   Field,
-  NumberInput,
 } from "@chakra-ui/react";
 
 import { useProducts } from "@/hooks/useProducts";
@@ -52,6 +51,7 @@ function adminCardapio() {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [open, setOpen] = useState(false);
+  const [open1, setOpen1] = useState(false);
   const { onOpen, onClose } = useDisclosure();
 
   const isMobile = useBreakpointValue({ base: true, md: false });
@@ -83,10 +83,24 @@ function adminCardapio() {
       precoTortaG: data.precoTortaG,
       precoPedacoP: data.precoPedacoP,
       precoPedacoG: data.precoPedacoG,
-      quantidade: data.quantidade,
+      quantidade: data.quantidade || 0,
       imagem: data.imagem,
     };
     const sucesso = await createProduct(dados);
+  };
+  const onSubmit1 = async (data: FormValues) => {
+    const dados = {
+      _id: data._id,
+      nome: data.nome,
+      descricao: data.descricao,
+      precoTortaP: data.precoTortaP,
+      precoTortaG: data.precoTortaG,
+      precoPedacoP: data.precoPedacoP,
+      precoPedacoG: data.precoPedacoG,
+      quantidade: data.quantidade || 0,
+      imagem: data.imagem || "",
+    };
+    const sucesso = await updateProduct(dados);
   };
 
   const handleAdd = () => {
@@ -94,9 +108,7 @@ function adminCardapio() {
   };
 
   const handleEdit = (product: Product) => {
-    setSelectedProduct(product);
-    reset(product);
-    onOpen();
+    setOpen1(true);
   };
 
   const handleDelete = async (id: string) => {
@@ -377,16 +389,187 @@ function adminCardapio() {
                         <Field.Label color="white">Quantidade</Field.Label>
                         <Input
                           variant="subtle"
+                          placeholder="opcional"
                           bgColor="#D9D9D9"
                           color="black"
                           size="lg"
                           type="number"
-                          {...register("quantidade", {
+                          {...register("quantidade")}
+                        />
+                        <Field.ErrorText>
+                          {errors.quantidade?.message}
+                        </Field.ErrorText>
+                      </Field.Root>
+
+                      <Button
+                        type="submit"
+                        bgColor="#895023"
+                        color="white"
+                        size="md"
+                        width="100%"
+                        alignSelf="center"
+                        loading={isLoading}
+                        loadingText="Criando conta..."
+                        _hover={{ bgColor: "#6a3d1a" }}
+                      >
+                        Adicionar Produto
+                      </Button>
+                    </Stack>
+                  </Center>
+                </form>
+              </Dialog.Body>
+              <Dialog.Footer></Dialog.Footer>
+              <Dialog.CloseTrigger asChild>
+                <CloseButton size="sm" />
+              </Dialog.CloseTrigger>
+            </Dialog.Content>
+          </Dialog.Positioner>
+        </Portal>
+      </Dialog.Root>
+
+      <Dialog.Root
+        lazyMount
+        open={open1}
+        onOpenChange={(e) => setOpen1(e.open)}
+      >
+        <Portal>
+          <Dialog.Backdrop />
+          <Dialog.Positioner>
+            <Dialog.Content>
+              <Dialog.Header>
+                <Dialog.Title>Dialog Title</Dialog.Title>
+              </Dialog.Header>
+              <Dialog.Body>
+                <form onSubmit={handleSubmit(onSubmit1)}>
+                  <Center>
+                    <Stack gap="4" width="100%" maxW="md">
+                      <Field.Root invalid={!!errors.nome}>
+                        <Field.Label htmlFor="nome" color="white">
+                          Nome
+                        </Field.Label>
+                        <Input
+                          variant="subtle"
+                          bgColor="#D9D9D9"
+                          color="black"
+                          size="lg"
+                          type="text"
+                          placeholder="Nome"
+                          {...register("nome", {
+                            required: "Nome é obrigatório",
+                          })}
+                        />
+                        <Field.ErrorText>
+                          {errors.nome?.message}
+                        </Field.ErrorText>
+                      </Field.Root>
+
+                      <Field.Root invalid={!!errors.descricao}>
+                        <Field.Label color="white">Descricao</Field.Label>
+                        <Input
+                          variant="subtle"
+                          bgColor="#D9D9D9"
+                          color="black"
+                          size="lg"
+                          placeholder="Descrição"
+                          {...register("descricao", {
+                            required: "Descrição é obrigatória",
+                          })}
+                        />
+                        <Field.ErrorText>
+                          {errors.descricao?.message}
+                        </Field.ErrorText>
+                      </Field.Root>
+
+                      <Field.Root invalid={!!errors.precoTortaP}>
+                        <Field.Label color="white">Preço Torta P</Field.Label>
+                        <Input
+                          variant="subtle"
+                          bgColor="#D9D9D9"
+                          color="black"
+                          size="lg"
+                          type="number"
+                          {...register("precoTortaP", {
+                            required: "Preço é obrigatório",
                             min: {
                               value: 0,
-                              message: "Quantidade deve ser positivo",
+                              message: "Preço deve ser positivo",
                             },
                           })}
+                        />
+                        <Field.ErrorText>
+                          {errors.precoTortaP?.message}
+                        </Field.ErrorText>
+                      </Field.Root>
+                      <Field.Root invalid={!!errors.precoTortaG}>
+                        <Field.Label color="white">Preço Torta G</Field.Label>
+                        <Input
+                          variant="subtle"
+                          bgColor="#D9D9D9"
+                          color="black"
+                          size="lg"
+                          type="number"
+                          {...register("precoTortaG", {
+                            required: "Preço da Torta G é obrigatório",
+                            min: {
+                              value: 0,
+                              message: "Preço deve ser positivo",
+                            },
+                          })}
+                        />
+                        <Field.ErrorText>
+                          {errors.precoTortaG?.message}
+                        </Field.ErrorText>
+                      </Field.Root>
+                      <Field.Root invalid={!!errors.precoPedacoP}>
+                        <Field.Label color="white">Preço Pedaço P</Field.Label>
+                        <Input
+                          variant="subtle"
+                          bgColor="#D9D9D9"
+                          color="black"
+                          size="lg"
+                          type="number"
+                          {...register("precoPedacoP", {
+                            required: "Preço do Pedaço P é obrigatório",
+                            min: {
+                              value: 0,
+                              message: "Preço deve ser positivo",
+                            },
+                          })}
+                        />
+                        <Field.ErrorText>
+                          {errors.precoTortaG?.message}
+                        </Field.ErrorText>
+                      </Field.Root>
+                      <Field.Root invalid={!!errors.precoPedacoG}>
+                        <Field.Label color="white">Preço Pedaço G</Field.Label>
+                        <Input
+                          variant="subtle"
+                          bgColor="#D9D9D9"
+                          color="black"
+                          size="lg"
+                          type="number"
+                          {...register("precoPedacoG", {
+                            required: "Preço do Pedaço G é obrigatório",
+                            min: {
+                              value: 0,
+                              message: "Preço deve ser positivo",
+                            },
+                          })}
+                        />
+                        <Field.ErrorText>
+                          {errors.precoPedacoG?.message}
+                        </Field.ErrorText>
+                      </Field.Root>
+                      <Field.Root invalid={!!errors.quantidade}>
+                        <Field.Label color="white">Quantidade</Field.Label>
+                        <Input
+                          variant="subtle"
+                          placeholder="opcional"
+                          bgColor="#D9D9D9"
+                          color="black"
+                          size="lg"
+                          type="number"
+                          {...register("quantidade")}
                         />
                         <Field.ErrorText>
                           {errors.quantidade?.message}
