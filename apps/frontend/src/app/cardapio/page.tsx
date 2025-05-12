@@ -17,7 +17,7 @@ import { MdSearch, MdFilterList } from "react-icons/md";
 import { useState, useEffect } from "react";
 import NavBar from "@/components/NavBar";
 import { useProducts } from "@/hooks/useProducts";
-import { useAuth } from "@/app/context/AuthContext";
+import { useAuth } from "@/context/AuthContext";
 
 function Cardapio() {
   const { products, getProducts, isLoading } = useProducts(); //~ hook busca os produtos

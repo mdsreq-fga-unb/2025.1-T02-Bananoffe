@@ -23,7 +23,7 @@ function NavBar() {
     { iconName: <MdOutlineMenuBook />, title: "Cardápio", rota: "/cardapio" },
     { iconName: <MdOutlineShoppingBag />, title: "Sacola", rota: "/sacola" },
     { iconName: <MdInventory />, title: "Pedidos", rota: "/pedidos" },
-    { iconName: <MdPerson />, title: "Perfil", rota: "/perfil" },
+    { iconName: <MdPerson />, title: "Perfil", rota: "/minha_conta" },
   ];
   const icons = navItems.map((item, index) => {
     const isActive = RotaAtual === item.rota;
@@ -44,7 +44,7 @@ function NavBar() {
   });
   return (
     <Box
-      maxW={isMobile ? "100%" : "900px"}
+      maxW={isMobile ? "100%" : "1200px"}
       mx="auto"
       position="fixed" // Fixa na tela
       bottom="0" // Coloca no rodapé
