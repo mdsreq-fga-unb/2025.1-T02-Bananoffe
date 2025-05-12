@@ -1,7 +1,7 @@
 import { Injectable, BadRequestException, UnauthorizedException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { CreateUsuarioDto, LoginUsuarioDto } from './auth.dto';
+import { CreateUsuarioDto, LoginUsuarioDto, UpdateUsuarioDto } from './auth.dto';
 import { Usuario, UsuarioDocument } from 'src/schemas/user.schema';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
@@ -159,5 +159,34 @@ export class AuthService {
       throw new BadRequestException('Usuário não encontrado.');
     }
     return { message: 'Usuário deletado com sucesso.' };
-  }
+    }
+
+
+    async getMe(userId: string) {
+        return this.userModel.findById(userId).select('-senha'); 
+      }
+
+    async updateMe(id: string, dto: UpdateUsuarioDto) {
+        const usuario = await this.userModel.findById(id);
+        if (!usuario) {
+          throw new BadRequestException('Usuário não encontrado.');
+        }
+    
+        if (dto.nome !== undefined) {
+          usuario.nome = dto.nome;
+        }
+        if (dto.telefone !== undefined) {
+          usuario.telefone = dto.telefone;
+        }
+        if (dto.dataNascimento !== undefined) {
+          usuario.dataNascimento = new Date(dto.dataNascimento);
+        }
+        if (dto.senha) {
+          const salt = await bcrypt.genSalt();
+          usuario.senha = await bcrypt.hash(dto.senha, salt);
+        }
+    
+        await usuario.save();
+        return { message: 'Dados atualizados com sucesso.' };
+    }
 }
