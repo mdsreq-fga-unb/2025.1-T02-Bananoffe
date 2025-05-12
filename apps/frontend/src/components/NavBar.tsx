@@ -20,7 +20,7 @@ function NavBar() {
   const isMobile = useBreakpointValue({ base: true, md: false });
   const RotaAtual = usePathname();
   const navItems = [
-    { iconName: <MdOutlineMenuBook />, title: "Cardápio", rota: "/cardapio" },
+    { iconName: <MdOutlineMenuBook />, title: "Cardápio", rota: "/" },
     { iconName: <MdOutlineShoppingBag />, title: "Sacola", rota: "/sacola" },
     { iconName: <MdInventory />, title: "Pedidos", rota: "/pedidos" },
     { iconName: <MdPerson />, title: "Perfil", rota: "/minha_conta" },

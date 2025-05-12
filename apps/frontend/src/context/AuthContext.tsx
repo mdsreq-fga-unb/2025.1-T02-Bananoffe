@@ -40,7 +40,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         type: 'success',
       });
 
-      router.push(session?.user?.role === 'admin' ? '/cadastro' : '/');
+      router.push(session?.user?.role === 'admin' ? '/admin_cardapio' : '/');
     }
   };
 
