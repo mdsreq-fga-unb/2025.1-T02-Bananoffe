@@ -17,12 +17,12 @@ import { MdSearch, MdFilterList } from "react-icons/md";
 import { useState, useEffect } from "react";
 import NavBar from "@/components/NavBar";
 import { useProducts } from "@/hooks/useProducts";
-import { useAuth } from "@/app/context/AuthContext";
+import { useAuth } from "@/context/AuthContext";
 
 function Home() {
   const { products, getProducts, isLoading } = useProducts(); //~ hook busca os produtos
   const { user, logout } = useAuth();
-
+  console.log(user)
   const [searchTerm, setSearchTerm] = useState("");
   const isMobile = useBreakpointValue({ base: true, md: false });
 
@@ -179,15 +179,15 @@ function Home() {
             )}
           </Box>
           <NavBar />
-            <Button
-              colorScheme="orange"
-              size="lg"
-              w={{ base: "full", sm: "auto" }}
-              backgroundColor="orange.600"
-              _hover={{ backgroundColor: "orange.700" }}
-            >
-              <a href="/minha_conta">Minha conta</a>
-            </Button>
+          <Button
+            colorScheme="orange"
+            size="lg"
+            w={{ base: "full", sm: "auto" }}
+            backgroundColor="orange.600"
+            _hover={{ backgroundColor: "orange.700" }}
+          >
+            <a href="/minha_conta">Minha conta</a>
+          </Button>
         </Stack>
       </Box>
     </Box>
