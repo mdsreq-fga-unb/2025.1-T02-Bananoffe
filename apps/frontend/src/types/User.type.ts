@@ -1,20 +1,20 @@
-export type UserRole = 'admin' | 'cliente';
+export type UserRole = "admin" | "cliente";
 
 export interface User {
-  id: string; 
+  id: string;
   nome: string;
   telefone: string;
-  dataNascimento?: string; 
+  dataNascimento?: string;
   email: string;
   role: UserRole;
   senha?: string;
 }
 
-export interface CreateUserDto extends Omit<User, 'id' | 'role'> {
+export interface CreateUserDto extends Omit<User, "id" | "role"> {
   senha: string;
 }
 
-export interface UpdateUserDto extends Partial<Omit<User, 'senha'>> {
+export interface UpdateUserDto extends Partial<Omit<User, "senha">> {
   id: string;
   senha?: string;
 }

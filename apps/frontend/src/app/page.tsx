@@ -70,11 +70,7 @@ function Home() {
                     Olá, {user.nome}!
                   </Text>
                 ) : (
-                  <Link
-                    color="black"
-                    variant="underline"
-                    href="/login"
-                  >
+                  <Link color="black" variant="underline" href="/login">
                     Fazer login
                   </Link>
                 )}
@@ -116,9 +112,9 @@ function Home() {
               </Center>
             ) : (
               <Stack gap="1">
-                {filteredProducts.map((product, index) => (
+                {filteredProducts.map((product) => (
                   <Flex
-                    key={index}
+                    key={product._id}
                     bg="white"
                     py="2"
                     justifyContent="space-between"
