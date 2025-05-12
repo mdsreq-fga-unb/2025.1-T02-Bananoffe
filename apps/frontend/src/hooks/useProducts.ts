@@ -10,7 +10,6 @@ const APIURL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080";
 export const useProducts = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [products, setProducts] = useState<Product[]>([]);
-  const token = localStorage.getItem("authToken");
   const { data: session } = useSession();
 
   const getProducts = async () => {
@@ -38,9 +37,6 @@ export const useProducts = () => {
     setIsLoading(true);
     console.log(data);
     try {
-      await axios.post(`${APIURL}/cardapio/adicionar`, data, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
       await axios.post(`${APIURL}/cardapio/adicionar`, data, {
         headers: {
           Authorization: `Bearer ${session?.user.accessToken}`,
@@ -72,7 +68,6 @@ export const useProducts = () => {
       setIsLoading(false);
     }
   };
-  const updateProduct = async (data: Product) => {
   
   const updateUser = async (data: Product) => {
     setIsLoading(true);
@@ -99,7 +94,7 @@ export const useProducts = () => {
     }
   };
 
-  const deleteProduct = async (id: string) => {
+  const deleteUser = async (id: string) => {
     setIsLoading(true);
     try {
       await axios.delete(`${APIURL}/cardapio/${id}`);
@@ -127,9 +122,6 @@ export const useProducts = () => {
   return {
     products,
     getProducts,
-    createProduct,
-    updateProduct,
-    deleteProduct,
     isLoading,
   };
 };
