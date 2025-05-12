@@ -23,7 +23,7 @@ import { User } from "@/types/User.type";
 import NavBar from "@/components/NavBar";
 
 export default function MinhaConta() {
-  const { user, isLoading } = useAuth();
+  const { user, isLoading, logout } = useAuth();
   const [changedFields, setChangedFields] = useState<Partial<User>>({});
   const router = useRouter();
   const { updateUser } = useUsers();
@@ -45,6 +45,11 @@ export default function MinhaConta() {
     }
 
     return digits;
+  }
+
+  const handleLogout = () => {
+    logout();
+    router.push("/");
   }
 
   const handleInputChange = (field: keyof User) => (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -138,8 +143,8 @@ export default function MinhaConta() {
                     onClick={() => setMostrarSenha(!mostrarSenha)}
                     _hover={{ bg: "transparent" }}
                   >
-        {mostrarSenha ? <ViewOffIcon /> : <ViewIcon />}
-        </Button>
+                    {mostrarSenha ? <ViewOffIcon /> : <ViewIcon />}
+                  </Button>
                 }
               >
                 <Input
@@ -165,6 +170,17 @@ export default function MinhaConta() {
               onClick={handleSubmit}
             >
               Salvar Alterações
+            </Button>
+            <Button
+              bgColor="#895023"
+              color="white"
+              size="lg"
+              _hover={{ bgColor: "#6a3d1a" }}
+              loading={isLoading}
+              loadingText="Salvando..."
+              onClick={handleLogout}
+            >
+              Sair
             </Button>
           </Stack>
         </Stack>
