@@ -9,6 +9,7 @@ const APIURL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080";
 export const useProducts = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [products, setProducts] = useState<Product[]>([]);
+  const token = localStorage.getItem("authToken");
 
   const getProducts = async () => {
     setIsLoading(true);
@@ -32,7 +33,9 @@ export const useProducts = () => {
     setIsLoading(true);
     console.log(data);
     try {
-      await axios.post(`${APIURL}/cardapio/adicionar`, data);
+      await axios.post(`${APIURL}/cardapio/adicionar`, data, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
 
       toaster.create({
         title: "Produto criado com sucesso!",
@@ -58,7 +61,7 @@ export const useProducts = () => {
       setIsLoading(false);
     }
   };
-  const updateUser = async (data: Product) => {
+  const updateProduct = async (data: Product) => {
     setIsLoading(true);
     try {
       await axios.patch(`${APIURL}/cardapio/${data._id}`, data);
@@ -83,7 +86,7 @@ export const useProducts = () => {
     }
   };
 
-  const deleteUser = async (id: string) => {
+  const deleteProduct = async (id: string) => {
     setIsLoading(true);
     try {
       await axios.delete(`${APIURL}/cardapio/${id}`);
@@ -111,6 +114,9 @@ export const useProducts = () => {
   return {
     products,
     getProducts,
+    createProduct,
+    updateProduct,
+    deleteProduct,
     isLoading,
   };
 };
