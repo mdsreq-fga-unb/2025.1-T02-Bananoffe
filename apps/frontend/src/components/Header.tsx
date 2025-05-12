@@ -1,11 +1,19 @@
 "use client";
 
-import { Box, Flex, Image, Text, useBreakpointValue } from "@chakra-ui/react";
+import {
+    Box,
+    Flex,
+    Image,
+    Text,
+    Button,
+    useBreakpointValue,
+    Stack,
+} from "@chakra-ui/react";
 import { useAuth } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
 
 function Header() {
-    const { user } = useAuth();
+    const { user, logout } = useAuth();
     const router = useRouter();
     const isMobile = useBreakpointValue({ base: true, md: false });
 
@@ -33,22 +41,35 @@ function Header() {
                 py={isMobile ? 3 : 5}
             >
                 <Flex justify="space-between" align="center">
-                    <Box>
+                    <Stack gap={1}>
                         <Text fontSize="xl" fontWeight="bold" color="#2D2D2D">
                             Bananoffee Doceria
                         </Text>
-                        <Text fontSize="sm" color="gray.600">
+                        <Text fontSize="md" color="gray.600">
                             Olá, {user?.nome || "visitante"}!
                         </Text>
-                    </Box>
+                        {user && (
+                            <Button
+                                size="xs"
+                                color="red"
+                                variant="ghost"
+                                width="fit-content"
+                                onClick={logout}
+                            >
+                                Sair
+                            </Button>
+                        )}
+                    </Stack>
 
                     <Image
                         src="/Logo Bananoffee - Sem Fundo-02.png"
                         alt="Logo Bananoffee"
                         maxH="5rem"
                         borderRadius="full"
-                                                cursor="pointer"
+                        cursor="pointer"
                         onClick={() => router.push("/")}
+                        w="30%"
+                        left="75%"
                     />
                 </Flex>
             </Box>

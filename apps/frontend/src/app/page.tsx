@@ -7,7 +7,6 @@ import {
   Input,
   InputGroup,
   Center,
-  useBreakpointValue,
   Spinner,
   Image,
   SimpleGrid,
@@ -49,6 +48,7 @@ function Home() {
             placeholder="Buscar produto..."
             bgColor="white"
             borderRadius="full"
+            color="gray.700"
             pl={4}
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
