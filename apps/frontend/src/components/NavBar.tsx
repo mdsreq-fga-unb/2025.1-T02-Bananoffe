@@ -29,19 +29,33 @@ function NavBar() {
     const isActive = RotaAtual === item.rota;
     return (
       <Link href={item.rota} key={index}>
-        <Stack gap="1">
-          <Center>
-            <Icon size="2xl" color={isActive ? "#16ed48" : "#000"}>
-              {item.iconName}
-            </Icon>
-          </Center>
-          <Text color={isActive ? "#16ed48" : "#000"} font="lg">
+        <Stack
+          gap="1"
+          align="center"
+          px="4"
+          py="2"
+          borderRadius="md"
+          transition="all 0.2s ease"
+          bg={isActive ? "green.100" : "transparent"}
+          _hover={{
+            bg: "green.50",
+            transform: "translateY(-2px)",
+          }}
+        >
+          <Icon
+            as={item.iconName.type}
+            boxSize={6}
+            color={isActive ? "#16ed48" : "#000"}
+            transition="color 0.2s"
+          />
+          <Text color={isActive ? "#16ed48" : "#000"} fontSize="sm">
             {item.title}
           </Text>
         </Stack>
       </Link>
     );
   });
+  
   return (
     <Box
       maxW={isMobile ? "100%" : "1200px"}

@@ -13,7 +13,7 @@ export const useUsers = () => {
   const getUsers = async () => {
     setIsLoading(true);
     try {
-      const response = await axios.get<User[]>(`${APIURL}/auth/listar`);
+      const response = await axios.get<User[]>(`${APIURL}/usuario/listar`);
       setUsers(response.data);
       return response.data;
     } catch (error) {
@@ -33,7 +33,7 @@ export const useUsers = () => {
     setIsLoading(true);
     console.log(data);
     try {
-      await axios.post(`${APIURL}/auth/cadastrar`, data);
+      await axios.post(`${APIURL}/usuario/cadastrar`, data);
 
       toaster.create({
         title: "Usuário criado com sucesso!",
@@ -63,33 +63,43 @@ export const useUsers = () => {
   const updateUser = async (data: UpdateUserDto) => {
     setIsLoading(true);
     try {
-      await axios.patch(`${APIURL}/auth/${data.id}`, data);
-
+      console.log(data);
+      await axios.patch(`${APIURL}/usuario/atualizar/${data.id}`, data);
+  
       toaster.create({
         title: "Usuário atualizado com sucesso!",
         type: "success",
       });
-
+  
       await getUsers();
       return true;
     } catch (error) {
       console.error(error);
+  
+      let errorMessage = "Verifique os dados e tente novamente.";
+      if (axios.isAxiosError(error)) {
+        errorMessage = error.response?.data?.message || error.message;
+      }
+  
       toaster.create({
         title: "Erro ao atualizar usuário",
-        description: "Verifique os dados e tente novamente.",
+        description: errorMessage,
         type: "error",
       });
+  
       return false;
     } finally {
       setIsLoading(false);
     }
   };
-
+  
   const deleteUser = async (id: string) => {
     setIsLoading(true);
     try {
-      await axios.delete(`${APIURL}/auth/${id}`);
-
+      await axios.delete(`${APIURL}/usuario/deletar`, {
+        data: { id }, 
+      });
+      
       toaster.create({
         title: "Usuário deletado com sucesso!",
         type: "success",
