@@ -8,14 +8,12 @@ import {
   Stack,
   Table,
   useBreakpointValue,
-  Text,
   Center,
   Dialog,
   Button,
   Portal,
   CloseButton,
   Flex,
-  useDisclosure,
   Field,
 } from "@chakra-ui/react";
 
@@ -24,6 +22,7 @@ import { useEffect, useState } from "react";
 import { MdAdd, MdDelete, MdEdit, MdSearch } from "react-icons/md";
 import { Product } from "@/types/Product.type";
 import { useForm } from "react-hook-form";
+import { register } from "module";
 
 interface FormValues {
   _id: string;
@@ -36,7 +35,6 @@ interface FormValues {
   quantidade: number;
   imagem?: string;
 }
-// }
 
 function adminCardapio() {
   const {
@@ -46,13 +44,15 @@ function adminCardapio() {
     updateProduct,
     deleteProduct,
     isLoading,
+    setIsLoading,
   } = useProducts();
 
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [open, setOpen] = useState(false);
   const [open1, setOpen1] = useState(false);
-  const { onOpen, onClose } = useDisclosure();
+  const [selectedImage, setSelectedImage] = useState<File | null>(null);
+  const [imagePreviewUrl, setImagePreviewUrl] = useState<string | null>(null);
 
   const isMobile = useBreakpointValue({ base: true, md: false });
   const imageSize = "50px";
@@ -70,25 +70,55 @@ function adminCardapio() {
     formState: { errors },
   } = useForm<FormValues>();
 
+  const formCreate = useForm<FormValues>();
+  const formEdit = useForm<FormValues>();
+
   useEffect(() => {
     getProducts();
   }, []);
 
+  useEffect(() => {
+    if (selectedProduct) {
+      reset({
+        _id: selectedProduct._id,
+        nome: selectedProduct.nome,
+        descricao: selectedProduct.descricao,
+        precoTortaP: selectedProduct.precoTortaP,
+        precoTortaG: selectedProduct.precoTortaG,
+        precoPedacoP: selectedProduct.precoPedacoP,
+        precoPedacoG: selectedProduct.precoPedacoG,
+        quantidade: selectedProduct.quantidade || 0,
+        imagem: selectedProduct.imagem || "",
+      });
+    }
+  }, [selectedProduct, reset]);
+
   const onSubmit = async (data: FormValues) => {
-    const dados = {
-      _id: data._id,
-      nome: data.nome,
-      descricao: data.descricao,
-      precoTortaP: data.precoTortaP,
-      precoTortaG: data.precoTortaG,
-      precoPedacoP: data.precoPedacoP,
-      precoPedacoG: data.precoPedacoG,
-      quantidade: data.quantidade || 0,
-      imagem: data.imagem,
-    };
-    const sucesso = await createProduct(dados);
-  };
-  const onSubmit1 = async (data: FormValues) => {
+
+    try {
+      const formData = new FormData();
+
+      formData.append("nome", data.nome);
+      formData.append("descricao", data.descricao);
+      formData.append("precoTortaP", data.precoTortaP.toString());
+      formData.append("precoTortaG", data.precoTortaG.toString());
+      formData.append("precoPedacoP", data.precoPedacoP.toString());
+      formData.append("precoPedacoG", data.precoPedacoG.toString());
+      formData.append("quantidade", data.quantidade.toString() || "0");
+
+      if (selectedImage) {
+        formData.append("imagem", selectedImage);
+      }
+      setIsLoading(true);
+      console.log("formData", formData);
+      await createProduct(formData);
+    }
+    catch (error) {
+      console.error(error);
+    }
+  }
+
+  const onSubmitEdit = async (data: Product) => {
     const dados = {
       _id: data._id,
       nome: data.nome,
@@ -101,13 +131,18 @@ function adminCardapio() {
       imagem: data.imagem || "",
     };
     const sucesso = await updateProduct(dados);
-  };
+  }
 
   const handleAdd = () => {
+    if (selectedProduct) {
+      setSelectedProduct(null);
+    }
     setOpen(true);
   };
 
   const handleEdit = (product: Product) => {
+    setSelectedProduct(product);
+    setImagePreviewUrl(selectedProduct?.imagem || null);
     setOpen1(true);
   };
 
@@ -117,9 +152,39 @@ function adminCardapio() {
     }
   };
 
-  const handleClose = () => {
-    setOpen(false);
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setSelectedImage(file);
+      setImagePreviewUrl(URL.createObjectURL(file));
+    }
   };
+
+  const handleRemoveImage = () => {
+    setSelectedImage(null);
+    setImagePreviewUrl(null);
+  };
+
+  useEffect(() => {
+    if (selectedImage) {
+      const imageUrl = URL.createObjectURL(selectedImage);
+      setImagePreviewUrl(imageUrl);
+    }
+  }, [selectedImage]);
+
+  useEffect(() => {
+    if (open1 && selectedProduct) {
+      setImagePreviewUrl(selectedProduct.imagem ?? null);
+    }
+  }, [open1, selectedProduct]);
+
+  useEffect(() => {
+    if (open) {
+      setSelectedProduct(null);
+      reset();
+      setImagePreviewUrl(null);
+    }
+  }, [open]);
 
   return (
     <Box
@@ -256,16 +321,25 @@ function adminCardapio() {
           </Table.Root>
         )}
       </Stack>
-      <Dialog.Root lazyMount open={open} onOpenChange={(e) => setOpen(e.open)}>
+
+      <Dialog.Root
+        open={open}
+        onOpenChange={(e: { open: boolean }) => {
+          setOpen(e.open);
+          if (!e.open) {
+            reset();
+            setImagePreviewUrl(null);
+          }
+        }}>
         <Portal>
           <Dialog.Backdrop />
           <Dialog.Positioner>
             <Dialog.Content>
               <Dialog.Header>
-                <Dialog.Title>Dialog Title</Dialog.Title>
+                <Dialog.Title>Cadastrar Produto</Dialog.Title>
               </Dialog.Header>
               <Dialog.Body>
-                <form onSubmit={handleSubmit(onSubmit)}>
+                <form onSubmit={formCreate.handleSubmit(onSubmit)}>
                   <Center>
                     <Stack gap="4" width="100%" maxW="md">
                       <Field.Root invalid={!!errors.nome}>
@@ -279,7 +353,7 @@ function adminCardapio() {
                           size="lg"
                           type="text"
                           placeholder="Nome"
-                          {...register("nome", {
+                          {...formCreate.register("nome", {
                             required: "Nome é obrigatório",
                           })}
                         />
@@ -296,7 +370,7 @@ function adminCardapio() {
                           color="black"
                           size="lg"
                           placeholder="Descrição"
-                          {...register("descricao", {
+                          {...formCreate.register("descricao", {
                             required: "Descrição é obrigatória",
                           })}
                         />
@@ -313,7 +387,7 @@ function adminCardapio() {
                           color="black"
                           size="lg"
                           type="number"
-                          {...register("precoTortaP", {
+                          {...formCreate.register("precoTortaP", {
                             required: "Preço é obrigatório",
                             min: {
                               value: 0,
@@ -333,7 +407,7 @@ function adminCardapio() {
                           color="black"
                           size="lg"
                           type="number"
-                          {...register("precoTortaG", {
+                          {...formCreate.register("precoTortaG", {
                             required: "Preço da Torta G é obrigatório",
                             min: {
                               value: 0,
@@ -353,7 +427,7 @@ function adminCardapio() {
                           color="black"
                           size="lg"
                           type="number"
-                          {...register("precoPedacoP", {
+                          {...formCreate.register("precoPedacoP", {
                             required: "Preço do Pedaço P é obrigatório",
                             min: {
                               value: 0,
@@ -373,7 +447,7 @@ function adminCardapio() {
                           color="black"
                           size="lg"
                           type="number"
-                          {...register("precoPedacoG", {
+                          {...formCreate.register("precoPedacoG", {
                             required: "Preço do Pedaço G é obrigatório",
                             min: {
                               value: 0,
@@ -394,11 +468,39 @@ function adminCardapio() {
                           color="black"
                           size="lg"
                           type="number"
-                          {...register("quantidade")}
+                          {...formCreate.register("quantidade")}
                         />
                         <Field.ErrorText>
                           {errors.quantidade?.message}
                         </Field.ErrorText>
+                      </Field.Root>
+
+                      <Field.Root>
+                        <Field.Label color="white">Imagem</Field.Label>
+                        {!imagePreviewUrl && (
+                          <Input
+                            variant="subtle"
+                            bgColor="#D9D9D9"
+                            color="black"
+                            size="lg"
+                            type="file"
+                            accept="image/*"
+                            onChange={handleImageChange}
+                          />
+                        )}
+
+                        {imagePreviewUrl && (
+                          <Flex mt="2" align="center" justify="center" gap="4">
+                            <img
+                              src={imagePreviewUrl}
+                              alt="Pré-visualização"
+                              style={{ maxHeight: "200px", borderRadius: "8px" }}
+                            />
+                            <Button onClick={handleRemoveImage} colorScheme="red" size="xs">
+                              Remover imagem
+                            </Button>
+                          </Flex>
+                        )}
                       </Field.Root>
 
                       <Button
@@ -409,8 +511,9 @@ function adminCardapio() {
                         width="100%"
                         alignSelf="center"
                         loading={isLoading}
-                        loadingText="Criando conta..."
+                        loadingText="Criando produto..."
                         _hover={{ bgColor: "#6a3d1a" }}
+                        onClick={() => setOpen(false)}
                       >
                         Adicionar Produto
                       </Button>
@@ -435,12 +538,12 @@ function adminCardapio() {
         <Portal>
           <Dialog.Backdrop />
           <Dialog.Positioner>
-            <Dialog.Content>
+            <Dialog.Content key={open1 ? "open" : "closed"}>
               <Dialog.Header>
-                <Dialog.Title>Dialog Title</Dialog.Title>
+                <Dialog.Title>Editar Produto</Dialog.Title>
               </Dialog.Header>
               <Dialog.Body>
-                <form onSubmit={handleSubmit(onSubmit1)}>
+                <form onSubmit={handleSubmit(onSubmitEdit)}>
                   <Center>
                     <Stack gap="4" width="100%" maxW="md">
                       <Field.Root invalid={!!errors.nome}>
@@ -574,6 +677,34 @@ function adminCardapio() {
                         <Field.ErrorText>
                           {errors.quantidade?.message}
                         </Field.ErrorText>
+                      </Field.Root>
+
+                      <Field.Root>
+                        <Field.Label color="white">Imagem</Field.Label>
+                        {!imagePreviewUrl && (
+                          <Input
+                            variant="subtle"
+                            bgColor="#D9D9D9"
+                            color="black"
+                            size="lg"
+                            type="file"
+                            accept="image/*"
+                            onChange={handleImageChange}
+                          />
+                        )}
+
+                        {imagePreviewUrl && (
+                          <Flex mt="2" align="center" justify="center" gap="4">
+                            <img
+                              src={imagePreviewUrl}
+                              alt="Pré-visualização"
+                              style={{ maxHeight: "200px", borderRadius: "8px" }}
+                            />
+                            <Button onClick={handleRemoveImage} colorScheme="red" size="xs">
+                              Remover imagem
+                            </Button>
+                          </Flex>
+                        )}
                       </Field.Root>
 
                       <Button

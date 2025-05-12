@@ -4,6 +4,7 @@ import axios from "axios";
 import { toaster } from "@/components/ui/toaster";
 import { Product } from "@/types/Product.type";
 import { useSession } from "next-auth/react";
+import { set } from "react-hook-form";
 
 const APIURL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080";
 
@@ -33,8 +34,7 @@ export const useProducts = () => {
     }
   };
 
-  console.log("session", session);
-  const createProduct = async (data: Product) => {
+  const createProduct = async (data: any) => {
     setIsLoading(true);
     console.log(data);
     try {
@@ -71,6 +71,7 @@ export const useProducts = () => {
 
   const updateProduct = async (data: Product) => {
     setIsLoading(true);
+    console.log(data);
     try {
       await axios.patch(`${APIURL}/cardapio/${data._id}`, data, {
         headers: {
@@ -134,5 +135,6 @@ export const useProducts = () => {
     updateProduct,
     deleteProduct,
     isLoading,
+    setIsLoading
   };
 };
