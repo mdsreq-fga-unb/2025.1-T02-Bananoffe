@@ -40,7 +40,7 @@ export class CardapioController {
     @Delete(':id')
     @Roles('admin')
     @UseGuards(JwtAuthGuard, RolesGuard)
-    async deletarItem(@Body() dto: DeletarItemDto) {
+    async deletarItem(@Param() dto: DeletarItemDto) {
         return this.CardapioService.deletarItem(dto);
     }
 
