@@ -19,7 +19,7 @@ import NavBar from "@/components/NavBar";
 import { useProducts } from "@/hooks/useProducts";
 import { useAuth } from "@/app/context/AuthContext";
 
-function Home() {
+function Cardapio() {
   const { products, getProducts, isLoading } = useProducts(); //~ hook busca os produtos
   const { user, logout } = useAuth();
 
@@ -179,19 +179,10 @@ function Home() {
             )}
           </Box>
           <NavBar />
-            <Button
-              colorScheme="orange"
-              size="lg"
-              w={{ base: "full", sm: "auto" }}
-              backgroundColor="orange.600"
-              _hover={{ backgroundColor: "orange.700" }}
-            >
-              <a href="/minha_conta">Minha conta</a>
-            </Button>
         </Stack>
       </Box>
     </Box>
   );
 }
 
-export default Home;
+export default Cardapio;
