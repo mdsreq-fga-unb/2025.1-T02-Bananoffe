@@ -4,7 +4,6 @@ import axios from "axios";
 import { toaster } from "@/components/ui/toaster";
 import { Product } from "@/types/Product.type";
 import { useSession } from "next-auth/react";
-import { set } from "react-hook-form";
 
 const APIURL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080";
 
@@ -34,7 +33,7 @@ export const useProducts = () => {
     }
   };
 
-  const createProduct = async (data: any) => {
+  const createProduct = async (data: FormData) => {
     setIsLoading(true);
     console.log(data);
     try {
@@ -69,11 +68,14 @@ export const useProducts = () => {
     }
   };
 
-  const updateProduct = async (data: Product) => {
+  const updateProduct = async (data: FormData) => {
     setIsLoading(true);
-    console.log(data);
+    console.log("Dados de alteração:", data);
+    const id = data.get("_id"); 
+    if (!id) throw new Error("ID do produto não informado");
+
     try {
-      await axios.patch(`${APIURL}/cardapio/${data._id}`, data, {
+      await axios.patch(`${APIURL}/cardapio/${id}`, data, {
         headers: {
           Authorization: `Bearer ${session?.user.accessToken}`,
         },
