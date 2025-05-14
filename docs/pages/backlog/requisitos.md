@@ -47,4 +47,4 @@ Requisitos não funcionais, por outro lado, são características que descrevem 
 
 | Data     | Versão | Descrição                            | Autor      |
 | -------- | ------ | ------------------------------------ | ---------- |
-| 17/04/25 | 1.0    | Criação do Documento e adição dos RF | Bruno Cruz |
+| 14/05/25 | 1.0    | Criação do Documento e adição dos RF | Bruno Cruz |
