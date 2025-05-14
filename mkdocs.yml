@@ -36,11 +36,13 @@ nav:
   - Visão do Produto e Projeto:
       - Cenário atual do cliente e do negócio: pages/visaoDoProduto/cenarioAtual.md
       - Solução proposta: pages/visaoDoProduto/solucaoProposta.md
-      - Estratégias de Engenharia de Softwatere: pages/visaoDoProduto/estrategiasEngSoft.md
+      - Estratégias de Engenharia de Software: pages/visaoDoProduto/estrategiasEngSoft.md
       - Cronogramas e Entregas: pages/visaoDoProduto/cronogramasEntregas.md
       - Interação entre Equipe e Cliente: pages/visaoDoProduto/interacaoEquipeCliente.md
       - Lições Aprendidas: pages/visaoDoProduto/licoesAprendidas.md
       - Referências: pages/visaoDoProduto/referencias.md
+  - Backlog:
+      - Requisistos de Software: pages/backlog/requisitos.md
   - Entregas:
       - Unidade 1: pages/entregas/unidade1.md
 
