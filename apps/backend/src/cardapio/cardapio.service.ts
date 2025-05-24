@@ -65,7 +65,7 @@ export class CardapioService {
 
       return {
         ...torta.toObject(),
-        imagem: {data: imagemBase64},
+        imagem: imagemBase64,
       };
     });
 
@@ -76,7 +76,7 @@ export class CardapioService {
 
       return {
         ...fatia.toObject(),
-        imagem: {data: imagemBase64},
+        imagem: imagemBase64,
       };
     });
 
