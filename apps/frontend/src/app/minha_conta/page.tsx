@@ -69,7 +69,7 @@ export default function MinhaConta() {
 
   return (
     <Box minH="100vh" bg="#F1DD2F" display="flex" flexDirection="column">
-      <Container maxW="lg" flex="1" py={10}>
+      <Container maxW="lg" flex="1" py={10} pb="120px">
         <Stack gap={8} boxShadow="lg" p={8} borderRadius="2xl" bg="white">
           <Flex justify="space-between" align="center">
             <Link href="/">

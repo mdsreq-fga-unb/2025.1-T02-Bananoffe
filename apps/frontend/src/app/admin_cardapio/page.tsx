@@ -16,9 +16,10 @@ import {
 import { useProducts } from "@/hooks/useProducts";
 import { useEffect, useState } from "react";
 import { MdAdd, MdDelete, MdEdit, MdSearch } from "react-icons/md";
-import { Product } from "@/types/Product.type";
+import { Fatia, Torta } from "@/types/Product.type";
 import { useForm } from "react-hook-form";
 import { ProdutoDialog } from "@/components/ProdutoDialog";
+import Link from "next/link";
 
 export interface FormValues {
   _id: string;
@@ -26,15 +27,16 @@ export interface FormValues {
   descricao: string;
   precoTortaP: number;
   precoTortaG: number;
-  precoPedacoP: number;
-  precoPedacoG: number;
-  quantidade: number;
+  precoFatia: number;
+  quantidadeTorta: number;
+  quantidadeFatia: number;
   imagem?: string;
 }
 
 function adminCardapio() {
   const {
-    products,
+    fatias,
+    tortas,
     getProducts,
     createProduct,
     updateProduct,
@@ -44,19 +46,27 @@ function adminCardapio() {
   } = useProducts();
 
   const [searchTerm, setSearchTerm] = useState("");
-  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+  const [selectedProduct, setSelectedProduct] = useState<Torta | Fatia | null>(null);
   const [openCreate, setOpenCreate] = useState(false);
   const [openEdit, setOpenEdit] = useState(false);
-  const [selectedImage, setSelectedImage] = useState<File | null>(null);
+  const [selectedTortaImage, setSelectedTortaImage] = useState<File | null>(null);
+  const [selectedFatiaImage, setSelectedFatiaImage] = useState<File | null>(null);
+  const [selectedEditImage, setSelectedEditImage] = useState<File | null>(null);
   const [imagePreviewUrl, setImagePreviewUrl] = useState<string | null>(null);
+  const [imageTortaPreviewUrl, setTortaImagePreviewUrl] = useState<string | null>(null);
+  const [imageFatiaPreviewUrl, setFatiaImagePreviewUrl] = useState<string | null>(null);
 
   const isMobile = useBreakpointValue({ base: true, md: false });
   const imageSize = "50px";
 
-  const filteredProducts = products.filter(
-    (product) =>
-      product.nome.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      product.descricao.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredFatias = fatias.filter((item) =>
+    item.nome.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    item.descricao.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  const filteredTortas = tortas.filter((item) =>
+    item.nome.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    item.descricao.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   const {
@@ -73,17 +83,31 @@ function adminCardapio() {
 
   useEffect(() => {
     if (selectedProduct) {
-      reset({
-        _id: selectedProduct._id,
-        nome: selectedProduct.nome,
-        descricao: selectedProduct.descricao,
-        precoTortaP: selectedProduct.precoTortaP,
-        precoTortaG: selectedProduct.precoTortaG,
-        precoPedacoP: selectedProduct.precoPedacoP,
-        precoPedacoG: selectedProduct.precoPedacoG,
-        quantidade: selectedProduct.quantidade || 0,
-        imagem: selectedProduct.imagem || "",
-      });
+      if ("precoTortaP" in selectedProduct) {
+        // É uma Torta
+        reset({
+          _id: selectedProduct._id,
+          nome: selectedProduct.nome,
+          descricao: selectedProduct.descricao,
+          precoTortaP: selectedProduct.precoTortaP,
+          precoTortaG: selectedProduct.precoTortaG,
+          precoFatia: 0,
+          quantidadeTorta: selectedProduct.quantidade || 0,
+          imagem: selectedProduct.imagem || "",
+        });
+      } else {
+        // É uma Fatia
+        reset({
+          _id: selectedProduct._id,
+          nome: selectedProduct.nome,
+          descricao: selectedProduct.descricao,
+          precoTortaP: 0,
+          precoTortaG: 0,
+          precoFatia: selectedProduct.precoFatia || 0,
+          quantidadeFatia: selectedProduct.quantidade || 0,
+          imagem: selectedProduct.imagem || "",
+        });
+      }
     }
   }, [selectedProduct, reset]);
 
@@ -93,62 +117,74 @@ function adminCardapio() {
 
       formData.append("nome", data.nome);
       formData.append("descricao", data.descricao);
-      formData.append("precoTortaP", data.precoTortaP.toString());
-      formData.append("precoTortaG", data.precoTortaG.toString());
-      formData.append("precoPedacoP", data.precoPedacoP.toString());
-      formData.append("precoPedacoG", data.precoPedacoG.toString());
-      formData.append("quantidade", data.quantidade.toString() || "0");
-
-      if (selectedImage) {
-        formData.append("imagem", selectedImage);
+      if (data.precoTortaP !== undefined)
+        formData.append("precoTortaP", data.precoTortaP.toString());
+      if (data.precoTortaG !== undefined)
+        formData.append("precoTortaG", data.precoTortaG.toString());
+      if (data.precoFatia !== undefined)
+        formData.append("precoFatia", data.precoFatia.toString());
+      if (data.quantidadeTorta !== undefined)
+        formData.append("quantidadeTorta", data.quantidadeTorta.toString());
+      if (data.quantidadeFatia !== undefined)
+        formData.append("quantidadeFatia", data.quantidadeFatia.toString());
+      if (selectedTortaImage) {
+        formData.append("imagens", selectedTortaImage); // primeiro arquivo
       }
+      if (selectedFatiaImage) {
+        formData.append("imagens", selectedFatiaImage); // segundo arquivo
+      }
+
       setIsLoading(true);
+
       for (let pair of formData.entries()) {
         console.log(pair[0] + ": " + pair[1]);
       }
-      if (formData === null) {
-        console.log("formData is null");
-      }
+
       await createProduct(formData);
-    }
-    catch (error) {
+    } catch (error) {
       console.error(error);
+    } finally {
+      setIsLoading(false);
     }
-  }
+  };
 
   const onSubmitEdit = async (data: FormValues) => {
     try {
-      const formData = new FormData();
-
-      if (data._id) formData.append("_id", data._id);
-      if (data.nome) formData.append("nome", data.nome);
-      if (data.descricao) formData.append("descricao", data.descricao);
-      if (data.precoTortaP !== undefined) formData.append("precoTortaP", data.precoTortaP.toString());
-      if (data.precoTortaG !== undefined) formData.append("precoTortaG", data.precoTortaG.toString());
-      if (data.precoPedacoP !== undefined) formData.append("precoPedacoP", data.precoPedacoP.toString());
-      if (data.precoPedacoG !== undefined) formData.append("precoPedacoG", data.precoPedacoG.toString());
-      if (data.quantidade !== undefined) formData.append("quantidade", data.quantidade.toString());
-
-      if (selectedImage) {
-        formData.append("imagem", selectedImage);
+      if (!data._id) {
+        throw new Error("ID do produto não informado.");
       }
 
-      // ✅ Debug do conteúdo enviado
-      console.log("📦 Conteúdo do FormData:");
+      const formData = new FormData();
+
+      formData.append("nome", data.nome);
+      formData.append("descricao", data.descricao);
+
+      if (data.precoTortaP !== undefined)
+        formData.append("precoTortaP", data.precoTortaP.toString());
+      if (data.precoTortaG !== undefined)
+        formData.append("precoTortaG", data.precoTortaG.toString());
+      if (data.precoFatia !== undefined)
+        formData.append("precoFatia", data.precoFatia.toString());
+      if (data.quantidadeTorta !== undefined)
+        formData.append("quantidade", data.quantidadeTorta.toString());
+      if (selectedEditImage instanceof File) {
+        formData.append("imagem", selectedEditImage);
+      }
+
+      // ✅ Debug
+      console.log("📦 FormData enviado:");
       for (const [key, value] of formData.entries()) {
         console.log(`${key}:`, value);
       }
 
       setIsLoading(true);
-      await updateProduct(formData);
+      await updateProduct(data._id, formData);
     } catch (error) {
       console.error("❌ Erro ao atualizar produto:", error);
     } finally {
       setIsLoading(false);
     }
   };
-
-
 
   const handleAdd = () => {
     if (selectedProduct) {
@@ -157,9 +193,9 @@ function adminCardapio() {
     setOpenCreate(true);
   };
 
-  const handleEdit = (product: Product) => {
+  const handleEdit = (product: Torta | Fatia) => {
     setSelectedProduct(product);
-    setImagePreviewUrl(product.imagem || null); 
+    setImagePreviewUrl(product.imagem || null);
     setOpenEdit(true);
   };
 
@@ -172,22 +208,51 @@ function adminCardapio() {
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
-      setSelectedImage(file);
+      setSelectedEditImage(file);
       setImagePreviewUrl(URL.createObjectURL(file));
     }
   };
 
+  const handleFatiaImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setSelectedFatiaImage(file);
+      setFatiaImagePreviewUrl(URL.createObjectURL(file));
+    }
+  };
+
+  const handleTortaImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setSelectedTortaImage(file);
+      setTortaImagePreviewUrl(URL.createObjectURL(file));
+    }
+  };
+
   const handleRemoveImage = () => {
-    setSelectedImage(null);
+    setSelectedEditImage(null);
     setImagePreviewUrl(null);
+  };
+  const handleRemoveFatiaImage = () => {
+    setSelectedFatiaImage(null);
+    setFatiaImagePreviewUrl(null);
+  };
+  const handleRemoveTortaImage = () => {
+    setSelectedTortaImage(null);
+    setTortaImagePreviewUrl(null);
   };
 
   useEffect(() => {
-    if (selectedImage) {
-      const imageUrl = URL.createObjectURL(selectedImage);
-      setImagePreviewUrl(imageUrl);
+    if (selectedTortaImage) {
+      const imageUrl = URL.createObjectURL(selectedTortaImage);
+      setTortaImagePreviewUrl(imageUrl)
     }
-  }, [selectedImage]);
+    if (selectedFatiaImage) {
+      const imageUrl = URL.createObjectURL(selectedFatiaImage);
+      setFatiaImagePreviewUrl(imageUrl);
+    }
+  }, [selectedTortaImage, selectedFatiaImage]);
+
 
   useEffect(() => {
     if (openEdit && selectedProduct) {
@@ -235,6 +300,15 @@ function adminCardapio() {
               onChange={(e) => setSearchTerm(e.target.value)}
             />
           </InputGroup>
+          <Link href="/">
+            <Button
+              bgColor="#895023"
+              color="#FFF"
+              marginRight={isMobile ? "0" : "2"}
+            >
+              Cardápio
+            </Button>
+          </Link>
         </Flex>
         {isLoading ? (
           <Center mx="auto" my={20} borderWidth={"0px"}>
@@ -260,10 +334,7 @@ function adminCardapio() {
                   Preço Torta G
                 </Table.ColumnHeader>
                 <Table.ColumnHeader textAlign="center">
-                  Preço Pedaço P
-                </Table.ColumnHeader>
-                <Table.ColumnHeader textAlign="center">
-                  Preço Pedaço G
+                  Preço Fatia
                 </Table.ColumnHeader>
                 <Table.ColumnHeader textAlign="center">
                   Quantidade
@@ -277,36 +348,24 @@ function adminCardapio() {
               </Table.Row>
             </Table.Header>
             <Table.Body>
-              {filteredProducts.map((item) => (
+              {[...filteredFatias, ...filteredTortas].map((item) => (
                 <Table.Row key={item._id}>
                   <Table.Cell>{item.nome}</Table.Cell>
                   <Table.Cell>{item.descricao}</Table.Cell>
                   <Table.Cell textAlign="center">
-                    {item.precoPedacoP}
+                    {"precoTortaP" in item ? item.precoTortaP : "-"}
                   </Table.Cell>
                   <Table.Cell textAlign="center">
-                    {item.precoPedacoG}
+                    {"precoTortaG" in item ? item.precoTortaG : "-"}
                   </Table.Cell>
-                  <Table.Cell textAlign="center">{item.precoTortaP}</Table.Cell>
-                  <Table.Cell textAlign="center">{item.precoTortaG}</Table.Cell>
+                  <Table.Cell textAlign="center">
+                    {"precoFatia" in item ? item.precoFatia : "-"}
+                  </Table.Cell>
                   <Table.Cell textAlign="center">{item.quantidade}</Table.Cell>
-                  <Table.Cell
-                    width={imageSize}
-                    height={imageSize}
-                    padding={1} // Espaçamento interno reduzido
-                  >
-                    <Box
-                      width="100%"
-                      height="100%"
-                      display="flex"
-                      alignItems="center"
-                      justifyContent="center"
-                      bg="gray.100" // Fundo cinza claro para visualização
-                      borderRadius="md" // Bordas arredondadas
-                      overflow="hidden" // Esconde qualquer overflow da imagem
-                    >
+                  <Table.Cell width={imageSize} height={imageSize} padding={1}>
+                    <Box width="100%" height="100%" display="flex" alignItems="center" justifyContent="center" bg="gray.100" borderRadius="md" overflow="hidden">
                       <Image
-                        src={item.imagem}
+                        src={typeof item.imagem === "string" ? item.imagem : ""}
                         maxW="100%"
                         maxH="100%"
                         objectFit="contain"
@@ -316,18 +375,10 @@ function adminCardapio() {
                   </Table.Cell>
                   <Table.Cell textAlign="center">
                     <Flex gap="2" justify="center">
-                      <Button
-                        bgColor="#141414"
-                        size="sm"
-                        onClick={() => handleEdit(item)}
-                      >
+                      <Button bgColor="#141414" size="sm" onClick={() => handleEdit(item)}>
                         <MdEdit color="white" />
                       </Button>
-                      <Button
-                        size="sm"
-                        bgColor="#141414"
-                        onClick={() => handleDelete(item._id)}
-                      >
+                      <Button size="sm" bgColor="#141414" onClick={() => handleDelete(item._id)}>
                         <MdDelete color="white" />
                       </Button>
                     </Flex>
@@ -335,6 +386,7 @@ function adminCardapio() {
                 </Table.Row>
               ))}
             </Table.Body>
+
           </Table.Root>
         )}
       </Stack>
@@ -350,10 +402,20 @@ function adminCardapio() {
         imagePreviewUrl={imagePreviewUrl}
         handleImageChange={handleImageChange}
         handleRemoveImage={handleRemoveImage}
+        handleFatiaImageChange={handleFatiaImageChange}
+        handleRemoveFatiaImage={handleRemoveFatiaImage}
+        handleTortaImageChange={handleTortaImageChange}
+        handleRemoveTortaImage={handleRemoveTortaImage}
         reset={reset}
         mode="create"
         product={selectedProduct}
         setImagePreviewUrl={setImagePreviewUrl}
+        imagemFatia={selectedFatiaImage}
+        setImagemFatia={setSelectedFatiaImage}
+        imagemTorta={selectedTortaImage}
+        setImagemTorta={setSelectedTortaImage}
+        FatiaImagePreviewUrl={imageFatiaPreviewUrl}
+        TortaImagePreviewUrl={imageTortaPreviewUrl}
       />
 
       {/* Para edição de produtos: */}
@@ -367,10 +429,20 @@ function adminCardapio() {
         imagePreviewUrl={imagePreviewUrl}
         handleImageChange={handleImageChange}
         handleRemoveImage={handleRemoveImage}
+        handleFatiaImageChange={handleFatiaImageChange}
+        handleRemoveFatiaImage={handleRemoveFatiaImage}
+        handleTortaImageChange={handleTortaImageChange}
+        handleRemoveTortaImage={handleRemoveTortaImage}
         reset={reset}
         mode="edit"
         product={selectedProduct}
         setImagePreviewUrl={setImagePreviewUrl}
+        imagemFatia={selectedFatiaImage}
+        setImagemFatia={setSelectedFatiaImage}
+        imagemTorta={selectedTortaImage}
+        setImagemTorta={setSelectedTortaImage}
+        FatiaImagePreviewUrl={imageFatiaPreviewUrl}
+        TortaImagePreviewUrl={imageTortaPreviewUrl}
       />
 
     </Box>
