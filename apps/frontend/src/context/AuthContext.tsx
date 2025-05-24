@@ -1,7 +1,7 @@
 'use client';
 
 import { createContext, useContext } from 'react';
-import { useSession, signIn, signOut } from 'next-auth/react';
+import { useSession, signIn, signOut, getSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { toaster } from '@/components/ui/toaster';
 import axios from 'axios';
@@ -39,6 +39,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         type: 'success',
       });
 
+      const session = await getSession();
       router.push(session?.user?.role === 'admin' ? '/admin_cardapio' : '/');
     }
   };

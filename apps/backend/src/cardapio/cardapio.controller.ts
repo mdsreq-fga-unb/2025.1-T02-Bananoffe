@@ -10,32 +10,31 @@ import {
   Put,
   Req,
   UploadedFile,
+  UploadedFiles,
   UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
-import { CreateItemDto, DeletarItemDto } from './cardapio.dto';
+import { CreateFatiaDto, CreateItensDto, CreateTortaDto, DeletarItemDto } from './cardapio.dto';
 import { CardapioService } from './cardapio.service';
 import { Roles } from 'src/auth/roles/roles.decorator';
 import { RolesGuard } from 'src/auth/roles/roles.guard';
-import { FileInterceptor } from '@nestjs/platform-express';
+import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
 import { Express } from 'express';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 
 @Controller('cardapio')
 export class CardapioController {
-  constructor(private readonly CardapioService: CardapioService) {}
+  constructor(private readonly CardapioService: CardapioService) { }
 
   @Post('adicionar')
   @Roles('admin')
   @UseGuards(JwtAuthGuard, RolesGuard)
   @UseInterceptors(
-    FileInterceptor('imagem', {
+    FilesInterceptor('imagens', 2, {
       fileFilter: (req, file, callback) => {
         if (!file.mimetype.startsWith('image/')) {
           return callback(
-            new BadRequestException(
-              'Apenas arquivos de imagem são permitidos.',
-            ),
+            new BadRequestException('Apenas arquivos de imagem são permitidos.'),
             false,
           );
         }
@@ -44,10 +43,14 @@ export class CardapioController {
     }),
   )
   async criarItem(
-    @UploadedFile() imagem: Express.Multer.File,
-    @Body() dto: CreateItemDto,
+    @UploadedFiles() imagens: Express.Multer.File[],
+    @Body() dto: CreateItensDto,
   ) {
-    const novoItem = await this.CardapioService.createItem(dto, imagem);
+    const imagemTorta = imagens?.[0];
+    const imagemFatia = imagens?.[1];
+
+    const novoItem = await this.CardapioService.createItem(dto, imagemTorta, imagemFatia);
+
     return {
       message: 'Item criado com sucesso!',
       novoItem,
@@ -87,7 +90,7 @@ export class CardapioController {
   async atualizarItem(
     @Param('id') id: string,
     @UploadedFile() imagem: Express.Multer.File,
-    @Body() dto: Partial<CreateItemDto>,
+    @Body() dto: Partial<CreateTortaDto | CreateFatiaDto>,
   ) {
     const itemAtualizado = await this.CardapioService.updateItem(
       id,

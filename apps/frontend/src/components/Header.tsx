@@ -13,9 +13,10 @@ import { useAuth } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
 
 function Header() {
-    const { user, logout } = useAuth();
+    const { user } = useAuth();
     const router = useRouter();
     const isMobile = useBreakpointValue({ base: true, md: false });
+    const isAdmin = user?.role==="admin"
 
     return (
         <Box
@@ -42,34 +43,37 @@ function Header() {
             >
                 <Flex justify="space-between" align="center">
                     <Stack gap={1}>
-                        <Text fontSize="xl" fontWeight="bold" color="#2D2D2D">
-                            Bananoffee Doceria
-                        </Text>
-                        <Text fontSize="md" color="gray.600">
-                            Olá, {user?.nome || "visitante"}!
-                        </Text>
-                        {user && (
+                        <Box w={isMobile ? "5rem" : "8rem"}>
+                            <Text fontSize="md" color="gray.600">
+                                Olá, {user?.nome || "visitante"}!
+                            </Text>
+                        </Box>
+                        {isAdmin && (
                             <Button
                                 size="xs"
                                 color="red"
                                 variant="ghost"
                                 width="fit-content"
-                                onClick={logout}
+                                onClick={() => router.push("/admin_cardapio")}
                             >
-                                Sair
+                                Gerenciar Cardápio
                             </Button>
                         )}
                     </Stack>
-
+                    <Box position="absolute" left="50%" transform="translateX(-50%)">
+                        <Text fontSize="xl" fontWeight="bold" color="#2D2D2D" textAlign="center">
+                            Bananoffee Doceria
+                        </Text>
+                    </Box>
                     <Image
-                        src="/Logo Bananoffee - Sem Fundo-02.png"
+                        src="/Logo Bananoffee - Sem Fundo-02 alt.png"
                         alt="Logo Bananoffee"
                         maxH="5rem"
                         borderRadius="full"
                         cursor="pointer"
                         onClick={() => router.push("/")}
-                        w="30%"
                         left="75%"
+                        w={100}
                     />
                 </Flex>
             </Box>

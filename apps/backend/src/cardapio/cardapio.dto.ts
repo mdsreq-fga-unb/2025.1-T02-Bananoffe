@@ -1,9 +1,59 @@
 import { Transform } from "class-transformer";
 import { IsNotEmpty, IsNumber, IsOptional } from "class-validator";
 
-export class CreateItemDto {
+export class CreateTortaDto {
     @IsNotEmpty({ message: "Nome não pode estar em branco." })
     nome: string;
+
+    @IsNotEmpty({ message: "Descrição não pode estar em branco." })
+    descricao: string;
+
+    @IsNotEmpty()
+    @Transform(({ value }) => parseFloat(value), { toClassOnly: true })
+    @IsNumber()
+    precoTortaP: number;
+
+    @IsNotEmpty()
+    @Transform(({ value }) => parseFloat(value), { toClassOnly: true })
+    @IsNumber()
+    precoTortaG: number;
+
+    @IsOptional()
+    @Transform(({ value }) => parseFloat(value), { toClassOnly: true })
+    @IsNumber()
+    quantidade?: number;
+
+    @IsOptional()
+    imagem?: Buffer;
+}
+
+export class CreateFatiaDto {
+    @IsNotEmpty({ message: "Nome não pode estar em branco." })
+    nome: string;
+
+    @IsNotEmpty({ message: "Descrição não pode estar em branco." })
+    descricao: string;
+
+    @IsNotEmpty()
+    @Transform(({ value }) => parseFloat(value), { toClassOnly: true })
+    @IsNumber()
+    precoFatia: number;
+
+    @IsOptional()
+    @Transform(({ value }) => parseFloat(value), { toClassOnly: true })
+    @IsNumber()
+    quantidade?: number;
+
+    @IsOptional()
+    imagem?: Buffer;
+}
+
+export class CreateItensDto {
+    @IsNotEmpty({ message: "Nome não pode estar em branco." })
+    nome: string;
+
+    @IsNotEmpty({ message: "Descrição não pode estar em branco." })
+    descricao: string;
 
     @IsNotEmpty()
     @Transform(({ value }) => parseFloat(value), { toClassOnly: true })
@@ -18,23 +68,23 @@ export class CreateItemDto {
     @IsNotEmpty()
     @Transform(({ value }) => parseFloat(value), { toClassOnly: true })
     @IsNumber()
-    precoPedacoP: number;
-
-    @IsNotEmpty()
-    @Transform(({ value }) => parseFloat(value), { toClassOnly: true })
-    @IsNumber()
-    precoPedacoG: number;
+    precoFatia: number;
 
     @IsOptional()
     @Transform(({ value }) => parseFloat(value), { toClassOnly: true })
     @IsNumber()
-    quantidade?: number;
+    quantidadeFatia?: number;
 
     @IsOptional()
-    imagem?: Buffer;
+    @Transform(({ value }) => parseFloat(value), { toClassOnly: true })
+    @IsNumber()
+    quantidadeTorta?: number;
 
-    @IsNotEmpty({ message: "Descrição não pode estar em branco." })
-    descricao: string;
+    @IsOptional()
+    imagemTorta?: Buffer;
+
+    @IsOptional()
+    imagemFatia?: Buffer;
 }
 
 export class DeletarItemDto {

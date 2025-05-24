@@ -3,79 +3,126 @@ import {
   Injectable,
   InternalServerErrorException,
 } from '@nestjs/common';
-import { CreateItemDto } from './cardapio.dto';
-import { Item, ItemDocument } from 'src/schemas/item.schema';
+import { CreateFatiaDto, CreateItensDto, CreateTortaDto } from './cardapio.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import path from 'path';
+import { Torta, TortaDocument } from 'src/schemas/torta.schema';
+import { Fatia, FatiaDocument } from 'src/schemas/fatia.schema';
 
 @Injectable()
 export class CardapioService {
-  constructor(@InjectModel(Item.name) private itemModel: Model<ItemDocument>) {}
+  constructor(
+    @InjectModel(Torta.name) private tortaModel: Model<TortaDocument>,
+    @InjectModel(Fatia.name) private fatiaModel: Model<FatiaDocument>,
+  ) { }
 
   async createItem(
-    dto: CreateItemDto,
-    imagem: Express.Multer.File,
-  ): Promise<Item> {
-    try {
-      const nomeExistente = await this.itemModel.findOne({ nome: dto.nome });
-      if (nomeExistente) {
-        throw new BadRequestException('Item já existe no cardápio.');
-      }
-
-      const novoItem = new this.itemModel({
-        ...dto,
-        imagem: imagem?.buffer,
-      });
-
-      return novoItem.save();
-    } catch (error) {
-      console.error('Erro ao salvar item:', error);
-      throw new InternalServerErrorException('Erro ao criar item.');
+    dto: CreateItensDto,
+    imagemTorta?: Express.Multer.File,
+    imagemFatia?: Express.Multer.File,
+  ) {
+    // Verifica se já existe algum item com esse nome (opcional)
+    const jaExiste = await this.tortaModel.findOne({ nome: dto.nome }) || await this.fatiaModel.findOne({ nome: dto.nome });
+    if (jaExiste) {
+      throw new BadRequestException('Já existe um item com esse nome.');
     }
+
+    const novaTorta = new this.tortaModel({
+      nome: `Torta ${dto.nome}`,
+      descricao: dto.descricao,
+      precoTortaP: dto.precoTortaP,
+      precoTortaG: dto.precoTortaG,
+      quantidade: dto.quantidadeTorta,
+      imagem: imagemTorta?.buffer,
+    });
+
+    const novaFatia = new this.fatiaModel({
+      nome: `Fatia ${dto.nome}`,
+      descricao: dto.descricao,
+      precoFatia: dto.precoFatia,
+      quantidade: dto.quantidadeFatia,
+      imagem: imagemFatia?.buffer,
+    });
+
+    await novaTorta.save();
+    await novaFatia.save();
+
+    return {
+      torta: novaTorta,
+      fatia: novaFatia,
+    };
   }
 
   async listarItens() {
-    const itens = await this.itemModel.find().select('-__v');
+    const tortas = await this.tortaModel.find().select('-__v');
+    const fatias = await this.fatiaModel.find().select('-__v');
 
-    const itensAdaptados = itens.map((item) => {
-      const imagemBase64 = item.imagem
-        ? `data:image/jpeg;base64,${item.imagem.toString('base64')}`
+    const tortasAdaptadas = tortas.map((torta) => {
+      const imagemBase64 = torta.imagem
+        ? `data:image/jpeg;base64,${torta.imagem.toString('base64')}`
         : undefined;
 
       return {
-        ...item.toObject(),
+        ...torta.toObject(),
         imagem: imagemBase64,
       };
     });
 
-    return itensAdaptados;
+    const fatiasAdaptadas = fatias.map((fatia) => {
+      const imagemBase64 = fatia.imagem
+        ? `data:image/jpeg;base64,${fatia.imagem.toString('base64')}`
+        : undefined;
+
+      return {
+        ...fatia.toObject(),
+        imagem: imagemBase64,
+      };
+    });
+
+    return {
+      Tortas: tortasAdaptadas,
+      Fatias: fatiasAdaptadas,
+    };
   }
 
   async deletarItem(dto: { id: string }) {
-    const item = await this.itemModel.findByIdAndDelete({ _id: dto.id });
-    if (!item) {
-      throw new BadRequestException('Item não encontrado.');
+    let item = await this.tortaModel.findByIdAndDelete(dto.id);
+    if (item) {
+      return { message: 'Torta deletada com sucesso!' };
     }
-    return { message: 'Item deletado com sucesso!' };
+
+    item = await this.fatiaModel.findByIdAndDelete(dto.id);
+    if (item) {
+      return { message: 'Fatia deletada com sucesso!' };
+    }
+
+    throw new BadRequestException('Item não encontrado.');
   }
 
   async updateItem(
     id: string,
-    dto: Partial<CreateItemDto>,
+    dto: Partial<CreateTortaDto | CreateFatiaDto>,
     imagem?: Express.Multer.File,
-  ): Promise<Item> {
-    const item = await this.itemModel.findById(id);
+  ): Promise<Torta | Fatia> {
+    let item = await this.tortaModel.findById(id);
+    let tipo: 'TORTA' | 'FATIA' = 'TORTA';
+
+    if (!item) {
+      item = await this.fatiaModel.findById(id);
+    }
+
     if (!item) {
       throw new BadRequestException('Item não encontrado.');
     }
 
     Object.assign(item, dto);
-
     if (imagem) {
       item.imagem = imagem.buffer;
     }
 
-    return item.save();
+    const updated = await item.save();
+
+    return { ...updated.toObject() };
   }
+
 }

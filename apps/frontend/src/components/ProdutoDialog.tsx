@@ -11,8 +11,8 @@ import {
     Flex,
 } from "@chakra-ui/react";
 import { UseFormReturn, FieldErrors } from "react-hook-form";
-import { Product } from "@/types/Product.type";
-import { useEffect, useState } from "react";
+import { Fatia, Torta } from "@/types/Product.type";
+import { useEffect } from "react";
 
 type ProdutoDialogProps = {
     open: boolean;
@@ -24,10 +24,20 @@ type ProdutoDialogProps = {
     imagePreviewUrl: string | null;
     handleImageChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
     handleRemoveImage: () => void;
+    handleFatiaImageChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    handleRemoveFatiaImage: () => void;
+    handleTortaImageChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    handleRemoveTortaImage: () => void;
     reset: () => void;
     mode: "create" | "edit";
-    product: Product | null;
+    product: Fatia | Torta | null;
     setImagePreviewUrl: (url: string | null) => void;
+    FatiaImagePreviewUrl: string | null
+    TortaImagePreviewUrl: string | null;
+    imagemTorta: File | null;
+    setImagemTorta: (file: File | null) => void;
+    imagemFatia: File | null;
+    setImagemFatia: (file: File | null) => void;
 };
 
 
@@ -45,25 +55,46 @@ export const ProdutoDialog = ({
     mode,
     product,
     setImagePreviewUrl,
+    imagemTorta,
+    setImagemTorta,
+    imagemFatia,
+    setImagemFatia,
+    FatiaImagePreviewUrl,
+    TortaImagePreviewUrl,
+    handleFatiaImageChange,
+    handleRemoveFatiaImage,
+    handleRemoveTortaImage,
+    handleTortaImageChange
 }: ProdutoDialogProps) => {
+
+    const tipo = product ? ("precoTortaP" in product ? "Torta" : "Fatia") : null;
 
     useEffect(() => {
         if (mode === 'create') {
             form.reset();
             setImagePreviewUrl(null);
         } else if (mode === 'edit' && product) {
-            form.setValue('nome', product.nome);
-            form.setValue('descricao', product.descricao);
-            form.setValue('precoTortaP', product.precoTortaP);
-            form.setValue('precoTortaG', product.precoTortaG);
-            form.setValue('precoPedacoP', product.precoPedacoP);
-            form.setValue('precoPedacoG', product.precoPedacoG);
-            form.setValue('quantidade', product.quantidade);
-            form.setValue('_id', product._id); // Passando o id para o form
+            form.setValue("_id", product._id);
+            form.setValue("nome", product.nome);
+            form.setValue("descricao", product.descricao);
+
+            if ("precoTortaP" in product) {
+                // produto tipo Torta
+                form.setValue("precoTortaP", product.precoTortaP);
+                form.setValue("precoTortaG", product.precoTortaG);
+                form.setValue("quantidadeTorta", product.quantidade)
+                form.setValue("precoFatia", 0);
+                form.setValue("quantidadeFatia", 0)
+            } else {
+                // produto tipo Fatia
+                form.setValue("precoFatia", product.precoFatia);
+                form.setValue("quantidadeFatia", product.quantidade);
+                form.setValue("precoTortaP", 0);
+                form.setValue("precoTortaG", 0);
+            }
             setImagePreviewUrl(product.imagem || null);
         }
     }, [product, form, setImagePreviewUrl]);
-
 
     return (
         <Dialog.Root
@@ -82,7 +113,7 @@ export const ProdutoDialog = ({
                     <Dialog.Content>-
                         <Dialog.Header>
                             <Dialog.Title>
-                                {mode === "create" ? "Cadastrar Produto" : "Editar Produto"}
+                                {mode === "create" ? "Cadastrar Produto" : `Editar ${tipo}`}
                             </Dialog.Title>
                         </Dialog.Header>
 
@@ -118,63 +149,141 @@ export const ProdutoDialog = ({
                                                 </Field.ErrorText>
                                             </Field.Root>
                                         ))}
-                                        {[
-                                            { name: "precoTortaP", label: "Preço Torta P", required: mode === "create" },
-                                            { name: "precoTortaG", label: "Preço Torta G", required: mode === "create" },
-                                            { name: "precoPedacoP", label: "Preço Pedaço P", required: mode === "create" },
-                                            { name: "precoPedacoG", label: "Preço Pedaço G", required: mode === "create" },
-                                            { name: "quantidade", label: "Quantidade", required: mode === "create" },
-                                        ].map(({ name, label, required }) => (
-                                            <Field.Root key={name} invalid={!!errors[name as keyof FormValues]}>
-                                                <Field.Label color="white">{label}</Field.Label>
-                                                <Input
-                                                    variant="subtle"
-                                                    bgColor="#D9D9D9"
-                                                    color="black"
-                                                    size="lg"
-                                                    type="number"
-                                                    placeholder={label}
-                                                    {...form.register(name as keyof FormValues, required
-                                                        ? {
-                                                            required: `${label} é obrigatório`,
-                                                            min: {
-                                                                value: 0,
-                                                                message: "Preço deve ser positivo",
-                                                            },
-                                                        }
-                                                        : {})}
-                                                />
-                                                <Field.ErrorText>
-                                                    {errors[name as keyof FormValues]?.message}
-                                                </Field.ErrorText>
-                                            </Field.Root>
-                                        ))}
 
-                                        <Field.Root>
-                                            <Field.Label color="white">Imagem</Field.Label>
-                                            {!imagePreviewUrl ? (
-                                                <Input
-                                                    variant="subtle"
-                                                    bgColor="#D9D9D9"
-                                                    color="black"
-                                                    size="lg"
-                                                    type="file"
-                                                    accept="image/*"
-                                                    onChange={handleImageChange}
-                                                />
-                                            ) : (
-                                                <Flex mt="2" align="center" justify="center" gap="4">
-                                                    <img
-                                                        src={imagePreviewUrl}
-                                                        alt="Pré-visualização"
-                                                        style={{ maxHeight: "200px", borderRadius: "8px" }}
+                                        {(mode === "create" || tipo === "Torta") && (
+                                            <>
+                                                {[
+                                                    { name: "precoTortaP", label: "Preço Torta P" },
+                                                    { name: "precoTortaG", label: "Preço Torta G" },
+                                                    { name: "quantidadeTorta", label: "Quantidade de Tortas" },
+                                                ].map(({ name, label }) => (
+                                                    <Field.Root key={name} invalid={!!errors[name as keyof FormValues]}>
+                                                        <Field.Label color="white">{label}</Field.Label>
+                                                        <Input
+                                                            variant="subtle"
+                                                            bgColor="#D9D9D9"
+                                                            color="black"
+                                                            size="lg"
+                                                            type="number"
+                                                            placeholder={label}
+                                                            {...form.register(name as keyof FormValues, {
+                                                                required: `${label} é obrigatório`,
+                                                                min: { value: 0, message: "Preço deve ser positivo" },
+                                                            })}
+                                                        />
+                                                        <Field.ErrorText>{errors[name as keyof FormValues]?.message}</Field.ErrorText>
+                                                    </Field.Root>
+                                                ))}
+                                            </>
+                                        )}
+
+                                        {(mode === "create" || tipo === "Fatia") && (
+                                            <>
+                                                {[
+                                                    { name: "precoFatia", label: "Preço Fatia" },
+                                                    { name: "quantidadeFatia", label: "Quantidade de Fatias" },
+                                                ].map(({ name, label }) => (
+                                                    <Field.Root key={name} invalid={!!errors[name as keyof FormValues]}>
+                                                        <Field.Label color="white">{label}</Field.Label>
+                                                        <Input
+                                                            variant="subtle"
+                                                            bgColor="#D9D9D9"
+                                                            color="black"
+                                                            size="lg"
+                                                            type="number"
+                                                            placeholder={label}
+                                                            {...form.register(name as keyof FormValues, {
+                                                                required: `${label} é obrigatório`,
+                                                                min: { value: 0, message: "Preço deve ser positivo" },
+                                                            })}
+                                                        />
+                                                        <Field.ErrorText>{errors[name as keyof FormValues]?.message}</Field.ErrorText>
+                                                    </Field.Root>
+                                                ))}
+                                            </>
+                                        )}
+
+                                        {mode === "create" ? (
+                                            <>
+                                                <Field.Root>
+                                                    <Field.Label color="white">Imagem da Torta</Field.Label>
+                                                    {!TortaImagePreviewUrl ? (
+                                                        <Input
+                                                            variant="subtle"
+                                                            bgColor="#D9D9D9"
+                                                            color="black"
+                                                            size="lg"
+                                                            type="file"
+                                                            accept="image/*"
+                                                            onChange={handleTortaImageChange}
+                                                        />
+                                                    ) : (
+                                                        <Flex mt="2" align="center" justify="center" gap="4">
+                                                            <img
+                                                                src={TortaImagePreviewUrl}
+                                                                alt="Pré-visualização"
+                                                                style={{ maxHeight: "200px", borderRadius: "8px" }}
+                                                            />
+                                                            <Button onClick={handleRemoveTortaImage} colorScheme="red" size="xs">
+                                                                Remover imagem
+                                                            </Button>
+                                                        </Flex>
+                                                    )}
+                                                </Field.Root>
+
+                                                <Field.Root>
+                                                    <Field.Label color="white">Imagem da Fatia</Field.Label>
+                                                    {!FatiaImagePreviewUrl ? (
+                                                        <Input
+                                                            variant="subtle"
+                                                            bgColor="#D9D9D9"
+                                                            color="black"
+                                                            size="lg"
+                                                            type="file"
+                                                            accept="image/*"
+                                                            onChange={handleFatiaImageChange}
+                                                        />
+                                                    ) : (
+                                                        <Flex mt="2" align="center" justify="center" gap="4">
+                                                            <img
+                                                                src={FatiaImagePreviewUrl}
+                                                                alt="Pré-visualização"
+                                                                style={{ maxHeight: "200px", borderRadius: "8px" }}
+                                                            />
+                                                            <Button onClick={handleRemoveFatiaImage} colorScheme="red" size="xs">
+                                                                Remover imagem
+                                                            </Button>
+                                                        </Flex>
+                                                    )}
+                                                </Field.Root>
+                                            </>
+                                        ) : (
+                                            <Field.Root>
+                                                <Field.Label color="white">Imagem</Field.Label>
+                                                {!imagePreviewUrl ? (
+                                                    <Input
+                                                        variant="subtle"
+                                                        bgColor="#D9D9D9"
+                                                        color="black"
+                                                        size="lg"
+                                                        type="file"
+                                                        accept="image/*"
+                                                        onChange={handleImageChange}
                                                     />
-                                                    <Button onClick={handleRemoveImage} colorScheme="red" size="xs">
-                                                        Remover imagem
-                                                    </Button>
-                                                </Flex>
-                                            )}
-                                        </Field.Root>
+                                                ) : (
+                                                    <Flex mt="2" align="center" justify="center" gap="4">
+                                                        <img
+                                                            src={imagePreviewUrl}
+                                                            alt="Pré-visualização"
+                                                            style={{ maxHeight: "200px", borderRadius: "8px" }}
+                                                        />
+                                                        <Button onClick={handleRemoveImage} colorScheme="red" size="xs">
+                                                            Remover imagem
+                                                        </Button>
+                                                    </Flex>
+                                                )}
+                                            </Field.Root>
+                                        )}
 
                                         <Button
                                             type="submit"
