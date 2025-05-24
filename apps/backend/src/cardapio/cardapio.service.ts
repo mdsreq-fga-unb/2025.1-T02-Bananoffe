@@ -2,6 +2,7 @@ import {
   BadRequestException,
   Injectable,
   InternalServerErrorException,
+  NotFoundException,
 } from '@nestjs/common';
 import { CreateFatiaDto, CreateItensDto, CreateTortaDto } from './cardapio.dto';
 import { InjectModel } from '@nestjs/mongoose';
@@ -64,7 +65,7 @@ export class CardapioService {
 
       return {
         ...torta.toObject(),
-        imagem: imagemBase64,
+        imagem: {data: imagemBase64},
       };
     });
 
@@ -75,7 +76,7 @@ export class CardapioService {
 
       return {
         ...fatia.toObject(),
-        imagem: imagemBase64,
+        imagem: {data: imagemBase64},
       };
     });
 
@@ -123,6 +124,17 @@ export class CardapioService {
     const updated = await item.save();
 
     return { ...updated.toObject() };
+  }
+
+  async buscarPorId(id: string): Promise<Torta | Fatia> {
+    let item = await this.tortaModel.findById(id);
+    if (!item) {
+      item = await this.fatiaModel.findById(id);
+    }
+    if (!item) {
+      throw new NotFoundException('Torta ou Fatia não encontrada');
+    }
+    return item;
   }
 
 }
