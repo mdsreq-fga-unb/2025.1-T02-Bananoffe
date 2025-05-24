@@ -57,9 +57,31 @@ export class CardapioService {
     const tortas = await this.tortaModel.find().select('-__v');
     const fatias = await this.fatiaModel.find().select('-__v');
 
+    const tortasAdaptadas = tortas.map((torta) => {
+      const imagemBase64 = torta.imagem
+        ? `data:image/jpeg;base64,${torta.imagem.toString('base64')}`
+        : undefined;
+
+      return {
+        ...torta.toObject(),
+        imagem: imagemBase64,
+      };
+    });
+
+    const fatiasAdaptadas = fatias.map((fatia) => {
+      const imagemBase64 = fatia.imagem
+        ? `data:image/jpeg;base64,${fatia.imagem.toString('base64')}`
+        : undefined;
+
+      return {
+        ...fatia.toObject(),
+        imagem: imagemBase64,
+      };
+    });
+
     return {
-      Tortas: tortas,
-      Fatias: fatias,
+      Tortas: tortasAdaptadas,
+      Fatias: fatiasAdaptadas,
     };
   }
 
