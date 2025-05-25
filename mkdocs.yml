@@ -40,6 +40,7 @@ nav:
       - Engenharia de Requisitos : pages/visaoDoProduto/engenhariaderequisitos.md
       - Cronogramas e Entregas: pages/visaoDoProduto/cronogramasEntregas.md
       - Interação entre Equipe e Cliente: pages/visaoDoProduto/interacaoEquipeCliente.md
+      - DoR e DoD: pages/visaoDoProduto/doredod.md
       - Lições Aprendidas: pages/visaoDoProduto/licoesAprendidas.md
       - Referências: pages/visaoDoProduto/referencias.md
   - Backlog:
