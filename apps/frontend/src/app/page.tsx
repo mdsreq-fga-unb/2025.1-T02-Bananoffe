@@ -37,7 +37,7 @@ function Home() {
     <Box minH="100vh" bgColor="#F1DD2F">
       <Header />
 
-      <Box maxW="1200px" mx="auto" px={6} pt={6} pb="110px">
+      <Box maxW="1200px" mx="auto" px={6} pt={6} pb="110px" mb={5}>
 
         <InputGroup
           w="100%"
