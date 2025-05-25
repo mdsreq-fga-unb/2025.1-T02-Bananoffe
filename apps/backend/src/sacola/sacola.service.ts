@@ -85,16 +85,20 @@ export class SacolaService {
             throw new BadRequestException('Quantidade solicitada maior que o estoque disponível');
         }
 
+        if (novaQuantidade > produto.quantidade) {
+            throw new BadRequestException('Quantidade solicitada será maior que o estoque disponível');
+        }
+
         item.quantidade = novaQuantidade;
         item.precoTotal = item.quantidade * item.precoUnitario;
 
         sacola.valorTotal = sacola.itens.reduce((acc, i) => acc + i.precoTotal, 0);
         await sacola.save();
 
-        return { 
+        return {
             message: 'Item atualizado com sucesso',
-            item,    
-         };
+            item,
+        };
     }
 
     async removerItem(itemId: string, usuarioId: string) {
