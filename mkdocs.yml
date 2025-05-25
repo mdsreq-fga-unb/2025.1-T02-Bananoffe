@@ -43,7 +43,7 @@ nav:
       - Lições Aprendidas: pages/visaoDoProduto/licoesAprendidas.md
       - Referências: pages/visaoDoProduto/referencias.md
   - Backlog:
-      - Requisistos de Software: pages/backlog/requisitos.md
+      - Requisitos de Software: pages/backlog/requisitos.md
   - Entregas:
       - Unidade 1: pages/entregas/unidade1.md
 
