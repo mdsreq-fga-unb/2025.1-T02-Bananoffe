@@ -1,7 +1,11 @@
-import { Injectable, BadRequestException, UnauthorizedException } from '@nestjs/common';
+import {
+  Injectable,
+  BadRequestException,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { CreateUsuarioDto, LoginUsuarioDto, UpdateUsuarioDto } from './auth.dto';
+import { LoginUsuarioDto } from './auth.dto';
 import { Usuario, UsuarioDocument } from 'src/schemas/user.schema';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
@@ -59,7 +63,7 @@ export class AuthService {
     await this.enviarEmail(
       usuario.email,
       'Seu código de recuperação de senha',
-      `Seu código de recuperação é: ${codigo}. Ele expira em 30 minutos.`
+      `Seu código de recuperação é: ${codigo}. Ele expira em 30 minutos.`,
     );
 
     return { message: 'Código enviado para seu email.' };
@@ -92,7 +96,6 @@ export class AuthService {
     }
 
     const senhaHash = await bcrypt.hash(novaSenha, 10);
-
     usuario.senha = senhaHash;
     await usuario.save();
 
@@ -110,7 +113,6 @@ export class AuthService {
     }
 
     const senhaValida = await bcrypt.compare(dto.senha, usuario.senha);
-
     if (!senhaValida) {
       throw new UnauthorizedException('Email ou senha incorretos.');
     }
@@ -131,62 +133,4 @@ export class AuthService {
       role: usuario.role,
     };
   }
-
-  async create(createDto: CreateUsuarioDto): Promise<Usuario> {
-    const emailExistente = await this.userModel.findOne({ email: createDto.email });
-    const telefoneExistente = await this.userModel.findOne({ telefone: createDto.telefone });
-
-    if (emailExistente && telefoneExistente) {
-      throw new BadRequestException('E-mail e telefone já cadastrados.');
-    } else if (emailExistente) {
-      throw new BadRequestException('E-mail já cadastrado.');
-    } else if (telefoneExistente) {
-      throw new BadRequestException('Telefone já cadastrado.');
-    }
-
-    const senhaHash = await bcrypt.hash(createDto.senha, 10);
-    const usuario = new this.userModel({ ...createDto, senha: senhaHash });
-    return usuario.save();
-  }
-
-  async listarUsuarios() {
-    return this.userModel.find();
-  }
-
-  async deletarUsuario(dto: { id: string }) {
-    const usuario = await this.userModel.findByIdAndDelete({ _id: dto.id });
-    if (!usuario) {
-      throw new BadRequestException('Usuário não encontrado.');
-    }
-    return { message: 'Usuário deletado com sucesso.' };
-    }
-
-
-    async getMe(userId: string) {
-        return this.userModel.findById(userId).select('-senha'); 
-      }
-
-    async updateMe(id: string, dto: UpdateUsuarioDto) {
-        const usuario = await this.userModel.findById(id);
-        if (!usuario) {
-          throw new BadRequestException('Usuário não encontrado.');
-        }
-    
-        if (dto.nome !== undefined) {
-          usuario.nome = dto.nome;
-        }
-        if (dto.telefone !== undefined) {
-          usuario.telefone = dto.telefone;
-        }
-        if (dto.dataNascimento !== undefined) {
-          usuario.dataNascimento = new Date(dto.dataNascimento);
-        }
-        if (dto.senha) {
-          const salt = await bcrypt.genSalt();
-          usuario.senha = await bcrypt.hash(dto.senha, salt);
-        }
-    
-        await usuario.save();
-        return { message: 'Dados atualizados com sucesso.' };
-    }
 }

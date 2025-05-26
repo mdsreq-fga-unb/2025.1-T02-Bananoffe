@@ -1,7 +1,7 @@
 'use client';
 
 import { createContext, useContext } from 'react';
-import { useSession, signIn, signOut } from 'next-auth/react';
+import { useSession, signIn, signOut, getSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { toaster } from '@/components/ui/toaster';
 import axios from 'axios';
@@ -12,7 +12,6 @@ interface AuthContextType {
   login: (email: string, password: string) => Promise<void>;
   logout: () => void;
   isLoading: boolean;
-  updateUser: (data: Partial<User>) => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -40,43 +39,13 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         type: 'success',
       });
 
+      const session = await getSession();
       router.push(session?.user?.role === 'admin' ? '/admin_cardapio' : '/');
     }
   };
 
   const logout = () => {
     signOut({ callbackUrl: '/login' });
-  };
-
-  const updateUser = async (data: Partial<User>) => {
-    try {
-      const token = session?.user?.accessToken;
-      if (!token) throw new Error("Usuário não autenticado");
-
-      const response = await axios.patch(`${process.env.NEXT_PUBLIC_API_URL}/auth/me`, data, {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      });
-
-      toaster.create({
-        title: 'Dados atualizados!',
-        description: 'Suas informações foram salvas com sucesso',
-        type: 'success',
-      });
-    } catch (error) {
-      let errorMessage = 'Erro ao atualizar dados';
-      if (axios.isAxiosError(error)) {
-        errorMessage = error.response?.data?.message || error.message;
-      }
-
-      toaster.create({
-        title: 'Erro na atualização',
-        description: errorMessage,
-        type: 'error',
-      });
-      throw error;
-    }
   };
 
   return (
@@ -86,7 +55,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         login,
         logout,
         isLoading: status === 'loading',
-        updateUser,
       }}
     >
       {children}

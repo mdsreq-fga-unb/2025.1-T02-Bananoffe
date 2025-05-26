@@ -1,12 +1,15 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
 
-export type ItemDocument = Item & Document;
+export type TortaDocument = Torta & Document;
 
 @Schema()
-export class Item {
+export class Torta {
     @Prop({ required: true, unique: true })
     nome: string;
+    
+    @Prop({ required: true })
+    descricao: string;
 
     @Prop({ required: true })
     precoTortaP: number;
@@ -14,20 +17,11 @@ export class Item {
     @Prop({ required: true })
     precoTortaG: number;
 
-    @Prop({ required: true })
-    precoPedacoP: number;
-
-    @Prop({ required: true })
-    precoPedacoG: number;
-
     @Prop({ default: 0 })
     quantidade: number;
 
     @Prop({ type: Buffer })
     imagem: Buffer;
-
-    @Prop({ required: true })
-    descricao: string;
 }
 
-export const ItemSchema = SchemaFactory.createForClass(Item);
+export const TortaSchema = SchemaFactory.createForClass(Torta);

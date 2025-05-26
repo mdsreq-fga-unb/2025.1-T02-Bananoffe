@@ -9,36 +9,34 @@ import {
   Table,
   useBreakpointValue,
   Center,
-  Dialog,
   Button,
-  Portal,
-  CloseButton,
   Flex,
-  Field,
 } from "@chakra-ui/react";
 
 import { useProducts } from "@/hooks/useProducts";
 import { useEffect, useState } from "react";
 import { MdAdd, MdDelete, MdEdit, MdSearch } from "react-icons/md";
-import { Product } from "@/types/Product.type";
+import { Fatia, Torta } from "@/types/Product.type";
 import { useForm } from "react-hook-form";
-import { register } from "module";
+import { ProdutoDialog } from "@/components/ProdutoDialog";
+import Link from "next/link";
 
-interface FormValues {
+export interface FormValues {
   _id: string;
   nome: string;
   descricao: string;
   precoTortaP: number;
   precoTortaG: number;
-  precoPedacoP: number;
-  precoPedacoG: number;
-  quantidade: number;
+  precoFatia: number;
+  quantidadeTorta: number;
+  quantidadeFatia: number;
   imagem?: string;
 }
 
 function adminCardapio() {
   const {
-    products,
+    fatias,
+    tortas,
     getProducts,
     createProduct,
     updateProduct,
@@ -48,24 +46,30 @@ function adminCardapio() {
   } = useProducts();
 
   const [searchTerm, setSearchTerm] = useState("");
-  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
-  const [open, setOpen] = useState(false);
-  const [open1, setOpen1] = useState(false);
-  const [selectedImage, setSelectedImage] = useState<File | null>(null);
+  const [selectedProduct, setSelectedProduct] = useState<Torta | Fatia | null>(null);
+  const [openCreate, setOpenCreate] = useState(false);
+  const [openEdit, setOpenEdit] = useState(false);
+  const [selectedTortaImage, setSelectedTortaImage] = useState<File | null>(null);
+  const [selectedFatiaImage, setSelectedFatiaImage] = useState<File | null>(null);
+  const [selectedEditImage, setSelectedEditImage] = useState<File | null>(null);
   const [imagePreviewUrl, setImagePreviewUrl] = useState<string | null>(null);
+  const [imageTortaPreviewUrl, setTortaImagePreviewUrl] = useState<string | null>(null);
+  const [imageFatiaPreviewUrl, setFatiaImagePreviewUrl] = useState<string | null>(null);
 
   const isMobile = useBreakpointValue({ base: true, md: false });
   const imageSize = "50px";
 
-  const filteredProducts = products.filter(
-    (product) =>
-      product.nome.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      product.descricao.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredFatias = fatias.filter((item) =>
+    item.nome.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    item.descricao.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  const filteredTortas = tortas.filter((item) =>
+    item.nome.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    item.descricao.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   const {
-    register,
-    handleSubmit,
     reset,
     formState: { errors },
   } = useForm<FormValues>();
@@ -79,71 +83,120 @@ function adminCardapio() {
 
   useEffect(() => {
     if (selectedProduct) {
-      reset({
-        _id: selectedProduct._id,
-        nome: selectedProduct.nome,
-        descricao: selectedProduct.descricao,
-        precoTortaP: selectedProduct.precoTortaP,
-        precoTortaG: selectedProduct.precoTortaG,
-        precoPedacoP: selectedProduct.precoPedacoP,
-        precoPedacoG: selectedProduct.precoPedacoG,
-        quantidade: selectedProduct.quantidade || 0,
-        imagem: selectedProduct.imagem || "",
-      });
+      if ("precoTortaP" in selectedProduct) {
+        // É uma Torta
+        reset({
+          _id: selectedProduct._id,
+          nome: selectedProduct.nome,
+          descricao: selectedProduct.descricao,
+          precoTortaP: selectedProduct.precoTortaP,
+          precoTortaG: selectedProduct.precoTortaG,
+          precoFatia: 0,
+          quantidadeTorta: selectedProduct.quantidade || 0,
+          imagem: selectedProduct.imagem || "",
+        });
+      } else {
+        // É uma Fatia
+        reset({
+          _id: selectedProduct._id,
+          nome: selectedProduct.nome,
+          descricao: selectedProduct.descricao,
+          precoTortaP: 0,
+          precoTortaG: 0,
+          precoFatia: selectedProduct.precoFatia || 0,
+          quantidadeFatia: selectedProduct.quantidade || 0,
+          imagem: selectedProduct.imagem || "",
+        });
+      }
     }
   }, [selectedProduct, reset]);
 
-  const onSubmit = async (data: FormValues) => {
-
+  const onSubmitCreate = async (data: FormValues) => {
     try {
       const formData = new FormData();
 
       formData.append("nome", data.nome);
       formData.append("descricao", data.descricao);
-      formData.append("precoTortaP", data.precoTortaP.toString());
-      formData.append("precoTortaG", data.precoTortaG.toString());
-      formData.append("precoPedacoP", data.precoPedacoP.toString());
-      formData.append("precoPedacoG", data.precoPedacoG.toString());
-      formData.append("quantidade", data.quantidade.toString() || "0");
-
-      if (selectedImage) {
-        formData.append("imagem", selectedImage);
+      if (data.precoTortaP !== undefined)
+        formData.append("precoTortaP", data.precoTortaP.toString());
+      if (data.precoTortaG !== undefined)
+        formData.append("precoTortaG", data.precoTortaG.toString());
+      if (data.precoFatia !== undefined)
+        formData.append("precoFatia", data.precoFatia.toString());
+      if (data.quantidadeTorta !== undefined)
+        formData.append("quantidadeTorta", data.quantidadeTorta.toString());
+      if (data.quantidadeFatia !== undefined)
+        formData.append("quantidadeFatia", data.quantidadeFatia.toString());
+      if (selectedTortaImage) {
+        formData.append("imagens", selectedTortaImage); // primeiro arquivo
       }
-      setIsLoading(true);
-      console.log("formData", formData);
-      await createProduct(formData);
-    }
-    catch (error) {
-      console.error(error);
-    }
-  }
+      if (selectedFatiaImage) {
+        formData.append("imagens", selectedFatiaImage); // segundo arquivo
+      }
 
-  const onSubmitEdit = async (data: Product) => {
-    const dados = {
-      _id: data._id,
-      nome: data.nome,
-      descricao: data.descricao,
-      precoTortaP: data.precoTortaP,
-      precoTortaG: data.precoTortaG,
-      precoPedacoP: data.precoPedacoP,
-      precoPedacoG: data.precoPedacoG,
-      quantidade: data.quantidade || 0,
-      imagem: data.imagem || "",
-    };
-    const sucesso = await updateProduct(dados);
-  }
+      setIsLoading(true);
+
+      for (let pair of formData.entries()) {
+        console.log(pair[0] + ": " + pair[1]);
+      }
+
+      await createProduct(formData);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const onSubmitEdit = async (data: FormValues) => {
+    try {
+      if (!data._id) {
+        throw new Error("ID do produto não informado.");
+      }
+
+      const formData = new FormData();
+
+      formData.append("nome", data.nome);
+      formData.append("descricao", data.descricao);
+
+      if (data.precoTortaP !== undefined)
+        formData.append("precoTortaP", data.precoTortaP.toString());
+      if (data.precoTortaG !== undefined)
+        formData.append("precoTortaG", data.precoTortaG.toString());
+      if (data.precoFatia !== undefined)
+        formData.append("precoFatia", data.precoFatia.toString());
+      if (data.quantidadeTorta !== undefined)
+        formData.append("quantidade", data.quantidadeTorta.toString());
+      if (selectedEditImage instanceof File) {
+        formData.append("imagem", selectedEditImage);
+      }
+
+      // ✅ Debug
+      console.log("📦 FormData enviado:");
+      for (const [key, value] of formData.entries()) {
+        console.log(`${key}:`, value);
+      }
+
+      setIsLoading(true);
+      await updateProduct(data._id, formData);
+    } catch (error) {
+      console.error("❌ Erro ao atualizar produto:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const handleAdd = () => {
     if (selectedProduct) {
       setSelectedProduct(null);
     }
-    setOpen(true);
+    setOpenCreate(true);
   };
 
-  const handleEdit = (product: Product) => {
+  const handleEdit = (product: Torta | Fatia) => {
     setSelectedProduct(product);
-    setImagePreviewUrl(selectedProduct?.imagem || null);
-    setOpen1(true);
+    setImagePreviewUrl(product.imagem || null);
+    setOpenEdit(true);
   };
 
   const handleDelete = async (id: string) => {
@@ -155,36 +208,65 @@ function adminCardapio() {
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
-      setSelectedImage(file);
+      setSelectedEditImage(file);
       setImagePreviewUrl(URL.createObjectURL(file));
     }
   };
 
+  const handleFatiaImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setSelectedFatiaImage(file);
+      setFatiaImagePreviewUrl(URL.createObjectURL(file));
+    }
+  };
+
+  const handleTortaImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setSelectedTortaImage(file);
+      setTortaImagePreviewUrl(URL.createObjectURL(file));
+    }
+  };
+
   const handleRemoveImage = () => {
-    setSelectedImage(null);
+    setSelectedEditImage(null);
     setImagePreviewUrl(null);
+  };
+  const handleRemoveFatiaImage = () => {
+    setSelectedFatiaImage(null);
+    setFatiaImagePreviewUrl(null);
+  };
+  const handleRemoveTortaImage = () => {
+    setSelectedTortaImage(null);
+    setTortaImagePreviewUrl(null);
   };
 
   useEffect(() => {
-    if (selectedImage) {
-      const imageUrl = URL.createObjectURL(selectedImage);
-      setImagePreviewUrl(imageUrl);
+    if (selectedTortaImage) {
+      const imageUrl = URL.createObjectURL(selectedTortaImage);
+      setTortaImagePreviewUrl(imageUrl)
     }
-  }, [selectedImage]);
+    if (selectedFatiaImage) {
+      const imageUrl = URL.createObjectURL(selectedFatiaImage);
+      setFatiaImagePreviewUrl(imageUrl);
+    }
+  }, [selectedTortaImage, selectedFatiaImage]);
+
 
   useEffect(() => {
-    if (open1 && selectedProduct) {
+    if (openEdit && selectedProduct) {
       setImagePreviewUrl(selectedProduct.imagem ?? null);
     }
-  }, [open1, selectedProduct]);
+  }, [openEdit, selectedProduct]);
 
   useEffect(() => {
-    if (open) {
+    if (openCreate) {
       setSelectedProduct(null);
       reset();
       setImagePreviewUrl(null);
     }
-  }, [open]);
+  }, [openCreate]);
 
   return (
     <Box
@@ -218,6 +300,15 @@ function adminCardapio() {
               onChange={(e) => setSearchTerm(e.target.value)}
             />
           </InputGroup>
+          <Link href="/">
+            <Button
+              bgColor="#895023"
+              color="#FFF"
+              marginRight={isMobile ? "0" : "2"}
+            >
+              Cardápio
+            </Button>
+          </Link>
         </Flex>
         {isLoading ? (
           <Center mx="auto" my={20} borderWidth={"0px"}>
@@ -243,10 +334,7 @@ function adminCardapio() {
                   Preço Torta G
                 </Table.ColumnHeader>
                 <Table.ColumnHeader textAlign="center">
-                  Preço Pedaço P
-                </Table.ColumnHeader>
-                <Table.ColumnHeader textAlign="center">
-                  Preço Pedaço G
+                  Preço Fatia
                 </Table.ColumnHeader>
                 <Table.ColumnHeader textAlign="center">
                   Quantidade
@@ -260,36 +348,24 @@ function adminCardapio() {
               </Table.Row>
             </Table.Header>
             <Table.Body>
-              {filteredProducts.map((item) => (
+              {[...filteredFatias, ...filteredTortas].map((item) => (
                 <Table.Row key={item._id}>
                   <Table.Cell>{item.nome}</Table.Cell>
                   <Table.Cell>{item.descricao}</Table.Cell>
                   <Table.Cell textAlign="center">
-                    {item.precoPedacoP}
+                    {"precoTortaP" in item ? item.precoTortaP : "-"}
                   </Table.Cell>
                   <Table.Cell textAlign="center">
-                    {item.precoPedacoG}
+                    {"precoTortaG" in item ? item.precoTortaG : "-"}
                   </Table.Cell>
-                  <Table.Cell textAlign="center">{item.precoTortaP}</Table.Cell>
-                  <Table.Cell textAlign="center">{item.precoTortaG}</Table.Cell>
+                  <Table.Cell textAlign="center">
+                    {"precoFatia" in item ? item.precoFatia : "-"}
+                  </Table.Cell>
                   <Table.Cell textAlign="center">{item.quantidade}</Table.Cell>
-                  <Table.Cell
-                    width={imageSize}
-                    height={imageSize}
-                    padding={1} // Espaçamento interno reduzido
-                  >
-                    <Box
-                      width="100%"
-                      height="100%"
-                      display="flex"
-                      alignItems="center"
-                      justifyContent="center"
-                      bg="gray.100" // Fundo cinza claro para visualização
-                      borderRadius="md" // Bordas arredondadas
-                      overflow="hidden" // Esconde qualquer overflow da imagem
-                    >
+                  <Table.Cell width={imageSize} height={imageSize} padding={1}>
+                    <Box width="100%" height="100%" display="flex" alignItems="center" justifyContent="center" bg="gray.100" borderRadius="md" overflow="hidden">
                       <Image
-                        src={item.imagem}
+                        src={typeof item.imagem === "string" ? item.imagem : ""}
                         maxW="100%"
                         maxH="100%"
                         objectFit="contain"
@@ -299,18 +375,10 @@ function adminCardapio() {
                   </Table.Cell>
                   <Table.Cell textAlign="center">
                     <Flex gap="2" justify="center">
-                      <Button
-                        bgColor="#141414"
-                        size="sm"
-                        onClick={() => handleEdit(item)}
-                      >
+                      <Button bgColor="#141414" size="sm" onClick={() => handleEdit(item)}>
                         <MdEdit color="white" />
                       </Button>
-                      <Button
-                        size="sm"
-                        bgColor="#141414"
-                        onClick={() => handleDelete(item._id)}
-                      >
+                      <Button size="sm" bgColor="#141414" onClick={() => handleDelete(item._id)}>
                         <MdDelete color="white" />
                       </Button>
                     </Flex>
@@ -318,420 +386,65 @@ function adminCardapio() {
                 </Table.Row>
               ))}
             </Table.Body>
+
           </Table.Root>
         )}
       </Stack>
 
-      <Dialog.Root
-        open={open}
-        onOpenChange={(e: { open: boolean }) => {
-          setOpen(e.open);
-          if (!e.open) {
-            reset();
-            setImagePreviewUrl(null);
-          }
-        }}>
-        <Portal>
-          <Dialog.Backdrop />
-          <Dialog.Positioner>
-            <Dialog.Content>
-              <Dialog.Header>
-                <Dialog.Title>Cadastrar Produto</Dialog.Title>
-              </Dialog.Header>
-              <Dialog.Body>
-                <form onSubmit={formCreate.handleSubmit(onSubmit)}>
-                  <Center>
-                    <Stack gap="4" width="100%" maxW="md">
-                      <Field.Root invalid={!!errors.nome}>
-                        <Field.Label htmlFor="nome" color="white">
-                          Nome
-                        </Field.Label>
-                        <Input
-                          variant="subtle"
-                          bgColor="#D9D9D9"
-                          color="black"
-                          size="lg"
-                          type="text"
-                          placeholder="Nome"
-                          {...formCreate.register("nome", {
-                            required: "Nome é obrigatório",
-                          })}
-                        />
-                        <Field.ErrorText>
-                          {errors.nome?.message}
-                        </Field.ErrorText>
-                      </Field.Root>
+      {/* Para criação de produtos: */}
+      <ProdutoDialog
+        open={openCreate}
+        setOpen={setOpenCreate}
+        onSubmit={onSubmitCreate}
+        form={formCreate}
+        errors={errors}
+        isLoading={isLoading}
+        imagePreviewUrl={imagePreviewUrl}
+        handleImageChange={handleImageChange}
+        handleRemoveImage={handleRemoveImage}
+        handleFatiaImageChange={handleFatiaImageChange}
+        handleRemoveFatiaImage={handleRemoveFatiaImage}
+        handleTortaImageChange={handleTortaImageChange}
+        handleRemoveTortaImage={handleRemoveTortaImage}
+        reset={reset}
+        mode="create"
+        product={selectedProduct}
+        setImagePreviewUrl={setImagePreviewUrl}
+        imagemFatia={selectedFatiaImage}
+        setImagemFatia={setSelectedFatiaImage}
+        imagemTorta={selectedTortaImage}
+        setImagemTorta={setSelectedTortaImage}
+        FatiaImagePreviewUrl={imageFatiaPreviewUrl}
+        TortaImagePreviewUrl={imageTortaPreviewUrl}
+      />
 
-                      <Field.Root invalid={!!errors.descricao}>
-                        <Field.Label color="white">Descricao</Field.Label>
-                        <Input
-                          variant="subtle"
-                          bgColor="#D9D9D9"
-                          color="black"
-                          size="lg"
-                          placeholder="Descrição"
-                          {...formCreate.register("descricao", {
-                            required: "Descrição é obrigatória",
-                          })}
-                        />
-                        <Field.ErrorText>
-                          {errors.descricao?.message}
-                        </Field.ErrorText>
-                      </Field.Root>
+      {/* Para edição de produtos: */}
+      <ProdutoDialog
+        open={openEdit}
+        setOpen={setOpenEdit}
+        onSubmit={onSubmitEdit}
+        form={formEdit}
+        errors={errors}
+        isLoading={isLoading}
+        imagePreviewUrl={imagePreviewUrl}
+        handleImageChange={handleImageChange}
+        handleRemoveImage={handleRemoveImage}
+        handleFatiaImageChange={handleFatiaImageChange}
+        handleRemoveFatiaImage={handleRemoveFatiaImage}
+        handleTortaImageChange={handleTortaImageChange}
+        handleRemoveTortaImage={handleRemoveTortaImage}
+        reset={reset}
+        mode="edit"
+        product={selectedProduct}
+        setImagePreviewUrl={setImagePreviewUrl}
+        imagemFatia={selectedFatiaImage}
+        setImagemFatia={setSelectedFatiaImage}
+        imagemTorta={selectedTortaImage}
+        setImagemTorta={setSelectedTortaImage}
+        FatiaImagePreviewUrl={imageFatiaPreviewUrl}
+        TortaImagePreviewUrl={imageTortaPreviewUrl}
+      />
 
-                      <Field.Root invalid={!!errors.precoTortaP}>
-                        <Field.Label color="white">Preço Torta P</Field.Label>
-                        <Input
-                          variant="subtle"
-                          bgColor="#D9D9D9"
-                          color="black"
-                          size="lg"
-                          type="number"
-                          {...formCreate.register("precoTortaP", {
-                            required: "Preço é obrigatório",
-                            min: {
-                              value: 0,
-                              message: "Preço deve ser positivo",
-                            },
-                          })}
-                        />
-                        <Field.ErrorText>
-                          {errors.precoTortaP?.message}
-                        </Field.ErrorText>
-                      </Field.Root>
-                      <Field.Root invalid={!!errors.precoTortaG}>
-                        <Field.Label color="white">Preço Torta G</Field.Label>
-                        <Input
-                          variant="subtle"
-                          bgColor="#D9D9D9"
-                          color="black"
-                          size="lg"
-                          type="number"
-                          {...formCreate.register("precoTortaG", {
-                            required: "Preço da Torta G é obrigatório",
-                            min: {
-                              value: 0,
-                              message: "Preço deve ser positivo",
-                            },
-                          })}
-                        />
-                        <Field.ErrorText>
-                          {errors.precoTortaG?.message}
-                        </Field.ErrorText>
-                      </Field.Root>
-                      <Field.Root invalid={!!errors.precoPedacoP}>
-                        <Field.Label color="white">Preço Pedaço P</Field.Label>
-                        <Input
-                          variant="subtle"
-                          bgColor="#D9D9D9"
-                          color="black"
-                          size="lg"
-                          type="number"
-                          {...formCreate.register("precoPedacoP", {
-                            required: "Preço do Pedaço P é obrigatório",
-                            min: {
-                              value: 0,
-                              message: "Preço deve ser positivo",
-                            },
-                          })}
-                        />
-                        <Field.ErrorText>
-                          {errors.precoTortaG?.message}
-                        </Field.ErrorText>
-                      </Field.Root>
-                      <Field.Root invalid={!!errors.precoPedacoG}>
-                        <Field.Label color="white">Preço Pedaço G</Field.Label>
-                        <Input
-                          variant="subtle"
-                          bgColor="#D9D9D9"
-                          color="black"
-                          size="lg"
-                          type="number"
-                          {...formCreate.register("precoPedacoG", {
-                            required: "Preço do Pedaço G é obrigatório",
-                            min: {
-                              value: 0,
-                              message: "Preço deve ser positivo",
-                            },
-                          })}
-                        />
-                        <Field.ErrorText>
-                          {errors.precoPedacoG?.message}
-                        </Field.ErrorText>
-                      </Field.Root>
-                      <Field.Root invalid={!!errors.quantidade}>
-                        <Field.Label color="white">Quantidade</Field.Label>
-                        <Input
-                          variant="subtle"
-                          placeholder="opcional"
-                          bgColor="#D9D9D9"
-                          color="black"
-                          size="lg"
-                          type="number"
-                          {...formCreate.register("quantidade")}
-                        />
-                        <Field.ErrorText>
-                          {errors.quantidade?.message}
-                        </Field.ErrorText>
-                      </Field.Root>
-
-                      <Field.Root>
-                        <Field.Label color="white">Imagem</Field.Label>
-                        {!imagePreviewUrl && (
-                          <Input
-                            variant="subtle"
-                            bgColor="#D9D9D9"
-                            color="black"
-                            size="lg"
-                            type="file"
-                            accept="image/*"
-                            onChange={handleImageChange}
-                          />
-                        )}
-
-                        {imagePreviewUrl && (
-                          <Flex mt="2" align="center" justify="center" gap="4">
-                            <img
-                              src={imagePreviewUrl}
-                              alt="Pré-visualização"
-                              style={{ maxHeight: "200px", borderRadius: "8px" }}
-                            />
-                            <Button onClick={handleRemoveImage} colorScheme="red" size="xs">
-                              Remover imagem
-                            </Button>
-                          </Flex>
-                        )}
-                      </Field.Root>
-
-                      <Button
-                        type="submit"
-                        bgColor="#895023"
-                        color="white"
-                        size="md"
-                        width="100%"
-                        alignSelf="center"
-                        loading={isLoading}
-                        loadingText="Criando produto..."
-                        _hover={{ bgColor: "#6a3d1a" }}
-                        onClick={() => setOpen(false)}
-                      >
-                        Adicionar Produto
-                      </Button>
-                    </Stack>
-                  </Center>
-                </form>
-              </Dialog.Body>
-              <Dialog.Footer></Dialog.Footer>
-              <Dialog.CloseTrigger asChild>
-                <CloseButton size="sm" />
-              </Dialog.CloseTrigger>
-            </Dialog.Content>
-          </Dialog.Positioner>
-        </Portal>
-      </Dialog.Root>
-
-      <Dialog.Root
-        lazyMount
-        open={open1}
-        onOpenChange={(e) => setOpen1(e.open)}
-      >
-        <Portal>
-          <Dialog.Backdrop />
-          <Dialog.Positioner>
-            <Dialog.Content key={open1 ? "open" : "closed"}>
-              <Dialog.Header>
-                <Dialog.Title>Editar Produto</Dialog.Title>
-              </Dialog.Header>
-              <Dialog.Body>
-                <form onSubmit={handleSubmit(onSubmitEdit)}>
-                  <Center>
-                    <Stack gap="4" width="100%" maxW="md">
-                      <Field.Root invalid={!!errors.nome}>
-                        <Field.Label htmlFor="nome" color="white">
-                          Nome
-                        </Field.Label>
-                        <Input
-                          variant="subtle"
-                          bgColor="#D9D9D9"
-                          color="black"
-                          size="lg"
-                          type="text"
-                          placeholder="Nome"
-                          {...register("nome", {
-                            required: "Nome é obrigatório",
-                          })}
-                        />
-                        <Field.ErrorText>
-                          {errors.nome?.message}
-                        </Field.ErrorText>
-                      </Field.Root>
-
-                      <Field.Root invalid={!!errors.descricao}>
-                        <Field.Label color="white">Descricao</Field.Label>
-                        <Input
-                          variant="subtle"
-                          bgColor="#D9D9D9"
-                          color="black"
-                          size="lg"
-                          placeholder="Descrição"
-                          {...register("descricao", {
-                            required: "Descrição é obrigatória",
-                          })}
-                        />
-                        <Field.ErrorText>
-                          {errors.descricao?.message}
-                        </Field.ErrorText>
-                      </Field.Root>
-
-                      <Field.Root invalid={!!errors.precoTortaP}>
-                        <Field.Label color="white">Preço Torta P</Field.Label>
-                        <Input
-                          variant="subtle"
-                          bgColor="#D9D9D9"
-                          color="black"
-                          size="lg"
-                          type="number"
-                          {...register("precoTortaP", {
-                            required: "Preço é obrigatório",
-                            min: {
-                              value: 0,
-                              message: "Preço deve ser positivo",
-                            },
-                          })}
-                        />
-                        <Field.ErrorText>
-                          {errors.precoTortaP?.message}
-                        </Field.ErrorText>
-                      </Field.Root>
-                      <Field.Root invalid={!!errors.precoTortaG}>
-                        <Field.Label color="white">Preço Torta G</Field.Label>
-                        <Input
-                          variant="subtle"
-                          bgColor="#D9D9D9"
-                          color="black"
-                          size="lg"
-                          type="number"
-                          {...register("precoTortaG", {
-                            required: "Preço da Torta G é obrigatório",
-                            min: {
-                              value: 0,
-                              message: "Preço deve ser positivo",
-                            },
-                          })}
-                        />
-                        <Field.ErrorText>
-                          {errors.precoTortaG?.message}
-                        </Field.ErrorText>
-                      </Field.Root>
-                      <Field.Root invalid={!!errors.precoPedacoP}>
-                        <Field.Label color="white">Preço Pedaço P</Field.Label>
-                        <Input
-                          variant="subtle"
-                          bgColor="#D9D9D9"
-                          color="black"
-                          size="lg"
-                          type="number"
-                          {...register("precoPedacoP", {
-                            required: "Preço do Pedaço P é obrigatório",
-                            min: {
-                              value: 0,
-                              message: "Preço deve ser positivo",
-                            },
-                          })}
-                        />
-                        <Field.ErrorText>
-                          {errors.precoTortaG?.message}
-                        </Field.ErrorText>
-                      </Field.Root>
-                      <Field.Root invalid={!!errors.precoPedacoG}>
-                        <Field.Label color="white">Preço Pedaço G</Field.Label>
-                        <Input
-                          variant="subtle"
-                          bgColor="#D9D9D9"
-                          color="black"
-                          size="lg"
-                          type="number"
-                          {...register("precoPedacoG", {
-                            required: "Preço do Pedaço G é obrigatório",
-                            min: {
-                              value: 0,
-                              message: "Preço deve ser positivo",
-                            },
-                          })}
-                        />
-                        <Field.ErrorText>
-                          {errors.precoPedacoG?.message}
-                        </Field.ErrorText>
-                      </Field.Root>
-                      <Field.Root invalid={!!errors.quantidade}>
-                        <Field.Label color="white">Quantidade</Field.Label>
-                        <Input
-                          variant="subtle"
-                          placeholder="opcional"
-                          bgColor="#D9D9D9"
-                          color="black"
-                          size="lg"
-                          type="number"
-                          {...register("quantidade")}
-                        />
-                        <Field.ErrorText>
-                          {errors.quantidade?.message}
-                        </Field.ErrorText>
-                      </Field.Root>
-
-                      <Field.Root>
-                        <Field.Label color="white">Imagem</Field.Label>
-                        {!imagePreviewUrl && (
-                          <Input
-                            variant="subtle"
-                            bgColor="#D9D9D9"
-                            color="black"
-                            size="lg"
-                            type="file"
-                            accept="image/*"
-                            onChange={handleImageChange}
-                          />
-                        )}
-
-                        {imagePreviewUrl && (
-                          <Flex mt="2" align="center" justify="center" gap="4">
-                            <img
-                              src={imagePreviewUrl}
-                              alt="Pré-visualização"
-                              style={{ maxHeight: "200px", borderRadius: "8px" }}
-                            />
-                            <Button onClick={handleRemoveImage} colorScheme="red" size="xs">
-                              Remover imagem
-                            </Button>
-                          </Flex>
-                        )}
-                      </Field.Root>
-
-                      <Button
-                        type="submit"
-                        bgColor="#895023"
-                        color="white"
-                        size="md"
-                        width="100%"
-                        alignSelf="center"
-                        loading={isLoading}
-                        loadingText="Criando conta..."
-                        _hover={{ bgColor: "#6a3d1a" }}
-                      >
-                        Adicionar Produto
-                      </Button>
-                    </Stack>
-                  </Center>
-                </form>
-              </Dialog.Body>
-              <Dialog.Footer></Dialog.Footer>
-              <Dialog.CloseTrigger asChild>
-                <CloseButton size="sm" />
-              </Dialog.CloseTrigger>
-            </Dialog.Content>
-          </Dialog.Positioner>
-        </Portal>
-      </Dialog.Root>
     </Box>
   );
 }

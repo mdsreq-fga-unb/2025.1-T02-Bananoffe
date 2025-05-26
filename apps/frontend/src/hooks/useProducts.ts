@@ -2,23 +2,24 @@
 import { useState } from "react";
 import axios from "axios";
 import { toaster } from "@/components/ui/toaster";
-import { Product } from "@/types/Product.type";
+import { Fatia, Product, Torta } from "@/types/Product.type";
 import { useSession } from "next-auth/react";
-import { set } from "react-hook-form";
 
 const APIURL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080";
 
 export const useProducts = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [products, setProducts] = useState<Product[]>([]);
   const { data: session } = useSession();
+  const [fatias, setFatias] = useState<Fatia[]>([]);
+  const [tortas, setTortas] = useState<Torta[]>([]);
 
   const getProducts = async () => {
     setIsLoading(true);
 
     try {
-      const response = await axios.get<Product[]>(`${APIURL}/cardapio/listar`);
-      setProducts(response.data);
+      const response = await axios.get<Product>(`${APIURL}/cardapio/listar`);
+      setFatias(response.data.Fatias);
+      setTortas(response.data.Tortas);
 
       return response.data;
     } catch (error) {
@@ -34,9 +35,8 @@ export const useProducts = () => {
     }
   };
 
-  const createProduct = async (data: any) => {
+  const createProduct = async (data: FormData) => {
     setIsLoading(true);
-    console.log(data);
     try {
       await axios.post(`${APIURL}/cardapio/adicionar`, data, {
         headers: {
@@ -69,11 +69,10 @@ export const useProducts = () => {
     }
   };
 
-  const updateProduct = async (data: Product) => {
-    setIsLoading(true);
-    console.log(data);
+
+  const updateProduct = async (id: string, data: FormData) => {
     try {
-      await axios.patch(`${APIURL}/cardapio/${data._id}`, data, {
+      const response = await axios.patch(`${APIURL}/cardapio/${id}`, data, {
         headers: {
           Authorization: `Bearer ${session?.user.accessToken}`,
         },
@@ -85,17 +84,18 @@ export const useProducts = () => {
       });
 
       await getProducts();
-      return true;
+      return response.data;
     } catch (error) {
-      console.error(error);
+      console.error("❌ Erro ao atualizar:", error);
+
       toaster.create({
         title: "Erro ao atualizar Produto",
-        description: "Verifique os dados e tente novamente.",
+        description: axios.isAxiosError(error)
+          ? error.response?.data?.message || error.message
+          : "Erro desconhecido.",
         type: "error",
       });
-      return false;
-    } finally {
-      setIsLoading(false);
+      return null;
     }
   };
 
@@ -129,7 +129,8 @@ export const useProducts = () => {
   };
 
   return {
-    products,
+    fatias,
+    tortas,
     getProducts,
     createProduct,
     updateProduct,
