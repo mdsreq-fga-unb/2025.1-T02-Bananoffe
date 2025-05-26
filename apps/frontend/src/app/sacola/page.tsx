@@ -159,7 +159,7 @@ export default function Dashboard() {
                                     {/* Parte do texto */}
                                     <Box flex="1">
                                         <Text fontWeight="bold" fontSize="lg" mb={2} color={"black"}>
-                                            {item.nome}
+                                            {item.tipo === "Fatia" ? item.nome : item.tamanho === "P" ? item.nome + " (P)" : item.nome + " (G)"}
                                         </Text>
 
                                         <Text fontSize="sm" color="gray.700" mb={1}>

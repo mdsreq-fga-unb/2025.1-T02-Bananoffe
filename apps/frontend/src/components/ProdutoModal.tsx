@@ -69,8 +69,9 @@ export default function ProductModal({
             produtoId: selectedProduct?._id ?? "",
             tipo: selectedProduct && isFatia(selectedProduct) ? "Fatia" : "Torta",
             quantidade: 1,
-            tamanho: undefined,
+            ...(selectedProduct && !isFatia(selectedProduct) && { tamanho: "P" }),
         },
+
     });
 
     const quantidadeNaSacola = sacola?.itens?.find(
@@ -157,59 +158,150 @@ export default function ProductModal({
 
                                     <Flex justify="space-between" align="center">
                                         {/* Preço */}
-                                        {selectedProduct && isFatia(selectedProduct) && (
-                                            <Text fontSize="2xl" fontWeight="bold" color="#895023">
-                                                R$ {selectedProduct.precoFatia.toFixed(2)}
-                                            </Text>
-                                        )}
+                                        {selectedProduct && (
+                                            isFatia(selectedProduct) ? (
+                                                // Produto do tipo fatia
+                                                <Flex justify="space-between" align="center">
+                                                    <Text fontSize="3xl" fontWeight="bold" color="#895023" py={2}>
+                                                        R$ {selectedProduct.precoFatia.toFixed(2)}
+                                                    </Text>
 
-                                        {/* Contador via Controller */}
-                                        <Controller
-                                            name="quantidade"
-                                            control={control}
-                                            render={({ field }) => (
-                                                <NumberInput.Root
-                                                    value={field.value.toString()}
-                                                    onValueChange={(v) => field.onChange(v.valueAsNumber)}
-                                                    min={1}
-                                                    spinOnPress={false}
-                                                >
-                                                    <HStack gap={2}>
-                                                        <NumberInput.DecrementTrigger asChild>
-                                                            <IconButton
-                                                                variant="outline"
-                                                                size="sm"
-                                                                borderColor="#895023"
-                                                                color="#895023"
-                                                                aria-label="Remover"
+                                                    <Controller
+                                                        name="quantidade"
+                                                        control={control}
+                                                        render={({ field }) => (
+                                                            <NumberInput.Root
+                                                                value={field.value.toString()}
+                                                                onValueChange={(v) => field.onChange(v.valueAsNumber)}
+                                                                min={1}
+                                                                spinOnPress={false}
+                                                                ml={4}
                                                             >
-                                                                <LuMinus />
-                                                            </IconButton>
-                                                        </NumberInput.DecrementTrigger>
+                                                                <HStack gap={2}>
+                                                                    <NumberInput.DecrementTrigger asChild>
+                                                                        <IconButton
+                                                                            variant="outline"
+                                                                            size="sm"
+                                                                            borderColor="#895023"
+                                                                            color="#895023"
+                                                                            aria-label="Remover"
+                                                                        >
+                                                                            <LuMinus />
+                                                                        </IconButton>
+                                                                    </NumberInput.DecrementTrigger>
 
-                                                        <NumberInput.ValueText
-                                                            textAlign="center"
-                                                            fontSize="lg"
-                                                            minW="3ch"
-                                                            color="#895023"
-                                                            fontWeight="bold"
+                                                                    <NumberInput.ValueText
+                                                                        textAlign="center"
+                                                                        fontSize="lg"
+                                                                        minW="3ch"
+                                                                        color="#895023"
+                                                                        fontWeight="bold"
+                                                                    />
+
+                                                                    <NumberInput.IncrementTrigger asChild>
+                                                                        <IconButton
+                                                                            variant="outline"
+                                                                            size="sm"
+                                                                            borderColor="#895023"
+                                                                            color="#895023"
+                                                                            aria-label="Adicionar"
+                                                                        >
+                                                                            <LuPlus />
+                                                                        </IconButton>
+                                                                    </NumberInput.IncrementTrigger>
+                                                                </HStack>
+                                                            </NumberInput.Root>
+                                                        )}
+                                                    />
+                                                </Flex>
+                                            ) : (
+                                                // Produto do tipo torta inteira
+                                                <Stack gap={2} w="full">
+                                                    {/* Texto acima */}
+                                                    <Text fontSize="xl" fontWeight="bold" color="#895023" py={2}>
+                                                        Escolha um Tamanho:
+                                                    </Text>
+
+                                                    {/* Linha com botões de tamanho e contador */}
+                                                    <Flex justify="space-between" align="center" gap={4} wrap="wrap">
+                                                        <Controller
+                                                            name="tamanho"
+                                                            control={control}
+                                                            rules={{ required: true }}
+                                                            render={({ field }) => (
+                                                                <HStack gap={2}>
+                                                                    <Button
+                                                                        variant={field.value === "P" ? "solid" : "outline"}
+                                                                        onClick={() => field.onChange("P")}
+                                                                        colorScheme={field.value === "P" ? "yellow" : "gray"}
+                                                                        color={field.value === "P" ? "#895023" : "gray.600"}
+                                                                        bg={field.value === "P" ? "#F1DD2F" : "white"}
+                                                                    >
+                                                                        P - R$ {selectedProduct.precoTortaP.toFixed(2)}
+                                                                    </Button>
+                                                                    <Button
+                                                                        variant={field.value === "G" ? "solid" : "outline"}
+                                                                        onClick={() => field.onChange("G")}
+                                                                        colorScheme={field.value === "G" ? "yellow" : "gray"}
+                                                                        color={field.value === "G" ? "#895023" : "gray.600"}
+                                                                        bg={field.value === "G" ? "#F1DD2F" : "white"}
+                                                                    >
+                                                                        G - R$ {selectedProduct.precoTortaG.toFixed(2)}
+                                                                    </Button>
+                                                                </HStack>
+                                                            )}
                                                         />
 
-                                                        <NumberInput.IncrementTrigger asChild>
-                                                            <IconButton
-                                                                variant="outline"
-                                                                size="sm"
-                                                                borderColor="#895023"
-                                                                color="#895023"
-                                                                aria-label="Adicionar"
-                                                            >
-                                                                <LuPlus />
-                                                            </IconButton>
-                                                        </NumberInput.IncrementTrigger>
-                                                    </HStack>
-                                                </NumberInput.Root>
-                                            )}
-                                        />
+                                                        <Controller
+                                                            name="quantidade"
+                                                            control={control}
+                                                            render={({ field }) => (
+                                                                <NumberInput.Root
+                                                                    value={field.value.toString()}
+                                                                    onValueChange={(v) => field.onChange(v.valueAsNumber)}
+                                                                    min={1}
+                                                                    spinOnPress={false}
+                                                                >
+                                                                    <HStack gap={2}>
+                                                                        <NumberInput.DecrementTrigger asChild>
+                                                                            <IconButton
+                                                                                variant="outline"
+                                                                                size="sm"
+                                                                                borderColor="#895023"
+                                                                                color="#895023"
+                                                                                aria-label="Remover"
+                                                                            >
+                                                                                <LuMinus />
+                                                                            </IconButton>
+                                                                        </NumberInput.DecrementTrigger>
+
+                                                                        <NumberInput.ValueText
+                                                                            textAlign="center"
+                                                                            fontSize="lg"
+                                                                            minW="3ch"
+                                                                            color="#895023"
+                                                                            fontWeight="bold"
+                                                                        />
+
+                                                                        <NumberInput.IncrementTrigger asChild>
+                                                                            <IconButton
+                                                                                variant="outline"
+                                                                                size="sm"
+                                                                                borderColor="#895023"
+                                                                                color="#895023"
+                                                                                aria-label="Adicionar"
+                                                                            >
+                                                                                <LuPlus />
+                                                                            </IconButton>
+                                                                        </NumberInput.IncrementTrigger>
+                                                                    </HStack>
+                                                                </NumberInput.Root>
+                                                            )}
+                                                        />
+                                                    </Flex>
+                                                </Stack>
+                                            )
+                                        )}
                                     </Flex>
                                     {/* Aviso de estoque excedido */}
                                     {excedeuEstoque && (
