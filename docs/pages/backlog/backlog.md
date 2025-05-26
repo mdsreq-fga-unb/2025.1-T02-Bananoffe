@@ -119,7 +119,7 @@ Além disso, o backlog também está organizado por Temas, que agrupam épicos e
 
 ## Priorização do Backlog Geral
 
-Para a construção da priorização do backlog geral do sistema Bananoffee, a equipe optou por utilizar a técnica **MoSCoW**, uma abordagem amplamente reconhecida em metodologias ágeis para definição de prioridades. Essa técnica auxilia no entendimento de quais funcionalidades são realmente essenciais para a entrega do **Mínimo Produto Viável (MVP)** e quais podem ser adiadas para versões futuras do produto.
+Para a construção da priorização do backlog geral do sistema Bananoffee, a equipe optou por utilizar a técnica **MoSCoW**, como foi dito no processo de [Engenharia de Requisitos](../visaoDoProduto/engenhariaderequisitos.md#analise-e-consenso) no módulo de Análise e Consenso, uma abordagem amplamente reconhecida em metodologias ágeis para definição de prioridades. Essa técnica auxilia no entendimento de quais funcionalidades são realmente essenciais para a entrega do **Mínimo Produto Viável (MVP)** e quais podem ser adiadas para versões futuras do produto.
 
 ### Técnica MoSCoW
 
