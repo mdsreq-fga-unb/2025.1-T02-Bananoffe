@@ -45,6 +45,7 @@ nav:
       - Referências: pages/visaoDoProduto/referencias.md
   - Backlog:
       - Requisitos de Software: pages/backlog/requisitos.md
+      - Backlog do Produto: pages/backlog/backlog.md
   - Entregas:
       - Unidade 1: pages/entregas/unidade1.md
 
