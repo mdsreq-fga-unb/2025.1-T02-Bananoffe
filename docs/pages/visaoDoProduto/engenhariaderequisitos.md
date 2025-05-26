@@ -89,22 +89,24 @@
 
 ## Quadro Resumo – Engenharia de Requisitos no Scrum
 
-| Fases do Scrum            | Atividades da ER           | Prática                     | Técnica                    | Resultado                                               |
-|---------------------------|----------------------------|-----------------------------|----------------------------|----------------------------------------------------------|
-| **Planejamento da Release** | Elicitação e descoberta     | Levantamento de requisitos  | Entrevista estruturada     | Identificação dos requisitos                             |
-|                           |                            | Análise de concorrência     | -                          | Conhecimento de boas práticas e diferenciais             |
-|                           | Análise e consenso          | Priorização de requisitos   | MoSCoW                     | Lista de requisitos classificada e priorizada            |
-|                           | Declaração                  | Registro de requisitos      | Temas, Épicos e US         | Funcionalidades estruturadas para o desenvolvimento      |
-| **Planejamento da Sprint**  | Elicitação e descoberta     | Refinamento de requisitos   | Entrevista estruturada     | Requisitos refinados para a sprint                       |
-|                           | Análise e consenso          | Refinamento de requisitos   | Reunião com a equipe       | Requisitos prontos para desenvolvimento                  |
-|                           | Verificação e validação     | Definição de checklist      | DoR                        | Lista de requisitos aptos para a sprint                  |
-|                           | Organização e atualização   | Refinamento do backlog      | Grooming                   | Requisitos atualizados conforme a sprint                 |
-| **Desenvolvimento da Sprint**| Elicitação e descoberta     | Validações rápidas          | Entrevista aberta          | Alinhamento contínuo com o cliente                       |
-|                           | Representação               | Visualização de interfaces  | Prototipagem (Figma)       | Protótipo de alta fidelidade                             |
-|                           | Verificação e validação     | Validação de interfaces     | Validação com o cliente    | Confirmação antes do desenvolvimento                     |
-|                           | Organização e atualização   | Refinamento do backlog      | Grooming                   | Requisitos preparados para as sprints seguintes          |
-| **Review da Sprint**       | Verificação e validação     | Validação do incremento     | Reunião com stakeholders / DoD | Validação do incremento da sprint                    |
-|                           | Organização e atualização   | Incorporação de feedback    | Grooming                   | Backlog atualizado com base no feedback do cliente       |
+| Fases do Scrum               | Atividades da ER         | Prática                                      | Técnica                    | Resultado                                                                                   |
+|------------------------------|--------------------------|-----------------------------------------------|----------------------------|---------------------------------------------------------------------------------------------|
+| Planejamento da Release      | Elicitação e descoberta   | Levantamento de requisitos                    | Entrevista estruturada     | Identificação dos requisitos                                                                |
+|                              | Elicitação e descoberta   | Levantamento de requisitos                    | Análise de concorrência    | Identificação de padrões de negócio                                                         |
+|                              | Análise e consenso        | Priorização de requisitos                     | MoSCoW                     | Lista de requisitos classificada<br/>e priorizada                                           |
+|                              | Declaração                | Registro de requisitos                        | Temas, épicos e US         | Funcionalidades do sistema estruturadas<br/>de maneira a organizar o desenvolvimento         |
+| Planejamento da Sprint       | Elicitação e descoberta   | Levantamento e refinamento de requisitos      | Entrevista estruturada     | Refinamento dos requisitos já<br/>elicitados                                                |
+|                              | Análise e consenso        | Refinamento de requisitos                     | Reunião com a equipe       | Refinamento dos requisitos da sprint                                                         |
+|                              | Verificação e validação   | Definição de checklist                        | DoR                        | Lista de requisitos aptos a entrar para a sprint                                             |
+|                              | Organização e atualização | Refinamento do Backlog                        | Grooming de Backlog        | Refinamento dos requisitos no backlog                                                        |
+| Desenvolvimento da Sprint    | Elicitação e descoberta   | Refinamento de requisitos                     | Entrevista aberta          | Validações rápidas e pontuais sobre o produto com o cliente                                  |
+|                              | Representação             | Visualização de interfaces                    | Prototipagem               | Protótipo de alta fidelidade                                                                 |
+|                              | Verificação e validação   | Validação de interfaces                       | Prototipagem               | Validação do protótipo pelo cliente                                                          |
+|                              | Organização e atualização | Refinamento do Backlog                        | Grooming de Backlog        | Refinamento dos requisitos no backlog                                                        |
+| Review da Sprint             | Verificação e validação   | Refinamento dos requisitos                    | Reunião com os stakeholders| Validação do incremento da sprint                                                            |
+|                              | Verificação e validação   | Definição de checklist                        | DoD                        | Validação do incremento da sprint                                                            |
+|                              | Organização e atualização | Refinamento do Backlog                        | Grooming de Backlog        | Incorporação do feedback do cliente ao incremento                                            |
+
 
 ---
 
