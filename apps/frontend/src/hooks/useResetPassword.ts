@@ -6,6 +6,24 @@ import { ResetPasswordDto } from '@/types/User.type';
 
 const APIURL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080';
 
+const getErrorMessage = (error: unknown): string => {
+  if (axios.isAxiosError(error)) {
+    const data = error.response?.data;
+
+    if (Array.isArray(data?.message)) {
+      return data.message[0]; // ou junte todos com .join(' | ') se quiser
+    }
+
+    return data?.message || error.message;
+  }
+
+  if (error instanceof Error) {
+    return error.message;
+  }
+
+  return 'Erro desconhecido.';
+};
+
 export const useResetPassword = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [codigoValidado, setCodigoValidado] = useState(false);
@@ -23,13 +41,7 @@ export const useResetPassword = () => {
 
       return true;
     } catch (error) {
-      console.error(error);
-
-      let errorMessage = 'Verifique seu e-mail e tente novamente.';
-
-      if (axios.isAxiosError(error)) {
-        errorMessage = error.response?.data?.message || error.message;
-      }
+      const errorMessage = getErrorMessage(error);
 
       toaster.create({
         title: 'Erro ao enviar código',
@@ -56,13 +68,7 @@ export const useResetPassword = () => {
       setCodigoValidado(true);
       return true;
     } catch (error) {
-      console.error(error);
-
-      let errorMessage = 'Código inválido ou expirado.';
-
-      if (axios.isAxiosError(error)) {
-        errorMessage = error.response?.data?.message || error.message;
-      }
+      const errorMessage = getErrorMessage(error);
 
       toaster.create({
         title: 'Erro ao validar código',
@@ -98,19 +104,14 @@ export const useResetPassword = () => {
 
       return true;
     } catch (error) {
-      console.error(error);
-
-      let errorMessage = 'Tente novamente mais tarde.';
-
-      if (axios.isAxiosError(error)) {
-        errorMessage = error.response?.data?.message || error.message;
-      }
+      const errorMessage = getErrorMessage(error);
 
       toaster.create({
         title: 'Erro ao redefinir senha',
         description: errorMessage,
         type: 'error',
       });
+
       return false;
     } finally {
       setIsLoading(false);

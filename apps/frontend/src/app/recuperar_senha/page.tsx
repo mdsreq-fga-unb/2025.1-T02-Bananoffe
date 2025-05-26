@@ -13,40 +13,39 @@ import {
   Center,
   PinInput,
   Link,
+  InputGroup,
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { toaster } from "@/components/ui/toaster";
 import { useResetPassword } from "@/hooks/useResetPassword";
+import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 
 interface FormValues {
   email: string;
   novaSenha: string;
+  confirmarSenha: string;
 }
 
 function RecuperarSenha() {
   const [step, setStep] = useState(1);
-  const [isLoading, setIsLoading] = useState(false);
   const [codigoDigitado, setCodigoDigitado] = useState<string[]>([]);
-  const { sendResetCode, resetPassword, validateCode } = useResetPassword();
+  const { sendResetCode, resetPassword, validateCode, isLoading } = useResetPassword();
   const [email, setEmail] = useState('');
   const router = useRouter();
+  const [mostrarSenha, setMostrarSenha] = useState(false);
+  const [mostrarConfirmar, setMostrarConfirmar] = useState(false);
 
   const { register, handleSubmit, formState: { errors, isValid } } = useForm<FormValues>({
     mode: "onChange",
   });
 
   const handleEnviarCodigo = async (data: { email: string }) => {
-    setIsLoading(true);
     const sucesso = await sendResetCode(data.email);
     if (sucesso) {
       setEmail(data.email);
       setStep(2);
-      setIsLoading(false);
-    }
-    if (!sucesso) {
-      setIsLoading(false);
     }
   };
 
@@ -60,26 +59,33 @@ function RecuperarSenha() {
       return;
     }
 
-    setIsLoading(true);
     const sucesso = await validateCode(email, codigoDigitado.join(''));
-    setIsLoading(false);
-
     if (sucesso) {
       setStep(3);
     }
   };
 
+  const handleRedefinirSenha = async (data: { novaSenha: string; confirmarSenha: string }) => {
+    if (data.novaSenha !== data.confirmarSenha) {
+      toaster.create({
+        title: "As senhas não coincidem",
+        description: "Verifique e tente novamente.",
+        type: "error",
+      });
+      return;
+    }
 
-  const handleRedefinirSenha = async (data: { novaSenha: string }) => {
     const sucesso = await resetPassword({
       email,
       codigo: codigoDigitado.join(''),
       novaSenha: data.novaSenha,
     });
+
     if (sucesso) {
       router.push('/login');
     }
   };
+
 
   return (
     <Box height="100vh">
@@ -95,89 +101,23 @@ function RecuperarSenha() {
         </Box>
         <Stack flex={{ base: "1", md: "0.5" }} backgroundColor={"#F1DD2F"}>
           <Stack gap="5" alignItems="center" padding="60px 30px 30px 30px">
+
+
+
+
+          </Stack>
+
+
+          <Container padding="30px" width="80%">
             {step === 1 && (
-              <>
+
+              <form onSubmit={handleSubmit(handleEnviarCodigo)}>
                 <Text textStyle="3xl" fontWeight="semibold" color="black" textAlign="center">
-                  Redefina sua senha:
+                  Redefinição de Senha
                 </Text>
                 <Text textStyle="lg" color="black" textAlign="center" maxW="400px">
                   Digite o endereço de e-mail que você usa no site para enviarmos um código.
                 </Text>
-                <Flex justify="space-between" gap={100}>
-                  <Link
-                    href="/login"
-                    color="#895023"
-                    _hover={{ textDecoration: "underline" }}
-                  >
-                    Login
-                  </Link>
-                  <Link
-                    href="/cadastro"
-                    color="#895023"
-                    _hover={{ textDecoration: "underline" }}
-                  >
-                    Cadastre-se
-                  </Link>
-                </Flex>
-              </>
-            )}
-
-            {step === 2 && (
-              <>
-                <Text textStyle="3xl" fontWeight="semibold" color="black" textAlign="center">
-                  Digite o código:
-                </Text>
-                <Text textStyle="md" color="black" textAlign="center" mt="2" maxW="400px">
-                  Um código foi enviado para seu e-mail. Insira-o abaixo para continuar.
-                </Text>
-
-                <Center mt="6">
-                  <PinInput.Root
-                    value={codigoDigitado}
-                    onValueChange={(details) => setCodigoDigitado(details.value)}
-                    gap="10px"
-                  >
-                    <PinInput.HiddenInput />
-                    <PinInput.Control>
-                      {[...Array(6)].map((_, index) => (
-                        <PinInput.Input
-                          key={index}
-                          index={index}
-                          style={{
-                            backgroundColor: 'white',
-                            color: 'black',
-                            borderRadius: '8px',
-                            border: '1px solid black',
-                            width: '50px',
-                            height: '60px',
-                            fontSize: '2xl',
-                            textAlign: 'center'
-                          }}
-                        />
-                      ))}
-                    </PinInput.Control>
-                  </PinInput.Root>
-                </Center>
-              </>
-            )}
-
-            {step === 3 && (
-              <>
-                <Text textStyle="3xl" fontWeight="semibold" color="black" textAlign="center">
-                  Nova senha:
-                </Text>
-                <Text textStyle="lg" color="black" textAlign="center" maxW="400px">
-                  Digite sua nova senha.
-                </Text>
-              </>
-            )}
-          </Stack>
-
-          <Separator size="md" />
-
-          <Container padding="30px" width="80%">
-            {step === 1 && (
-              <form onSubmit={handleSubmit(handleEnviarCodigo)}>
                 <Center>
                   <Stack gap="4" width="100%" maxW="md">
                     <Field.Root invalid={!!errors.email}>
@@ -212,7 +152,7 @@ function RecuperarSenha() {
                       disabled={!isValid}
                       mt={4}
                     >
-                      ENVIAR CÓDIGO
+                      Enviar Código
                     </Button>
                   </Stack>
                 </Center>
@@ -220,26 +160,69 @@ function RecuperarSenha() {
             )}
 
             {step === 2 && (
-              <Center mt={4}>
-                <Button
-                  onClick={handleValidarCodigo}
-                  bgColor="#895023"
-                  color="white"
-                  size="md"
-                  width="100%"
-                  loading={isLoading}
-                  mt={4}
-                >
-                  VALIDAR CÓDIGO
-                </Button>
-              </Center>
+              <>
+                <Text textStyle="3xl" fontWeight="semibold" color="black" textAlign="center">
+                  Redefinição de Senha
+                </Text>
+                <Text textStyle="3xl" fontWeight="semibold" color="black" textAlign="center">
+                  Digite o código:
+                </Text>
+                <Text textStyle="md" color="black" textAlign="center" mt="2" maxW="400px">
+                  Um código foi enviado para seu e-mail. Insira-o abaixo para continuar.
+                </Text>
+
+                <Center mt="5">
+                  <PinInput.Root
+                    value={codigoDigitado}
+                    onValueChange={(details) => setCodigoDigitado(details.value)}
+                    gap="10px"
+                  >
+                    <PinInput.HiddenInput />
+                    <PinInput.Control>
+                      {[...Array(6)].map((_, index) => (
+                        <PinInput.Input
+                          key={index}
+                          index={index}
+                          style={{
+                            backgroundColor: 'white',
+                            color: 'black',
+                            borderRadius: '8px',
+                            border: '1px solid black',
+                            width: '50px',
+                            height: '60px',
+                            fontSize: '2xl',
+                            textAlign: 'center'
+                          }}
+                        />
+                      ))}
+
+                    </PinInput.Control>
+                    <Button
+                      onClick={handleValidarCodigo}
+                      bgColor="#895023"
+                      color="white"
+                      size="md"
+                      width="100%"
+                      loading={isLoading}
+                      mt={4}
+                    >
+                      Validar Código
+                    </Button>
+                  </PinInput.Root>
+
+                </Center>
+              </>
             )}
 
             {step === 3 && (
-              <form onSubmit={handleSubmit(handleRedefinirSenha)}>
+              <>
+                <Text textStyle="3xl" fontWeight="semibold" color="black" textAlign="center">
+                  Redefinição de Senha
+                </Text> 
+                <form onSubmit={handleSubmit(handleRedefinirSenha)}>
                 <Center>
                   <Stack gap="4" width="100%" maxW="md">
-                    <Field.Root>
+                    <Field.Root invalid={!!errors.novaSenha}>
                       <Field.Label color="black">Nova senha:</Field.Label>
                       <Input
                         variant="subtle"
@@ -255,6 +238,24 @@ function RecuperarSenha() {
                           },
                         })}
                       />
+                      <Field.ErrorText>{errors.novaSenha?.message}</Field.ErrorText>
+                    </Field.Root>
+
+                    <Field.Root invalid={!!errors.confirmarSenha}>
+                      <Field.Label color="black">Confirmar senha:</Field.Label>
+                      <Input
+                        variant="subtle"
+                        bgColor="#FFFFFF"
+                        color="black"
+                        size="lg"
+                        type="password"
+                        {...register("confirmarSenha", {
+                          required: "Confirme sua senha",
+                          validate: (value, formValues) =>
+                            value === formValues.novaSenha || "As senhas não coincidem",
+                        })}
+                      />
+                      <Field.ErrorText>{errors.confirmarSenha?.message}</Field.ErrorText>
                     </Field.Root>
 
                     <Button
@@ -266,11 +267,12 @@ function RecuperarSenha() {
                       loading={isLoading}
                       mt={4}
                     >
-                      REDEFINIR SENHA
+                      Redefinir Senha
                     </Button>
                   </Stack>
                 </Center>
               </form>
+              </>
             )}
           </Container>
         </Stack>
@@ -278,5 +280,4 @@ function RecuperarSenha() {
     </Box>
   );
 }
-
 export default RecuperarSenha;
