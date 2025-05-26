@@ -155,7 +155,7 @@ export default function Dashboard() {
                     <VStack align="stretch">
                         {itensSacola.map((item, index) => (
                             <Box key={index} bg="gray.100" borderRadius="md" overflowY="auto">
-                                <Flex align="center">
+                                <Flex align="center" >
                                     {/* Parte do texto */}
                                     <Box flex="1">
                                         <Text fontWeight="bold" fontSize="lg" mb={2} color={"black"}>
@@ -168,9 +168,9 @@ export default function Dashboard() {
                                         <Text fontSize="sm" color="gray.700" mb={1}>
                                             Total: R$ {item.precoTotal.toFixed(2)}
                                         </Text>
-                                        <Text fontSize="sm" color="gray.700" mb={3}>
+                                        {/* <Text fontSize="sm" color="gray.700" mb={3}>
                                             Em estoque: {getEstoqueDoProduto(item.produtoId, fatias, tortas)}
-                                        </Text>
+                                        </Text> */}
 
                                         <Flex align="center" gap={2}>
                                             {item.quantidade === 1 ? (
@@ -210,9 +210,6 @@ export default function Dashboard() {
                                             </Button>
                                         </Flex>
                                     </Box>
-
-                                    {/* Espaço entre texto e imagem */}
-                                    <Spacer />
 
                                     {/* Imagem à direita */}
                                     <Dialog.Root motionPreset="slide-in-bottom" placement={"center"}>
