@@ -149,32 +149,6 @@ Com base na priorização MoSCoW, o MVP será composto por todos os requisitos c
 
 Requisitos **Could Have (C)** e **Won’t Have (W)** não farão parte do MVP, mas serão mantidos no backlog para iterações futuras.
 
-### Requisitos Funcionais
-
-- **RQF01:** Criar Post no Blog;
-- **RQF02:** Editar Post no Blog;
-- **RQF04:** Categorizar Post no Blog;
-- **RQF05:** Fitrar Posts no Blog;
-- **RQF06:** Pesquisar Posts no Blog;
-- **RQF08:** Recomendar outros Posts no Blog;
-- **RQF11:** Configurar disponibilidade de Visita Técnica à Fábrica;
-- **RQF14:** Agendar visita técnica à Fábrica;
-- **RQF15:** Enviar mensagem à empresa pela Central de Atendimento ao Cliente;
-- **RQF16:** Localizar por Produtos da Família do Sítio;
-- **RQF18:** Fazer login na Central Administrativa;
-- **RQF19:** Gerenciar contas com acesso à Central de Administração.
-
-### Requisitos não Funcionais de Usabilidade (Relacionadas à implementação de uma Interface)
-
-- **RNF01:** O sistema deve permitir que os usuários localizem facilmente a seção que apresenta a história da empresa, com navegação intuitiva e conteúdo disposto de forma clara e acessível;
-- **RNF02:** A interface deve exibir os produtos da empresa de forma visualmente organizada e categorizada, facilitando a identificação e compreensão de cada item pelo usuário;
-- **RNF03:** As informações sobre ações sociais da empresa devem estar disponíveis de maneira acessível e atrativa, garantindo clareza na comunicação e fácil navegação para o usuário;
-- **RNF04:** Os contatos da empresa devem ser apresentados em um formato padronizado e de fácil compreensão, com suporte a links clicáveis para e-mail, telefone e redes sociais;
-- **RNF05:** As vagas de emprego da empresa devem ser exibidas de forma clara, com uma organização que facilitem a busca por oportunidades compatíveis com o interesse do usuário, instruindo o usuário como prosseguir com o processo no site terceiro empregare;
-- **RNF06:** As instruções do E-commerce devem ser descritas de maneira clara, com linguagem simples e objetiva, utilizando elementos visuais, como ícones e guias passo a passo, para melhorar a compreensão.
-- **RNF07 -** A interface da página principal deverá introduzir os usuários às principais informações para as demais navegações: História da Família do Sítio e Ações Sociais, além do rodapé e cabeçalho com as demais navegações.
-
-
 # Referências Bibliográficas:
 
 - PRESSMAN, Roger S. Engenharia de Software: Uma Abordagem Profissional. 7ª ed. São Paulo: McGraw Hill, 2011.
