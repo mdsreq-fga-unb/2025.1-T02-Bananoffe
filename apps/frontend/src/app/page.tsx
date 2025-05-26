@@ -18,12 +18,14 @@ import { useProducts } from "@/hooks/useProducts";
 import Header from "@/components/Header";
 import { Fatia, Torta } from "@/types/Product.type";
 import ProductModal from "@/components/ProdutoModal";
+import { useSession } from "next-auth/react";
 
 function Home() {
   const { fatias, tortas, getProducts, isLoading } = useProducts();
   const [searchTerm, setSearchTerm] = useState("")
   const [dialogOpen, setDialogOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState<Fatia | Torta>();
+  const { data: session } = useSession();
 
   const handleProductClick = (product: Fatia | Torta) => {
     setSelectedProduct(product);
@@ -182,6 +184,7 @@ function Home() {
         open={dialogOpen}
         onClose={() => setDialogOpen(false)}
         selectedProduct={selectedProduct}
+        token={session?.user.accessToken}
       />
       <NavBar />
     </Box>

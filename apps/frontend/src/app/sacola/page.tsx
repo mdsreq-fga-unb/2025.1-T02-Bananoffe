@@ -168,9 +168,9 @@ export default function Dashboard() {
                                         <Text fontSize="sm" color="gray.700" mb={1}>
                                             Total: R$ {item.precoTotal.toFixed(2)}
                                         </Text>
-                                        <Text fontSize="sm" color="gray.700" mb={3}>
+                                        {/* <Text fontSize="sm" color="gray.700" mb={3}>
                                             Em estoque: {getEstoqueDoProduto(item.produtoId, fatias, tortas)}
-                                        </Text>
+                                        </Text> */}
 
                                         <Flex align="center" gap={2}>
                                             {item.quantidade === 1 ? (

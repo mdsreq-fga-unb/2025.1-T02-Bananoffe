@@ -2,13 +2,13 @@
 import { useState } from "react";
 import axios from "axios";
 import { toaster } from "@/components/ui/toaster";
-import { ItensSacola, Sacola } from "@/types/Sacola.type";
+import { Sacola } from "@/types/Sacola.type";
 import { useSession } from "next-auth/react";
 import { FormValues } from "@/components/ProdutoModal";
 
 const APIURL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080";
 
-export const useSacola = () => {
+export const useSacola = (token?: string) => {
     const [isLoading, setIsLoading] = useState(false);
     const [sacola, setSacola] = useState<Sacola | null>(null);
     const { data: session } = useSession();
@@ -78,11 +78,13 @@ export const useSacola = () => {
 
     const adicionarItemSacola = async (data: FormValues) => {
         try {
+
             await axios.post(`${APIURL}/sacola/adicionar`, data, {
                 headers: {
-                    Authorization: `Bearer ${session?.user.accessToken}`,
+                    Authorization: `Bearer ${token}`,
                 },
             });
+
             await getSacola();
             toaster.create({
                 title: "Produto adicionado à sacola com sucesso!",

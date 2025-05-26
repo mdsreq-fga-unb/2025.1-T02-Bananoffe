@@ -20,6 +20,7 @@ import { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { useProducts } from "@/hooks/useProducts";
 import { useSacola } from "@/hooks/useSacola";
+import { get } from "http";
 
 export interface FormValues {
     produtoId: string
@@ -32,35 +33,54 @@ type ProductDialogProps = {
     open: boolean;
     onClose: () => void;
     selectedProduct?: Fatia | Torta;
+    token?: string;
 };
 
 export default function ProductModal({
     open,
     onClose,
     selectedProduct,
+    token,
 }: ProductDialogProps) {
-    const [quantity, setQuantity] = useState(1);
     const { isLoading, setIsLoading } = useProducts();
-    const { adicionarItemSacola } = useSacola();
+    const { adicionarItemSacola, sacola, getSacola } = useSacola(token);
+    const [tamanho] = useState<string | undefined>(undefined);
+    const [sacolaCarregada, setSacolaCarregada] = useState(false);
+
+    useEffect(() => {
+        if (token && !sacolaCarregada) {
+            getSacola();
+            setSacolaCarregada(true);
+        }
+    }, [token, sacolaCarregada]);
 
     function isFatia(prod: Fatia | Torta): prod is Fatia {
         return (prod as Fatia).precoFatia !== undefined;
     }
 
-    const form = useForm<FormValues>();
     const {
         register,
         control,
         handleSubmit,
-        reset
+        reset,
+        watch
     } = useForm<FormValues>({
         defaultValues: {
             produtoId: selectedProduct?._id ?? "",
             tipo: selectedProduct && isFatia(selectedProduct) ? "Fatia" : "Torta",
             quantidade: 1,
-            //tamanho: undefined,
+            tamanho: undefined,
         },
     });
+
+    const quantidadeNaSacola = sacola?.itens?.find(
+        (item) => item.produtoId === selectedProduct?._id
+    )?.quantidade ?? 0;
+    const quantidadeMaximaPermitida = selectedProduct?.quantidade !== undefined ? selectedProduct?.quantidade - quantidadeNaSacola : undefined;
+    const quantidadeAtualSelecionada = watch("quantidade") ?? 1;
+    const excedeuEstoque = quantidadeMaximaPermitida !== undefined
+        ? quantidadeAtualSelecionada > quantidadeMaximaPermitida
+        : false;
 
     useEffect(() => {
         if (selectedProduct) {
@@ -68,16 +88,21 @@ export default function ProductModal({
                 produtoId: selectedProduct._id,
                 tipo: isFatia(selectedProduct) ? "Fatia" : "Torta",
                 quantidade: 1,
-                //tamanho: undefined,
+                tamanho: isFatia(selectedProduct) ? undefined : tamanho,
             });
         }
     }, [selectedProduct, reset]);
 
     const onSubmit = async (data: FormValues) => {
-        console.log(data);
+        if (!token) {
+            console.error("Token não disponível!");
+            return;
+        }
+
         setIsLoading(true);
         try {
             await adicionarItemSacola(data);
+            onClose();
         } catch (error) {
             console.error(error);
         } finally {
@@ -117,7 +142,7 @@ export default function ProductModal({
                                 <Stack gap={4}>
                                     {/* Nome, descrição, preço… */}
                                     <Text
-                                        fontSize="2xl"
+                                        fontSize="3xl"
                                         fontWeight="bold"
                                         color="#895023"
                                         lineHeight="1.2"
@@ -130,32 +155,15 @@ export default function ProductModal({
                                         {selectedProduct?.descricao}
                                     </Text>
 
-                                    {/* Preço */}
-                                    {selectedProduct && (
-                                        isFatia(selectedProduct) ? (
-                                            <Text fontSize="3xl" fontWeight="bold" color="#895023" py={2}>
+                                    <Flex justify="space-between" align="center">
+                                        {/* Preço */}
+                                        {selectedProduct && isFatia(selectedProduct) && (
+                                            <Text fontSize="2xl" fontWeight="bold" color="#895023">
                                                 R$ {selectedProduct.precoFatia.toFixed(2)}
                                             </Text>
-                                        ) : (
-                                            /* aqui é Torta */
-                                            <Text fontSize="lg" color="gray.600">
-                                                P: R$ {selectedProduct.precoTortaP.toFixed(2)} &nbsp;|&nbsp;
-                                                G: R$ {selectedProduct.precoTortaG.toFixed(2)}
-                                            </Text>
-                                        )
-                                    )}
+                                        )}
 
-                                    {/* Contador + Botão */}
-                                    <Flex
-                                        justify="space-between"
-                                        align="center"
-                                        bg="white"
-                                        p={4}
-                                        position="sticky"
-                                        bottom={0}
-                                        boxShadow="0px -2px 10px rgba(0, 0, 0, 0.05)"
-                                    >
-                                        {/* Quantidade via Controller */}
+                                        {/* Contador via Controller */}
                                         <Controller
                                             name="quantidade"
                                             control={control}
@@ -202,25 +210,47 @@ export default function ProductModal({
                                                 </NumberInput.Root>
                                             )}
                                         />
+                                    </Flex>
+                                    {/* Aviso de estoque excedido */}
+                                    {excedeuEstoque && (
+                                        <Text fontSize="sm" color="red.500" fontWeight="medium">
+                                            {quantidadeMaximaPermitida && quantidadeMaximaPermitida > 0
+                                                ? `Estoque insuficiente. Você pode adicionar até ${quantidadeMaximaPermitida} unidade${quantidadeMaximaPermitida > 1 ? 's' : ''}.`
+                                                : "Estoque máximo atingido na sacola para este produto."}
+                                        </Text>
+                                    )}
 
-                                        {/* Botão COM type="submit" */}
+                                    {/* Botão Adicionar */}
+                                    {token ? (
                                         <Button
                                             type="submit"
                                             colorScheme="yellow"
                                             bg="#F1DD2F"
                                             color="#895023"
                                             size="lg"
-                                            px={8}
+                                            w="100%"
+                                            maxW="full"
                                             _hover={{ bg: "#E0CC28" }}
                                             loading={isLoading}
+                                            disabled={excedeuEstoque}
+                                            mt={4}
                                         >
-                                            <HStack gap={2}>
+                                            <HStack gap={2} justify="center" w="100%">
                                                 <FiShoppingBag size={24} />
-                                                <Text>Adicionar</Text>
+                                                <Text>Adicionar à Sacola</Text>
                                             </HStack>
                                         </Button>
-                                    </Flex>
+                                    ) : (
+                                        <Text color="red.500" fontWeight="bold">
+                                            Você precisa estar logado para adicionar produtos à sacola.
+                                        </Text>
+                                    )}
                                 </Stack>
+                                {!token && (
+                                    <Text color="red.500" fontWeight="bold">
+                                        Você precisa estar logado para adicionar produtos à sacola.
+                                    </Text>
+                                )}
                             </form>
                         </Dialog.Body>
 
@@ -236,8 +266,8 @@ export default function ProductModal({
                             />
                         </Dialog.CloseTrigger>
                     </Dialog.Content>
-                </Dialog.Positioner>
-            </Portal>
-        </Dialog.Root>
+                </Dialog.Positioner >
+            </Portal >
+        </Dialog.Root >
     );
 }
