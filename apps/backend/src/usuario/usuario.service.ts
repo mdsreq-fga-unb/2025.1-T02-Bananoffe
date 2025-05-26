@@ -48,7 +48,11 @@ export class UsuarioService {
   }
 
   async getUsuario(userId: string) {
-    return this.userModel.findById(userId).select('-senha');
+    const usuario = await this.userModel.findById(userId).select('-senha');
+    if (!usuario) {
+      throw new BadRequestException('Usuário não encontrado.');
+    }
+    return usuario;
   }
 
   async updateUsuario(id: string, dto: UpdateUsuarioDto) {
@@ -56,23 +60,23 @@ export class UsuarioService {
     if (!usuario) {
       throw new BadRequestException('Usuário não encontrado.');
     }
-  
+
     if (dto.nome !== undefined) usuario.nome = dto.nome;
     if (dto.telefone !== undefined) usuario.telefone = dto.telefone;
     if (dto.dataNascimento !== undefined) {
       usuario.dataNascimento = new Date(dto.dataNascimento);
     }
-  
+
     if (dto.senha) {
       const mesmaSenha = await bcrypt.compare(dto.senha, usuario.senha);
       if (mesmaSenha) {
         throw new BadRequestException('A nova senha não pode ser igual à anterior.');
       }
-  
+
       const salt = await bcrypt.genSalt();
       usuario.senha = await bcrypt.hash(dto.senha, salt);
     }
-  
+
     await usuario.save();
     return { message: 'Dados atualizados com sucesso.' };
   }

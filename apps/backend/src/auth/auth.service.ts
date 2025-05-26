@@ -70,6 +70,10 @@ export class AuthService {
   }
 
   async validarCodigo(email: string, codigo: string) {
+    if (this.codigosValidados.has(email)) {
+      throw new BadRequestException('Este código já foi utilizado.');
+    }
+
     const dadosCodigo = this.resetCodes.get(email);
 
     if (
@@ -93,6 +97,11 @@ export class AuthService {
 
     if (!this.codigosValidados.has(email)) {
       throw new UnauthorizedException('Código ainda não foi validado.');
+    }
+
+    const senhaIgual = await bcrypt.compare(novaSenha, usuario.senha);
+    if (senhaIgual) {
+      throw new BadRequestException('A nova senha não pode ser igual à anterior.');
     }
 
     const senhaHash = await bcrypt.hash(novaSenha, 10);

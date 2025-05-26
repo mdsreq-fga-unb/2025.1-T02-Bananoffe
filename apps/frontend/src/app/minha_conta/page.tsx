@@ -21,6 +21,7 @@ import Link from "next/link";
 import { useAuth } from "@/context/AuthContext";
 import { User } from "@/types/User.type";
 import NavBar from "@/components/NavBar";
+import { toaster } from "@/components/ui/toaster";
 
 export default function MinhaConta() {
   const { user, isLoading, logout } = useAuth();
@@ -57,13 +58,16 @@ export default function MinhaConta() {
     setChangedFields((prev) => ({ ...prev, [field]: value }));
   };
 
-  const handleSubmit = async () => {
-    if (!user || Object.keys(changedFields).length === 0) return;
-    try {
-      await updateUser({ ...changedFields, id: user.id });
-      setChangedFields({});
-    } catch (error) { }
-  };
+const handleSubmit = async () => {
+  if (!user || Object.keys(changedFields).length === 0) return;
+
+  const sucesso = await updateUser({ ...changedFields, id: user.id });
+
+  if (sucesso) {
+    setChangedFields({});
+  }
+};
+
 
   if (!user) return null;
 

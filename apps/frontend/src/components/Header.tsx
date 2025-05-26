@@ -3,20 +3,21 @@
 import {
     Box,
     Flex,
-    Image,
-    Text,
     Button,
     useBreakpointValue,
-    Stack,
+    Menu,
+    Text,
 } from "@chakra-ui/react";
+import { ChevronDownIcon } from "@chakra-ui/icons";
 import { useAuth } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 function Header() {
-    const { user } = useAuth();
+    const { user, logout } = useAuth();
     const router = useRouter();
     const isMobile = useBreakpointValue({ base: true, md: false });
-    const isAdmin = user?.role==="admin"
+    const isAdmin = user?.role === "admin"
 
     return (
         <Box
@@ -41,40 +42,76 @@ function Header() {
                 px={6}
                 py={isMobile ? 3 : 5}
             >
-                <Flex justify="space-between" align="center">
-                    <Stack gap={1}>
-                        <Box w={isMobile ? "5rem" : "8rem"}>
-                            <Text fontSize="md" color="gray.600">
-                                Olá, {user?.nome || "visitante"}!
-                            </Text>
-                        </Box>
-                        {isAdmin && (
+                <Flex justify="space-between" align="center" position="relative">
+                    <Menu.Root>
+                        <Menu.Trigger>
                             <Button
-                                size="xs"
-                                color="red"
                                 variant="ghost"
-                                width="fit-content"
-                                onClick={() => router.push("/admin_cardapio")}
+                                fontWeight="normal"
+                                color="gray.600"
+                                display="flex"
+                                alignItems="center"
+                                gap={2}
+                                _hover={{ bg: "gray.300" }}
                             >
-                                Gerenciar Cardápio
+                                Olá, {user?.nome || "Visitante"}!
+                                <ChevronDownIcon />
                             </Button>
-                        )}
-                    </Stack>
+                        </Menu.Trigger>
+                        <Menu.Positioner>
+                            <Menu.Content bg="white" borderRadius="md" boxShadow="lg" minW="200px">
+                                {isAdmin && (
+                                    <Menu.Item color="black" _hover={{
+                                        bg: "gray.300", transform: "translateY(-2px)",
+                                    }} value="admin_cardapio" onSelect={() => router.push("/admin_cardapio")}>
+                                        Gerenciar Cardápio
+                                    </Menu.Item>
+                                )}
+                                <Menu.Separator />
+                                <Menu.Item
+                                    color="black"
+                                    value="logout"
+                                    onSelect={() => {
+                                        logout();
+                                        router.push("/");
+                                    }}
+                                    _hover={{
+                                        bg: "gray.300", transform: "translateY(-2px)",
+                                    }}
+                                >
+                                    Sair
+                                </Menu.Item>
+                                <Menu.Arrow />
+                            </Menu.Content>
+                        </Menu.Positioner>
+                    </Menu.Root>
+
+                    {/* Nome da doceria centralizado */}
                     <Box position="absolute" left="50%" transform="translateX(-50%)">
                         <Text fontSize="xl" fontWeight="bold" color="#2D2D2D" textAlign="center">
                             Bananoffee Doceria
                         </Text>
                     </Box>
-                    <Image
-                        src="/Logo Bananoffee - Sem Fundo-02 alt.png"
-                        alt="Logo Bananoffee"
+
+                    <Box
                         maxH="5rem"
                         borderRadius="full"
                         cursor="pointer"
                         onClick={() => router.push("/")}
-                        left="75%"
-                        w={100}
-                    />
+                        w="100px"
+                        overflow="hidden"
+                        display="flex"
+                        alignItems="center"
+                        justifyContent="center"
+                    >
+                        <Image
+                            src="/Logo Bananoffee - Sem Fundo-02 alt.png"
+                            alt="Logo Bananoffee"
+                            width={100}
+                            height={80}
+                            style={{ objectFit: "contain", borderRadius: "9999px" }}
+                        />
+                    </Box>
                 </Flex>
             </Box>
         </Box>
