@@ -2,7 +2,6 @@
 
 A *Definition of Ready* (DoR) é um conjunto de critérios que um item ou uma User Story do Backlog deve atender para ser considerado pronto para iniciar o trabalho. Assim que um item do Backlog atende a esses critérios, ele é puxado para ser trabalhado durante a Sprint. Para que um item possa ser considerado "Ready", ele precisa atender aos seguintes critérios:
 
-- **A US satisfaz o INVEST de forma objetiva e mensurável? O INVEST está bem definido?** Está atendendo os requisitos.
 - **Os critérios de aceitação definidos e descritos na US estão de acordo com a definição do projeto?** Ou seja, estão conformes aos requisitos.
 - **As regras de negócio estão definidas e descritas na US de maneira objetiva, mensurável e clara?**
 - **O requisito não possui ambiguidade?** Isto é, a história de usuário e seu título não devem permitir múltiplas interpretações por desenvolvedores e stakeholders.
