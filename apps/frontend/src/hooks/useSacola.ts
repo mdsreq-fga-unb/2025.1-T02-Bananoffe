@@ -4,6 +4,7 @@ import axios from "axios";
 import { toaster } from "@/components/ui/toaster";
 import { ItensSacola, Sacola } from "@/types/Sacola.type";
 import { useSession } from "next-auth/react";
+import { FormValues } from "@/components/ProdutoModal";
 
 const APIURL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080";
 
@@ -75,28 +76,29 @@ export const useSacola = () => {
         }
     };
 
-    const adicionarItemSacola = async (data: FormData) => {
+    const adicionarItemSacola = async (data: FormValues) => {
         try {
-            await axios.post(`${APIURL}/sacola/adicionar`, {
+            await axios.post(`${APIURL}/sacola/adicionar`, data, {
                 headers: {
                     Authorization: `Bearer ${session?.user.accessToken}`,
                 },
             });
             await getSacola();
             toaster.create({
-                title: "Produto adicionado a sacola com sucesso!",
-                type: "sucess",
+                title: "Produto adicionado à sacola com sucesso!",
+                type: "success",
             });
-            return true
+            return true;
         } catch (error) {
             console.error(error);
             toaster.create({
-                title: "Erro ao adicionar item a sacola",
+                title: "Erro ao adicionar item à sacola",
                 description: "Tente novamente.",
                 type: "error",
             });
         }
     };
+
 
     return { getSacola, isLoading, sacola, setSacola, atualizarItemSacola, excluirItemSacola, adicionarItemSacola };
 };

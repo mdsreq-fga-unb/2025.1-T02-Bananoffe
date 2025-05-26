@@ -74,19 +74,10 @@ export default function ProductModal({
     }, [selectedProduct, reset]);
 
     const onSubmit = async (data: FormValues) => {
-        console.log(data)
+        console.log(data);
+        setIsLoading(true);
         try {
-            const formData = new FormData();
-
-            formData.append("produtoId", data.produtoId);
-            formData.append("quantidade", data.quantidade.toString());
-            formData.append("tipo", data.tipo);
-            if (data.tamanho === "Torta")
-                formData.append("tamanho", data.tamanho);
-
-            setIsLoading(true);
-
-            await adicionarItemSacola(formData);
+            await adicionarItemSacola(data);
         } catch (error) {
             console.error(error);
         } finally {
@@ -233,7 +224,7 @@ export default function ProductModal({
                             </form>
                         </Dialog.Body>
 
-                        <Dialog.CloseTrigger>
+                        <Dialog.CloseTrigger asChild>
                             <CloseButton
                                 size="lg"
                                 position="absolute"
