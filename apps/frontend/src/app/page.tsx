@@ -17,10 +17,18 @@ import NavBar from "@/components/NavBar";
 import { useProducts } from "@/hooks/useProducts";
 import Header from "@/components/Header";
 import { Fatia, Torta } from "@/types/Product.type";
+import ProductModal from "@/components/ProdutoModal";
 
 function Home() {
   const { fatias, tortas, getProducts, isLoading } = useProducts();
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState("")
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState<Fatia | Torta>();
+
+  const handleProductClick = (product: Fatia | Torta) => {
+    setSelectedProduct(product);
+    setDialogOpen(true);
+  };  
 
   const filteredProducts = <T extends Fatia | Torta>(items: T[], term: string = searchTerm) =>
     items.filter(
@@ -74,6 +82,8 @@ function Home() {
                 return (
                   <Flex
                     key={item._id}
+                    onClick={()=> handleProductClick(item)}
+                    cursor="pointer"
                     bg="white"
                     borderRadius="2xl"
                     boxShadow="lg"
@@ -120,6 +130,8 @@ function Home() {
                 return (
                   <Flex
                     key={item._id}
+                    onClick={()=> handleProductClick(item)}
+                    cursor="pointer"
                     bg="white"
                     borderRadius="2xl"
                     boxShadow="lg"
@@ -166,7 +178,11 @@ function Home() {
           </>
         )}
       </Box>
-
+      <ProductModal
+        open={dialogOpen}
+        onClose={() => setDialogOpen(false)}
+        selectedProduct={selectedProduct}
+      />
       <NavBar />
     </Box>
   );

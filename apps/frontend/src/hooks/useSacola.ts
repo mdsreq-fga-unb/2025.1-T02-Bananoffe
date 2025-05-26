@@ -75,5 +75,28 @@ export const useSacola = () => {
         }
     };
 
-    return { getSacola, isLoading, sacola, setSacola, atualizarItemSacola, excluirItemSacola };
+    const adicionarItemSacola = async (data: FormData) => {
+        try {
+            await axios.post(`${APIURL}/sacola/adicionar`, {
+                headers: {
+                    Authorization: `Bearer ${session?.user.accessToken}`,
+                },
+            });
+            await getSacola();
+            toaster.create({
+                title: "Produto adicionado a sacola com sucesso!",
+                type: "sucess",
+            });
+            return true
+        } catch (error) {
+            console.error(error);
+            toaster.create({
+                title: "Erro ao adicionar item a sacola",
+                description: "Tente novamente.",
+                type: "error",
+            });
+        }
+    };
+
+    return { getSacola, isLoading, sacola, setSacola, atualizarItemSacola, excluirItemSacola, adicionarItemSacola };
 };
