@@ -20,12 +20,7 @@ comissões da plataforma elevam o valor ao consumidor e reduzem a margem de lucr
 
 ### Identificação da Oportunidade ou Problema
 
-A principal limitação da Bananoffee Doceria está na comunicação e organização de pedidos, hoje totalmente
-manual e concentrada no WhatsApp. Esse fluxo gera um gargalo operacional: um dos sócios dedica‑se
-integralmente a atender clientes — vendendo, reservando sabores e agendando retiradas — enquanto o outro
-cuida das entregas e da logística de portaria. Como a cozinheira precisa alternar a produção das tortas pela
-manhã com o atendimento aos pedidos à tarde, há um elevado risco de atrasos, desencontros de informação e
-até desistências de clientes durante o processo de compra.
+A principal limitação da Bananoffe Doceria está na forte dependência de plataformas de terceiros, como Whatsapp e iFood, para a realização e organização de pedidos. Esse modelo impõe custos adicionais com taxas administrativas e limita a autonomia do negócio sobre a experiência do cliente. Atualmente: um dos sócios dedica‑se integralmente a atender clientes via Whatsapp — vendendo, reservando sabores e agendando retiradas — enquanto o outro cuida das entregas e da logística de portaria. Como a cozinheira precisa alternar a produção das tortas pela manhã com o atendimento aos pedidos à tarde, há um elevado risco de atrasos, desencontros de informação e até desistências de clientes durante o processo de compra.
 
 Esse cenário se agrava em datas de pico, como Páscoa e Natal, quando toda a capacidade produtiva é
 direcionada às tortas inteiras e não há fatias à pronta‑entrega. A dependência exclusiva do WhatsApp e de
@@ -76,3 +71,4 @@ que não se disponha de dados formais sobre faixa etária, observa-se um públic
 | 19/04/25 | 1.1    | Ajustes e estilização   | Bruno Cruz         |
 | 21/04/25 | 1.2    | Atualização do diagrama | Guilherme Zanella  |
 | 21/04/25 | 1.3    | Ajustes                 | Anne de Capdeville |
+| 26/05/25 | 1.4    | Atualização do Problema | Guilherme Zanella  |
