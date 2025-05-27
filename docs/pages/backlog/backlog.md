@@ -199,15 +199,9 @@ A priorização dos requisitos funcionais foi realizada em uma reunião colabora
 
 # Referências Bibliográficas:
 
-- PRESSMAN, Roger S. Engenharia de Software: Uma Abordagem Profissional. 7ª ed. São Paulo: McGraw Hill, 2011.
-
-- RUBIN, Kenneth S. Scrum Essencial: Um Guia Prático para o Processo Ágil Mais Popular. São Paulo: Alta Books, 2014.
-
-- SCHWABER, Ken; SUTHERLAND, Jeff. Guia do Scrum: O Guia Definitivo para o Scrum, as Regras do Jogo. Scrum.org, 2020.
-
-- CAROLI, Paulo. Lean Inception: Como Alinhar Pessoas e Construir o Produto Certo. São Paulo: Caroli.org, 2018.
-
-- RIES, Eric. A Startup Enxuta: Como os Empreendedores Atuais Utilizam a Inovação Contínua para Criar Empresas Extremamente Bem-Sucedidas. Rio de Janeiro: Alta Books, 2012.
+- MARSCICANO, George. Requisitos de Software - Fundamentos, Evolução e Práticas. 0.2, Draft. 2025
+  
+- http://www.extremeprogramming.org/
 
 ---
 ## Histórico de Versão:
