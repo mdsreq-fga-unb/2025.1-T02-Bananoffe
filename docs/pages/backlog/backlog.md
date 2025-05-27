@@ -13,11 +13,10 @@ Além disso, o backlog também está organizado por Temas, que agrupam épicos e
 
 ### Temas
 
-| Código | Título                      | Descrição                                                                                                            |
-| ------ | --------------------------- | -------------------------------------------------------------------------------------------------------------------- |
-| TM01   | Conta do Usuário e Admin    | Funcionalidades para cadastro, autenticação e gerenciamento da conta do usuário e uso do sistema pelo administrador. |
-| TM02   | Cardápio                    | Funcionalidades para gerenciar e visualizar o catálogo de produtos da doceria.                                       |
-| TM03   | Pedidos, Sacola e Pagamento | Funcionalidades para montagem, acompanhamento e pagamento dos pedidos.                                               |
+| Código | Título                   | Descrição                                                                                                                                 |
+| ------ | ------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| TM01   | Conta do Usuário e Admin | Funcionalidades para cadastro, autenticação e gerenciamento da conta do usuário e uso do sistema pelo administrador.                      |
+| TM02   | Fluxo de Compra          | Funcionalidades para gerenciar e visualizar o catálogo de produtos da doceria e montagem, além do acompanhamento e pagamento dos pedidos. |
 
 ---
 
@@ -28,10 +27,9 @@ Além disso, o backlog também está organizado por Temas, que agrupam épicos e
 | EP01   | TM01 | Cadastro e Autenticação               | Como usuário, quero me cadastrar e autenticar no sistema para acessar minhas funcionalidades pessoais.                                      |
 | EP02   | TM01 | Gerenciar Conta de Usuário            | Como usuário autenticado e administrador, quero atualizar meus dados pessoais e acessar o sistema com login seguro para manter minha conta. |
 | EP03   | TM02 | Gerenciar Cardápio                    | Como administrador, quero adicionar, editar e remover itens do cardápio para manter o menu atualizado.                                      |
-| EP04   | TM03 | Gerenciar Sacola de Compras           | Como cliente, quero adicionar, alterar e remover produtos na sacola para montar meu pedido.                                                 |
-| EP05   | TM03 | Finalizar Pedido e Reservas           | Como cliente, quero concluir pedidos, realizar encomendas e reservar produtos para garantir minha compra.                                   |
-| EP06   | TM03 | Acompanhar e Gerenciar Pedidos        | Como cliente e administrador, quero acompanhar o status dos pedidos para manter controle e organização.                                     |
-| EP07   | TM03 | Integração e Confirmação de Pagamento | Como cliente e administrador, quero gerar, confirmar e receber notificações sobre pagamentos via PIX para garantir segurança e agilidade.   |
+| EP04   | TM02 | Gerenciar Sacola de Compras           | Como cliente, quero adicionar, alterar e remover produtos na sacola para montar meu pedido.                                                 |
+| EP05   | TM02 | Finalizar e Acompanhar Pedido         | Como cliente, quero concluir pedidos, realizar encomendas e reservar produtos para garantir minha compra.                                   |
+| EP06   | TM02 | Integração e Confirmação de Pagamento | Como cliente e administrador, quero gerar, confirmar e receber notificações sobre pagamentos via PIX para garantir segurança e agilidade.   |
 
 ---
 
@@ -39,23 +37,23 @@ Além disso, o backlog também está organizado por Temas, que agrupam épicos e
 
 | Código | Requisito Funcional Associado | Épico Associado | User Story                                                                                                                                             |
 | ------ | ----------------------------- | --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| US01   | RF13                          | EP01            | Como novo usuário, quero me cadastrar para acessar as funcionalidades do sistema.                                                                      |
-| US02   | RF14                          | EP01            | Como usuário, quero autenticar-me para garantir acesso seguro à minha conta.                                                                           |
-| US03   | RF12                          | EP02            | Como administrador, quero fazer login seguro no sistema para acessar funcionalidades restritas.                                                        |
-| US04   | RF16                          | EP02            | Como usuário autenticado, quero atualizar meus dados pessoais (exceto e-mail) para manter minhas informações atualizadas.                              |
+| US01   | RF12                          | EP01            | Como novo usuário, quero me cadastrar para acessar as funcionalidades do sistema.                                                                      |
+| US02   | RF13                          | EP01            | Como usuário, quero autenticar-me para garantir acesso seguro à minha conta.                                                                           |
+| US03   | RF11                          | EP02            | Como administrador, quero fazer login seguro no sistema para acessar funcionalidades restritas.                                                        |
+| US04   | RF15                          | EP02            | Como usuário autenticado, quero atualizar meus dados pessoais (exceto e-mail) para manter minhas informações atualizadas.                              |
 | US05   | RF01                          | EP03            | Como administrador, quero adicionar itens ao cardápio com nome, descrição, preço (por tamanho), quantidade e imagem para manter o cardápio atualizado. |
 | US06   | RF02                          | EP03            | Como administrador, quero remover itens do cardápio para retirar produtos indisponíveis ou descontinuados.                                             |
 | US07   | RF03                          | EP03            | Como administrador, quero editar itens do cardápio para corrigir ou atualizar informações.                                                             |
-| US08   | RF15                          | EP03            | Como cliente, quero visualizar todos os produtos do cardápio com nome, descrição, preços por tamanho e imagem em uma tela responsiva.                  |
-| US09   | RF17, RF18                    | EP04            | Como cliente, quero adicionar e remover produtos na sacola de compras para montar meu pedido com controle de quantidade e preços.                      |
-| US10   | RF19, RF20                    | EP04            | Como cliente, quero alterar a quantidade dos produtos na sacola de compras para ajustar meu pedido antes da finalização.                               |
-| US11   | RF21                          | EP05            | Como cliente, quero concluir pedidos para finalizar a compra dos produtos selecionados.                                                                |
-| US12   | RF22, RF23                    | EP05            | Como cliente, quero realizar encomendas e reservar produtos para garantir a disponibilidade futura.                                                    |
-| US13   | RF04, RF05, RF06, RF07        | EP06            | Como administrador, quero gerenciar pedidos, alterar status, visualizar detalhes e receber notificações para organizar a produção e entrega.           |
-| US14   | RF24, RF25                    | EP06            | Como cliente, quero acompanhar o status dos meus pedidos e visualizar histórico para controle pessoal.                                                 |
-| US15   | RF08, RF09, RF10, RF11        | EP07            | Como administrador, quero receber notificações e confirmar recebimentos de pagamentos via PIX para controle financeiro da doceria.                     |
-| US16   | RF29, RF30, RF31, RF32        | EP07            | Como cliente, quero gerar código PIX, visualizar QR Code, copiar chave e realizar o pagamento via Pix para concluir o meu pedido na doceria.           |
-| US17   | RF33, RF34, RF35              | EP07            | Como cliente, quero confirmar pagamento, receber notificação e visualizar comprovante de pagamento para facilitar transações seguras.                  |
+| US08   | RF14                          | EP03            | Como cliente, quero visualizar todos os produtos do cardápio com nome, descrição, preços por tamanho e imagem em uma tela responsiva.                  |
+| US09   | RF16, RF17                    | EP04            | Como cliente, quero adicionar e remover produtos na sacola de compras para montar meu pedido com controle de quantidade e preços.                      |
+| US10   | RF18, RF19                    | EP04            | Como cliente, quero alterar a quantidade dos produtos na sacola de compras para ajustar meu pedido antes da finalização.                               |
+| US11   | RF20, RF27                    | EP05            | Como cliente, quero concluir pedidos para finalizar a compra dos produtos selecionados.                                                                |
+| US12   | RF21                          | EP05            | Como cliente, quero realizar encomendas de produtos para garantir a disponibilidade futura.                                                            |
+| US13   | RF05                          | EP05            | Como administrador, quero visualizar detalhes de um produto para organizar a produção e entrega.                                                       |
+| US14   | RF07, RF08, RF10              | EP06            | Como administrador, quero receber notificações e confirmar recebimentos de pagamentos via PIX para controle financeiro da doceria.                     |
+| US15   | RF28, RF29                    | EP06            | Como cliente, quero gerar código PIX e visualizar QR Code para poder continuar o meu processo de pagamento de pedido na doceria.                       |
+| US16   | RF30, RF31                    | EP06            | Como cliente, quero copiar chave e realizar o pagamento via Pix para concluir o meu pedido na doceria.                                                 |
+| US17   | RF32, RF33                    | EP06            | Como cliente, quero confirmar pagamento, receber notificação e visualizar comprovante de pagamento para facilitar transações seguras.                  |
 
 ---
 
@@ -146,7 +144,58 @@ Com base na priorização MoSCoW, o MVP será composto por todos os requisitos c
 - **Must Have (M)**: Sem exceções.
 - Alguns **Should Have (S)**: Desde que não comprometam a entrega no prazo e sejam de baixa complexidade.
 
-Requisitos **Could Have (C)** e **Won’t Have (W)** não farão parte do MVP, mas serão mantidos no backlog para iterações futuras.
+Requisitos **Could Have (C)** e **Won’t Have (W)** não farão parte do MVP, mas serão mantidos no backlog para caso haja iterações futuras.
+
+#### Priorização dos Requisitos
+
+A priorização dos requisitos funcionais foi realizada em uma reunião colaborativa envolvendo os principais stakeholders, o Product Owner (PO), a equipe de desenvolvimento e demais envolvidos no projeto. Durante essa sessão, foram discutidas as necessidades do negócio, a viabilidade técnica e o impacto para o usuário final, de modo a definir quais requisitos seriam essenciais (Must Have), importantes (Should Have), desejáveis (Could Have) ou que poderiam ser descartados por enquanto (Won’t Have). Essa priorização orienta o desenvolvimento incremental do sistema, garantindo foco no que agrega maior valor ao produto no menor tempo possível.
+
+#### Requisitos Funcionais para o Administrador
+
+| ID   | Descrição                                                   | Prioridade  | MVP |
+| ---- | ----------------------------------------------------------- | ----------- | --- |
+| RF01 | Adicionar um item no cardápio digital                       | Must Have   | X   |
+| RF02 | Excluir um item no cardápio digital                         | Must Have   | X   |
+| RF03 | Alterar um item no cardápio digital                         | Must Have   | X   |
+| RF04 | Alterar o status de um pedido                               | Won’t Have  |     |
+| RF05 | Visualizar um pedido                                        | Must Have   | X   |
+| RF06 | Receber uma notificação sobre um pedido via SMS ou WhatsApp | Could Have  |     |
+| RF07 | Receber notificação de pagamento realizado                  | Should Have | X   |
+| RF08 | Confirmar recebimento do pagamento PIX                      | Should Have | X   |
+| RF09 | Visualizar relatório de pagamentos recebidos                | Won’t Have  |     |
+| RF10 | Gerenciar chave PIX da doceria                              | Must Have   | X   |
+| RF11 | Ter uma conta já cadastrada no sistema                      | Must Have   | X   |
+
+
+#### Requisitos Funcionais para o Usuário
+
+| ID   | Descrição                                                 | Prioridade  | MVP |
+| ---- | --------------------------------------------------------- | ----------- | --- |
+| RF12 | Se cadastrar no sistema                                   | Must Have   | X   |
+| RF13 | Realizar a autenticação no sistema                        | Must Have   | X   |
+| RF14 | Visualizar o cardápio digital                             | Must Have   | X   |
+| RF15 | Gerenciar sua conta de usuário                            | Must Have   | X   |
+| RF16 | Adicionar produtos na sacola virtual de compras           | Must Have   | X   |
+| RF17 | Remover os produtos da sacola virtual                     | Must Have   | X   |
+| RF18 | Inserir os produtos da sacola virtual                     | Must Have   | X   |
+| RF19 | Alterar os produtos da sacola virtual                     | Must Have   | X   |
+| RF20 | Concluir seu pedido                                       | Must Have   | X   |
+| RF21 | Realizar encomenda de produtos                            | Should Have | X   |
+| RF22 | Reservar um produto                                       | Could Have  |     |
+| RF23 | Acompanhar o status do pedido                             | Won’t Have  |     |
+| RF24 | Visualizar seu histórico de pedidos                       | Could Have  |     |
+| RF25 | Ganhar pontos de fidelidade por pedido                    | Could Have  |     |
+| RF26 | Avaliar um pedido                                         | Won’t Have  |     |
+| RF27 | Visualizar o valor total do pedido antes de finalizar     | Must Have   | X   |
+| RF28 | Gerar código PIX para pagamento do pedido                 | Must Have   | X   |
+| RF29 | Visualizar QR Code do PIX para pagamento                  | Must Have   | X   |
+| RF30 | Copiar código PIX (chave aleatória) para pagamento manual | Must Have   | X   |
+| RF31 | Efetuar o pagamento via PIX                               | Must Have   | X   |
+| RF32 | Confirmar o pagamento realizado via PIX                   | Must Have   | X   |
+| RF33 | Receber notificação de confirmação de pagamento           | Should Have | X   |
+| RF34 | Visualizar comprovante de pagamento no histórico          | Won’t Have  |     |
+
+
 
 # Referências Bibliográficas:
 

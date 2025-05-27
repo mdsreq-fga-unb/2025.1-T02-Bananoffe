@@ -13,41 +13,40 @@ Requisitos funcionais são especificações que descrevem o que o sistema deve f
 | RF03   | Alterar um item no cardápio digital                         |
 | RF04   | Alterar o status de um pedido                               |
 | RF05   | Visualizar um pedido                                        |
-| RF06   | Gerenciar um pedido                                         |
-| RF07   | Receber uma notificação sobre um pedido via SMS ou WhatsApp |
-| RF08   | Receber notificação de pagamento realizado                  |
-| RF09   | Confirmar recebimento do pagamento PIX                      |
-| RF10   | Visualizar relatório de pagamentos recebidos                |
-| RF11   | Gerenciar chave PIX da doceria                              |
-| RF12   | Ter uma conta já cadastrada no sistema                      |
+| RF06   | Receber uma notificação sobre um pedido via SMS ou WhatsApp |
+| RF07   | Receber notificação de pagamento realizado                  |
+| RF08   | Confirmar recebimento do pagamento PIX                      |
+| RF09   | Visualizar relatório de pagamentos recebidos                |
+| RF10   | Gerenciar chave PIX da doceria                              |
+| RF11   | Ter uma conta já cadastrada no sistema                      |
 
 ### Requisitos Para o Usuário
 
 | **ID** | **Descrição de Requisitos Para o Usuário**                |
 | ------ | --------------------------------------------------------- |
-| RF13   | Se cadastrar no sistema                                   |
-| RF14   | Realizar a autenticação no sistema                        |
-| RF15   | Visualizar o cardápio digital                             |
-| RF16   | Gerenciar sua conta de usuário                            |
-| RF17   | Adicionar produtos na sacola virtual de compras           |
-| RF18   | Remover os produtos da sacola virtual                     |
-| RF19   | Inserir os produtos da sacola virtual                     |
-| RF20   | Alterar os produtos da sacola virtual                     |
-| RF21   | Concluir seu pedido                                       |
-| RF22   | Realizar encomenda de produtos                            |
-| RF23   | Reservar um produto                                       |
-| RF24   | Acompanhar o status do pedido                             |
-| RF25   | Visualizar seu histórico de pedidos                       |
-| RF26   | Ganhar pontos de fidelidade por pedido                    |
-| RF27   | Avaliar um pedido                                         |
-| RF28   | Visualizar o valor total do pedido antes de finalizar     |
-| RF29   | Gerar código PIX para pagamento do pedido                 |
-| RF30   | Visualizar QR Code do PIX para pagamento                  |
-| RF31   | Copiar código PIX (chave aleatória) para pagamento manual |
-| RF32   | Efetuar o pagamento via PIX                               |
-| RF33   | Confirmar o pagamento realizado via PIX                   |
-| RF34   | Receber notificação de confirmação de pagamento           |
-| RF35   | Visualizar comprovante de pagamento no histórico          |
+| RF12   | Se cadastrar no sistema                                   |
+| RF13   | Realizar a autenticação no sistema                        |
+| RF14   | Visualizar o cardápio digital                             |
+| RF15   | Gerenciar sua conta de usuário                            |
+| RF16   | Adicionar produtos na sacola virtual de compras           |
+| RF17   | Remover os produtos da sacola virtual                     |
+| RF18   | Inserir os produtos da sacola virtual                     |
+| RF19   | Alterar os produtos da sacola virtual                     |
+| RF20   | Concluir seu pedido                                       |
+| RF21   | Realizar encomenda de produtos                            |
+| RF22   | Reservar um produto                                       |
+| RF23   | Acompanhar o status do pedido                             |
+| RF24   | Visualizar seu histórico de pedidos                       |
+| RF25   | Ganhar pontos de fidelidade por pedido                    |
+| RF26   | Avaliar um pedido                                         |
+| RF27   | Visualizar o valor total do pedido antes de finalizar     |
+| RF28   | Gerar código PIX para pagamento do pedido                 |
+| RF29   | Visualizar QR Code do PIX para pagamento                  |
+| RF30   | Copiar código PIX (chave aleatória) para pagamento manual |
+| RF31   | Efetuar o pagamento via PIX                               |
+| RF32   | Confirmar o pagamento realizado via PIX                   |
+| RF33   | Receber notificação de confirmação de pagamento           |
+| RF34   | Visualizar comprovante de pagamento no histórico          |
 
 
 ## Lista de Requisitos Não Funcionais (RNF)
