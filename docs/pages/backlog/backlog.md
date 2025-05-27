@@ -22,14 +22,15 @@ Além disso, o backlog também está organizado por Temas, que agrupam épicos e
 
 ### Épicos
 
-| Código | Tema | Título                                | User Story                                                                                                                                  |
-| ------ | ---- | ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| EP01   | TM01 | Cadastro e Autenticação               | Como usuário, quero me cadastrar e autenticar no sistema para acessar minhas funcionalidades pessoais.                                      |
-| EP02   | TM01 | Gerenciar Conta de Usuário            | Como usuário autenticado e administrador, quero atualizar meus dados pessoais e acessar o sistema com login seguro para manter minha conta. |
-| EP03   | TM02 | Gerenciar Cardápio                    | Como administrador, quero adicionar, editar e remover itens do cardápio para manter o menu atualizado.                                      |
-| EP04   | TM02 | Gerenciar Sacola de Compras           | Como cliente, quero adicionar, alterar e remover produtos na sacola para montar meu pedido.                                                 |
-| EP05   | TM02 | Finalizar e Acompanhar Pedido         | Como cliente, quero concluir pedidos, realizar encomendas e reservar produtos para garantir minha compra.                                   |
-| EP06   | TM02 | Integração e Confirmação de Pagamento | Como cliente e administrador, quero gerar, confirmar e receber notificações sobre pagamentos via PIX para garantir segurança e agilidade.   |
+| Código | Tema  | Título                                | Descrição                                                                                                                                     |
+|--------|-------|----------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------|
+| EP01   | TM01  | Cadastro e Autenticação                | Funcionalidades que permitem aos usuários criarem uma conta no sistema e realizarem login de forma segura para acessar suas funcionalidades. |
+| EP02   | TM01  | Gerenciar Conta de Usuário             | Permite que usuários autenticados e administradores atualizem seus dados pessoais e mantenham a segurança de acesso ao sistema.              |
+| EP03   | TM02  | Gerenciar Cardápio                     | Funcionalidades voltadas ao administrador para cadastrar, editar e remover itens do cardápio, mantendo o menu sempre atualizado.             |
+| EP04   | TM02  | Gerenciar Sacola de Compras            | Permite ao cliente montar seu pedido adicionando, alterando e removendo itens da sacola antes de finalizar a compra.                         |
+| EP05   | TM02  | Finalizar e Acompanhar Pedido          | Funcionalidades que possibilitam ao cliente concluir pedidos, fazer encomendas e reservas, além de acompanhar o status das solicitações.     |
+| EP06   | TM02  | Integração e Confirmação de Pagamento  | Integração com sistema de pagamento via PIX, permitindo a geração de cobranças, confirmação de pagamentos e notificações para as partes.     |
+
 
 ---
 
