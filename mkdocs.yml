@@ -37,9 +37,9 @@ nav:
       - Cenário atual do cliente e do negócio: pages/visaoDoProduto/cenarioAtual.md
       - Solução proposta: pages/visaoDoProduto/solucaoProposta.md
       - Estratégias de Engenharia de Software: pages/visaoDoProduto/estrategiasEngSoft.md
-      - Engenharia de Requisitos: pages/visaoDoProduto/engenhariaderequisitos.md
-      - Cronogramas e Entregas: pages/visaoDoProduto/cronogramasEntregas.md
       - Interação entre Equipe e Cliente: pages/visaoDoProduto/interacaoEquipeCliente.md
+      - Cronogramas e Entregas: pages/visaoDoProduto/cronogramasEntregas.md
+      - Engenharia de Requisitos: pages/visaoDoProduto/engenhariaderequisitos.md
       - DoR e DoD: pages/visaoDoProduto/doredod.md
       - Lições Aprendidas:
           - Unidade 1: pages/visaoDoProduto/licoesAprendidas/unidade1.md
