@@ -50,6 +50,7 @@ nav:
       - Backlog do Produto: pages/backlog/backlog.md
   - Entregas:
       - Unidade 1: pages/entregas/unidade1.md
+      - Unidade 2: pages/entregas/unidade2.md
 
 extra_css:
   - stylesheets/styles.css
