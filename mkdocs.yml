@@ -1,4 +1,4 @@
-site_name:  Bananoffee Doceria
+site_name: Bananoffee Doceria
 site_description: Documentação oficial do projeto
 site_author: Equipe BananaTech
 repo_url: https://github.com/mdsreq-fga-unb/2025.1-T02-Bananoffe
@@ -9,7 +9,7 @@ theme:
   language: pt-BR
   favicon: assets/logounb.svg
   logo: assets/logoBananoffee.png
-  icon: 
+  icon:
     repo: fontawesome/brands/github
   palette:
     - scheme: default
@@ -37,11 +37,13 @@ nav:
       - Cenário atual do cliente e do negócio: pages/visaoDoProduto/cenarioAtual.md
       - Solução proposta: pages/visaoDoProduto/solucaoProposta.md
       - Estratégias de Engenharia de Software: pages/visaoDoProduto/estrategiasEngSoft.md
-      - Engenharia de Requisitos : pages/visaoDoProduto/engenhariaderequisitos.md
+      - Engenharia de Requisitos: pages/visaoDoProduto/engenhariaderequisitos.md
       - Cronogramas e Entregas: pages/visaoDoProduto/cronogramasEntregas.md
       - Interação entre Equipe e Cliente: pages/visaoDoProduto/interacaoEquipeCliente.md
       - DoR e DoD: pages/visaoDoProduto/doredod.md
-      - Lições Aprendidas: pages/visaoDoProduto/licoesAprendidas.md
+      - Lições Aprendidas:
+          - Unidade 1: pages/visaoDoProduto/licoesAprendidas/unidade1.md
+          - Unidade 2: pages/visaoDoProduto/licoesAprendidas/unidade2.md
       - Referências: pages/visaoDoProduto/referencias.md
   - Backlog:
       - Requisitos de Software: pages/backlog/requisitos.md
@@ -50,4 +52,4 @@ nav:
       - Unidade 1: pages/entregas/unidade1.md
 
 extra_css:
-  - stylesheets/styles.css   
+  - stylesheets/styles.css

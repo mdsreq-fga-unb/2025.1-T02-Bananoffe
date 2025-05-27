@@ -12,13 +12,15 @@ O foco do projeto está no **levantamento e especificação de requisitos** para
 
 A iniciativa busca substituir o atual fluxo de atendimento, realizado manualmente via WhatsApp, por uma solução mais eficiente, que automatiza as etapas do processo, reduzindo a necessidade de intervenções manuais e melhorando a consistência nas respostas. Isso otimiza tanto a experiência dos clientes, ao proporcionar um atendimento mais ágil e preciso, quanto o controle interno da produção e vendas, com a centralização e monitoramento de dados em tempo real, permitindo uma gestão mais eficaz e a redução de erros operacionais.
 
-## Objetivos Gerais
+## Objetivo Geral
 
-- Automatizar o processo de pedidos e reservas de tortas;
-- Reduzir o tempo gasto com atendimento via mensagens;
-- Melhorar a organização e previsibilidade da produção diária;
-- Oferecer um painel administrativo para controle de vendas e estoque;
+- Automatizar o processo de pedidos e reservas de tortas: Com a plataforma desenvolvida, os processos de atendimento, visualização do cardápio, seleção de produtos e pagamento serão realizados diretamente pelo cliente, sem a necessidade de um colaborador como intermediário.
+
+## Objetivos Específicos
+
+- Oferecer um cardápio interativo ao cliente.
 - Integrar formas de pagamento online, como Pix com QR Code.
+- Disponibilizar um painel administrativo para gerenciamento do cardápio e controle de estoque.
 
 ## Integrantes do grupo
 
@@ -89,3 +91,4 @@ A iniciativa busca substituir o atual fluxo de atendimento, realizado manualment
 | 17/04/25 | 1.0    | Criação do Documento  | Marcos Bezerra     |
 | 19/04/25 | 1.1    | Ajustes e estilização | Bruno Cruz         |
 | 21/04/25 | 1.2    | Ajustes               | Anne de Capdeville |
+| 26/05/25 | 1.3    | Adicionando objetivos específicos | Marcos Bezerra |

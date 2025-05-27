@@ -1,34 +1,39 @@
 ## Definition of Ready (DoR)
 
-A *Definition of Ready* (DoR) é um conjunto de critérios que um item ou uma User Story do Backlog deve atender para ser considerado pronto para iniciar o trabalho. Assim que um item do Backlog atende a esses critérios, ele é puxado para ser trabalhado durante a Sprint. Para que um item possa ser considerado "Ready", ele precisa atender aos seguintes critérios:
+A *Definition of Ready* (DoR) é um conjunto de critérios que um item ou User Story do Backlog deve atender para ser considerado pronto para iniciar o trabalho. Um item é considerado "Ready" quando possui clareza, viabilidade e alinhamento com os objetivos da Sprint. Os critérios são:
 
-- **Os critérios de aceitação definidos e descritos na US estão de acordo com a definição do projeto?** Ou seja, estão conformes aos requisitos.
-- **As regras de negócio estão definidas e descritas na US de maneira objetiva, mensurável e clara?**
-- **O requisito não possui ambiguidade?** Isto é, a história de usuário e seu título não devem permitir múltiplas interpretações por desenvolvedores e stakeholders.
-- **As stakeholders passaram os critérios de aceitação?** Isto é, as ações e comportamentos que eles testarão e esperam que ocorram no software estão claros.
-- **As stakeholders aceitaram o protótipo feito?** A stakeholder possui conhecimento prévio da área e aprovou o protótipo.
-- **O requisito foi validado pelo Analista de Requisitos?** Ou seja, o requisito foi revisado e aprovado, garantindo conformidade com os padrões de qualidade, incluindo clareza, viabilidade técnica e documentação completa e sem ambiguidades.
+- **O requisito está claro, completo e sem ambiguidades?** Deve conter informações suficientes para que o time entenda o que precisa ser feito, sem múltiplas interpretações.
+- **As regras de negócio estão bem definidas e compreendidas?** Devem ser descritas de forma objetiva e mensurável.
+- **O requisito pode ser concluído dentro de uma única Sprint?** Deve ser pequeno o suficiente para ser implementado dentro do ciclo.
+- **O requisito está descrito no formato de história de usuário?** Isso facilita o entendimento e a priorização.
+- **Os critérios de aceitação foram definidos pelas stakeholders?** É necessário saber claramente o que será validado no produto final.
+- **O protótipo foi aprovado pelas stakeholders?** Garante que há um modelo visual previamente validado.
+- **O requisito foi validado pelo Analista de Requisitos?** Aprovado quanto à clareza, viabilidade técnica e documentação.
 
 ---
 
 ## Definition of Done (DoD)
 
-Se a DoR é um conjunto de critérios para que um item seja considerado adequado para começar a se trabalhar nele, então a *Definition of Done* (DoD) é o conjunto de critérios que um item precisa atender para ser considerado como terminado. Estes critérios são:
+A *Definition of Done* (DoD) é o conjunto de critérios que define quando um item do backlog está completo, garantindo qualidade, conformidade e entrega de valor. Os critérios são:
 
-- **A interface está de acordo com o protótipo aceito pelas stakeholders?** A interface deve refletir fielmente o que foi validado.
-- **Os critérios de aceitação definidos com os stakeholders foram atendidos?** A funcionalidade deve incluir todas as ações e comportamentos esperados.
-- **O backend foi integrado ao frontend (caso necessário)?** A integração deve estar correta e funcional.
-- **Todo o código passou por revisão de pares para garantir qualidade e aderência aos padrões do projeto, com ao menos 2 revisores aprovando o código?** Pelo processo de desenvolvimento de software aderido, ScrumXP, a revisão é feita também em pares.
-- **O backend foi validado pelo coordenador Matheus Rodrigues e segue níveis seguros na manipulação dos dados (caso aplicável)?**
-- **O código foi validado pelo Analista de Quality Assurance Anne Capdeville e possui cobertura de testes de no mínimo 85%?**
-- **A funcionalidade foi integrada ao branch principal sem conflitos?** A entrega não deve interferir negativamente em outras partes do sistema.
-- **A funcionalidade está disponível em um ambiente de homologação ou produção, pronta para validação?** O ambiente deve estar acessível para validação pelas stakeholders.
+- **A interface está fiel ao protótipo validado?** Deve refletir com precisão o que foi previamente aprovado.
+- **Todos os critérios de aceitação foram atendidos?** O comportamento e resultado esperados foram entregues.
+- **O backend foi corretamente integrado ao frontend (quando aplicável)?**
+- **O código passou por revisão de pares com pelo menos dois aprovadores?** Seguindo práticas como as do ScrumXP.
+- **A funcionalidade está documentada e compreensível para uso e manutenção?**
+- **O código segue os padrões de codificação definidos pela equipe?**
+- **O backend foi validado pelo coordenador Matheus Rodrigues e segue práticas seguras de manipulação de dados (quando aplicável)?**
+- **A funcionalidade foi integrada ao branch principal sem conflitos?**
+- **Está disponível em ambiente de homologação ou produção para validação?**
+- **A equipe de QA revisou a funcionalidade, verificando conformidade com a LGPD e qualidade do código?**
+- **A documentação foi atualizada e o feedback do cliente incorporado?**
 
 ---
 
 ## Histórico de Versão
 
-| Data     | Versão | Descrição            | Autor                |
-|----------|--------|----------------------|-----------------------|
-| 25/05/25 | 1.0    | Criação do Documento | Fábio Santos Araújo   |
-| 25/05/25 | 1.1    | DoR e DoD            | Fábio Santos Araújo   |
+| Data     | Versão | Descrição                        | Autor                |
+|----------|--------|----------------------------------|----------------------|
+| 25/05/25 | 1.0    | Criação do Documento             | Fábio Santos Araújo  |
+| 25/05/25 | 1.1    | DoR e DoD                        | Fábio Santos Araújo  |
+| 26/05/25 | 1.2    | Atualização do DoR e DoD         | Fábio Santos Araújo  |
