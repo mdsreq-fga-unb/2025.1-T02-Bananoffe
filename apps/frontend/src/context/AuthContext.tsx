@@ -37,6 +37,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       toaster.create({
         title: 'Login realizado com sucesso!',
         type: 'success',
+        duration: 2000,
       });
 
       const session = await getSession();
@@ -45,7 +46,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   const logout = () => {
-    signOut({ callbackUrl: '/login' });
+    signOut({ callbackUrl: '/' });
   };
 
   return (

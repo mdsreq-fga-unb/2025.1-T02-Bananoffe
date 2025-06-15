@@ -20,6 +20,7 @@ import { Fatia, Torta } from "@/types/Product.type";
 import { useForm } from "react-hook-form";
 import { ProdutoDialog } from "@/components/ProdutoDialog";
 import Link from "next/link";
+import MenuBar from "@/components/MenuBar";
 
 export interface FormValues {
   _id: string;
@@ -283,6 +284,7 @@ function adminCardapio() {
           flexDirection={isMobile ? "column" : "row"}
           gap="1"
         >
+          <MenuBar/>
           <Button
             bgColor="#222222"
             color="#FFF"
@@ -306,7 +308,7 @@ function adminCardapio() {
               color="#FFF"
               marginRight={isMobile ? "0" : "2"}
             >
-              Cardápio
+              Cardápio Digital
             </Button>
           </Link>
         </Flex>

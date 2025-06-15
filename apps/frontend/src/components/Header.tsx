@@ -18,6 +18,7 @@ function Header() {
     const router = useRouter();
     const isMobile = useBreakpointValue({ base: true, md: false });
     const isAdmin = user?.role === "admin"
+    const isAuthenticated = !!user;
 
     return (
         <Box
@@ -44,15 +45,19 @@ function Header() {
             >
                 <Flex justify="space-between" align="center" position="relative">
                     <Menu.Root>
-                        <Menu.Trigger>
+                        <Menu.Trigger asChild>
                             <Button
                                 variant="ghost"
+                                _hover={{ bg: "gray.300" }}
                                 fontWeight="normal"
                                 color="gray.600"
                                 display="flex"
                                 alignItems="center"
-                                gap={2}
-                                _hover={{ bg: "gray.300" }}
+                                gap={1}
+                                h="60px"
+                                px={2}
+                                whiteSpace="normal" // permite a quebra
+                                textAlign="left"
                             >
                                 Olá, {user?.nome || "Visitante"}!
                                 <ChevronDownIcon />
@@ -67,19 +72,23 @@ function Header() {
                                         Gerenciar Cardápio
                                     </Menu.Item>
                                 )}
-                                <Menu.Separator />
                                 <Menu.Item
                                     color="black"
-                                    value="logout"
+                                    value={isAuthenticated ? "logout" : "login"}
                                     onSelect={() => {
-                                        logout();
-                                        router.push("/");
+                                        if (isAuthenticated) {
+                                            logout();
+                                            router.push("/");
+                                        } else {
+                                            router.push("/minha_conta");
+                                        }
                                     }}
                                     _hover={{
-                                        bg: "gray.300", transform: "translateY(-2px)",
+                                        bg: "gray.300",
+                                        transform: "translateY(-2px)",
                                     }}
                                 >
-                                    Sair
+                                    {isAuthenticated ? "Sair" : "Login"}
                                 </Menu.Item>
                                 <Menu.Arrow />
                             </Menu.Content>

@@ -21,7 +21,6 @@ import Link from "next/link";
 import { useAuth } from "@/context/AuthContext";
 import { User } from "@/types/User.type";
 import NavBar from "@/components/NavBar";
-import { toaster } from "@/components/ui/toaster";
 
 export default function MinhaConta() {
   const { user, isLoading, logout } = useAuth();
