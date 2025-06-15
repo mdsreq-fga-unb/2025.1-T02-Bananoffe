@@ -6,15 +6,17 @@ import {
 } from '@nestjs/common';
 import { CreateFatiaDto, CreateItensDto, CreateTortaDto } from './cardapio.dto';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
+import { Model, Types } from 'mongoose';
 import { Torta, TortaDocument } from 'src/schemas/torta.schema';
 import { Fatia, FatiaDocument } from 'src/schemas/fatia.schema';
+import { Sacola, SacolaDocument } from 'src/schemas/sacola.schema';
 
 @Injectable()
 export class CardapioService {
   constructor(
     @InjectModel(Torta.name) private tortaModel: Model<TortaDocument>,
     @InjectModel(Fatia.name) private fatiaModel: Model<FatiaDocument>,
+    @InjectModel(Sacola.name) private sacolaModel: Model<SacolaDocument>,
   ) { }
 
   async createItem(
@@ -88,16 +90,28 @@ export class CardapioService {
 
   async deletarItem(dto: { id: string }) {
     let item = await this.tortaModel.findByIdAndDelete(dto.id);
-    if (item) {
-      return { message: 'Torta deletada com sucesso!' };
+    let tipo = 'Torta';
+
+    if (!item) {
+      item = await this.fatiaModel.findByIdAndDelete(dto.id);
+      tipo = 'Fatia';
     }
 
-    item = await this.fatiaModel.findByIdAndDelete(dto.id);
-    if (item) {
-      return { message: 'Fatia deletada com sucesso!' };
+    if (!item) {
+      throw new BadRequestException('Item não encontrado.');
     }
 
-    throw new BadRequestException('Item não encontrado.');
+    const produtoObjectId = new Types.ObjectId(dto.id);
+
+    const sacolasAfetadas = await this.sacolaModel.find({ "itens.produtoId": produtoObjectId });
+
+    for (const sacola of sacolasAfetadas) {
+      sacola.itens = sacola.itens.filter(i => !i.produtoId.equals(produtoObjectId));
+      sacola.valorTotal = sacola.itens.reduce((total, i) => total + i.precoTotal, 0);
+      await sacola.save();
+    }
+
+    return { message: `${tipo} deletada com sucesso!` };
   }
 
   async updateItem(
