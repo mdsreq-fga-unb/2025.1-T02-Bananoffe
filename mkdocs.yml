@@ -51,6 +51,9 @@ nav:
   - Entregas:
       - Unidade 1: pages/entregas/unidade1.md
       - Unidade 2: pages/entregas/unidade2.md
+  - Estudos de caso:
+      - PBB: pages/EstudosDeCaso/PBB/PBB.md
+      - USM: pages/EstudosDeCaso/USM/USM.md
 
 extra_css:
   - stylesheets/styles.css
