@@ -51,6 +51,15 @@ nav:
   - Entregas:
       - Unidade 1: pages/entregas/unidade1.md
       - Unidade 2: pages/entregas/unidade2.md
+  - Evidências de ESW e ER:
+      - Atas: 
+          - Ata 1: pages/evidencias/atas/ata01.md 
+          - Ata 2: pages/evidencias/atas/ata02.md
+          - Ata 3: pages/evidencias/atas/ata03.md
+          - Ata 4: pages/evidencias/atas/ata04.md
+          - Ata 5: pages/evidencias/atas/ata05.md
+          - Retrospectiva 1: pages/evidencias/atas/ataRetrospectiva01.md
+      - Protótipo: pages/evidencias/prototipo.md
   - Estudos de caso:
       - PBB: pages/EstudosDeCaso/PBB/PBB.md
       - USM: pages/EstudosDeCaso/USM/USM.md
