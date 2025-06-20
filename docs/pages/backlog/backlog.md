@@ -22,39 +22,41 @@ Além disso, o backlog também está organizado por Temas, que agrupam épicos e
 
 ### Épicos
 
-| Código | Tema  | Título                                | Descrição                                                                                                                                     |
-|--------|-------|----------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------|
-| EP01   | TM01  | Cadastro e Autenticação                | Funcionalidades que permitem aos usuários criarem uma conta no sistema e realizarem login de forma segura para acessar suas funcionalidades. |
-| EP02   | TM01  | Gerenciar Conta de Usuário             | Permite que usuários autenticados e administradores atualizem seus dados pessoais e mantenham a segurança de acesso ao sistema.              |
-| EP03   | TM02  | Gerenciar Cardápio                     | Funcionalidades voltadas ao administrador para cadastrar, editar e remover itens do cardápio, mantendo o menu sempre atualizado.             |
-| EP04   | TM02  | Gerenciar Sacola de Compras            | Permite ao cliente montar seu pedido adicionando, alterando e removendo itens da sacola antes de finalizar a compra.                         |
-| EP05   | TM02  | Finalizar e Acompanhar Pedido          | Funcionalidades que possibilitam ao cliente concluir pedidos, fazer encomendas e reservas, além de acompanhar o status das solicitações.     |
-| EP06   | TM02  | Integração e Confirmação de Pagamento  | Integração com sistema de pagamento via PIX, permitindo a geração de cobranças, confirmação de pagamentos e notificações para as partes.     |
-
+| Código | Tema | Título                                         | Descrição                                                                                                                                    |
+| ------ | ---- | ---------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| EP01   | TM01 | Cadastro e Autenticação                        | Funcionalidades que permitem aos usuários criarem uma conta no sistema e realizarem login de forma segura para acessar suas funcionalidades. |
+| EP02   | TM01 | Gerenciar Conta de Usuário                     | Permite que usuários autenticados e administradores atualizem seus dados pessoais e mantenham a segurança de acesso ao sistema.              |
+| EP03   | TM02 | Gerenciar Cardápio                             | Funcionalidades voltadas ao administrador para cadastrar, editar e remover itens do cardápio, mantendo o menu sempre atualizado.             |
+| EP04   | TM02 | Gerenciar Sacola de Compras                    | Permite ao cliente montar seu pedido adicionando, alterando e removendo itens da sacola antes de finalizar a compra.                         |
+| EP05   | TM02 | Gestão de Pedidos e Pagamentos (Administrador) | Funcionalidades voltadas ao controle e gerenciamento dos pedidos e pagamentos por parte do administrador.                                    |
+| EP06   | TM02 | Jornada do Cliente: Pedido e Pagamento         | funcionalidades que contemplam a experiência do cliente no processo de compra, acompanhamento e avaliação do pedido.                         |
 
 ---
 
 ### User Stories dos Requisitos Funcionais
 
-| Código | Requisito Funcional Associado | Épico Associado | User Story                                                                                                                                             |
-| ------ | ----------------------------- | --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| US01   | RF12                          | EP01            | Como novo usuário, quero me cadastrar para acessar as funcionalidades do sistema.                                                                      |
-| US02   | RF13                          | EP01            | Como usuário, quero autenticar-me para garantir acesso seguro à minha conta.                                                                           |
-| US03   | RF11                          | EP02            | Como administrador, quero fazer login seguro no sistema para acessar funcionalidades restritas.                                                        |
-| US04   | RF15                          | EP02            | Como usuário autenticado, quero atualizar meus dados pessoais (exceto e-mail) para manter minhas informações atualizadas.                              |
-| US05   | RF01                          | EP03            | Como administrador, quero adicionar itens ao cardápio com nome, descrição, preço (por tamanho), quantidade e imagem para manter o cardápio atualizado. |
-| US06   | RF02                          | EP03            | Como administrador, quero remover itens do cardápio para retirar produtos indisponíveis ou descontinuados.                                             |
-| US07   | RF03                          | EP03            | Como administrador, quero editar itens do cardápio para corrigir ou atualizar informações.                                                             |
-| US08   | RF14                          | EP03            | Como cliente, quero visualizar todos os produtos do cardápio com nome, descrição, preços por tamanho e imagem em uma tela responsiva.                  |
-| US09   | RF16, RF17                    | EP04            | Como cliente, quero adicionar e remover produtos na sacola de compras para montar meu pedido com controle de quantidade e preços.                      |
-| US10   | RF18, RF19                    | EP04            | Como cliente, quero alterar a quantidade dos produtos na sacola de compras para ajustar meu pedido antes da finalização.                               |
-| US11   | RF20, RF27                    | EP05            | Como cliente, quero concluir pedidos para finalizar a compra dos produtos selecionados.                                                                |
-| US12   | RF21                          | EP05            | Como cliente, quero realizar encomendas de produtos para garantir a disponibilidade futura.                                                            |
-| US13   | RF05                          | EP05            | Como administrador, quero visualizar detalhes de um produto para organizar a produção e entrega.                                                       |
-| US14   | RF07, RF08, RF10              | EP06            | Como administrador, quero receber notificações e confirmar recebimentos de pagamentos via PIX para controle financeiro da doceria.                     |
-| US15   | RF28, RF29                    | EP06            | Como cliente, quero gerar código PIX e visualizar QR Code para poder continuar o meu processo de pagamento de pedido na doceria.                       |
-| US16   | RF30, RF31                    | EP06            | Como cliente, quero copiar chave e realizar o pagamento via Pix para concluir o meu pedido na doceria.                                                 |
-| US17   | RF32, RF33                    | EP06            | Como cliente, quero confirmar pagamento, receber notificação e visualizar comprovante de pagamento para facilitar transações seguras.                  |
+| Código | Requisito Funcional | Épico Associado | User Story                                                                                                    |
+| ------ | ------------------- | --------------- | ------------------------------------------------------------------------------------------------------------- |
+| US01   | RF08                | EP01            | Como novo usuário, quero me cadastrar para acessar as funcionalidades do sistema.                             |
+| US02   | RF09                | EP01            | Como usuário, quero realizar login no sistema para acessar minhas funcionalidades.                            |
+| US03   | RF11                | EP02            | Como usuário autenticado, quero alterar minha conta para atualizar minhas informações pessoais.               |
+| US04   | RF12                | EP02            | Como usuário autenticado, quero excluir minha conta para encerrar meu uso do sistema.                         |
+| US05   | RF01                | EP03            | Como administrador, quero adicionar um item no cardápio digital para manter o menu sempre atualizado.         |
+| US06   | RF02                | EP03            | Como administrador, quero excluir um item do cardápio digital para remover produtos indisponíveis.            |
+| US07   | RF03                | EP03            | Como administrador, quero alterar um item no cardápio digital para atualizar informações do produto.          |
+| US08   | RF10                | EP03            | Como cliente, quero visualizar o cardápio digital para escolher produtos de forma fácil e rápida.             |
+| US09   | RF13                | EP04            | Como cliente, quero adicionar produtos na sacola virtual para montar meu pedido.                              |
+| US10   | RF14                | EP04            | Como cliente, quero remover produtos da sacola virtual para ajustar meu pedido.                               |
+| US11   | RF15                | EP04            | Como cliente, quero alterar produtos da sacola virtual para modificar meu pedido antes da finalização.        |
+| US12   | RF04                | EP05            | Como administrador, quero alterar o status de um pedido para mudar a etapa do processo de produção do pedido. |
+| US13   | RF05                | EP05            | Como administrador, quero visualizar um pedido para acompanhar detalhes e confirmar informações.              |
+| US14   | RF06                | EP05            | Como administrador, quero visualizar relatório de pagamentos recebidos para controle financeiro.              |
+| US15   | RF07                | EP05            | Como administrador, quero alterar a chave PIX da doceria para atualizar informações de pagamento.             |
+| US16   | RF16                | EP06            | Como cliente, quero realizar um pedido para efetuar a compra dos produtos selecionados.                       |
+| US17   | RF17                | EP06            | Como cliente, quero acompanhar o status do pedido para saber em que etapa ele se encontra.                    |
+| US18   | RF18                | EP06            | Como cliente, quero visualizar meu histórico de pedidos para consultar compras anteriores.                    |
+| US19   | RF19                | EP06            | Como cliente, quero avaliar um pedido para dar feedback e melhorar o serviço.                                 |
+| US20   | RF20                | EP06            | Como cliente, quero realizar pagamento de pedido via PIX para concluir a compra de forma segura e rápida.     |
 
 ---
 
@@ -116,86 +118,163 @@ Além disso, o backlog também está organizado por Temas, que agrupam épicos e
 
 
 
-## Priorização do Backlog Geral
+## Priorização do Backlog Geral e MVP
 
-Para a construção da priorização do backlog geral do sistema Bananoffee, a equipe optou por utilizar a técnica **MoSCoW**, como foi dito no processo de [Engenharia de Requisitos](../visaoDoProduto/engenhariaderequisitos.md#analise-e-consenso) no módulo de Análise e Consenso, uma abordagem amplamente reconhecida em metodologias ágeis para definição de prioridades. Essa técnica auxilia no entendimento de quais funcionalidades são realmente essenciais para a entrega do **Mínimo Produto Viável (MVP)** e quais podem ser adiadas para versões futuras do produto.
+Para a construção da priorização do backlog geral do sistema **Bananoffee**, a equipe optou por utilizar a técnica **MoSCoW**, conforme descrito no processo de [Engenharia de Requisitos](../visaoDoProduto/engenhariaderequisitos.md#analise-e-consenso), no módulo de Análise e Consenso. Essa abordagem é amplamente reconhecida em metodologias ágeis e auxilia na identificação das funcionalidades essenciais para o **Mínimo Produto Viável (MVP)**, bem como aquelas que podem ser adiadas para versões futuras.
+
 
 ### Técnica MoSCoW
 
-A técnica MoSCoW categoriza os requisitos em quatro níveis de prioridade:
+A técnica **MoSCoW** categoriza os requisitos em quatro níveis de prioridade:
 
 - **Must Have (M)** – _Deve Ter_: Funcionalidades **obrigatórias** para o sistema funcionar minimamente. Sem elas, o produto não pode ser entregue.
-- **Should Have (S)** – _Deveria Ter_: Funcionalidades **importantes**, mas que podem ser adiadas, se necessário. Podem ser incluídas no MVP caso haja tempo.
-- **Could Have (C)** – _Poderia Ter_: Funcionalidades **desejáveis**, que agregam valor, mas que não são críticas para o funcionamento básico.
-- **Won’t Have (W)** – _Não Terá por agora_: Funcionalidades que **não serão implementadas na versão atual**, mas que podem ser consideradas no futuro.
+- **Should Have (S)** – _Deveria Ter_: Funcionalidades **importantes**, mas que podem ser adiadas, se necessário.
+- **Could Have (C)** – _Poderia Ter_: Funcionalidades **desejáveis**, que agregam valor, mas não são críticas para o funcionamento básico.
+- **Won’t Have (W)** – _Não Terá por agora_: Funcionalidades **não serão implementadas na versão atual**, podendo ser consideradas no futuro.
 
 ### Processo de Priorização
 
-A priorização foi feita por meio de reuniões com a equipe de desenvolvimento, considerando também as necessidades do cliente e o escopo do projeto. Foram analisados dois fatores principais:
+A priorização foi definida a partir de reuniões com a equipe de desenvolvimento e do alinhamento com os objetivos do cliente. Foram considerados dois fatores principais:
 
-- **Valor para o negócio e experiência do usuário**, conforme expresso pelo cliente e pelos objetivos do sistema.
-- **Viabilidade técnica e esforço estimado**, conforme análise da equipe de desenvolvimento.
+- **Valor para o negócio e experiência do usuário**, conforme expressado pelo cliente e pelos objetivos do sistema.
+- **Viabilidade técnica e esforço estimado**, calculado com base em **Story Points**, que representam o esforço necessário para a implementação de cada funcionalidade, considerando complexidade técnica, volume de trabalho e incertezas.
 
-A classificação MoSCoW foi aplicada aos **Requisitos Funcionais (RF)** e, em alguns casos, a **Requisitos Não Funcionais (RNF)** considerados essenciais para garantir usabilidade, segurança e operação mínima do sistema.
+A classificação MoSCoW foi aplicada a todos os **Requisitos Funcionais (RF)**.
+
+
+### Capacidade Técnica da Equipe
+
+Com base nas últimas 3 sprints realizadas, a equipe demonstrou uma capacidade técnica de:
+
+- **9,75 Story Points por sprint**
+
+Considerando 6 sprints para a entrega do MVP:
+
+- **Capacidade total estimada**: `9,75 x 6 = 59 Story Points`
+
+Esse valor é utilizado como limite de esforço para definir as funcionalidades que poderão compor o MVP.
+
+### Utilização do Gráfico Valor de Negócio × Story Points
+
+Para apoiar o processo de priorização do backlog e definição do MVP, foi utilizado um gráfico de **Valor de Negócio (MoSCoW)** versus **Story Points**. Essa matriz é uma ferramenta visual que auxilia na identificação de funcionalidades que oferecem o **melhor equilíbrio entre impacto para o cliente e esforço de desenvolvimento**.
+
+O gráfico é dividido em quatro quadrantes:
+
+- **1º Quadrante – **Alto Valor / Alto Esforço**
+Funcionalidades que geram grande valor para o negócio, mas que exigem alto esforço de desenvolvimento. São importantes, porém podem ser planejadas para sprints posteriores, já que demandam mais tempo e recursos.
+
+- **2º Quadrante – **Baixo Valor / Alto Esforço**
+Funcionalidades com baixo retorno para o negócio e alto custo de implementação. Devem ser evitadas no MVP e só reconsideradas em versões futuras, se houver necessidade real ou mudança de contexto.
+
+- **3º Quadrante – **Baixo Valor / Baixo Esforço**
+Funcionalidades de fácil implementação, mas com baixo impacto. Podem ser incluídas caso sobre tempo no projeto, mas não são prioritárias para o MVP.
+
+- **4º Quadrante – **Alto Valor / Baixo Esforço**
+Esse é o **quadrante ideal para o MVP**. Contém funcionalidades que geram alto valor com baixo esforço de desenvolvimento. São as primeiras a serem selecionadas para implementação, pois oferecem maior retorno com menor investimento.
+
+Ao cruzar esses dois critérios – **valor percebido pelo cliente** e **custo estimado em Story Points** – a equipe consegue tomar decisões mais assertivas, priorizando aquilo que realmente importa e garantindo entregas rápidas com impacto significativo.
+
+Essa abordagem reforça os princípios ágeis de **maximizar valor e minimizar desperdícios**, favorecendo um ciclo de desenvolvimento mais eficiente e orientado às reais necessidades do projeto.
+
+![Gráfico de Valor de Negócio x Story Points](../../assets/graficoMVP.png)
 
 ### Definição do MVP
 
-Com base na priorização MoSCoW, o MVP será composto por todos os requisitos classificados como:
+O MVP será composto por funcionalidades que se localizam no **4º quadrante** do gráfico de **Valor de Negócio x Story Points**, ou seja:
 
-- **Must Have (M)**: Sem exceções.
-- Alguns **Should Have (S)**: Desde que não comprometam a entrega no prazo e sejam de baixa complexidade.
+**Critérios:**
 
-Requisitos **Could Have (C)** e **Won’t Have (W)** não farão parte do MVP, mas serão mantidos no backlog para caso haja iterações futuras.
+- Alto valor de negócio (Must Have ou Should Have segundo MoSCoW)
+- Baixo esforço de desenvolvimento (baixa pontuação de Story Points)
 
-#### Priorização dos Requisitos
+**Funcionalidades incluídas:**
 
-A priorização dos requisitos funcionais foi realizada em uma reunião colaborativa envolvendo os principais stakeholders, o Product Owner (PO), a equipe de desenvolvimento e demais envolvidos no projeto. Durante essa sessão, foram discutidas as necessidades do negócio, a viabilidade técnica e o impacto para o usuário final, de modo a definir quais requisitos seriam essenciais (Must Have), importantes (Should Have), desejáveis (Could Have) ou que poderiam ser descartados por enquanto (Won’t Have). Essa priorização orienta o desenvolvimento incremental do sistema, garantindo foco no que agrega maior valor ao produto no menor tempo possível.
+- `RF1`, `RF2`, `RF3`, `RF5`, `RF7`, `RF8`, `RF9`, `RF11`, `RF12`, `RF14`, `RF15`, `RF16`
+
+Essas funcionalidades serão entregues na primeira versão do sistema, garantindo entrega rápida de valor com menor complexidade e maior impacto para o usuário final.
+
+
+#### Funcionalidades Planejadas para Futuras Iterações
+
+As funcionalidades do **1º quadrante** possuem alto valor de negócio, mas alto custo de desenvolvimento (Story Points elevados). Elas serão desenvolvidas nas sprints finais, desde que o tempo e os recursos permitam.
+
+**Critérios:**
+
+- Alto valor de negócio
+- Alto esforço (SP alto)
+
+**Funcionalidades:**
+
+- `RF10`, `RF13`, `RF20`
+
+
+#### Funcionalidades Fora do MVP e com Menor Prioridade
+
+As funcionalidades localizadas nos **quadrantes 2 e 3** não fazem parte do MVP nem da próxima etapa. Elas apresentam menor prioridade por:
+
+**Critérios:**
+
+- Story Points muito altos e/ou
+- Baixo valor de negócio percebido
+
+**Funcionalidades:**
+
+- **2º quadrante**: `RF6`
+- **3º quadrante**: `RF17`, `RF18`, `RF19`
+
+Essas funcionalidades poderão ser reavaliadas futuramente com base em feedbacks dos usuários e disponibilidade de tempo/recursos da equipe.
+
+
+### Priorização dos Requisitos
+
+A priorização dos requisitos funcionais foi realizada em uma reunião colaborativa com:
+
+- Stakeholders  
+- Product Owner (PO)  
+- Equipe de desenvolvimento
+
+Durante a sessão, discutiram-se as **necessidades do negócio**, a **viabilidade técnica** e o **impacto para o usuário final**. Para apoiar esse processo, foram utilizados dois critérios principais:
+
+- A técnica **MoSCoW**, para classificar os requisitos em níveis de prioridade (Must Have, Should Have, Could Have, Won’t Have).
+- A estimativa de **Story Points**, utilizada para medir o esforço necessário para implementar cada funcionalidade, levando em conta a complexidade técnica, o volume de trabalho e as incertezas envolvidas.
+
+Essa combinação permitiu identificar quais funcionalidades entregam **maior valor com menor esforço**, guiando o desenvolvimento incremental do sistema com foco em gerar valor no menor tempo possível. O cruzamento entre valor de negócio e Story Points também subsidiou a seleção dos requisitos que compõem o MVP.
+
+
 
 #### Requisitos Funcionais para o Administrador
 
-| ID   | Descrição                                                   | Prioridade  | MVP |
-| ---- | ----------------------------------------------------------- | ----------- | --- |
-| RF01 | Adicionar um item no cardápio digital                       | Must Have   | X   |
-| RF02 | Excluir um item no cardápio digital                         | Must Have   | X   |
-| RF03 | Alterar um item no cardápio digital                         | Must Have   | X   |
-| RF04 | Alterar o status de um pedido                               | Won’t Have  |     |
-| RF05 | Visualizar um pedido                                        | Must Have   | X   |
-| RF06 | Receber uma notificação sobre um pedido via SMS ou WhatsApp | Could Have  |     |
-| RF07 | Receber notificação de pagamento realizado                  | Should Have | X   |
-| RF08 | Confirmar recebimento do pagamento PIX                      | Should Have | X   |
-| RF09 | Visualizar relatório de pagamentos recebidos                | Won’t Have  |     |
-| RF10 | Gerenciar chave PIX da doceria                              | Must Have   | X   |
-| RF11 | Ter uma conta já cadastrada no sistema                      | Must Have   | X   |
+### Tabela de Priorização dos Requisitos
 
+| Código | Requisito                                    | MoSCoW     | Story Points | MVP |
+| ------ | -------------------------------------------- | ---------- | ------------ | --- |
+| RF01   | Adicionar um item no cardápio digital        | Must Have  | 2            | x   |
+| RF02   | Excluir um item no cardápio digital          | Must Have  | 2            | x   |
+| RF03   | Alterar um item no cardápio digital          | Must Have  | 3            | x   |
+| RF04   | Alterar o status de um pedido                | Won’t Have | 2            |     |
+| RF05   | Visualizar um pedido                         | Must Have  | 3            | x   |
+| RF06   | Visualizar relatório de pagamentos recebidos | Won’t Have | 5            |     |
+| RF07   | Alterar chave pix da doceria                 | Must Have  | 1            | x   |
 
 #### Requisitos Funcionais para o Usuário
 
-| ID   | Descrição                                                 | Prioridade  | MVP |
-| ---- | --------------------------------------------------------- | ----------- | --- |
-| RF12 | Se cadastrar no sistema                                   | Must Have   | X   |
-| RF13 | Realizar a autenticação no sistema                        | Must Have   | X   |
-| RF14 | Visualizar o cardápio digital                             | Must Have   | X   |
-| RF15 | Gerenciar sua conta de usuário                            | Must Have   | X   |
-| RF16 | Adicionar produtos na sacola virtual de compras           | Must Have   | X   |
-| RF17 | Remover os produtos da sacola virtual                     | Must Have   | X   |
-| RF18 | Inserir os produtos da sacola virtual                     | Must Have   | X   |
-| RF19 | Alterar os produtos da sacola virtual                     | Must Have   | X   |
-| RF20 | Concluir seu pedido                                       | Must Have   | X   |
-| RF21 | Realizar encomenda de produtos                            | Should Have | X   |
-| RF22 | Reservar um produto                                       | Could Have  |     |
-| RF23 | Acompanhar o status do pedido                             | Won’t Have  |     |
-| RF24 | Visualizar seu histórico de pedidos                       | Could Have  |     |
-| RF25 | Ganhar pontos de fidelidade por pedido                    | Could Have  |     |
-| RF26 | Avaliar um pedido                                         | Won’t Have  |     |
-| RF27 | Visualizar o valor total do pedido antes de finalizar     | Must Have   | X   |
-| RF28 | Gerar código PIX para pagamento do pedido                 | Must Have   | X   |
-| RF29 | Visualizar QR Code do PIX para pagamento                  | Must Have   | X   |
-| RF30 | Copiar código PIX (chave aleatória) para pagamento manual | Must Have   | X   |
-| RF31 | Efetuar o pagamento via PIX                               | Must Have   | X   |
-| RF32 | Confirmar o pagamento realizado via PIX                   | Must Have   | X   |
-| RF33 | Receber notificação de confirmação de pagamento           | Should Have | X   |
-| RF34 | Visualizar comprovante de pagamento no histórico          | Won’t Have  |     |
+### Tabela de Priorização dos Requisitos
 
+| Código | Requisito                                       | MoSCoW     | Story Points | MVP |
+| ------ | ----------------------------------------------- | ---------- | ------------ | --- |
+| RF08   | Realizar cadastro no sistema                    | Must Have  | 2            | x   |
+| RF09   | Realizar login no sistema                       | Must Have  | 2            | x   |
+| RF10   | Visualizar o cardápio digital                   | Must Have  | 5            | x   |
+| RF11   | Alterar conta de usuário                        | Must Have  | 3            | x   |
+| RF12   | Excluir conta de usuário                        | Must Have  | 1            | x   |
+| RF13   | Adicionar produtos na sacola virtual de compras | Must Have  | 5            | x   |
+| RF14   | Remover os produtos da sacola virtual           | Must Have  | 2            | x   |
+| RF15   | Alterar os produtos da sacola virtual           | Must Have  | 2            | x   |
+| RF16   | Realizar pedido                                 | Must Have  | 3            | x   |
+| RF17   | Acompanhar o status do pedido                   | Won’t Have | 2            |     |
+| RF18   | Visualizar seu histórico de pedidos             | Could Have | 2            |     |
+| RF19   | Avaliar um pedido                               | Won’t Have | 1            |     |
+| RF20   | Realizar pagamento de pedido via pix            | Must Have  | 8            | x   |
 
 
 # Referências Bibliográficas:
@@ -209,3 +288,4 @@ A priorização dos requisitos funcionais foi realizada em uma reunião colabora
 | Data     | Versão | Descrição                                      | Autor      |
 | -------- | ------ | ---------------------------------------------- | ---------- |
 | 25/05/25 | 1.0    | Criação do Documento e adição do Backlog Geral | Bruno Cruz |
+| /06/25   | 2.0    | Correção do backlog e do MVP                   | Bruno Cruz |
