@@ -94,25 +94,50 @@ Product Backlog Building (PBB) é a prática de detalhar e priorizar itens de ba
 
 ### US03: Como Técnico, posso gerenciar o status do serviço (solicitado, em andamento, pausado, concluído, cancelado) para maior visibilidade do status dos serviços.
 
-#### CENÁRIO 1: Falha ao concluir sem preencher o formulário
-- **DADO QUE** o técnico abriu o modal de um serviço e selecionou “Concluído”
-- **E** o formulário de conclusão foi exibido
-- **QUANDO** ele submeter o formulário sem preencher todos os campos obrigatórios (com horário de conclusão, confirmação de reparo, descrição do trabalho ou assinatura do cliente)
-- **ENTÃO** o sistema não altera o status do serviço
-- **E** exibe a mensagem “Preencha todos os campos de conclusão antes de encerrar”
+#### CENÁRIO 1: Falha ao concluir sem preencher todos os campos obrigatórios
+- **DADO QUE** o técnico abriu o modal de um serviço e selecionou “Concluído”  
+- **E** o formulário de conclusão foi exibido com os campos:
+    - Horário de conclusão (data e hora)
+    - Confirmação de reparo (checkbox)
+    - Descrição do trabalho (textarea)
+    - Assinatura do cliente (upload de imagem)  
+- **QUANDO** ele submeter o formulário preenchendo:
+    - Horário de conclusão: “2025-06-20 14:30”
+    - Confirmação de reparo: marcado
+    - Descrição do trabalho: **em branco**
+    - Assinatura do cliente: **não anexada**  
+- **ENTÃO** o sistema **não** altera o status do serviço  
+- **E** exibe a mensagem “Preencha todos os campos de conclusão antes de encerrar”  
+- **E** destaca em vermelho os labels “Descrição do trabalho” e “Assinatura do cliente”
 
-#### CENÁRIO 2: Sucesso ao concluir serviço com formulário preenchido
-- **DADO QUE** o técnico abriu o modal de um serviço e selecionou “Concluído”
-- **E** preencheu o formulário de conclusão com horário de conclusão, confirmação de reparo, descrição do trabalho e assinatura do cliente
-- **QUANDO** ele clicar em “Salvar”
-- **ENTÃO** o status do serviço muda para “Concluído”
-- **E** o Grid de Serviços e a tela do cliente refletem a mudança automaticamente
+#### CENÁRIO 2: Falha ao concluir com formato de dado inválido
+- **DADO QUE** o técnico abriu o modal de um serviço e selecionou “Concluído”  
+- **E** o formulário de conclusão foi exibido  
+- **QUANDO** ele submeter o formulário preenchendo:
+    - Horário de conclusão: “ontem às três” (texto livre)
+    - Confirmação de reparo: marcado
+    - Descrição do trabalho: “Troca de filtro”
+    - Assinatura do cliente: imagem válida  
+- **ENTÃO** o sistema **não** altera o status do serviço  
+- **E** exibe a mensagem “Insira data e hora no formato DD/MM/AAAA HH:MM”  
+- **E** destaca em vermelho o campo “Horário de conclusão”
 
-#### CENÁRIO 3: Cancelar serviço após confirmação
-- **DADO QUE** o técnico abriu o modal de um serviço e selecionou “Cancelado”
-- **QUANDO** ele confirmar a ação no modal “Tem certeza que deseja cancelar este serviço?”
-- **ENTÃO** o status do serviço muda para “Cancelado”
-- **E** o Grid de Serviços e a tela do cliente refletem o cancelamento automaticamente
+#### CENÁRIO 3: Sucesso ao concluir serviço com formulário completamente válido
+- **DADO QUE** o técnico abriu o modal de um serviço e selecionou “Concluído”  
+- **E** preencheu o formulário de conclusão com:
+    - Horário de conclusão: “20/06/2025 14:30”
+    - Confirmação de reparo: marcado
+    - Descrição do trabalho: “Substituição de válvula e teste de pressão OK”
+    - Assinatura do cliente: imagem JPG de 300 KB  
+- **QUANDO** ele clicar em “Salvar”  
+- **ENTÃO** o status do serviço muda para “Concluído”  
+- **E** o Grid de Serviços e a tela do cliente atualizam imediatamente para “Concluído”
+
+#### CENÁRIO 4: Cancelar serviço após confirmação
+- **DADO QUE** o técnico abriu o modal de um serviço e selecionou “Cancelado”  
+- **QUANDO** ele confirmar a ação no modal “Tem certeza que deseja cancelar este serviço?”  
+- **ENTÃO** o status do serviço muda para “Cancelado”  
+- **E** o Grid de Serviços e a tela do cliente refletem o cancelamento
 
 ### US06: Como Atendente, posso receber novas solicitações dos clientes em tempo real para agilizar as solicitações de serviço.
 
@@ -132,51 +157,64 @@ Product Backlog Building (PBB) é a prática de detalhar e priorizar itens de ba
 
 ### US11: Como Cliente, posso solicitar serviços para agilizar as solicitações de serviços.
 
-#### CENÁRIO 1: Sucesso ao enviar solicitação
-- **DADO QUE** o cliente está na Tela de “Solicitar Serviço”
-- **E** preencheu o campo “Tipo de Serviço” com “Manutenção Corretiva”
-- **E** escreveu na “Descrição Detalhada” o texto “Motor não liga ao acionar”
-- **E** selecionou “Emergencial” no campo “Urgência”
-- **E** indicou “Equipamento A123” em “Equipamento/Local”
-- **E** anexou dois arquivos válidos (PDF e JPG, cada um abaixo de 5 MB)
-- **QUANDO** clicar no botão “Enviar”
-- **ENTÃO** o sistema mostra a mensagem “Solicitação enviada com sucesso” com o número de protocolo
+#### CENÁRIO 1: Sucesso ao enviar solicitação com todos os campos válidos
+- **DADO QUE** o cliente está na Tela de “Solicitar Serviço”  
+- **E** preencheu:
+    - Tipo de Serviço: “Manutenção Corretiva”
+    - Descrição Detalhada: “Motor não liga ao acionar”
+    - Urgência: “Emergencial”
+    - Equipamento/Local: “Equipamento A123”
+    - Anexou arquivos: “foto_problema.jpg” (JPEG, 1,2 MB) e “manual_técnico.pdf” (PDF, 450 KB) 
+  
+- **QUANDO** clicar no botão “Enviar”  
+- **ENTÃO** o sistema mostra “Solicitação enviada com sucesso — Protocolo #20250620-001”  
 - **E** o novo chamado aparece imediatamente em “Minhas Solicitações” com status “Solicitado”
 
 #### CENÁRIO 2: Falha ao tentar enviar sem preencher campos obrigatórios
-- **DADO QUE** o cliente está na Tela de “Solicitar Serviço”
-- **E** deixou em branco o campo “Descrição Detalhada”
-- **QUANDO** clicar em “Enviar”
-- **ENTÃO** o sistema não envia a solicitação
-- **E** exibe mensagem “Preencha a descrição do problema para continuar”
-- **E** o novo chamado não aparece em “Minhas Solicitações”
+- **DADO QUE** o cliente deixou em branco o campo “Descrição Detalhada”  
+- **QUANDO** clicar em “Enviar”  
+- **ENTÃO** o sistema **não** envia a solicitação  
+- **E** exibe mensagem “Preencha a descrição do problema para continuar”  
+- **E** realça em vermelho o campo “Descrição Detalhada”
+
+#### CENÁRIO 3: Falha ao anexar arquivo com tipo ou tamanho inválido
+- **DADO QUE** o cliente tenta anexar:
+    - “video.mp4” (MP4, 10 MB)
+- **QUANDO** clicar em “Enviar”  
+- **ENTÃO** o sistema **não** envia a solicitação  
+- **E** exibe mensagem “Anexe apenas PDF ou JPG de até 5 MB”  
+- **E** remove o arquivo inválido da lista de anexos
 
 ### US13: Como Cliente, posso enviar feedback de um serviço para melhorar a coleta de feedbacks.
 
 #### CENÁRIO 1: Sucesso ao enviar feedback com todos os campos válidos
-- **DADO QUE** o serviço está com status “Concluído” na “Minhas Solicitações”
-- **E** o cliente clica no botão “Enviar Feedback”
-- **E** seleciona 4 estrelas no campo de nota
-- **E** escreve um comentário com 15 caracteres ou mais
-- **E** anexa um arquivo JPG de 1 MB
-- **QUANDO** clicar em “Enviar”
-- **ENTÃO** o sistema mostra “Obrigado pelo seu feedback!”
-- **E** registra a nota e o comentário no perfil do serviço
+- **DADO QUE** o serviço está com status “Concluído” na “Minhas Solicitações”  
+- **E** o cliente clica no botão “Enviar Feedback”  
+- **E** preenche:
+    - Nota: 4 estrelas
+    - Comentário: “Atendimento rápido e eficiente” (≥ 15 caracteres)
+    - Anexo: “evidência.jpg” (JPG, 1 MB)  
+- **QUANDO** clicar em “Enviar”  
+- **ENTÃO** o sistema mostra “Obrigado pelo seu feedback!”  
+- **E** registra nota, comentário e anexo no perfil do serviço
 
-#### CENÁRIO 2: Falha ao tentar enviar feedback sem nota ou comentário insuficiente
-- **DADO QUE** o serviço está com status “Concluído”
-- **E** o cliente abre o formulário de feedback
-- **E** não seleciona nenhuma estrela
-- **OU** escreve um comentário com menos de 5 caracteres
-- **QUANDO** clicar em “Enviar”
-- **ENTÃO** o sistema não envia o feedback
-- **E** exibe mensagem “Selecione uma nota de 1 a 5 e escreva ao menos 5 caracteres”
+#### CENÁRIO 2: Falha ao não selecionar nota ou comentário insuficiente
+- **DADO QUE** o cliente:
+  - **não** selecionou nenhuma estrela  
+  **OU** escreveu “OK” (2 caracteres) no comentário  
+- **QUANDO** clicar em “Enviar”  
+- **ENTÃO** o sistema **não** envia o feedback  
+- **E** exibe “Selecione uma nota de 1 a 5 e escreva ao menos 5 caracteres”  
+- **E** destaca em vermelho os campos inválidos
 
 #### CENÁRIO 3: Envio de lembrete após 48 horas sem feedback
-- **DADO QUE** se passaram 48 horas desde que o serviço foi concluído
-- **E** o cliente ainda não enviou feedback
-- **QUANDO** o sistema processar a rotina diária de lembretes
-- **ENTÃO** é enviado um e‑mail automático ao cliente lembrando de enviar o feedback
+- **DADO QUE** se passaram 48 horas desde que o serviço foi concluído  
+- **E** o cliente ainda não enviou feedback  
+- **QUANDO** o sistema processar a rotina diária de lembretes  
+- **ENTÃO** é enviado um e‑mail automático para o cliente com:
+    - Assunto: “Lembrete: Avalie seu serviço Concluído”
+    - Link direto ao formulário de feedback
+
 
 ### US17: Como Diretora, posso emitir relatórios de desempenho consolidados para apoiar a tomada de decisões estratégicas.
 
@@ -210,5 +248,6 @@ Product Backlog Building (PBB) é a prática de detalhar e priorizar itens de ba
 | Data     | Versão | Descrição             | Autor              |
 | -------- | ------ | --------------------- | ------------------ |
 | 19/06/25 | 1.0    | Criação do Documento  | Marcos Bezerra     |
-| 20/06/25 | 1.1    | Atualizando os benefícios  | Marcos Bezerra     |
+| 20/06/25 | 1.1    | Atualizando os benefícios  | Marcos Bezerra|
+| 20/06/25 | 1.2    | Atualizando o BDD  | Marcos Bezerra|
 
