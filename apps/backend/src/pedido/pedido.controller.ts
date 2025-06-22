@@ -30,7 +30,7 @@ export class PedidoController {
 
     @Get()
     async listarPedidosDoUsuario(@Req() req) {
-        const usuarioId = req.user._id;
+        const usuarioId = req.user.id;
         const pedidos = await this.pedidoService.listarPedidosPorUsuario(usuarioId);
         return pedidos;
     }
