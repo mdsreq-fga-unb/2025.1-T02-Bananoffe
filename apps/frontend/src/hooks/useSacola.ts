@@ -89,7 +89,7 @@ export const useSacola = (token?: string) => {
             toaster.create({
                 title: "Produto adicionado à sacola com sucesso!",
                 type: "success",
-                duration: 2000,
+                duration: 800,
             });
             return true;
         } catch (error) {

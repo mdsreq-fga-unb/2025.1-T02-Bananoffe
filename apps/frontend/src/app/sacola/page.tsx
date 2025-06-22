@@ -32,7 +32,7 @@ import { useProducts } from "@/hooks/useProducts";
 import { Fatia, Torta } from "@/types/Product.type";
 import { AddIcon, MinusIcon } from "@chakra-ui/icons";
 
-export default function Dashboard() {
+export default function Sacola() {
     const { getSacola, isLoading, sacola, setSacola, atualizarItemSacola, excluirItemSacola } = useSacola();
     const { tortas, fatias, getProducts } = useProducts();
     const [itensSacola, setItensSacola] = useState<ItensSacola[] | []>([]);
@@ -115,7 +115,7 @@ export default function Dashboard() {
     }
 
     return (
-        <Box minH="100vh" bgColor="#F1DD2F" flexDirection="column" pb="100px">
+        <Box minH="100vh" bgColor="#F1DD2F" flexDirection="column" pb="180px">
             <Header />
             <NavBar />
             <Box
@@ -129,7 +129,7 @@ export default function Dashboard() {
                 flex="1"
                 display="flex"
                 flexDirection="column"
-                mb={6}
+                pb={3}
             >
                 <Center>
                     <Text fontSize="2xl" fontWeight="bold" mb={2} color={"black"}>
@@ -255,27 +255,38 @@ export default function Dashboard() {
                                                         </VStack>
                                                     </DialogBody>
                                                     <Dialog.CloseTrigger asChild>
-                                                        <IoMdClose color="black"/>
+                                                        <IoMdClose color="black" />
                                                     </Dialog.CloseTrigger>
                                                 </Dialog.Content>
                                             </Dialog.Positioner>
                                         </Portal>
                                     </Dialog.Root>
-
                                 </Flex>
                                 <Separator mt={4}></Separator>
                             </Box>
                         ))}
-                        <Box pt={3}>
-                            <Center>
-                                <Text fontWeight="bold" fontSize="xl" textAlign="right" color={"black"}>
-                                    Total: R${sacola?.valorTotal}
-                                </Text>
-                            </Center>
-                        </Box>
                     </VStack>
                 )}
             </Box>
-        </Box>
+            <Center>
+                <Box
+                    position="fixed"
+                    bottom={isMobile ? "92px" : "115px"}
+                    width="100%"
+                    maxW={isMobile ? "100%" : "1200px"}
+                    bg={"white"}
+                    p={2}
+                    mb={3}
+                    borderRadius={"md"}
+                    boxShadow="md"
+                >
+                    <Center>
+                        <Text fontWeight="bold" fontSize="xl" color="black">
+                            Total: R${sacola?.valorTotal?.toFixed(2)}
+                        </Text>
+                    </Center>
+                </Box>
+            </Center>
+        </Box >
     );
 }

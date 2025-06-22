@@ -338,11 +338,6 @@ export default function ProductModal({
                                         </Text>
                                     )}
                                 </Stack>
-                                {!token && (
-                                    <Text color="red.500" fontWeight="bold">
-                                        Você precisa estar logado para adicionar produtos à sacola.
-                                    </Text>
-                                )}
                             </form>
                         </Dialog.Body>
 
