@@ -24,15 +24,10 @@
 
 ## Planejamento da Sprint
 
-### Elicitação e Descoberta
-
-- **Entrevistas**:  
-  Realização de entrevistas estruturadas com os stakeholders da Bananoffee com o objetivo de refinar os requisitos previamente elicitados durante o planejamento da release, ajustando-os para que se adequem ao escopo e às prioridades da sprint atual.
-
 ### Análise e Consenso
-
+ 
 - **Reuniões**:  
-  Realização de reuniões com a equipe para analisar os requisitos levantados, promover melhorias e definir as tarefas que serão executadas ao longo da sprint. A distribuição das atividades entre os membros da equipe é feita com base na priorização estabelecida, utilizando-se um quadro Kanban no Trello para organizar e acompanhar o andamento das entregas.
+Realização de reuniões com a equipe e  os stakeholders com o objetivo de revisar e priorizar quais requisitos irão entrar para desenvolvimento na Sprint atual
 
 ### Verificação e Validação
 
@@ -116,3 +111,4 @@
 |-----------|--------|------------------------|----------------------|
 | 25/05/25  | 1.0    | Criação do Documento   | Fábio Santos Araújo |
 | 25/05/25  | 1.1    | Documentação           | Marcos Bezerra      |
+| 22/06/25  | 1.2    | Mudanças da issue 16   | Marcos Bezerra      |
