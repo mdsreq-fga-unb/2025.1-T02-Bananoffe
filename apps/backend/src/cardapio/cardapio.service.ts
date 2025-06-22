@@ -120,7 +120,6 @@ export class CardapioService {
     imagem?: Express.Multer.File,
   ): Promise<Torta | Fatia> {
     let item = await this.tortaModel.findById(id);
-    let tipo: 'TORTA' | 'FATIA' = 'TORTA';
 
     if (!item) {
       item = await this.fatiaModel.findById(id);

@@ -21,10 +21,10 @@ export class SacolaService {
         const precoUnitario = this.calcularPreco(produto, dto.tipo, dto.tamanho);
         const precoTotal = precoUnitario * dto.quantidade;
 
-        let sacola = await this.sacolaModel.findOne({ usuarioId });
+        let sacola = await this.sacolaModel.findOne({ usuarioId: usuarioId });
 
         if (!sacola) {
-            sacola = new this.sacolaModel({ usuarioId, itens: [], valorTotal: 0 });
+            sacola = new this.sacolaModel({ usuarioId: usuarioId, itens: [], valorTotal: 0 });
         }
 
         const index = sacola.itens.findIndex(

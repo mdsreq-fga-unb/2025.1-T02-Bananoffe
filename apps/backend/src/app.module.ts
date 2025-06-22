@@ -9,6 +9,7 @@ import { CardapioModule } from './cardapio/cardapio.module';
 import { CardapioController } from './cardapio/cardapio.controller';
 import { UsuarioModule } from './usuario/usuario.module';
 import { SacolaModule } from './sacola/sacola.module';
+import { PedidoModule } from './pedido/pedido.module';
 
 config({
   path:'.env'
@@ -21,6 +22,7 @@ config({
     CardapioModule,
     UsuarioModule,
     SacolaModule,
+    PedidoModule,
   ],
   controllers: [AppController, AuthController, CardapioController],
   providers: [AppService],
