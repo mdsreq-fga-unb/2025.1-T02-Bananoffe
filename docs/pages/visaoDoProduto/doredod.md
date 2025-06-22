@@ -20,13 +20,10 @@ A *Definition of Done* (DoD) é o conjunto de critérios que define quando um it
 - **Todos os critérios de aceitação foram atendidos?** O comportamento e resultado esperados foram entregues.
 - **O backend foi corretamente integrado ao frontend (quando aplicável)?**
 - **O código passou por revisão de pares com pelo menos dois aprovadores?** Seguindo práticas como as do ScrumXP.
-- **A funcionalidade está documentada e compreensível para uso e manutenção?**
-- **O código segue os padrões de codificação definidos pela equipe?**
-- **O backend foi validado pelo coordenador Matheus Rodrigues e segue práticas seguras de manipulação de dados (quando aplicável)?**
+- **O backend foi validado pelo coordenador Matheus Rodrigues?**
 - **A funcionalidade foi integrada ao branch principal sem conflitos?**
-- **Está disponível em ambiente de homologação ou produção para validação?**
-- **A equipe de QA revisou a funcionalidade, verificando conformidade com a LGPD e qualidade do código?**
-- **A documentação foi atualizada e o feedback do cliente incorporado?**
+- **Está disponível em ambiente de homologação para validação?**
+- **A documentação presente no GitPages da equipe foi atualizada e o feedback do cliente incorporado?**
 
 ---
 
@@ -37,3 +34,4 @@ A *Definition of Done* (DoD) é o conjunto de critérios que define quando um it
 | 25/05/25 | 1.0    | Criação do Documento             | Fábio Santos Araújo  |
 | 25/05/25 | 1.1    | DoR e DoD                        | Fábio Santos Araújo  |
 | 26/05/25 | 1.2    | Atualização do DoR e DoD         | Fábio Santos Araújo  |
+| 22/06/25 | 1.3    | Atualizações da issue 17         | Marcos Bezerra       |
