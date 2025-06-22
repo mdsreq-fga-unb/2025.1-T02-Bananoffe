@@ -289,6 +289,7 @@ function adminCardapio() {
             color="#FFF"
             marginRight={isMobile ? "0" : "2"}
             onClick={handleAdd}
+            _hover={{ bgColor: "#444444" }}
           >
             <MdAdd /> Adicionar Produto
           </Button>
@@ -306,6 +307,7 @@ function adminCardapio() {
               bgColor="#895023"
               color="#FFF"
               marginRight={isMobile ? "0" : "2"}
+              _hover={{ bgColor: "#6f3f1b" }}
             >
               Cardápio Digital
             </Button>
@@ -323,6 +325,7 @@ function adminCardapio() {
             color="black"
             borderRadius="sm"
             overflow="auto"
+            showColumnBorder
           >
             <Table.Header>
               <Table.Row>

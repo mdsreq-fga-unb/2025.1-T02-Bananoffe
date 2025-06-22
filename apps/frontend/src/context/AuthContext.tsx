@@ -4,8 +4,7 @@ import { createContext, useContext } from 'react';
 import { useSession, signIn, signOut, getSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { toaster } from '@/components/ui/toaster';
-import axios from 'axios';
-import { User, UserRole } from '@/types/User.type';
+import { User} from '@/types/User.type';
 
 interface AuthContextType {
   user: User | null;
