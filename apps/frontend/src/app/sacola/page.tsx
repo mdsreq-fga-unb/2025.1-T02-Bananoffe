@@ -268,25 +268,27 @@ export default function Sacola() {
                     </VStack>
                 )}
             </Box>
-            <Center>
-                <Box
-                    position="fixed"
-                    bottom={isMobile ? "92px" : "115px"}
-                    width="100%"
-                    maxW={isMobile ? "100%" : "1200px"}
-                    bg={"white"}
-                    p={2}
-                    mb={3}
-                    borderRadius={"md"}
-                    boxShadow="md"
-                >
-                    <Center>
-                        <Text fontWeight="bold" fontSize="xl" color="black">
-                            Total: R${sacola?.valorTotal?.toFixed(2)}
-                        </Text>
-                    </Center>
-                </Box>
-            </Center>
+            {sacola && sacola.itens && sacola.itens.length > 0 && (
+                <Center>
+                    <Box
+                        position="fixed"
+                        bottom={isMobile ? "92px" : "115px"}
+                        width="100%"
+                        maxW={isMobile ? "100%" : "1200px"}
+                        bg={"white"}
+                        p={2}
+                        mb={3}
+                        borderRadius={"md"}
+                        boxShadow="md"
+                    >
+                        <Center>
+                            <Text fontWeight="bold" fontSize="xl" color="black">
+                                Total: R${sacola?.valorTotal?.toFixed(2)}
+                            </Text>
+                        </Center>
+                    </Box>
+                </Center>
+            )}
         </Box >
     );
 }

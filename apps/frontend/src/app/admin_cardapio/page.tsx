@@ -137,10 +137,6 @@ function adminCardapio() {
 
       setIsLoading(true);
 
-      for (let pair of formData.entries()) {
-        console.log(pair[0] + ": " + pair[1]);
-      }
-
       await createProduct(formData);
     } catch (error) {
       console.error(error);
@@ -166,17 +162,20 @@ function adminCardapio() {
         formData.append("precoTortaG", data.precoTortaG.toString());
       if (data.precoFatia !== undefined)
         formData.append("precoFatia", data.precoFatia.toString());
-      if (data.quantidadeTorta !== undefined)
+      if (data.quantidadeTorta !== undefined && data.quantidadeTorta > -1) {
         formData.append("quantidade", data.quantidadeTorta.toString());
+      } else if (data.quantidadeFatia !== undefined && data.quantidadeFatia > -1) {
+        formData.append("quantidade", data.quantidadeFatia.toString());
+      }
       if (selectedEditImage instanceof File) {
         formData.append("imagem", selectedEditImage);
       }
 
       // ✅ Debug
-      console.log("📦 FormData enviado:");
-      for (const [key, value] of formData.entries()) {
-        console.log(`${key}:`, value);
-      }
+      // console.log("📦 FormData enviado:");
+      // for (const [key, value] of formData.entries()) {
+      //   console.log(`${key}:`, value);
+      // }
 
       setIsLoading(true);
       await updateProduct(data._id, formData);
@@ -284,7 +283,7 @@ function adminCardapio() {
           flexDirection={isMobile ? "column" : "row"}
           gap="1"
         >
-          <MenuBar/>
+          <MenuBar />
           <Button
             bgColor="#222222"
             color="#FFF"
@@ -412,10 +411,6 @@ function adminCardapio() {
         mode="create"
         product={selectedProduct}
         setImagePreviewUrl={setImagePreviewUrl}
-        imagemFatia={selectedFatiaImage}
-        setImagemFatia={setSelectedFatiaImage}
-        imagemTorta={selectedTortaImage}
-        setImagemTorta={setSelectedTortaImage}
         FatiaImagePreviewUrl={imageFatiaPreviewUrl}
         TortaImagePreviewUrl={imageTortaPreviewUrl}
       />
@@ -439,10 +434,6 @@ function adminCardapio() {
         mode="edit"
         product={selectedProduct}
         setImagePreviewUrl={setImagePreviewUrl}
-        imagemFatia={selectedFatiaImage}
-        setImagemFatia={setSelectedFatiaImage}
-        imagemTorta={selectedTortaImage}
-        setImagemTorta={setSelectedTortaImage}
         FatiaImagePreviewUrl={imageFatiaPreviewUrl}
         TortaImagePreviewUrl={imageTortaPreviewUrl}
       />
