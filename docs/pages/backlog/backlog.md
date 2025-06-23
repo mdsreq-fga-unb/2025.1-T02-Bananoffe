@@ -288,4 +288,4 @@ Essa combinação permitiu identificar quais funcionalidades entregam **maior va
 | Data     | Versão | Descrição                                      | Autor      |
 | -------- | ------ | ---------------------------------------------- | ---------- |
 | 25/05/25 | 1.0    | Criação do Documento e adição do Backlog Geral | Bruno Cruz |
-| /06/25   | 2.0    | Correção do backlog e do MVP                   | Bruno Cruz |
+| 19/06/25 | 2.0    | Correção do backlog e do MVP                   | Bruno Cruz |
