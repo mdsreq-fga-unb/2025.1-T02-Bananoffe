@@ -50,10 +50,16 @@ export const useSacola = (token?: string) => {
             await getSacola();
         } catch (error) {
             console.error(error);
+            let mensagemErro = "Tente novamente mais tarde.";
+
+            if (axios.isAxiosError(error)) {
+                mensagemErro = error.response?.data?.message || mensagemErro;
+            }
             toaster.create({
                 title: "Erro ao atualizar item",
-                description: "Tente novamente.",
+                description: mensagemErro,
                 type: "error",
+                duration: 1000,
             });
         }
     };

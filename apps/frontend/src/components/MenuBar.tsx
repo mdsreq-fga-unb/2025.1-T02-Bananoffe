@@ -4,10 +4,11 @@ import { Button, Link, Menu, Portal, Text } from "@chakra-ui/react"
 import { CgMenuLeftAlt } from "react-icons/cg";
 import { BiFoodMenu } from "react-icons/bi";
 import { BiCommentError } from "react-icons/bi";
+import { GrConfigure } from "react-icons/gr";
 
 const links = [
     {
-        title: "Cardápio",
+        title: "Estoque",
         href: "/admin_cardapio",
         icon: <BiFoodMenu />,
     },
@@ -16,13 +17,18 @@ const links = [
         href: "/admin_pedidos",
         icon: <BiCommentError />,
     },
+    {
+        title: "Configurações",
+        href: "/admin_config",
+        icon: <GrConfigure />,
+    },
 ]
 
 function MenuBar() {
     return (
         <Menu.Root>
             <Menu.Trigger asChild>
-                <Button size="md" variant="outline" backgroundColor={"#222222"}>
+                <Button size="md" variant="outline" backgroundColor={"#222222"} _hover={{ backgroundColor: "#333333" }}>
                     <CgMenuLeftAlt /> Administração
                 </Button>
             </Menu.Trigger>

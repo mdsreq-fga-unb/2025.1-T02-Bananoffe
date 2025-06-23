@@ -7,18 +7,20 @@ import {
   useBreakpointValue,
   Button,
   Flex,
+  Table,
 } from "@chakra-ui/react";
 
 import { useState } from "react";
 import { MdSearch } from "react-icons/md";
 import Link from "next/link";
 import MenuBar from "@/components/MenuBar";
+import { useProducts } from "@/hooks/useProducts";
 
 function adminPedido() {
 
   const [searchTerm, setSearchTerm] = useState("");
-
   const isMobile = useBreakpointValue({ base: true, md: false });
+  const { isLoading } = useProducts();
 
   return (
     <Box
@@ -35,7 +37,7 @@ function adminPedido() {
           flexDirection={isMobile ? "column" : "row"}
           gap="1"
         >
-          <MenuBar/>
+          <MenuBar />
           <InputGroup endElement={<MdSearch />} w={isMobile ? "100%" : "30%"}>
             <Input
               placeholder="Pesquise"

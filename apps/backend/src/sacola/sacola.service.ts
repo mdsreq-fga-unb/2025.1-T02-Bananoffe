@@ -21,10 +21,10 @@ export class SacolaService {
         const precoUnitario = this.calcularPreco(produto, dto.tipo, dto.tamanho);
         const precoTotal = precoUnitario * dto.quantidade;
 
-        let sacola = await this.sacolaModel.findOne({ usuarioId });
+        let sacola = await this.sacolaModel.findOne({ usuarioId: usuarioId });
 
         if (!sacola) {
-            sacola = new this.sacolaModel({ usuarioId, itens: [], valorTotal: 0 });
+            sacola = new this.sacolaModel({ usuarioId: usuarioId, itens: [], valorTotal: 0 });
         }
 
         const index = sacola.itens.findIndex(
@@ -81,11 +81,10 @@ export class SacolaService {
         if (!produto)
             throw new NotFoundException('Produto não encontrado no cardápio');
 
-        if (produto.quantidade < novaQuantidade) {
-            throw new BadRequestException('Quantidade solicitada maior que o estoque disponível');
-        }
+        const quantidadeAtualNaSacola = item.quantidade;
 
-        if (novaQuantidade > produto.quantidade) {
+        // Só bloqueia se o usuário estiver tentando aumentar além do estoque atual
+        if (novaQuantidade > quantidadeAtualNaSacola && novaQuantidade > produto.quantidade) {
             throw new BadRequestException('Quantidade solicitada será maior que o estoque disponível');
         }
 

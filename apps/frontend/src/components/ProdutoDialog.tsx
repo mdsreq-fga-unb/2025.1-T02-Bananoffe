@@ -34,10 +34,6 @@ type ProdutoDialogProps = {
     setImagePreviewUrl: (url: string | null) => void;
     FatiaImagePreviewUrl: string | null
     TortaImagePreviewUrl: string | null;
-    imagemTorta: File | null;
-    setImagemTorta: (file: File | null) => void;
-    imagemFatia: File | null;
-    setImagemFatia: (file: File | null) => void;
 };
 
 
@@ -55,10 +51,6 @@ export const ProdutoDialog = ({
     mode,
     product,
     setImagePreviewUrl,
-    imagemTorta,
-    setImagemTorta,
-    imagemFatia,
-    setImagemFatia,
     FatiaImagePreviewUrl,
     TortaImagePreviewUrl,
     handleFatiaImageChange,
@@ -83,14 +75,15 @@ export const ProdutoDialog = ({
                 form.setValue("precoTortaP", product.precoTortaP);
                 form.setValue("precoTortaG", product.precoTortaG);
                 form.setValue("quantidadeTorta", product.quantidade)
-                form.setValue("precoFatia", 0);
-                form.setValue("quantidadeFatia", 0)
+                form.setValue("precoFatia", -1);
+                form.setValue("quantidadeFatia", -1)
             } else {
                 // produto tipo Fatia
                 form.setValue("precoFatia", product.precoFatia);
                 form.setValue("quantidadeFatia", product.quantidade);
                 form.setValue("precoTortaP", 0);
                 form.setValue("precoTortaG", 0);
+                form.setValue("quantidadeTorta", -1)
             }
             setImagePreviewUrl(product.imagem || null);
         }

@@ -31,9 +31,11 @@ import { useRouter } from "next/navigation";
 import { useProducts } from "@/hooks/useProducts";
 import { Fatia, Torta } from "@/types/Product.type";
 import { AddIcon, MinusIcon } from "@chakra-ui/icons";
+import { usePedidos } from "@/hooks/usePedidos";
 
 export default function Sacola() {
     const { getSacola, isLoading, sacola, setSacola, atualizarItemSacola, excluirItemSacola } = useSacola();
+    const { realizarPedido } = usePedidos();
     const { tortas, fatias, getProducts } = useProducts();
     const [itensSacola, setItensSacola] = useState<ItensSacola[] | []>([]);
     const isMobile = useBreakpointValue({ base: true, md: false });
@@ -268,25 +270,37 @@ export default function Sacola() {
                     </VStack>
                 )}
             </Box>
-            <Center>
-                <Box
-                    position="fixed"
-                    bottom={isMobile ? "92px" : "115px"}
-                    width="100%"
-                    maxW={isMobile ? "100%" : "1200px"}
-                    bg={"white"}
-                    p={2}
-                    mb={3}
-                    borderRadius={"md"}
-                    boxShadow="md"
-                >
-                    <Center>
-                        <Text fontWeight="bold" fontSize="xl" color="black">
-                            Total: R${sacola?.valorTotal?.toFixed(2)}
-                        </Text>
-                    </Center>
-                </Box>
-            </Center>
+            {sacola && sacola.itens && sacola.itens.length > 0 && (
+                <Center>
+                    <Box
+                        position="fixed"
+                        bottom={isMobile ? "92px" : "115px"}
+                        width="100%"
+                        maxW={isMobile ? "100%" : "1200px"}
+                        bg={"white"}
+                        p={2}
+                        mb={3}
+                        borderRadius={"md"}
+                        boxShadow="md"
+                    >
+                        <Center>
+                            <Text fontWeight="bold" fontSize="xl" color="black">
+                                Total: R${sacola?.valorTotal?.toFixed(2)}
+                            </Text>
+                            <Button
+                                bgColor="#895023"
+                                color="black"
+                                _hover={{ bgColor: "#a56530" }}
+                                size={isMobile ? "sm" : "md"}
+                                ml={4}
+                                onClick={() => realizarPedido()}
+                            >
+                                Concluir Pedido
+                            </Button>
+                        </Center>
+                    </Box>
+                </Center>
+            )}
         </Box >
     );
 }

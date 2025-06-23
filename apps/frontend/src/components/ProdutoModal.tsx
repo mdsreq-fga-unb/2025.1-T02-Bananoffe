@@ -306,9 +306,15 @@ export default function ProductModal({
                                     {/* Aviso de estoque excedido */}
                                     {excedeuEstoque && (
                                         <Text fontSize="sm" color="red.500" fontWeight="medium">
-                                            {quantidadeMaximaPermitida && quantidadeMaximaPermitida > 0
-                                                ? `Estoque insuficiente. Você pode adicionar até ${quantidadeMaximaPermitida} unidade${quantidadeMaximaPermitida > 1 ? 's' : ''}.`
-                                                : "Estoque máximo atingido na sacola para este produto."}
+                                            {selectedProduct?.quantidade !== 0 ? (
+                                                quantidadeMaximaPermitida && quantidadeMaximaPermitida > 0 ? (
+                                                    `Estoque insuficiente. Você pode adicionar até ${quantidadeMaximaPermitida} unidade${quantidadeMaximaPermitida > 1 ? 's' : ''}.`
+                                                ) : (
+                                                    "Estoque máximo atingido na sacola para este produto."
+                                                )
+                                            ) : (
+                                                "Este produto está esgotado."
+                                            )}
                                         </Text>
                                     )}
 
