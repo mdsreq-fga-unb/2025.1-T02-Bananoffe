@@ -59,65 +59,6 @@ Além disso, o backlog também está organizado por Temas, que agrupam épicos e
 | US20   | RF20                | EP06            | Como cliente, quero realizar pagamento de pedido via PIX para concluir a compra de forma segura e rápida.     |
 
 ---
-
-### Requisitos Não Funcionais
-
-#### Requisitos de Usabilidade
-
-| **ID** | **Descrição do Requisito de Usabilidade**                                                                                                                                                                                                                                     |
-| ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| RNF01  | O sistema deve permitir que usuários localizem facilmente o cardápio, histórico de pedidos e área de login por meio de uma navegação com ícones visuais para melhorar a compreensão, assim até mesmo usuários com pouca familiaridade digital terão facilidade na utilização. |
-| RNF02  | A interface deve exibir feedbacks visuais claros ao adicionar ou remover itens da sacola, realizar login ou confirmar pedidos.                                                                                                                                                |
-| RNF03  | A interface deve ser responsiva e adaptável a diferentes dispositivos (smartphones, tablets, desktops).                                                                                                                                                                       |
-| RNF04  | O sistema deve oferecer instruções claras durante o fluxo de pedido e pagamento.                                                                                                                                                                                              |
-| RNF05  | Os botões e elementos interativos devem ser facilmente clicáveis e legíveis em qualquer dispositivo.                                                                                                                                                                          |
-| RNF06  | A interface principal deve destacar os principais produtos e promoções, além de facilitar o acesso ao histórico de pedidos e status.                                                                                                                                          |
-| RNF07  | O sistema deve ser acessível para usuários com diferentes níveis de habilidade técnica, com botões claros e sem sobrecarga de informações.                                                                                                                                    |
-| RNF08  | As cores da interface devem seguir a paleta visual da Bananoffee Doceria, refletindo a identidade da marca, com contraste adequado para legibilidade.                                                                                                                         |
-| RNF09  | A tipografia utilizada no sistema deve seguir o padrão visual da marca, priorizando fontes legíveis e consistentes entre as telas.                                                                                                                                            |
-| RNF10  | O QR Code do PIX deve ser claramente visível e facilmente escaneável.                                                                                                                                                                                                         |
-| RNF11  | O processo de pagamento deve ser intuitivo, com instruções claras sobre como realizar o PIX.                                                                                                                                                                                  |
-| RNF12  | O sistema deve exibir o valor do pagamento de forma destacada e clara.                                                                                                                                                                                                        |
-
-#### Requisitos de Confiabilidade
-
-| **ID** | **Descrição do Requisito de Confiabilidade**                                                                                        |
-| ------ | ----------------------------------------------------------------------------------------------------------------------------------- |
-| RNF13  | O sistema deve permitir recuperação automática em caso de queda de conexão durante a finalização do pedido.                         |
-| RNF14  | O sistema deve notificar o usuário se algum erro ocorrer durante o processo de pagamento, garantindo que o pedido não seja perdido. |
-| RNF15  | A aplicação deve manter os dados dos usuários e pedidos salvos em caso de falhas.                                                   |
-| RNF16  | O status dos pedidos deve refletir com precisão as atualizações feitas pelo administrador em tempo real.                            |
-| RNF17  | O sistema deve estar disponível pelo menos 99,5% do tempo por mês (uptime), monitorado continuamente.                               |
-| RNF18  | O sistema deve manter log de todas as transações PIX para auditoria.                                                                |
-| RNF19  | Em caso de falha na geração do PIX, o sistema deve permitir nova tentativa imediatamente.                                           |
-
-#### Requisitos de Suportabilidade
-
-| **ID** | **Descrição do Requisito de Suportabilidade**                                                                                |
-| ------ | ---------------------------------------------------------------------------------------------------------------------------- |
-| RNF20  | O sistema deve ser desenvolvido com tecnologias modernas (Next.js, NestJS) para facilitar a manutenção e evolução do código. |
-| RNF21  | A aplicação deve seguir uma arquitetura modular para facilitar a adição de novas funcionalidades.                            |
-| RNF22  | O sistema deve ter documentação básica que permita a continuidade do desenvolvimento por novos membros da equipe.            |
-| RNF23  | O código-fonte deve estar versionado em repositório Git com histórico de mudanças.                                           |
-| RNF24  | A base de dados deve permitir consultas eficientes e bem estruturadas com uso de MongoDB.                                    |
-| RNF25  | O sistema deve permitir a atualização de categorias e produtos sem necessidade de interrupção do serviço.                    |
-
-#### Requisitos de Segurança
-
-| **ID** | **Descrição do Requisito de Segurança**                                                                                   |
-| ------ | ------------------------------------------------------------------------------------------------------------------------- |
-| RNF26  | O sistema deve criptografar senhas dos usuários antes de armazená-las no banco de dados.                                  |
-| RNF27  | O login deve utilizar autenticação segura, com tokens JWT para sessões autenticadas.                                      |
-| RNF28  | As rotas administrativas devem ser protegidas e acessíveis apenas para usuários autenticados com perfil de administrador. |
-| RNF29  | As requisições de pagamento devem ser protegidas com HTTPS e validação de origem confiável.                               |
-| RNF30  | O sistema deve expirar automaticamente sessões inativas após 30 minutos.                                                  |
-| RNF31  | Deve haver verificação de duplicidade no cadastro para evitar múltiplas contas com o mesmo e-mail.                        |
-| RNF32  | O sistema deve gerar códigos PIX únicos e seguros para cada transação.                                                    |
-| RNF33  | As informações de pagamento devem ser criptografadas durante a transmissão.                                               |
-| RNF34  | O código PIX deve ter validade máxima de 30 minutos após a geração.                                                       |
-
-
-
 ## Priorização do Backlog Geral e MVP
 
 Para a construção da priorização do backlog geral do sistema **Bananoffee**, a equipe optou por utilizar a técnica **MoSCoW**, conforme descrito no processo de [Engenharia de Requisitos](../visaoDoProduto/engenhariaderequisitos.md#analise-e-consenso), no módulo de Análise e Consenso. Essa abordagem é amplamente reconhecida em metodologias ágeis e auxilia na identificação das funcionalidades essenciais para o **Mínimo Produto Viável (MVP)**, bem como aquelas que podem ser adiadas para versões futuras.
@@ -289,3 +230,4 @@ Essa combinação permitiu identificar quais funcionalidades entregam **maior va
 | -------- | ------ | ---------------------------------------------- | ---------- |
 | 25/05/25 | 1.0    | Criação do Documento e adição do Backlog Geral | Bruno Cruz |
 | 19/06/25 | 2.0    | Correção do backlog e do MVP                   | Bruno Cruz |
+| 23/06/25 | 2.1    | Ajuste do Backlog do Produto                   | Bruno Cruz |
