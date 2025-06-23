@@ -15,32 +15,57 @@ import {
 } from "@chakra-ui/react";
 
 import { useState } from "react";
-import { MdSearch } from "react-icons/md";
 import Link from "next/link";
 import MenuBar from "@/components/MenuBar";
 import { CiEdit } from "react-icons/ci";
-import { toaster } from "@/components/ui/toaster";
+import { useConfiguracoes } from "@/hooks/useConfiguracoes";
+import { useEffect } from "react";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 function adminConfig() {
-
-    const [searchTerm, setSearchTerm] = useState("");
     const isMobile = useBreakpointValue({ base: true, md: false });
-    const [chaveAleatoria, setChaveAleatoria] = useState("123e4567-e89b-12d3-a456-426655440000");
+    const { buscarChavePix, alterarChavePix } = useConfiguracoes();
+    const [chaveAleatoria, setChaveAleatoria] = useState("carregando...");
     const [novaChave, setNovaChave] = useState("");
+    const { data: session } = useSession();
+    const router = useRouter();
 
-    function handleSalvarChave() {
+    const fetchChavePix = async () => {
+        try {
+            const chave = await buscarChavePix();
+            if (chave) {
+                setChaveAleatoria(chave);
+            }
+        } catch (error) {
+            console.error("Erro ao buscar chave Pix:", error);
+        }
+    }
+
+    useEffect(() => {
+        if (session === undefined) {
+            return;
+        }
+
+        if (session === null) {
+            router.push("/login");
+            return;
+        }
+
+        fetchChavePix();
+    }, [session]);
+
+    async function handleSalvarChave() {
         if (novaChave.trim() === "") {
             alert("Por favor, insira uma nova chave Pix válida.");
             return;
         }
 
-        setChaveAleatoria(novaChave);
-        setNovaChave("");
-
-        toaster.create({
-            title: "Chave Pix atualizada com sucesso!",
-            type: "success",
-        });
+        const sucesso = await alterarChavePix(novaChave);
+        if (sucesso) {
+            setChaveAleatoria(novaChave);
+            setNovaChave("");
+        }
     }
 
     return (

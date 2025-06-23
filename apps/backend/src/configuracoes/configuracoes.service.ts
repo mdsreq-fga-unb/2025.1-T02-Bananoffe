@@ -2,6 +2,7 @@ import { BadRequestException, Injectable, NotFoundException } from '@nestjs/comm
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Configuracao } from 'src/schemas/configuracao.schema';
+import { v4 as uuidv4 } from 'uuid';
 
 @Injectable()
 export class ConfiguracoesService {
@@ -9,10 +10,12 @@ export class ConfiguracoesService {
         @InjectModel(Configuracao.name) private configuracaoModel: Model<Configuracao>
     ) { }
 
-
     async obterChavePix(): Promise<string> {
-        const config = await this.configuracaoModel.findOne();
-        if (!config) throw new NotFoundException('Configurações não encontrada.');
+        let config = await this.configuracaoModel.findOne();
+        if (!config) {
+            config = await this.configuracaoModel.create({ chave: uuidv4() });
+        }
+
         return config.chavePix;
     }
 
