@@ -47,3 +47,8 @@ Os principais benefícios do **EduConnect** incluem:
 <div style="text-align:center; margin: 2rem 0;">
 <iframe width="768" height="432" src="https://miro.com/app/live-embed/uXjVIpB5v8g=/?embedMode=view_only_without_ui&moveToViewport=-11071,3352,28450,9054&embedId=591954963930" frameborder="0" scrolling="no" allow="fullscreen; clipboard-read; clipboard-write" allowfullscreen></iframe>
 </div>
+
+| Data     | Versão | Descrição          | Autor                               |
+| -------- | ------ | ------------------ | ----------------------------------- |
+| 14/06/25 | 1.0    | Criação da um Miro | Anne Capdeville & Guilherme Zanella |
+| 15/06/25 | 1.1    | Adição do texto    | Anne Capdeville & Guilherme Zanella |
