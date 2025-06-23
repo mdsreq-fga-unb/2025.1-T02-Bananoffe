@@ -97,4 +97,4 @@ Requisitos não funcionais descrevem como o sistema da Bananoffee Doceria deve o
 | 14/05/25 | 1.1    | Correção e atualização do doc.       | Fábio Araújo |
 | 21/05/25 | 1.2    | Correção e melhorias no doc.         | Fábio Araújo |
 | 25/05/25 | 2.0    | Correção e melhorias no documento    | Bruno Cruz   |
-| /06/25   | 2.1    | Correção da listas de requisitos     | Bruno Cruz   |
+| 19/06/25 | 2.1    | Correção da listas de requisitos     | Bruno Cruz   |
