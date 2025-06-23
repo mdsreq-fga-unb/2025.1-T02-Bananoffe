@@ -85,7 +85,7 @@ A classificação MoSCoW foi aplicada a todos os **Requisitos Funcionais (RF)**.
 
 ### Capacidade Técnica da Equipe
 
-Com base nas últimas 3 sprints realizadas, a equipe demonstrou uma capacidade técnica de:
+Com base nas primeiras 3 sprints realizadas, a equipe demonstrou uma capacidade técnica de:
 
 - **9,75 Story Points por sprint**
 
@@ -101,17 +101,17 @@ Para apoiar o processo de priorização do backlog e definição do MVP, foi uti
 
 O gráfico é dividido em quatro quadrantes:
 
-- **1º Quadrante – **Alto Valor / Alto Esforço**
+- **1º Quadrante – Alto Valor / Alto Esforço:**
 Funcionalidades que geram grande valor para o negócio, mas que exigem alto esforço de desenvolvimento. São importantes, porém podem ser planejadas para sprints posteriores, já que demandam mais tempo e recursos.
 
-- **2º Quadrante – **Baixo Valor / Alto Esforço**
+- **2º Quadrante – Baixo Valor / Alto Esforço:**
 Funcionalidades com baixo retorno para o negócio e alto custo de implementação. Devem ser evitadas no MVP e só reconsideradas em versões futuras, se houver necessidade real ou mudança de contexto.
 
-- **3º Quadrante – **Baixo Valor / Baixo Esforço**
+- **3º Quadrante – Baixo Valor / Baixo Esforço:**
 Funcionalidades de fácil implementação, mas com baixo impacto. Podem ser incluídas caso sobre tempo no projeto, mas não são prioritárias para o MVP.
 
-- **4º Quadrante – **Alto Valor / Baixo Esforço**
-Esse é o **quadrante ideal para o MVP**. Contém funcionalidades que geram alto valor com baixo esforço de desenvolvimento. São as primeiras a serem selecionadas para implementação, pois oferecem maior retorno com menor investimento.
+- **4º Quadrante – Alto Valor / Baixo Esforço:**
+**Esse é o quadrante ideal para o MVP**. Contém funcionalidades que geram alto valor com baixo esforço de desenvolvimento. São as primeiras a serem selecionadas para implementação, pois oferecem maior retorno com menor investimento.
 
 Ao cruzar esses dois critérios – **valor percebido pelo cliente** e **custo estimado em Story Points** – a equipe consegue tomar decisões mais assertivas, priorizando aquilo que realmente importa e garantindo entregas rápidas com impacto significativo.
 
@@ -121,7 +121,7 @@ Essa abordagem reforça os princípios ágeis de **maximizar valor e minimizar d
 
 ### Definição do MVP
 
-O MVP será composto por funcionalidades que se localizam no **4º quadrante** do gráfico de **Valor de Negócio x Story Points**, ou seja:
+O MVP será composto por funcionalidades que se localizam no **4º quadrante** do gráfico de **Valor de Negócio (VN) x Story Points**, ou seja:
 
 **Critérios:**
 
