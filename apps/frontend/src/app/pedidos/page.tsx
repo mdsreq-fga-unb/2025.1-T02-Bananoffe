@@ -3,7 +3,7 @@
 import Header from "@/components/Header";
 import NavBar from "@/components/NavBar";
 import { usePedidos } from "@/hooks/usePedidos";
-import { Box, Button, Center, Dialog, DialogBody, DialogHeader, DialogTitle, Flex, Image, Portal, Separator, Text, useBreakpointValue, VStack } from "@chakra-ui/react";
+import { Box, Button, Center, Dialog, DialogBody, DialogHeader, DialogTitle, Flex, Image, Portal, Separator, Spinner, Text, useBreakpointValue, VStack } from "@chakra-ui/react";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
@@ -15,19 +15,23 @@ import Link from "next/link";
 
 export default function Pedidos() {
     const isMobile = useBreakpointValue({ base: true, md: false });
-    const { listarPedidosDoUsuario, deletePedido } = usePedidos();
+    const { listarPedidosDoUsuario } = usePedidos();
     const { data: session } = useSession();
     const router = useRouter();
     const [pedidos, setPedidos] = useState<Pedido[]>([]);
     const { tortas, fatias, getProducts } = useProducts();
+    const [isLoading, setIsLoading] = useState(true);
 
     const fetchPedidos = async () => {
         try {
+            setIsLoading(true);
             const dados = await listarPedidosDoUsuario();
             getProducts();
             setPedidos(dados);
         } catch (err) {
             console.error("Erro ao buscar pedidos", err);
+        } finally {
+            setIsLoading(false);
         }
     };
 
@@ -84,7 +88,11 @@ export default function Pedidos() {
                 </Center>
                 <Separator mb={4} />
                 <VStack align="stretch">
-                    {pedidos.length === 0 && (
+                    <> {isLoading ? (
+                        <Center py={10}>
+                            <Spinner size="lg" color="#895023" />
+                        </Center>
+                    ) : pedidos.length === 0 ? (
                         <VStack gap={3} mt={6} textAlign="center">
                             <Text fontSize="lg" color={"black"}>Você ainda não realizou nenhum pedido</Text>
                             <Link href="/sacola" color="#895023">
@@ -93,8 +101,7 @@ export default function Pedidos() {
                                 </Text>
                             </Link>
                         </VStack>
-                    )}
-                    {pedidos.length > 0 && (
+                    ) : (
                         pedidos.map((pedido, i) => (
                             <Box key={pedido._id || i} bg="gray.100" borderRadius="md" p={4} mb={4}>
                                 <Text fontWeight="bold" fontSize="lg" mb={2} color="black">
@@ -170,6 +177,7 @@ export default function Pedidos() {
                             </Box>
                         ))
                     )}
+                    </>
                 </VStack>
             </Box>
         </Box >
