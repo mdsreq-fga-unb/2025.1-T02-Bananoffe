@@ -9,7 +9,7 @@ import * as bcrypt from 'bcrypt';
 export class UsuarioService {
   constructor(
     @InjectModel(Usuario.name) private userModel: Model<UsuarioDocument>,
-  ) {}
+  ) { }
 
   async create(createDto: CreateUsuarioDto): Promise<Usuario> {
     const emailExistente = await this.userModel.findOne({ email: createDto.email });
@@ -39,12 +39,24 @@ export class UsuarioService {
     return this.userModel.find().select('-senha');
   }
 
-  async deletarUsuario(dto: { id: string }) {
-    const usuario = await this.userModel.findByIdAndDelete({ _id: dto.id });
+  async deletarUsuario(id: string) {
+    const usuario = await this.userModel.findByIdAndDelete({ _id: id });
     if (!usuario) {
       throw new BadRequestException('Usuário não encontrado.');
     }
     return { message: 'Usuário deletado com sucesso.' };
+  }
+
+  async deletarMinhaConta(userId: string) {
+    const usuario = await this.userModel.findByIdAndDelete(userId);
+
+    if (!usuario) {
+      throw new BadRequestException('Usuário não encontrado.');
+    }
+  }
+
+  async findById(userId: string) {
+    return this.userModel.findById(userId);
   }
 
   async getUsuario(userId: string) {

@@ -1,6 +1,10 @@
-import { Controller, Post, Body, Get, Delete, Patch, Query, Param } from '@nestjs/common';
+import { Controller, Post, Body, Get, Delete, Patch, Query, Param, UseGuards, Req, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { UsuarioService } from './usuario.service';
-import { CreateUsuarioDto, DeletarUsuarioDto, UpdateUsuarioDto } from '../auth/auth.dto';
+import { CreateUsuarioDto, UpdateUsuarioDto } from '../auth/auth.dto';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+import { RolesGuard } from 'src/auth/roles/roles.guard';
+import { Roles } from 'src/auth/roles/roles.decorator';
+import * as bcrypt from 'bcrypt';
 
 @Controller('usuario')
 export class UsuarioController {
@@ -20,13 +24,45 @@ export class UsuarioController {
         return this.usuarioService.listarUsuarios(id);
     }
 
-    @Delete('deletar')
-    async deletarUsuario(@Body() dto: DeletarUsuarioDto) {
-        return this.usuarioService.deletarUsuario(dto);
-    }
+    @UseGuards(JwtAuthGuard)
+    @Delete('minha-conta')
+    async deletarMinhaConta(@Req() req) {
+        console.log('Usuário logado:', req.user);
+        console.log('ID do usuário');
+        const usuarioId = req.user.id;
+        await this.usuarioService.deletarMinhaConta(usuarioId);
+        return {
+            message: 'Conta deletada com sucesso!',
+        };
+    };
 
     @Patch('atualizar/:id')
     async atualizarUsuario(@Body() dto: UpdateUsuarioDto, @Param('id') id: string) {
         return this.usuarioService.updateUsuario(id, dto);
     }
+
+    @UseGuards(JwtAuthGuard)
+    @Post('verificar-senha')
+    async verificarSenha(@Req() req, @Body('password') senha: string) {
+        const usuario = await this.usuarioService.findById(req.user.id);
+
+        if (!usuario) {
+            throw new NotFoundException('Usuário não encontrado.');
+        }
+
+        const senhaCorreta = await bcrypt.compare(senha, usuario.senha); 
+
+        if (!senhaCorreta) {
+            throw new UnauthorizedException('Senha incorreta.');
+        }
+
+        return { message: 'Senha correta' };
+    };
+
+    @UseGuards(JwtAuthGuard, RolesGuard)
+    @Roles('admin')
+    @Delete(':id')
+    async deletarUsuario(@Param('id') id: string) {
+        return this.usuarioService.deletarUsuario(id);
+    };
 }

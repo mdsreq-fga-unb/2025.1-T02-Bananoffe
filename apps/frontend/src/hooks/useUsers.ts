@@ -3,6 +3,8 @@ import { useState } from 'react';
 import axios from 'axios';
 import { toaster } from '@/components/ui/toaster';
 import { CreateUserDto, UpdateUserDto, User } from '@/types/User.type';
+import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 
 const APIURL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080';
 
@@ -28,6 +30,8 @@ const getErrorMessage = (error: unknown): string => {
 export const useUsers = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [users, setUsers] = useState<User[]>([]);
+  const { data: session } = useSession();
+  const Router = useRouter();
 
   const getUsers = async () => {
     setIsLoading(true);
@@ -105,7 +109,7 @@ export const useUsers = () => {
   const deleteUser = async (id: string) => {
     setIsLoading(true);
     try {
-      await axios.delete(`${APIURL}/usuario/deletar`, {
+      await axios.delete(`${APIURL}/usuario/${id}`, {
         data: { id },
       });
 
@@ -131,5 +135,57 @@ export const useUsers = () => {
     }
   };
 
-  return { users, getUsers, createUser, updateUser, deleteUser, isLoading };
+  const deleteMyAccount = async () => {
+    setIsLoading(true);
+    try {
+      await axios.delete(`${APIURL}/usuario/minha-conta`, {
+        headers: {
+          Authorization: `Bearer ${session?.user.accessToken}`,
+        },
+      });
+
+      toaster.create({
+        title: 'Usuário deletado com sucesso!',
+        type: 'success',
+        duration: 1000,
+      });
+
+      Router.push('/login');
+      return true;
+    } catch (error) {
+      const errorMessage = getErrorMessage(error);
+
+      toaster.create({
+        title: 'Erro ao deletar usuário',
+        description: errorMessage,
+        type: 'error',
+      });
+
+      return false;
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
+  const verificarSenha = async (senha: string) => {
+    setIsLoading(true);
+    try {
+      const response = await axios.post(`${APIURL}/usuario/verificar-senha`, { password: senha }, {
+        headers: {
+          Authorization: `Bearer ${session?.user.accessToken}`,
+        },
+      });
+      return response.data;
+    } catch (error) {
+      const errorMessage = getErrorMessage(error);
+      toaster.create({
+        title: 'Erro ao verificar senha',
+        description: errorMessage,
+        type: 'error',
+      });
+      return false;
+    }
+  }
+
+  return { users, getUsers, createUser, updateUser, deleteUser, isLoading, deleteMyAccount, verificarSenha };
 };
