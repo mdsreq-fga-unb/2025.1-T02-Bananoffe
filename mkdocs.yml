@@ -44,6 +44,7 @@ nav:
       - Lições Aprendidas:
           - Unidade 1: pages/visaoDoProduto/licoesAprendidas/unidade1.md
           - Unidade 2: pages/visaoDoProduto/licoesAprendidas/unidade2.md
+          - Unidade 3: pages/visaoDoProduto/licoesAprendidas/unidade3.md
       - Referências: pages/visaoDoProduto/referencias.md
   - Backlog:
       - Requisitos de Software: pages/backlog/requisitos.md
