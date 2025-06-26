@@ -5,6 +5,7 @@ import { toaster } from '@/components/ui/toaster';
 import { CreateUserDto, UpdateUserDto, User } from '@/types/User.type';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
+import { useAuth } from '@/context/AuthContext';
 
 const APIURL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080';
 
@@ -32,6 +33,7 @@ export const useUsers = () => {
   const [users, setUsers] = useState<User[]>([]);
   const { data: session } = useSession();
   const Router = useRouter();
+  const { setUser } = useAuth();
 
   const getUsers = async () => {
     setIsLoading(true);
@@ -187,5 +189,25 @@ export const useUsers = () => {
     }
   }
 
-  return { users, getUsers, createUser, updateUser, deleteUser, isLoading, deleteMyAccount, verificarSenha };
+  const refreshSession = async () => {
+    const res = await fetch(`${APIURL}/auth/refreshToken`, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${session?.user?.accessToken}`,
+        'Content-Type': 'application/json',
+      },
+    });
+
+    if (!res.ok) {
+      throw new Error('Erro ao atualizar token');
+    }
+
+    const data = await res.json();
+    setUser(data.user);
+
+    console.log('Usuário atualizado:', data.user);
+  };
+
+
+  return { users, getUsers, createUser, updateUser, deleteUser, isLoading, deleteMyAccount, verificarSenha,refreshSession };
 };

@@ -24,6 +24,11 @@ export class UsuarioController {
         return this.usuarioService.listarUsuarios(id);
     }
 
+    @Get('listar/:id')
+    async listarUsuario(@Param('id') id?: string) {
+        return this.usuarioService.listarUsuarios(id);
+    }
+
     @UseGuards(JwtAuthGuard)
     @Delete('minha-conta')
     async deletarMinhaConta(@Req() req) {

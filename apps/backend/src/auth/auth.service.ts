@@ -22,7 +22,7 @@ export class AuthService {
   constructor(
     @InjectModel(Usuario.name) private userModel: Model<UsuarioDocument>,
     private jwtService: JwtService,
-  ) {}
+  ) { }
 
   private gerarCodigo(): string {
     return Math.floor(100000 + Math.random() * 900000).toString();
@@ -140,6 +140,41 @@ export class AuthService {
       id: usuario._id,
       nome: usuario.nome,
       role: usuario.role,
+      telefone: usuario.telefone,
+      email: usuario.email,
+      dataNascimento: usuario.dataNascimento ? usuario.dataNascimento : null,
     };
   }
+
+  async refreshToken(userId: string) {
+    const usuario = await this.userModel.findById(userId);
+
+    if (!usuario) {
+      throw new UnauthorizedException('Usuário não encontrado.');
+    }
+
+    const payload = {
+      id: usuario._id,
+      nome: usuario.nome,
+      role: usuario.role,
+      telefone: usuario.telefone,
+      email: usuario.email,
+      dataNascimento: usuario.dataNascimento ? usuario.dataNascimento : null,
+    };
+
+    const token = this.jwtService.sign(payload);
+
+    return {
+      access_token: token,
+      user: {
+        id: usuario._id,
+        nome: usuario.nome,
+        role: usuario.role,
+        telefone: usuario.telefone,
+        email: usuario.email,
+        dataNascimento: usuario.dataNascimento ? usuario.dataNascimento : null,
+      },
+    };
+  }
+
 }

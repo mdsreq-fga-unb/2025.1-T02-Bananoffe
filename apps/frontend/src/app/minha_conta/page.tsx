@@ -24,10 +24,11 @@ import Link from "next/link";
 import { useAuth } from "@/context/AuthContext";
 import { User } from "@/types/User.type";
 import NavBar from "@/components/NavBar";
+import { useSession } from "next-auth/react";
 
 export default function MinhaConta() {
   const { user, isLoading, logout } = useAuth();
-  const { deleteMyAccount, verificarSenha } = useUsers();
+  const { deleteMyAccount, verificarSenha, refreshSession } = useUsers();
   const [changedFields, setChangedFields] = useState<Partial<User>>({});
   const router = useRouter();
   const { updateUser } = useUsers();
@@ -35,6 +36,16 @@ export default function MinhaConta() {
   const [mostrarSenha, setMostrarSenha] = useState(false);
   const [senha, setSenha] = useState("");
   const [erro, setErro] = useState("");
+  const { data: session } = useSession();
+
+  useEffect(() => {
+    if (session === undefined) return;
+
+    if (user) {
+      setTelefoneFormatado(user.telefone || "");
+    }
+    console.log("Sessão atual:", session);
+  }, [session]);
 
   useEffect(() => {
     if (!user && !isLoading) {
@@ -85,11 +96,13 @@ export default function MinhaConta() {
 
   const handleSubmit = async () => {
     if (!user || Object.keys(changedFields).length === 0) return;
-
+    console.log("Campos alterados:", changedFields);
     const sucesso = await updateUser({ ...changedFields, id: user.id });
 
     if (sucesso) {
       setChangedFields({});
+      await refreshSession();
+      console.log("Sessão atual:", session);
     }
   };
 

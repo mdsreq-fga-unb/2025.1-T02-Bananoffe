@@ -90,6 +90,6 @@ export class UsuarioService {
     }
 
     await usuario.save();
-    return { message: 'Dados atualizados com sucesso.' };
+    return { message: 'Dados atualizados com sucesso.', usuario };
   }
 }

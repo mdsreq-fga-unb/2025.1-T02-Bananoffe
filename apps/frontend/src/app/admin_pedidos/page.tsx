@@ -20,13 +20,14 @@ import { useRouter } from "next/navigation";
 import { Pedido } from "@/types/Pedido.type";
 import { useSession } from "next-auth/react";
 import React from "react";
+import { FaFileCircleCheck } from "react-icons/fa6";
 
 function AdminPedido() {
   const [searchTerm, setSearchTerm] = useState("");
   const [pedidos, setPedidos] = useState<Pedido[]>([]);
   const [expandedRow, setExpandedRow] = useState<string | null>(null);
   const isMobile = useBreakpointValue({ base: true, md: false });
-  const { listarTodosPedidos, isLoading } = usePedidos();
+  const { listarTodosPedidos, isLoading, deletePedido } = usePedidos();
   const router = useRouter();
   const { data: session } = useSession();
 
@@ -55,6 +56,17 @@ function AdminPedido() {
   const toggleExpand = (id: string) => {
     setExpandedRow((prev) => (prev === id ? null : id));
   };
+
+  const handleDelete = async (id: string) => {
+    if (confirm("Tem certeza que deseja Concluir/Excluir este pedido?")) {
+      try {
+        await deletePedido(id);
+        setPedidos((prev) => prev.filter((pedido) => pedido._id !== id));
+      } catch (error) {
+        console.error("Erro ao excluir pedido:", error);
+      }
+    }
+  }
 
   const cellStyle = { textAlign: "center", bg: "white", p: 2, color: "gray.800" };
 
@@ -124,6 +136,9 @@ function AdminPedido() {
                   <Table.ColumnHeader textAlign="center" p={2}>
                     Data
                   </Table.ColumnHeader>
+                  <Table.ColumnHeader textAlign="center" p={2}>
+                    Concluir
+                  </Table.ColumnHeader>
                 </Table.Row>
               </Table.Header>
               <Table.Body>
@@ -131,21 +146,32 @@ function AdminPedido() {
                   <React.Fragment key={pedido._id}>
                     <Table.Row
                       _hover={{ bg: "gray.100", cursor: "pointer" }}
-                      onClick={() => toggleExpand(pedido._id)}
                     >
-                      <Table.Cell {...cellStyle}>
+                      <Table.Cell {...cellStyle} onClick={() => toggleExpand(pedido._id)}>
                         {pedido._id}
                       </Table.Cell>
-                      <Table.Cell {...cellStyle}>
+                      <Table.Cell {...cellStyle} onClick={() => toggleExpand(pedido._id)}>
                         {pedido.usuarioId?.nome ?? "—"}
                       </Table.Cell>
-                      <Table.Cell {...cellStyle}>
+                      <Table.Cell {...cellStyle} onClick={() => toggleExpand(pedido._id)}>
                         R$ {pedido.valorTotal.toFixed(2)}
                       </Table.Cell>
-                      <Table.Cell {...cellStyle}>
+                      <Table.Cell {...cellStyle} onClick={() => toggleExpand(pedido._id)}>
                         {pedido.createdAt
                           ? new Date(pedido.createdAt).toLocaleDateString()
                           : "—"}
+                      </Table.Cell>
+                      <Table.Cell {...cellStyle}>
+                        <Button
+                          size="sm"
+                          variant="ghost"
+                          _hover={{ bgColor: "#e2e2e2" }}
+                          color="green.600" 
+                          onClick={() => handleDelete(pedido._id)}
+                        >
+                          <FaFileCircleCheck />
+                        </Button>
+
                       </Table.Cell>
                     </Table.Row>
 
@@ -160,7 +186,6 @@ function AdminPedido() {
                               <Box
                                 key={index}
                                 p={3}
-                                bg="gray.50"
                                 borderRadius="md"
                                 boxShadow="base"
                               >
