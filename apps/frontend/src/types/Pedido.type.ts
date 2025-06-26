@@ -1,3 +1,9 @@
+export interface UsuarioResumo {
+  _id: string;
+  nome: string;
+  email: string;
+}
+
 export interface PedidoItem {
   produtoId: string; 
   nome: string;
@@ -10,7 +16,7 @@ export interface PedidoItem {
 
 export interface Pedido {
   _id: string;
-  usuarioId: string;
+  usuarioId: UsuarioResumo; 
   itens: PedidoItem[];
   valorTotal: number;
   createdAt?: string;

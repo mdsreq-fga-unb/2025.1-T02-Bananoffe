@@ -1,13 +1,14 @@
 'use client';
 
-import { createContext, useContext } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 import { useSession, signIn, signOut, getSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { toaster } from '@/components/ui/toaster';
-import { User} from '@/types/User.type';
+import { User } from '@/types/User.type';
 
 interface AuthContextType {
   user: User | null;
+  setUser: (user: User) => void;
   login: (email: string, password: string) => Promise<void>;
   logout: () => void;
   isLoading: boolean;
@@ -18,6 +19,13 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const { data: session, status } = useSession();
   const router = useRouter();
+  const [currentUser, setCurrentUser] = useState<User | null>(session?.user ?? null);
+
+  useEffect(() => {
+    if (session?.user) {
+      setCurrentUser(session.user);
+    }
+  }, [session]);
 
   const login = async (email: string, password: string) => {
     const res = await signIn("credentials", {
@@ -52,6 +60,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     <AuthContext.Provider
       value={{
         user: session?.user ?? null,
+        setUser: setCurrentUser,
         login,
         logout,
         isLoading: status === 'loading',

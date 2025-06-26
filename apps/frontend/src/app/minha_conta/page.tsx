@@ -11,6 +11,9 @@ import {
   Flex,
   Image,
   InputGroup,
+  Dialog,
+  Portal,
+  Field,
 } from "@chakra-ui/react";
 import { FormControl, FormLabel } from '@chakra-ui/form-control';
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
@@ -21,14 +24,28 @@ import Link from "next/link";
 import { useAuth } from "@/context/AuthContext";
 import { User } from "@/types/User.type";
 import NavBar from "@/components/NavBar";
+import { useSession } from "next-auth/react";
 
 export default function MinhaConta() {
   const { user, isLoading, logout } = useAuth();
+  const { deleteMyAccount, verificarSenha, refreshSession } = useUsers();
   const [changedFields, setChangedFields] = useState<Partial<User>>({});
   const router = useRouter();
   const { updateUser } = useUsers();
   const [telefoneFormatado, setTelefoneFormatado] = useState(user?.telefone || "");
   const [mostrarSenha, setMostrarSenha] = useState(false);
+  const [senha, setSenha] = useState("");
+  const [erro, setErro] = useState("");
+  const { data: session } = useSession();
+
+  useEffect(() => {
+    if (session === undefined) return;
+
+    if (user) {
+      setTelefoneFormatado(user.telefone || "");
+    }
+    console.log("Sessão atual:", session);
+  }, [session]);
 
   useEffect(() => {
     if (!user && !isLoading) {
@@ -52,20 +69,42 @@ export default function MinhaConta() {
     router.push("/");
   }
 
+  const handleDeleteAccount = async () => {
+    setErro("");
+    isLoading;
+    try {
+      const resultado = await verificarSenha(senha);
+      console.log("Resultado da verificação de senha:", resultado);
+
+      if (resultado.message === "Senha correta") {
+        await deleteMyAccount();
+      } else {
+        setErro("Senha incorreta");
+      }
+    } catch (err) {
+      console.error("Erro ao excluir conta:", err);
+      setErro("Erro ao excluir conta. Tente novamente mais tarde.");
+    } finally {
+      !isLoading && setSenha("");
+    }
+  };
+
   const handleInputChange = (field: keyof User) => (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setChangedFields((prev) => ({ ...prev, [field]: value }));
   };
 
-const handleSubmit = async () => {
-  if (!user || Object.keys(changedFields).length === 0) return;
+  const handleSubmit = async () => {
+    if (!user || Object.keys(changedFields).length === 0) return;
+    console.log("Campos alterados:", changedFields);
+    const sucesso = await updateUser({ ...changedFields, id: user.id });
 
-  const sucesso = await updateUser({ ...changedFields, id: user.id });
-
-  if (sucesso) {
-    setChangedFields({});
-  }
-};
+    if (sucesso) {
+      setChangedFields({});
+      await refreshSession();
+      console.log("Sessão atual:", session);
+    }
+  };
 
 
   if (!user) return null;
@@ -185,6 +224,61 @@ const handleSubmit = async () => {
             >
               Sair
             </Button>
+            <Dialog.Root>
+              <Dialog.Trigger asChild>
+                <Button
+                  bgColor="red.700"
+                  color="white"
+                  size="lg"
+                  _hover={{ bgColor: "red.900" }}
+                  loading={isLoading}
+                  loadingText="Carregando..."
+                >
+                  Apagar Conta
+                </Button>
+              </Dialog.Trigger>
+              <Portal>
+                <Dialog.Backdrop />
+                <Dialog.Positioner>
+                  <Dialog.Content>
+                    <Dialog.Header>
+                      <Dialog.Title>Excluir Conta</Dialog.Title>
+                    </Dialog.Header>
+                    <Dialog.Body pb="4">
+                      <Stack gap="4">
+                        <Field.Root>
+                          <Field.Label>Digite sua Senha para continuar</Field.Label>
+                          <Input
+                            type="password"
+                            placeholder="Digite sua senha"
+                            value={senha}
+                            onChange={(e) => setSenha(e.target.value)}
+                          />
+                          {erro && (
+                            <Text color={"red.100"}>Senha Incorreta</Text>
+                          )}
+                        </Field.Root>
+                      </Stack>
+                    </Dialog.Body>
+                    <Dialog.Footer>
+                      <Dialog.ActionTrigger asChild>
+                        <Button variant="outline">Cancelar</Button>
+                      </Dialog.ActionTrigger>
+                      <Button
+                        bg={"red.200"}
+                        _hover={{ bgColor: "red.400" }}
+                        onClick={handleDeleteAccount}
+                        loading={isLoading}
+                        loadingText="Excluindo..."
+                        disabled={!senha || senha.length < 6}
+                      >
+                        Excluir Conta
+                      </Button>
+                    </Dialog.Footer>
+                  </Dialog.Content>
+                </Dialog.Positioner>
+              </Portal>
+            </Dialog.Root>
           </Stack>
         </Stack>
       </Container>
