@@ -65,6 +65,7 @@ nav:
   - Estudos de caso:
       - PBB: pages/EstudosDeCaso/PBB/PBB.md
       - USM: pages/EstudosDeCaso/USM/USM.md
+      - Casos de Uso: pages/EstudosDeCaso/UC/UC.md
 
 extra_css:
   - stylesheets/styles.css
