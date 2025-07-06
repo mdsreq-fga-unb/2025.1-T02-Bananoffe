@@ -33,19 +33,18 @@ import { AddIcon, MinusIcon } from "@chakra-ui/icons";
 import { usePedidos } from "@/hooks/usePedidos";
 
 export default function Sacola() {
-    const { getSacola, isLoading, sacola, setSacola, atualizarItemSacola, excluirItemSacola } = useSacola();
+    const { getSacola, isLoading, setIsLoading, sacola, setSacola, atualizarItemSacola, excluirItemSacola } = useSacola();
     const { realizarPedido } = usePedidos();
     const { tortas, fatias, getProducts } = useProducts();
     const [itensSacola, setItensSacola] = useState<ItensSacola[] | []>([]);
     const isMobile = useBreakpointValue({ base: true, md: false });
     const { data: session } = useSession();
     const router = useRouter();
+    const [foiCarregado, setFoiCarregado] = useState(false);
 
     useEffect(() => {
-        if (session === undefined) {
-            return;
-        }
-
+        setIsLoading(true)
+        if (session === undefined) return;
         if (session === null) {
             router.push("/login");
             return;
@@ -54,15 +53,17 @@ export default function Sacola() {
         const fetchSacola = async () => {
             try {
                 const dados = await getSacola();
-                getProducts()
+                await getProducts();
                 setSacola(dados);
             } catch (err) {
                 console.error("Erro ao buscar sacola", err);
+            } finally {
+                setFoiCarregado(true);
             }
         };
 
         fetchSacola();
-    }, [session,getProducts,setSacola,router,getSacola]);
+    }, [session, getProducts, getSacola, router,setIsLoading,setSacola]);
 
     useEffect(() => {
         if (sacola && sacola.itens) {
@@ -143,7 +144,7 @@ export default function Sacola() {
                     <HStack justify="center" mt={6}>
                         <Spinner size="lg" color="yellow.500" />
                     </HStack>
-                ) : itensSacola.length === 0 ? (
+                ) : foiCarregado && itensSacola.length === 0 ? (
                     <VStack gap={3} mt={6} textAlign="center">
                         <Text fontSize="lg" color={"black"}>Não há itens na sacola!</Text>
                         <Link href="/" color="#895023">

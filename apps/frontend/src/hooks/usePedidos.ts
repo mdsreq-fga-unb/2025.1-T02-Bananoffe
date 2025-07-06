@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import axios from "axios";
 import { toaster } from "@/components/ui/toaster";
 import { useSession } from "next-auth/react";
@@ -13,7 +13,7 @@ export const usePedidos = () => {
     const { data: session } = useSession();
     const router = useRouter();
 
-    const realizarPedido = async (): Promise<Pedido | null> => {
+    const realizarPedido = useCallback(async (): Promise<Pedido | null> => {
         setIsLoading(true);
         try {
             const response = await axios.post<Pedido>(
@@ -48,9 +48,9 @@ export const usePedidos = () => {
         } finally {
             setIsLoading(false);
         }
-    };
+    },[session, router]);
 
-    const listarTodosPedidos = async (): Promise<Pedido[]> => {
+    const listarTodosPedidos = useCallback(async (): Promise<Pedido[]> => {
         setIsLoading(true);
         try {
             const response = await axios.get<Pedido[]>(`${APIURL}/pedido/listar-todos`, {
@@ -70,9 +70,9 @@ export const usePedidos = () => {
         } finally {
             setIsLoading(false);
         }
-    }
+    },[session]);
 
-    const listarPedidosDoUsuario = async (): Promise<Pedido[]> => {
+    const listarPedidosDoUsuario = useCallback(async (): Promise<Pedido[]> => {
         setIsLoading(true);
         try {
             const response = await axios.get<Pedido[]>(`${APIURL}/pedido`, {
@@ -92,9 +92,9 @@ export const usePedidos = () => {
         } finally {
             setIsLoading(false);
         }
-    }
+    },[session]);
 
-    const deletePedido = async (id: string) => {
+    const deletePedido = useCallback(async (id: string) => {
         setIsLoading(true);
         try {
             await axios.delete(`${APIURL}/pedido/${id}`, {
@@ -121,7 +121,7 @@ export const usePedidos = () => {
         } finally {
             setIsLoading(false);
         }
-    };
+    },[session, listarPedidosDoUsuario]);
 
     return {
         realizarPedido,

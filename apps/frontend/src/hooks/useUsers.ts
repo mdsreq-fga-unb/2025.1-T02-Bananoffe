@@ -1,11 +1,10 @@
 'use client';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import axios from 'axios';
 import { toaster } from '@/components/ui/toaster';
 import { CreateUserDto, UpdateUserDto, User } from '@/types/User.type';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
-import { useAuth } from '@/context/AuthContext';
 
 const APIURL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080';
 
@@ -33,7 +32,6 @@ export const useUsers = () => {
   const [users, setUsers] = useState<User[]>([]);
   const { data: session } = useSession();
   const Router = useRouter();
-  const { setUser } = useAuth();
 
   const getUsers = async () => {
     setIsLoading(true);
@@ -53,6 +51,24 @@ export const useUsers = () => {
       setIsLoading(false);
     }
   };
+
+  const getUser = useCallback(async (id: string): Promise<User | null> => {
+    setIsLoading(true);
+    try {
+      const response = await axios.get<User>(`${APIURL}/usuario/listar/${id}`);
+      return response.data;
+    } catch (error) {
+      const errorMessage = getErrorMessage(error);
+      toaster.create({
+        title: `Erro ao Buscar Usuário`,
+        description: errorMessage,
+        type: 'error',
+      });
+      return null;
+    } finally {
+      setIsLoading(false);
+    }
+  },[]);
 
   const createUser = async (data: CreateUserDto) => {
     setIsLoading(true);
@@ -189,25 +205,5 @@ export const useUsers = () => {
     }
   }
 
-  const refreshSession = async () => {
-    const res = await fetch(`${APIURL}/auth/refreshToken`, {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${session?.user?.accessToken}`,
-        'Content-Type': 'application/json',
-      },
-    });
-
-    if (!res.ok) {
-      throw new Error('Erro ao atualizar token');
-    }
-
-    const data = await res.json();
-    setUser(data.user);
-
-    console.log('Usuário atualizado:', data.user);
-  };
-
-
-  return { users, getUsers, createUser, updateUser, deleteUser, isLoading, deleteMyAccount, verificarSenha,refreshSession };
+  return { users, getUsers,getUser, createUser, updateUser, deleteUser, isLoading, deleteMyAccount, verificarSenha };
 };

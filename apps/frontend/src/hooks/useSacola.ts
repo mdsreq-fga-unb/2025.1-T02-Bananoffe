@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import axios from "axios";
 import { toaster } from "@/components/ui/toaster";
 import { Sacola } from "@/types/Sacola.type";
@@ -13,7 +13,7 @@ export const useSacola = (token?: string) => {
     const [sacola, setSacola] = useState<Sacola | null>(null);
     const { data: session } = useSession();
 
-    const getSacola = async () => {
+    const getSacola = useCallback(async () => {
         setIsLoading(true);
         try {
             const response = await axios.get<Sacola>(`${APIURL}/sacola`, {
@@ -34,9 +34,9 @@ export const useSacola = (token?: string) => {
         } finally {
             setIsLoading(false);
         }
-    };
+    },[session,setSacola]);
 
-    const atualizarItemSacola = async (itemId: string, novaQuantidade: number) => {
+    const atualizarItemSacola = useCallback(async (itemId: string, novaQuantidade: number) => {
         try {
             await axios.put(
                 `${APIURL}/sacola/${itemId}`,
@@ -62,9 +62,9 @@ export const useSacola = (token?: string) => {
                 duration: 1000,
             });
         }
-    };
+    },[session,getSacola]);
 
-    const excluirItemSacola = async (itemId: string) => {
+    const excluirItemSacola = useCallback(async (itemId: string) => {
         try {
             await axios.delete(`${APIURL}/sacola/item/${itemId}`, {
                 headers: {
@@ -80,9 +80,9 @@ export const useSacola = (token?: string) => {
                 type: "error",
             });
         }
-    };
+    },[session,getSacola]);
 
-    const adicionarItemSacola = async (data: FormValues) => {
+    const adicionarItemSacola = useCallback(async (data: FormValues) => {
         try {
 
             await axios.post(`${APIURL}/sacola/adicionar`, data, {
@@ -106,8 +106,8 @@ export const useSacola = (token?: string) => {
                 type: "error",
             });
         }
-    };
+    },[getSacola,token]);
 
 
-    return { getSacola, isLoading, sacola, setSacola, atualizarItemSacola, excluirItemSacola, adicionarItemSacola };
+    return { getSacola, isLoading,setIsLoading, sacola, setSacola, atualizarItemSacola, excluirItemSacola, adicionarItemSacola };
 };
