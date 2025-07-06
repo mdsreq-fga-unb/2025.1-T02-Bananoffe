@@ -27,13 +27,22 @@ export const useConfiguracoes = () => {
                 },
             });
             return response.data.chavePix;
-        } catch (error: any) {
-            console.error("Erro ao buscar chave PIX:", error);
-            toaster.create({
-                title: "Erro ao buscar chave PIX",
-                description: error.response?.data?.message || "Tente novamente mais tarde.",
-                type: "error",
-            });
+        } catch (error: unknown) {
+            if (axios.isAxiosError(error)) {
+                console.error("Erro ao buscar chave PIX:", error);
+                toaster.create({
+                    title: "Erro ao buscar chave PIX",
+                    description: error.response?.data?.message || "Tente novamente mais tarde.",
+                    type: "error",
+                });
+            } else {
+                console.error("Erro desconhecido ao buscar chave PIX:", error);
+                toaster.create({
+                    title: "Erro ao buscar chave PIX",
+                    description: "Tente novamente mais tarde.",
+                    type: "error",
+                });
+            }
             return null;
         }
     }
@@ -63,13 +72,22 @@ export const useConfiguracoes = () => {
                 type: "success",
             });
             return true;
-        } catch (error: any) {
-            console.error("Erro ao atualizar chave PIX:", error);
-            toaster.create({
-                title: "Erro ao atualizar chave PIX",
-                description: error.response?.data?.message || "Tente novamente mais tarde.",
-                type: "error",
-            });
+        } catch (error: unknown) {
+            if (axios.isAxiosError(error)) {
+                console.error("Erro ao atualizar chave PIX:", error);
+                toaster.create({
+                    title: "Erro ao atualizar chave PIX",
+                    description: error.response?.data?.message || "Tente novamente mais tarde.",
+                    type: "error",
+                });
+            } else {
+                console.error("Erro desconhecido ao atualizar chave PIX:", error);
+                toaster.create({
+                    title: "Erro ao atualizar chave PIX",
+                    description: "Tente novamente mais tarde.",
+                    type: "error",
+                });
+            }
             return false;
         } finally {
             setIsLoading(false);

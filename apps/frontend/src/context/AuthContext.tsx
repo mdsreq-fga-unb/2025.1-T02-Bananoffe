@@ -19,7 +19,7 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const { data: session, status } = useSession();
   const router = useRouter();
-  const [currentUser, setCurrentUser] = useState<User | null>(session?.user ?? null);
+  const [,setCurrentUser] = useState<User | null>(session?.user ?? null);
 
   useEffect(() => {
     if (session?.user) {

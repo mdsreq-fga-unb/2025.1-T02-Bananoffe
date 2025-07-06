@@ -34,7 +34,7 @@ export interface FormValues {
   imagem?: string;
 }
 
-function adminCardapio() {
+function AdminCardapio() {
   const {
     fatias,
     tortas,
@@ -80,7 +80,7 @@ function adminCardapio() {
 
   useEffect(() => {
     getProducts();
-  }, []);
+  }, [getProducts]);
 
   useEffect(() => {
     if (selectedProduct) {
@@ -266,7 +266,7 @@ function adminCardapio() {
       reset();
       setImagePreviewUrl(null);
     }
-  }, [openCreate]);
+  }, [openCreate,reset]);
 
   return (
     <Box
@@ -445,4 +445,4 @@ function adminCardapio() {
   );
 }
 
-export default adminCardapio;
+export default AdminCardapio;

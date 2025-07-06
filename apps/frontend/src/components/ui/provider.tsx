@@ -2,13 +2,11 @@
 
 import { ChakraProvider } from "@chakra-ui/react";
 import { defaultSystem } from "@chakra-ui/react";
-import {
-  ColorModeProvider,
-  type ColorModeProviderProps,
-} from "./color-mode";
+import { ColorModeProvider } from "./color-mode";
 
-interface ExtendedProviderProps extends ColorModeProviderProps {
+interface ExtendedProviderProps {
   initialColorMode?: "light" | "dark";
+  children: React.ReactNode; // importante incluir children para renderizar o conteúdo
 }
 
 function CustomColorModeScript({ mode = "light" }: { mode?: "light" | "dark" }) {

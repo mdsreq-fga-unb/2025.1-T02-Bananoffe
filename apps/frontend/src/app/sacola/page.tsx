@@ -11,7 +11,6 @@ import {
     useBreakpointValue,
     Button,
     Flex,
-    Spacer,
     Image,
     Dialog,
     Portal,
@@ -63,7 +62,7 @@ export default function Sacola() {
         };
 
         fetchSacola();
-    }, [session]);
+    }, [session,getProducts,setSacola,router,getSacola]);
 
     useEffect(() => {
         if (sacola && sacola.itens) {

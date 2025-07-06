@@ -22,19 +22,6 @@ export default function Pedidos() {
     const { tortas, fatias, getProducts } = useProducts();
     const [isLoading, setIsLoading] = useState(true);
 
-    const fetchPedidos = async () => {
-        try {
-            setIsLoading(true);
-            const dados = await listarPedidosDoUsuario();
-            getProducts();
-            setPedidos(dados);
-        } catch (err) {
-            console.error("Erro ao buscar pedidos", err);
-        } finally {
-            setIsLoading(false);
-        }
-    };
-
     useEffect(() => {
         if (session === undefined) {
             return;
@@ -45,8 +32,21 @@ export default function Pedidos() {
             return;
         }
 
+        const fetchPedidos = async () => {
+            try {
+                setIsLoading(true);
+                const dados = await listarPedidosDoUsuario();
+                getProducts();
+                setPedidos(dados);
+            } catch (err) {
+                console.error("Erro ao buscar pedidos", err);
+            } finally {
+                setIsLoading(false);
+            }
+        };
+
         fetchPedidos();
-    }, [session]);
+    }, [session, router,getProducts,listarPedidosDoUsuario]);
 
     function getImagemDoProduto(produtoId: string, fatias: Fatia[], tortas: Torta[]): string {
         const produto =

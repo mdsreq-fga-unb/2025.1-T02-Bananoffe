@@ -13,6 +13,7 @@ import {
 import { UseFormReturn, FieldErrors } from "react-hook-form";
 import { Fatia, Torta } from "@/types/Product.type";
 import { useEffect } from "react";
+import Image from "next/image";
 
 type ProdutoDialogProps = {
     open: boolean;
@@ -87,7 +88,7 @@ export const ProdutoDialog = ({
             }
             setImagePreviewUrl(product.imagem || null);
         }
-    }, [product, form, setImagePreviewUrl]);
+    }, [product, form, setImagePreviewUrl,mode]);
 
     return (
         <Dialog.Root
@@ -212,7 +213,7 @@ export const ProdutoDialog = ({
                                                         />
                                                     ) : (
                                                         <Flex mt="2" align="center" justify="center" gap="4">
-                                                            <img
+                                                            <Image
                                                                 src={TortaImagePreviewUrl}
                                                                 alt="Pré-visualização"
                                                                 style={{ maxHeight: "200px", borderRadius: "8px" }}
@@ -238,7 +239,7 @@ export const ProdutoDialog = ({
                                                         />
                                                     ) : (
                                                         <Flex mt="2" align="center" justify="center" gap="4">
-                                                            <img
+                                                            <Image
                                                                 src={FatiaImagePreviewUrl}
                                                                 alt="Pré-visualização"
                                                                 style={{ maxHeight: "200px", borderRadius: "8px" }}
@@ -265,7 +266,7 @@ export const ProdutoDialog = ({
                                                     />
                                                 ) : (
                                                     <Flex mt="2" align="center" justify="center" gap="4">
-                                                        <img
+                                                        <Image
                                                             src={imagePreviewUrl}
                                                             alt="Pré-visualização"
                                                             style={{ maxHeight: "200px", borderRadius: "8px" }}

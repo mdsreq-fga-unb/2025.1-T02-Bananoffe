@@ -5,22 +5,18 @@ import {
   Stack,
   Text,
   Image,
-  Separator,
   Field,
   Input,
   Container,
   Button,
   Center,
   PinInput,
-  Link,
-  InputGroup,
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { toaster } from "@/components/ui/toaster";
 import { useResetPassword } from "@/hooks/useResetPassword";
-import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 
 interface FormValues {
   email: string;
@@ -34,8 +30,6 @@ function RecuperarSenha() {
   const { sendResetCode, resetPassword, validateCode, isLoading } = useResetPassword();
   const [email, setEmail] = useState('');
   const router = useRouter();
-  const [mostrarSenha, setMostrarSenha] = useState(false);
-  const [mostrarConfirmar, setMostrarConfirmar] = useState(false);
 
   const { register, handleSubmit, formState: { errors, isValid } } = useForm<FormValues>({
     mode: "onChange",

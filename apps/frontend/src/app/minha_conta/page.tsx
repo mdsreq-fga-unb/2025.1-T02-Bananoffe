@@ -27,7 +27,7 @@ import NavBar from "@/components/NavBar";
 import { useSession } from "next-auth/react";
 
 export default function MinhaConta() {
-  const { user, isLoading, logout } = useAuth();
+  const { user, logout } = useAuth();
   const { deleteMyAccount, verificarSenha, refreshSession } = useUsers();
   const [changedFields, setChangedFields] = useState<Partial<User>>({});
   const router = useRouter();
@@ -37,6 +37,7 @@ export default function MinhaConta() {
   const [senha, setSenha] = useState("");
   const [erro, setErro] = useState("");
   const { data: session } = useSession();
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     if (session === undefined) return;
@@ -45,10 +46,10 @@ export default function MinhaConta() {
       setTelefoneFormatado(user.telefone || "");
     }
     console.log("Sessão atual:", session);
-  }, [session]);
+  }, [session,user]);
 
   useEffect(() => {
-    if (!user && !isLoading) {
+    if (!user && isLoading===false) {
       router.push("/login");
     }
   }, [user, isLoading, router]);
@@ -71,7 +72,7 @@ export default function MinhaConta() {
 
   const handleDeleteAccount = async () => {
     setErro("");
-    isLoading;
+    setIsLoading(true);
     try {
       const resultado = await verificarSenha(senha);
       console.log("Resultado da verificação de senha:", resultado);
@@ -85,7 +86,8 @@ export default function MinhaConta() {
       console.error("Erro ao excluir conta:", err);
       setErro("Erro ao excluir conta. Tente novamente mais tarde.");
     } finally {
-      !isLoading && setSenha("");
+      setIsLoading(false);
+      setSenha("");
     }
   };
 

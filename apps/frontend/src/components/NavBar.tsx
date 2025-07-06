@@ -2,7 +2,6 @@
 import { usePathname } from "next/navigation";
 import {
   Stack,
-  Center,
   Icon,
   Flex,
   Text,

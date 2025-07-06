@@ -2,7 +2,6 @@
 import {
     Box,
     Input,
-    InputGroup,
     Stack,
     useBreakpointValue,
     Button,
@@ -23,24 +22,13 @@ import { useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
-function adminConfig() {
+function AdminConfig() {
     const isMobile = useBreakpointValue({ base: true, md: false });
     const { buscarChavePix, alterarChavePix } = useConfiguracoes();
     const [chaveAleatoria, setChaveAleatoria] = useState("carregando...");
     const [novaChave, setNovaChave] = useState("");
     const { data: session } = useSession();
     const router = useRouter();
-
-    const fetchChavePix = async () => {
-        try {
-            const chave = await buscarChavePix();
-            if (chave) {
-                setChaveAleatoria(chave);
-            }
-        } catch (error) {
-            console.error("Erro ao buscar chave Pix:", error);
-        }
-    }
 
     useEffect(() => {
         if (session === undefined) {
@@ -52,8 +40,19 @@ function adminConfig() {
             return;
         }
 
+        const fetchChavePix = async () => {
+            try {
+                const chave = await buscarChavePix();
+                if (chave) {
+                    setChaveAleatoria(chave);
+                }
+            } catch (error) {
+                console.error("Erro ao buscar chave Pix:", error);
+            }
+        }
+
         fetchChavePix();
-    }, [session]);
+    }, [session, router,buscarChavePix]);
 
     async function handleSalvarChave() {
         if (novaChave.trim() === "") {
@@ -184,4 +183,4 @@ function adminConfig() {
     );
 }
 
-export default adminConfig;
+export default AdminConfig;
