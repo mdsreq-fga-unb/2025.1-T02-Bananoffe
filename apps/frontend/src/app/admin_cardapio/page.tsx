@@ -142,6 +142,7 @@ function AdminCardapio() {
       console.error(error);
     } finally {
       setIsLoading(false);
+      setOpenCreate(false);
     }
   };
 
@@ -266,7 +267,7 @@ function AdminCardapio() {
       reset();
       setImagePreviewUrl(null);
     }
-  }, [openCreate,reset]);
+  }, [openCreate, reset]);
 
   return (
     <Box
@@ -368,13 +369,15 @@ function AdminCardapio() {
                   <Table.Cell textAlign="center">{item.quantidade}</Table.Cell>
                   <Table.Cell width={imageSize} height={imageSize} padding={1}>
                     <Box width="100%" height="100%" display="flex" alignItems="center" justifyContent="center" bg="gray.100" borderRadius="md" overflow="hidden">
-                      <Image
-                        src={typeof item.imagem === "string" ? item.imagem : ""}
-                        maxW="100%"
-                        maxH="100%"
-                        objectFit="contain"
-                        alt={item.nome}
-                      />
+                      {typeof item.imagem === "string" && item.imagem.trim() !== "" ? (
+                        <Image
+                          src={item.imagem}
+                          maxW="100%"
+                          maxH="100%"
+                          objectFit="contain"
+                          alt={item.nome}
+                        />
+                      ) : null}
                     </Box>
                   </Table.Cell>
                   <Table.Cell textAlign="center">

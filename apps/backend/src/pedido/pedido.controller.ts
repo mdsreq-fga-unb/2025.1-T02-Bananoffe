@@ -42,4 +42,9 @@ export class PedidoController {
         return { message: `Pedido ${id} apagado com sucesso.` };
     }
 
+    @Get(':id')
+    async buscarPedidoPorId(@Param('id') id:string){
+        return this.pedidoService.findById(id);
+    }
+
 }

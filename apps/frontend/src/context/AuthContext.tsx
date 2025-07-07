@@ -19,7 +19,7 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const { data: session, status } = useSession();
   const router = useRouter();
-  const [,setCurrentUser] = useState<User | null>(session?.user ?? null);
+  const [, setCurrentUser] = useState<User | null>(session?.user ?? null);
 
   useEffect(() => {
     if (session?.user) {
@@ -30,25 +30,38 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const login = async (email: string, password: string) => {
     const res = await signIn("credentials", {
       email,
-      senha: password,
+      senha: password,  // Só confirma que o backend espera 'senha' mesmo?
       redirect: false,
     });
 
     if (res?.error) {
+      let description = "";
+
+      switch (res.error) {
+        case "CredentialsSignin":
+          description = "Email ou senha incorretos. Por favor, tente novamente.";
+          break;
+        case "OAuthAccountNotLinked":
+          description = "Conta não vinculada. Use outra forma de login.";
+          break;
+        default:
+          description = "Erro ao fazer login. Por favor, tente novamente mais tarde.";
+      }
+
       toaster.create({
-        title: 'Erro ao fazer login',
-        description: res.error,
-        type: 'error',
+        title: "Erro ao fazer login",
+        description,
+        type: "error",
       });
     } else {
       toaster.create({
-        title: 'Login realizado com sucesso!',
-        type: 'success',
+        title: "Login realizado com sucesso!",
+        type: "success",
         duration: 2000,
       });
 
       const session = await getSession();
-      router.push(session?.user?.role === 'admin' ? '/admin_cardapio' : '/');
+      router.push(session?.user?.role === "admin" ? "/admin_cardapio" : "/");
     }
   };
 

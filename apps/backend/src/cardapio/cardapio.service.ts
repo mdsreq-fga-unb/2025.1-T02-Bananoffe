@@ -25,7 +25,12 @@ export class CardapioService {
     imagemFatia?: Express.Multer.File,
   ) {
     // Verifica se já existe algum item com esse nome (opcional)
-    const jaExiste = await this.tortaModel.findOne({ nome: dto.nome }) || await this.fatiaModel.findOne({ nome: dto.nome });
+    const nomeTorta = `Torta ${dto.nome}`;
+    const nomeFatia = `Fatia ${dto.nome}`;
+
+    const jaExiste = await this.tortaModel.findOne({ nome: nomeTorta })
+      || await this.fatiaModel.findOne({ nome: nomeFatia });
+
     if (jaExiste) {
       throw new BadRequestException('Já existe um item com esse nome.');
     }

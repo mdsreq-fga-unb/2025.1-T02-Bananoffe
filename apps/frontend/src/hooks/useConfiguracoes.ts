@@ -94,10 +94,46 @@ export const useConfiguracoes = () => {
         }
     }
 
+    async function gerarPixQrCode(valor: number) {
+        if (!session?.user.accessToken) {
+            return null;
+        }
+        const chavePix = await buscarChavePix();
+
+        if (!chavePix) {
+            toaster.create({
+                title: "Erro ao gerar QR Code",
+                description: "Não foi possível recuperar a chave PIX.",
+                type: "error",
+            });
+            return null;
+        }
+
+        try {
+            const res = await axios.post(`${APIURL}/pagamentos/gerar`, {
+                chave: chavePix,
+                nome: 'Bruno Cruz Garcia Rosa',
+                cidade: "Sao Paulo",
+                valor: parseFloat(valor.toFixed(2)),
+            }, {
+                headers: {
+                    Authorization: `Bearer ${session.user.accessToken}`,
+                },
+            }
+            );
+            return res.data;
+        } catch (error) {
+            console.error("Erro ao gerar QR Code:", error);
+            alert("Erro ao gerar QR Code");
+            return null;
+        }
+    }
+
     return {
         buscarChavePix,
         alterarChavePix,
         isLoading,
+        gerarPixQrCode,
     };
 };
 

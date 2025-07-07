@@ -11,6 +11,8 @@ import { UsuarioModule } from './usuario/usuario.module';
 import { SacolaModule } from './sacola/sacola.module';
 import { PedidoModule } from './pedido/pedido.module';
 import { ConfiguracoesModule } from './configuracoes/configuracoes.module';
+import { PagamentosController } from './pagamentos/pagamentos.controller';
+import { PagamentosModule } from './pagamentos/pagamentos.module';
 
 config({
   path:'.env'
@@ -25,6 +27,7 @@ config({
     SacolaModule,
     PedidoModule,
     ConfiguracoesModule,
+    PagamentosModule,
   ],
   controllers: [AppController, AuthController, CardapioController],
   providers: [AppService],

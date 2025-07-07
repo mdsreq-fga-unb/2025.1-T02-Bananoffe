@@ -107,8 +107,15 @@ export class PedidoService {
         const userObjId = typeof usuarioId === 'string' ? new Types.ObjectId(usuarioId) : usuarioId;
         return this.pedidoModel
             .find({ usuarioId: userObjId })
-            .populate('usuarioId', 'nome email') 
+            .populate('usuarioId', 'nome email')
             .sort({ createdAt: -1 });
+    }
+
+    async findById(pedidoId: string) {
+        const res = await this.pedidoModel.findById(pedidoId);
+        if (!res)
+            throw new NotFoundException(`Pedido com id ${pedidoId} não encontrado.`);
+        return res;
     }
 
 }

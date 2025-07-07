@@ -46,7 +46,7 @@ export default function Pedidos() {
         };
 
         fetchPedidos();
-    }, [session, router,getProducts,listarPedidosDoUsuario]);
+    }, [session, router, getProducts, listarPedidosDoUsuario]);
 
     function getImagemDoProduto(produtoId: string, fatias: Fatia[], tortas: Torta[]): string {
         const produto =
@@ -105,7 +105,7 @@ export default function Pedidos() {
                         pedidos.map((pedido, i) => (
                             <Box key={pedido._id || i} bg="gray.100" borderRadius="md" p={4} mb={4}>
                                 <Text fontWeight="bold" fontSize="lg" mb={2} color="black">
-                                    Pedido {i + 1}
+                                    Pedido {i + 1} 
                                 </Text>
                                 {pedido.itens.map((item, idx) => (
                                     <Flex key={idx} justify="space-between" align="center" mb={4} p={5}>
@@ -172,7 +172,29 @@ export default function Pedidos() {
                                         <Separator />
                                     </Flex>
                                 ))}
-                                <Text mb={2} color={"black"} fontWeight="bold">Valor total: R$ {pedido.valorTotal.toFixed(2)}</Text>
+                                <Flex align="center" justify="space-between" mb={2}>
+                                    <Flex direction={"column"}>
+                                        <Text color="black" fontWeight="medium">
+                                            Data: {pedido.createdAt
+                                                ? new Date(pedido.createdAt).toLocaleDateString()
+                                                : "—"}
+                                        </Text>
+                                        <Text color="black" fontWeight="bold">
+                                            Valor total: R$ {pedido.valorTotal.toFixed(2)}
+                                        </Text>
+                                    </Flex>
+
+                                    <Button
+                                        size="sm"
+                                        color="white"
+                                        bg="#895023"
+                                        _hover={{ bg: "#6f3f1b" }}
+                                        onClick={() => router.push(`/pagamento/${pedido._id}`)}
+                                        mr={3}
+                                    >
+                                        Pagar via Pix
+                                    </Button>
+                                </Flex>
                                 <Separator mt={5} />
                             </Box>
                         ))
