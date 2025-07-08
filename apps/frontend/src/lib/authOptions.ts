@@ -21,9 +21,16 @@ export const authOptions: NextAuthOptions = {
                         body: JSON.stringify(credentials),
                     });
 
-                    const user = await res.json();
+                    const text = await res.text();
 
-                    if (res.ok && user?.access_token) {
+                    if (!res.ok) {
+                        console.error("Erro na resposta do login:", res.status, text);
+                        return null;
+                    }
+
+                    const user = JSON.parse(text);
+
+                    if (user?.access_token) {
                         return {
                             id: user.id,
                             nome: user.nome,
@@ -40,7 +47,7 @@ export const authOptions: NextAuthOptions = {
                     console.error("Erro ao autorizar:", error);
                     return null;
                 }
-            },
+            }
         }),
     ],
     callbacks: {
