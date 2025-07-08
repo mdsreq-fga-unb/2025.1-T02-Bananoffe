@@ -172,12 +172,6 @@ function AdminCardapio() {
         formData.append("imagem", selectedEditImage);
       }
 
-      // ✅ Debug
-      // console.log("📦 FormData enviado:");
-      // for (const [key, value] of formData.entries()) {
-      //   console.log(`${key}:`, value);
-      // }
-
       setIsLoading(true);
       await updateProduct(data._id, formData);
     } catch (error) {

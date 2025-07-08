@@ -106,7 +106,6 @@ export default function MinhaConta() {
 
   const handleSubmit = async () => {
     if (!user || Object.keys(changedFields).length === 0) return;
-    console.log("Campos alterados:", changedFields);
     const sucesso = await updateUser({ ...changedFields, id: user.id });
 
     if (sucesso) {

@@ -21,4 +21,30 @@ export class ConfiguracoesController {
         const chave = await this.configuracoesService.atualizarChavePix(chavePix);
         return { chavePix: chave };
     }
+
+    @Get('nome')
+    async getNomeCompleto() {
+        const nome = await this.configuracoesService.obterNomeCompleto();
+        return { nome: nome };
+    }
+
+    @Roles('admin')
+    @Put('nome')
+    async updateNomeCompleto(@Body('nomeCompleto') chavePix: string) {
+        const nomeCompleto = await this.configuracoesService.atualizarNomeCompleto(chavePix);
+        return { nomeCompleto: nomeCompleto };
+    }
+
+    @Get('cidade')
+    async getCidadeBanco() {
+        const cidadeBanco = await this.configuracoesService.obterCidadeBanco();
+        return { cidadeBanco: cidadeBanco };
+    }
+
+    @Roles('admin')
+    @Put('cidade')
+    async updateCidadeBanco(@Body('cidadeBanco') chavePix: string) {
+        const cidadeBanco = await this.configuracoesService.atualizarCidadeBanco(chavePix);
+        return { cidadeBanco: cidadeBanco };
+    }
 }
