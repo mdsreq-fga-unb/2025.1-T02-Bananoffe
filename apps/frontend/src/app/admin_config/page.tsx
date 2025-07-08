@@ -97,27 +97,22 @@ function AdminConfig() {
         }
 
         try {
-            let sucesso = false;
-
             if (novaChave.trim() !== "") {
                 await alterarChavePix(novaChave);
                 setChaveAleatoria(novaChave);
                 setNovaChave("");
-                sucesso = true;
             }
 
             if (novoNome.trim() !== "") {
                 await alterarNomeCompleto(novoNome);
                 setNomeCompleto(novoNome);
                 setNovoNome("");
-                sucesso = true;
             }
 
             if (novaCidade.trim() !== "") {
                 await alterarCidadeBanco(novaCidade);
                 setCidadeBanco(novaCidade);
                 setNovaCidade("");
-                sucesso = true;
             }
         } catch (error) {
             console.error("Erro ao salvar configurações:", error);
