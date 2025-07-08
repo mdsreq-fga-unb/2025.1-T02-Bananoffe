@@ -10,24 +10,44 @@ export class ConfiguracoesService {
         @InjectModel(Configuracao.name) private configuracaoModel: Model<Configuracao>
     ) { }
 
-    async obterChavePix(): Promise<string> {
+    private async garantirConfiguracao(): Promise<Configuracao> {
         let config = await this.configuracaoModel.findOne();
+
         if (!config) {
-            config = await this.configuracaoModel.create({ chave: uuidv4() });
+            config = await this.configuracaoModel.create({
+                chavePix: uuidv4(),
+                nomeCompleto: "Felipe",
+                cidadeBanco: "São Paulo",
+            });
         }
 
+        return config;
+    }
+
+    async obterChavePix(): Promise<string> {
+        const config = await this.garantirConfiguracao();
         return config.chavePix;
     }
 
-    async atualizarChavePix(novaChave: string): Promise<string> {
-        // if (!novaChave || !/^chave-[a-z0-9-]{5,}$/.test(novaChave)) {
-        //     throw new BadRequestException('Formato inválido de chave PIX aleatória.');
-        // }
+    async obterNomeCompleto(): Promise<string> {
+        const config = await this.garantirConfiguracao();
+        return config.nomeCompleto;
+    }
 
+    async obterCidadeBanco(): Promise<string> {
+        const config = await this.garantirConfiguracao();
+        return config.cidadeBanco;
+    }
+
+    async atualizarChavePix(novaChave: string): Promise<string> {
         let config = await this.configuracaoModel.findOne();
 
         if (!config) {
-            config = new this.configuracaoModel({ chavePix: novaChave });
+            config = new this.configuracaoModel({
+                chavePix: novaChave,
+                nomeCompleto: "",
+                cidadeBanco: "",
+            });
         } else {
             config.chavePix = novaChave;
         }
@@ -35,4 +55,39 @@ export class ConfiguracoesService {
         await config.save();
         return config.chavePix;
     }
+
+    async atualizarNomeCompleto(novoNome: string): Promise<string> {
+        let config = await this.configuracaoModel.findOne();
+
+        if (!config) {
+            config = new this.configuracaoModel({
+                chavePix: "",
+                nomeCompleto: novoNome,
+                cidadeBanco: "",
+            });
+        } else {
+            config.nomeCompleto = novoNome;
+        }
+
+        await config.save();
+        return config.nomeCompleto;
+    }
+
+    async atualizarCidadeBanco(novaCidade: string): Promise<string> {
+        let config = await this.configuracaoModel.findOne();
+
+        if (!config) {
+            config = new this.configuracaoModel({
+                chavePix: "",
+                nomeCompleto: "",
+                cidadeBanco: novaCidade,
+            });
+        } else {
+            config.cidadeBanco = novaCidade;
+        }
+
+        await config.save();
+        return config.cidadeBanco;
+    }
+
 }

@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import axios from "axios";
 import { toaster } from "@/components/ui/toaster";
 import { Fatia, Product, Torta } from "@/types/Product.type";
@@ -13,7 +13,7 @@ export const useProducts = () => {
   const [fatias, setFatias] = useState<Fatia[]>([]);
   const [tortas, setTortas] = useState<Torta[]>([]);
 
-  const getProducts = async () => {
+  const getProducts = useCallback(async () => {
     setIsLoading(true);
 
     try {
@@ -33,9 +33,9 @@ export const useProducts = () => {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, []);
 
-  const createProduct = async (data: FormData) => {
+  const createProduct = useCallback(async (data: FormData) => {
     setIsLoading(true);
     try {
       await axios.post(`${APIURL}/cardapio/adicionar`, data, {
@@ -67,10 +67,9 @@ export const useProducts = () => {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [session,getProducts]);
 
-
-  const updateProduct = async (id: string, data: FormData) => {
+  const updateProduct = useCallback(async (id: string, data: FormData) => {
     try {
       const response = await axios.patch(`${APIURL}/cardapio/${id}`, data, {
         headers: {
@@ -97,9 +96,9 @@ export const useProducts = () => {
       });
       return null;
     }
-  };
+  }, [session, getProducts]);
 
-  const deleteProduct = async (id: string) => {
+  const deleteProduct = useCallback(async (id: string) => {
     setIsLoading(true);
     try {
       await axios.delete(`${APIURL}/cardapio/${id}`, {
@@ -126,7 +125,7 @@ export const useProducts = () => {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [session, getProducts]);
 
   return {
     fatias,

@@ -41,7 +41,7 @@ function Home() {
 
   useEffect(() => {
     getProducts();
-  }, []);
+  }, [getProducts]);
 
   return (
     <Box minH="100vh" bgColor="#F1DD2F">

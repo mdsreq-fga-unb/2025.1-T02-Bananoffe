@@ -27,8 +27,8 @@ import NavBar from "@/components/NavBar";
 import { useSession } from "next-auth/react";
 
 export default function MinhaConta() {
-  const { user, isLoading, logout } = useAuth();
-  const { deleteMyAccount, verificarSenha, refreshSession } = useUsers();
+  const { user, logout } = useAuth();
+  const { deleteMyAccount, verificarSenha, getUser } = useUsers();
   const [changedFields, setChangedFields] = useState<Partial<User>>({});
   const router = useRouter();
   const { updateUser } = useUsers();
@@ -36,22 +36,31 @@ export default function MinhaConta() {
   const [mostrarSenha, setMostrarSenha] = useState(false);
   const [senha, setSenha] = useState("");
   const [erro, setErro] = useState("");
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
+  const [isLoading, setIsLoading] = useState(false);
+  const [nome, setNome] = useState("");
+  const [dataNascimento, setDataNascimento] = useState("");
 
   useEffect(() => {
-    if (session === undefined) return;
+    if (session === undefined || !user) return;
 
-    if (user) {
-      setTelefoneFormatado(user.telefone || "");
-    }
-    console.log("Sessão atual:", session);
-  }, [session]);
+    const fetchUsuario = async () => {
+      const userData = await getUser(user.id);
+      if (userData !== null) {
+        setNome(userData.nome || "");
+        setTelefoneFormatado(userData.telefone || "");
+        setDataNascimento(userData.dataNascimento?.split("T")[0] || "");
+      }
+    };
+
+    fetchUsuario();
+  }, [session, user, getUser]);
 
   useEffect(() => {
-    if (!user && !isLoading) {
+    if (status === "unauthenticated") {
       router.push("/login");
     }
-  }, [user, isLoading, router]);
+  }, [status, router]);
 
   function formatPhoneVisual(value: string) {
     const digits = value.replace(/\D/g, "").slice(0, 11);
@@ -71,7 +80,7 @@ export default function MinhaConta() {
 
   const handleDeleteAccount = async () => {
     setErro("");
-    isLoading;
+    setIsLoading(true);
     try {
       const resultado = await verificarSenha(senha);
       console.log("Resultado da verificação de senha:", resultado);
@@ -85,7 +94,8 @@ export default function MinhaConta() {
       console.error("Erro ao excluir conta:", err);
       setErro("Erro ao excluir conta. Tente novamente mais tarde.");
     } finally {
-      !isLoading && setSenha("");
+      setIsLoading(false);
+      setSenha("");
     }
   };
 
@@ -96,18 +106,12 @@ export default function MinhaConta() {
 
   const handleSubmit = async () => {
     if (!user || Object.keys(changedFields).length === 0) return;
-    console.log("Campos alterados:", changedFields);
     const sucesso = await updateUser({ ...changedFields, id: user.id });
 
     if (sucesso) {
       setChangedFields({});
-      await refreshSession();
-      console.log("Sessão atual:", session);
     }
   };
-
-
-  if (!user) return null;
 
   return (
     <Box minH="100vh" bg="#F1DD2F" display="flex" flexDirection="column">
@@ -141,7 +145,7 @@ export default function MinhaConta() {
                 bg="#D9D9D9"
                 color="black"
                 size="lg"
-                defaultValue={user.nome || ""}
+                defaultValue={nome}
                 onChange={handleInputChange("nome")}
               />
             </FormControl>
@@ -170,7 +174,7 @@ export default function MinhaConta() {
                 bg="#D9D9D9"
                 color="black"
                 size="lg"
-                defaultValue={user.dataNascimento?.split("T")[0] || ""}
+                defaultValue={dataNascimento}
                 onChange={handleInputChange("dataNascimento")}
               />
             </FormControl>

@@ -11,13 +11,13 @@ import {
     useBreakpointValue,
     Button,
     Flex,
-    Spacer,
     Image,
     Dialog,
     Portal,
     DialogHeader,
     DialogBody,
     DialogTitle,
+    CloseButton,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { IoMdClose } from "react-icons/io";
@@ -34,19 +34,18 @@ import { AddIcon, MinusIcon } from "@chakra-ui/icons";
 import { usePedidos } from "@/hooks/usePedidos";
 
 export default function Sacola() {
-    const { getSacola, isLoading, sacola, setSacola, atualizarItemSacola, excluirItemSacola } = useSacola();
+    const { getSacola, isLoading, setIsLoading, sacola, setSacola, atualizarItemSacola, excluirItemSacola } = useSacola();
     const { realizarPedido } = usePedidos();
     const { tortas, fatias, getProducts } = useProducts();
     const [itensSacola, setItensSacola] = useState<ItensSacola[] | []>([]);
     const isMobile = useBreakpointValue({ base: true, md: false });
     const { data: session } = useSession();
     const router = useRouter();
+    const [foiCarregado, setFoiCarregado] = useState(false);
 
     useEffect(() => {
-        if (session === undefined) {
-            return;
-        }
-
+        setIsLoading(true)
+        if (session === undefined) return;
         if (session === null) {
             router.push("/login");
             return;
@@ -55,15 +54,17 @@ export default function Sacola() {
         const fetchSacola = async () => {
             try {
                 const dados = await getSacola();
-                getProducts()
+                await getProducts();
                 setSacola(dados);
             } catch (err) {
                 console.error("Erro ao buscar sacola", err);
+            } finally {
+                setFoiCarregado(true);
             }
         };
 
         fetchSacola();
-    }, [session]);
+    }, [session, getProducts, getSacola, router, setIsLoading, setSacola]);
 
     useEffect(() => {
         if (sacola && sacola.itens) {
@@ -144,7 +145,7 @@ export default function Sacola() {
                     <HStack justify="center" mt={6}>
                         <Spinner size="lg" color="yellow.500" />
                     </HStack>
-                ) : itensSacola.length === 0 ? (
+                ) : foiCarregado && itensSacola.length === 0 ? (
                     <VStack gap={3} mt={6} textAlign="center">
                         <Text fontSize="lg" color={"black"}>Não há itens na sacola!</Text>
                         <Link href="/" color="#895023">
@@ -287,16 +288,53 @@ export default function Sacola() {
                             <Text fontWeight="bold" fontSize="xl" color="black">
                                 Total: R${sacola?.valorTotal?.toFixed(2)}
                             </Text>
-                            <Button
-                                bgColor="#895023"
-                                color="black"
-                                _hover={{ bgColor: "#a56530" }}
-                                size={isMobile ? "sm" : "md"}
-                                ml={4}
-                                onClick={() => realizarPedido()}
-                            >
-                                Concluir Pedido
-                            </Button>
+                            <Dialog.Root placement="center" motionPreset="slide-in-bottom" size={"xs"}>
+                                <Dialog.Trigger asChild>
+                                    <Button
+                                        bgColor="#895023"
+                                        color="black"
+                                        _hover={{ bgColor: "#a56530" }}
+                                        size={isMobile ? "sm" : "md"}
+                                        ml={4}
+                                    >
+                                        Concluir Pedido
+                                    </Button>
+                                </Dialog.Trigger>
+                                <Portal>
+                                    <Dialog.Backdrop />
+                                    <Dialog.Positioner>
+                                        <Dialog.Content bg={"white"}>
+                                            <Dialog.Header>
+                                                <Dialog.CloseTrigger asChild>
+                                                    <CloseButton size="sm" color={"black"} />
+                                                </Dialog.CloseTrigger>
+                                            </Dialog.Header>
+                                            <Dialog.Body color={"black"}>
+                                                <VStack>
+                                                    <Text mb={5} fontSize={"xl"} fontWeight="bold">Escolha o método de Pagamento</Text>
+                                                    <Text mb={5} fontSize={"lg"}>Retire o pedido no estabelecimento</Text>
+                                                    <Center>
+                                                        <Button
+                                                            bgColor="#895023"
+                                                            color="black"
+                                                            _hover={{ bgColor: "#a56530" }}
+                                                            onClick={() => realizarPedido("local")}>
+                                                            Pagar no local
+                                                        </Button>
+                                                        <Button
+                                                            onClick={() => realizarPedido("pix")}
+                                                            bgColor="#895023" color="black"
+                                                            _hover={{ bgColor: "#a56530" }}
+                                                            ml={4}>
+                                                            Pagar via Pix
+                                                        </Button>
+                                                    </Center>
+                                                </VStack>
+                                            </Dialog.Body>
+                                        </Dialog.Content>
+                                    </Dialog.Positioner>
+                                </Portal>
+                            </Dialog.Root>
                         </Center>
                     </Box>
                 </Center>

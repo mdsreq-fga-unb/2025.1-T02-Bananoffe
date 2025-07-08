@@ -87,7 +87,7 @@ export const ProdutoDialog = ({
             }
             setImagePreviewUrl(product.imagem || null);
         }
-    }, [product, form, setImagePreviewUrl]);
+    }, [product, form, setImagePreviewUrl, mode]);
 
     return (
         <Dialog.Root
@@ -212,11 +212,15 @@ export const ProdutoDialog = ({
                                                         />
                                                     ) : (
                                                         <Flex mt="2" align="center" justify="center" gap="4">
-                                                            <img
-                                                                src={TortaImagePreviewUrl}
-                                                                alt="Pré-visualização"
-                                                                style={{ maxHeight: "200px", borderRadius: "8px" }}
-                                                            />
+                                                            {TortaImagePreviewUrl ? (
+                                                                /* eslint-disable @next/next/no-img-element */
+                                                                <img
+                                                                    src={TortaImagePreviewUrl}
+                                                                    alt="Pré-visualização"
+                                                                    style={{ maxHeight: "200px", borderRadius: "8px" }}
+                                                                />
+                                                                /* eslint-enable @next/next/no-img-element */
+                                                            ) : null}
                                                             <Button onClick={handleRemoveTortaImage} colorScheme="red" size="xs">
                                                                 Remover imagem
                                                             </Button>
@@ -238,11 +242,16 @@ export const ProdutoDialog = ({
                                                         />
                                                     ) : (
                                                         <Flex mt="2" align="center" justify="center" gap="4">
-                                                            <img
-                                                                src={FatiaImagePreviewUrl}
-                                                                alt="Pré-visualização"
-                                                                style={{ maxHeight: "200px", borderRadius: "8px" }}
-                                                            />
+                                                            {FatiaImagePreviewUrl ? (
+                                                                /* eslint-disable @next/next/no-img-element */
+                                                                <img
+                                                                    src={FatiaImagePreviewUrl}
+                                                                    alt="Pré-visualização"
+                                                                    style={{ maxHeight: "200px", borderRadius: "8px" }}
+                                                                />
+                                                                /* eslint-enable @next/next/no-img-element */
+                                                            ) : (
+                                                                null)}
                                                             <Button onClick={handleRemoveFatiaImage} colorScheme="red" size="xs">
                                                                 Remover imagem
                                                             </Button>
@@ -265,11 +274,19 @@ export const ProdutoDialog = ({
                                                     />
                                                 ) : (
                                                     <Flex mt="2" align="center" justify="center" gap="4">
-                                                        <img
-                                                            src={imagePreviewUrl}
-                                                            alt="Pré-visualização"
-                                                            style={{ maxHeight: "200px", borderRadius: "8px" }}
-                                                        />
+                                                        {imagePreviewUrl ?
+                                                            (
+                                                                /* eslint-disable @next/next/no-img-element */
+                                                                <img
+                                                                    src={imagePreviewUrl}
+                                                                    alt="Pré-visualização"
+                                                                    style={{ maxHeight: "200px", borderRadius: "8px" }}
+                                                                />
+                                                                /* eslint-enable @next/next/no-img-element */
+
+                                                            ) : (
+                                                                null
+                                                            )}
                                                         <Button onClick={handleRemoveImage} colorScheme="red" size="xs">
                                                             Remover imagem
                                                         </Button>

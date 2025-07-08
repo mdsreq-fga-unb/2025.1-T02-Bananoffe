@@ -34,7 +34,7 @@ export interface FormValues {
   imagem?: string;
 }
 
-function adminCardapio() {
+function AdminCardapio() {
   const {
     fatias,
     tortas,
@@ -80,7 +80,7 @@ function adminCardapio() {
 
   useEffect(() => {
     getProducts();
-  }, []);
+  }, [getProducts]);
 
   useEffect(() => {
     if (selectedProduct) {
@@ -142,6 +142,7 @@ function adminCardapio() {
       console.error(error);
     } finally {
       setIsLoading(false);
+      setOpenCreate(false);
     }
   };
 
@@ -170,12 +171,6 @@ function adminCardapio() {
       if (selectedEditImage instanceof File) {
         formData.append("imagem", selectedEditImage);
       }
-
-      // ✅ Debug
-      // console.log("📦 FormData enviado:");
-      // for (const [key, value] of formData.entries()) {
-      //   console.log(`${key}:`, value);
-      // }
 
       setIsLoading(true);
       await updateProduct(data._id, formData);
@@ -266,7 +261,7 @@ function adminCardapio() {
       reset();
       setImagePreviewUrl(null);
     }
-  }, [openCreate]);
+  }, [openCreate, reset]);
 
   return (
     <Box
@@ -368,13 +363,15 @@ function adminCardapio() {
                   <Table.Cell textAlign="center">{item.quantidade}</Table.Cell>
                   <Table.Cell width={imageSize} height={imageSize} padding={1}>
                     <Box width="100%" height="100%" display="flex" alignItems="center" justifyContent="center" bg="gray.100" borderRadius="md" overflow="hidden">
-                      <Image
-                        src={typeof item.imagem === "string" ? item.imagem : ""}
-                        maxW="100%"
-                        maxH="100%"
-                        objectFit="contain"
-                        alt={item.nome}
-                      />
+                      {typeof item.imagem === "string" && item.imagem.trim() !== "" ? (
+                        <Image
+                          src={item.imagem}
+                          maxW="100%"
+                          maxH="100%"
+                          objectFit="contain"
+                          alt={item.nome}
+                        />
+                      ) : null}
                     </Box>
                   </Table.Cell>
                   <Table.Cell textAlign="center">
@@ -445,4 +442,4 @@ function adminCardapio() {
   );
 }
 
-export default adminCardapio;
+export default AdminCardapio;

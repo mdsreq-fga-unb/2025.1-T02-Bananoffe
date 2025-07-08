@@ -2,7 +2,6 @@
 import {
     Box,
     Input,
-    InputGroup,
     Stack,
     useBreakpointValue,
     Button,
@@ -12,6 +11,8 @@ import {
     Portal,
     Field,
     Text,
+    Center,
+    QrCode,
 } from "@chakra-ui/react";
 
 import { useState } from "react";
@@ -22,25 +23,20 @@ import { useConfiguracoes } from "@/hooks/useConfiguracoes";
 import { useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { toaster } from "@/components/ui/toaster";
 
-function adminConfig() {
+function AdminConfig() {
     const isMobile = useBreakpointValue({ base: true, md: false });
-    const { buscarChavePix, alterarChavePix } = useConfiguracoes();
+    const { buscarChavePix, alterarChavePix, buscarCidadeBanco, alterarCidadeBanco, buscarNomeCompleto, alterarNomeCompleto, gerarPixQrCode } = useConfiguracoes();
     const [chaveAleatoria, setChaveAleatoria] = useState("carregando...");
+    const [nomeCompleto, setNomeCompleto] = useState("carregando...");
+    const [cidadeBanco, setCidadeBanco] = useState("carregando...");
     const [novaChave, setNovaChave] = useState("");
+    const [novoNome, setNovoNome] = useState("");
+    const [novaCidade, setNovaCidade] = useState("");
+    const [pixCode, setPixCode] = useState("");
     const { data: session } = useSession();
     const router = useRouter();
-
-    const fetchChavePix = async () => {
-        try {
-            const chave = await buscarChavePix();
-            if (chave) {
-                setChaveAleatoria(chave);
-            }
-        } catch (error) {
-            console.error("Erro ao buscar chave Pix:", error);
-        }
-    }
 
     useEffect(() => {
         if (session === undefined) {
@@ -52,21 +48,95 @@ function adminConfig() {
             return;
         }
 
-        fetchChavePix();
-    }, [session]);
+        const fetchChavePix = async () => {
+            try {
+                const chave = await buscarChavePix();
+                if (chave) {
+                    setChaveAleatoria(chave);
+                }
+            } catch (error) {
+                console.error("Erro ao buscar chave Pix:", error);
+            }
+        }
 
-    async function handleSalvarChave() {
-        if (novaChave.trim() === "") {
-            alert("Por favor, insira uma nova chave Pix válida.");
+        const fetchNomeCompleto = async () => {
+            try {
+                const nome = await buscarNomeCompleto();
+                if (nome) {
+                    setNomeCompleto(nome.nome);
+                }
+            } catch (error) {
+                console.error("Erro ao buscar Nome Completo", error);
+            }
+        }
+
+        const fetchCidadeBanco = async () => {
+            try {
+                const cidade = await buscarCidadeBanco();
+                if (cidade) {
+                    setCidadeBanco(cidade.cidadeBanco);
+                }
+            } catch (error) {
+                console.error("Erro ao buscar Cidade do Banco", error);
+            }
+        }
+
+        fetchChavePix();
+        fetchNomeCompleto();
+        fetchCidadeBanco();
+    }, [session, router, buscarChavePix, buscarCidadeBanco, buscarNomeCompleto]);
+
+    async function handleSalvar() {
+        if (
+            novaChave.trim() === "" &&
+            novoNome.trim() === "" &&
+            novaCidade.trim() === ""
+        ) {
+            alert("Nenhuma alteração foi feita.");
             return;
         }
 
-        const sucesso = await alterarChavePix(novaChave);
-        if (sucesso) {
-            setChaveAleatoria(novaChave);
-            setNovaChave("");
+        try {
+            if (novaChave.trim() !== "") {
+                await alterarChavePix(novaChave);
+                setChaveAleatoria(novaChave);
+                setNovaChave("");
+            }
+
+            if (novoNome.trim() !== "") {
+                await alterarNomeCompleto(novoNome);
+                setNomeCompleto(novoNome);
+                setNovoNome("");
+            }
+
+            if (novaCidade.trim() !== "") {
+                await alterarCidadeBanco(novaCidade);
+                setCidadeBanco(novaCidade);
+                setNovaCidade("");
+            }
+        } catch (error) {
+            console.error("Erro ao salvar configurações:", error);
+            alert("Erro inesperado ao salvar.");
         }
     }
+
+    async function gerar() {
+        try {
+            const code = await gerarPixQrCode(0.01);
+            if (code) setPixCode(code.pixCode);
+        } catch (error) {
+            console.error("Erro ao gerar Qr Code:", error);
+            toaster.create({
+                title: "Erro ao gerar Qr Code",
+                description: "Por favor, tente mais tarde",
+                type: "error"
+            })
+        }
+    }
+
+    const handleFechar = () => {
+        setPixCode('');
+    };
 
     return (
         <Box
@@ -111,6 +181,12 @@ function adminConfig() {
                                     Chave Pix Aleatória
                                 </Table.ColumnHeader>
                                 <Table.ColumnHeader textAlign="center" p={2} color="white">
+                                    Nome Completo
+                                </Table.ColumnHeader>
+                                <Table.ColumnHeader textAlign="center" p={2} color="white">
+                                    Cidade do Banco
+                                </Table.ColumnHeader>
+                                <Table.ColumnHeader textAlign="center" p={2} color="white">
                                     Editar
                                 </Table.ColumnHeader>
                             </Table.Row>
@@ -119,6 +195,12 @@ function adminConfig() {
                             <Table.Row>
                                 <Table.Cell bg="white" color="black" textAlign="center" p={2}>
                                     {chaveAleatoria}
+                                </Table.Cell>
+                                <Table.Cell bg="white" color="black" textAlign="center" p={2}>
+                                    {nomeCompleto}
+                                </Table.Cell>
+                                <Table.Cell bg="white" color="black" textAlign="center" p={2}>
+                                    {cidadeBanco}
                                 </Table.Cell>
                                 <Table.Cell bg="white" textAlign="center" p={2}>
                                     <Dialog.Root>
@@ -153,6 +235,33 @@ function adminConfig() {
                                                                         }
                                                                     }}
                                                                 />
+                                                                {novaChave !== "" && (
+                                                                    <Flex direction={"column"}>
+                                                                        <Text color={'gray'}>Se a chave pix for telefone, utilizar o código do país antes</Text>
+                                                                        <Text color={'gray'}>Ex: +5561912345678</Text>
+                                                                    </Flex>
+                                                                )}
+                                                            </Field.Root>
+                                                            <Field.Root>
+                                                                <Field.Label>Nome Completo</Field.Label>
+                                                                <Input
+                                                                    placeholder="Novo Nome Completo"
+                                                                    value={novoNome}
+                                                                    onChange={(e) => setNovoNome(e.target.value)}
+                                                                />
+                                                            </Field.Root>
+                                                            <Field.Root>
+                                                                <Field.Label>Cidade do Banco</Field.Label>
+                                                                <Input
+                                                                    placeholder="Nova Cidade do Banco"
+                                                                    value={novaCidade}
+                                                                    onChange={(e) => setNovaCidade(e.target.value)}
+                                                                />
+                                                                {novaCidade !== "" && (
+                                                                    <Flex direction={"column"}>
+                                                                        <Text color={'gray'}>Não utilizar acentos</Text>
+                                                                    </Flex>
+                                                                )}
                                                             </Field.Root>
                                                         </Stack>
                                                     </Dialog.Body>
@@ -161,7 +270,7 @@ function adminConfig() {
                                                             <Button variant="outline">Cancelar</Button>
                                                         </Dialog.ActionTrigger>
                                                         <Dialog.Trigger asChild>
-                                                            <Button onClick={handleSalvarChave} disabled={novaChave === ""}>Salvar</Button>
+                                                            <Button onClick={handleSalvar} disabled={novaChave === "" && novaCidade === "" && novoNome === " "}>Salvar</Button>
                                                         </Dialog.Trigger>
                                                     </Dialog.Footer>
                                                 </Dialog.Content>
@@ -172,11 +281,63 @@ function adminConfig() {
                             </Table.Row>
                         </Table.Body>
                     </Table.Root>
+                    <Button
+                        bgColor="#895023"
+                        color="#FFF"
+                        marginRight={isMobile ? "0" : "2"}
+                        mt={5}
+                        onClick={() => (gerar())}
+                    >
+                        Testar Qr Code
+                    </Button>
                 </Box>
-                {chaveAleatoria === "123e4567-e89b-12d3-a456-426655440000" && (
-                    <Flex direction="column" alignItems="center" mt={4} p={4}>
-                        <Text color={"red"}>Essa é uma chave pix de exemplo</Text>
-                    </Flex>
+                {pixCode !== '' && (
+                    <Box rounded="md" bgColor={'black'} p={5} w={"50%"}>
+                        <Center>
+                            <QrCode.Root value={pixCode} size={"2xl"}>
+                                <QrCode.Frame>
+                                    <QrCode.Pattern />
+                                </QrCode.Frame>
+                            </QrCode.Root>
+                        </Center>
+                        <Text mt={2} wordBreak="break-all">
+                            <Text as="span" color="#895023" fontWeight="bold">
+                                Chave:{' '}
+                            </Text>
+                            {pixCode}
+                        </Text>
+
+                        <Flex align={"center"} justifyContent={"space-between"} mt={6}>
+                            <Button
+                                bg="#895023"
+                                color="white"
+                                variant="solid"
+                                _hover={{ bgColor: "#6f3f1b" }}
+                                size={"2xl"}
+                                onClick={() => {
+                                    navigator.clipboard.writeText(pixCode);
+                                    toaster.create({
+                                        title: "Código copiado!",
+                                        description: "O código Pix foi copiado para a área de transferência.",
+                                        type: "success",
+                                        duration: 2000,
+                                        closable: true,
+                                    });
+                                }}
+                            >
+                                Copiar código copia e cola
+                            </Button>
+                            <Button
+                                bg="#895023"
+                                color="white"
+                                variant="solid"
+                                _hover={{ bgColor: "#6f3f1b" }}
+                                size={"2xl"}
+                                onClick={handleFechar}>
+                                Fechar Qr Code
+                            </Button>
+                        </Flex>
+                    </Box>
                 )}
             </Stack>
 
@@ -184,4 +345,4 @@ function adminConfig() {
     );
 }
 
-export default adminConfig;
+export default AdminConfig;

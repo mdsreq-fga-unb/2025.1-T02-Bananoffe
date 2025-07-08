@@ -6,7 +6,6 @@ import { Roles } from 'src/auth/roles/roles.decorator';
 
 @Controller('configuracoes')
 @UseGuards(JwtAuthGuard, RolesGuard)
-@Roles('admin')
 export class ConfiguracoesController {
     constructor(private readonly configuracoesService: ConfiguracoesService) { }
 
@@ -16,9 +15,36 @@ export class ConfiguracoesController {
         return { chavePix: chave };
     }
 
+    @Roles('admin')
     @Put('pix')
     async updateChavePix(@Body('chavePix') chavePix: string) {
         const chave = await this.configuracoesService.atualizarChavePix(chavePix);
         return { chavePix: chave };
+    }
+
+    @Get('nome')
+    async getNomeCompleto() {
+        const nome = await this.configuracoesService.obterNomeCompleto();
+        return { nome: nome };
+    }
+
+    @Roles('admin')
+    @Put('nome')
+    async updateNomeCompleto(@Body('nomeCompleto') chavePix: string) {
+        const nomeCompleto = await this.configuracoesService.atualizarNomeCompleto(chavePix);
+        return { nomeCompleto: nomeCompleto };
+    }
+
+    @Get('cidade')
+    async getCidadeBanco() {
+        const cidadeBanco = await this.configuracoesService.obterCidadeBanco();
+        return { cidadeBanco: cidadeBanco };
+    }
+
+    @Roles('admin')
+    @Put('cidade')
+    async updateCidadeBanco(@Body('cidadeBanco') chavePix: string) {
+        const cidadeBanco = await this.configuracoesService.atualizarCidadeBanco(chavePix);
+        return { cidadeBanco: cidadeBanco };
     }
 }

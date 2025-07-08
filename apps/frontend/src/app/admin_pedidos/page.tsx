@@ -31,11 +31,6 @@ function AdminPedido() {
   const router = useRouter();
   const { data: session } = useSession();
 
-  const fetchPedidos = async () => {
-    const data = await listarTodosPedidos();
-    setPedidos(data);
-  };
-
   const pedidosFiltrados = pedidos.filter(
     (pedido) =>
       pedido._id.includes(searchTerm) ||
@@ -50,8 +45,13 @@ function AdminPedido() {
       return;
     }
 
+    const fetchPedidos = async () => {
+      const data = await listarTodosPedidos();
+      setPedidos(data);
+    };
+
     fetchPedidos();
-  }, [session]);
+  }, [session, router,listarTodosPedidos]);
 
   const toggleExpand = (id: string) => {
     setExpandedRow((prev) => (prev === id ? null : id));
@@ -166,7 +166,7 @@ function AdminPedido() {
                           size="sm"
                           variant="ghost"
                           _hover={{ bgColor: "#e2e2e2" }}
-                          color="green.600" 
+                          color="green.600"
                           onClick={() => handleDelete(pedido._id)}
                         >
                           <FaFileCircleCheck />

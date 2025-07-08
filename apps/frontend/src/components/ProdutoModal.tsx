@@ -20,7 +20,6 @@ import { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { useProducts } from "@/hooks/useProducts";
 import { useSacola } from "@/hooks/useSacola";
-import { get } from "http";
 
 export interface FormValues {
     produtoId: string
@@ -52,7 +51,7 @@ export default function ProductModal({
             getSacola();
             setSacolaCarregada(true);
         }
-    }, [token, sacolaCarregada]);
+    }, [token, sacolaCarregada,getSacola]);
 
     function isFatia(prod: Fatia | Torta): prod is Fatia {
         return (prod as Fatia).precoFatia !== undefined;
@@ -92,7 +91,7 @@ export default function ProductModal({
                 tamanho: isFatia(selectedProduct) ? undefined : tamanho,
             });
         }
-    }, [selectedProduct, reset]);
+    }, [selectedProduct, reset,tamanho]);
 
     const onSubmit = async (data: FormValues) => {
         if (!token) {
