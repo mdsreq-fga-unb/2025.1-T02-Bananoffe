@@ -5,7 +5,24 @@
 
 Product Backlog Building (PBB) é a prática de detalhar e priorizar itens de backlog de produto de forma colaborativa, garantindo que o time de desenvolvimento entenda claramente as funcionalidades necessárias, seus critérios de aceitação e cenários de teste (BDD). O PBB auxilia na comunicação entre stakeholders, no planejamento de entregas e na definição de qualidade esperada para cada User Story.
 
-<!-- Espaço para embed do Miro -->
+## PBB Canvas
+
+![Foto do PBB canvas](PBB1.jpg)
+## Problemas e Expectativas identificadas
+![Foto do PBB canvas](PBB6.jpg)
+
+As funcinoalidades foram organizadas por persona, as imagens a seguir contêm as personas com suas atividades e objetivos, e logo abaixo a sua funcinoalidade associada e seu conjunto de PBIs
+## Carlos - Técnico de Campo
+![Foto do PBB canvas](PBB2.jpg)
+## Mariana - Atendente
+![Foto do PBB canvas](PBB3.jpg)
+## Rafael - Cliente
+![Foto do PBB canvas](PBB4.jpg)
+## Ana - Diretora de operações
+![Foto do PBB canvas](PBB5.jpg)
+
+## PBB Canvas - Miro
+Segue o mesmo quadro PBB Canvas no miro para melhor visualização
 
 <div style="text-align:center; margin: 2rem 0;">
   <iframe width="768" height="432" src="https://miro.com/app/live-embed/uXjVIpB5v8g=/?embedMode=view_only_without_ui&moveToViewport=-21130,-9910,14446,11810&embedId=665492763069" frameborder="0" scrolling="no" allow="fullscreen; clipboard-read; clipboard-write" allowfullscreen></iframe>
@@ -250,4 +267,5 @@ Product Backlog Building (PBB) é a prática de detalhar e priorizar itens de ba
 | 19/06/25 | 1.0    | Criação do Documento  | Marcos Bezerra     |
 | 20/06/25 | 1.1    | Atualizando os benefícios  | Marcos Bezerra|
 | 20/06/25 | 1.2    | Atualizando o BDD  | Marcos Bezerra|
+| 13/07/25 | 1.3    | Atualizações da Issue 22  | Marcos Bezerra|
 
