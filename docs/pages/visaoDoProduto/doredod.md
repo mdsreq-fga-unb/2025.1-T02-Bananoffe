@@ -1,6 +1,6 @@
 ## Definition of Ready (DoR)
 
-A *Definition of Ready* (DoR) é um conjunto de critérios que um item ou User Story do Backlog deve atender para ser considerado pronto para iniciar o trabalho. Um item é considerado "Ready" quando possui clareza, viabilidade e alinhamento com os objetivos da Sprint. Os critérios são:
+A _Definition of Ready_ (DoR) é um conjunto de critérios que um item ou User Story do Backlog deve atender para ser considerado pronto para iniciar o trabalho. Um item é considerado "Ready" quando possui clareza, viabilidade e alinhamento com os objetivos da Sprint. Os critérios são:
 
 - **O requisito está claro, completo e sem ambiguidades?** Deve conter informações suficientes para que o time entenda o que precisa ser feito, sem múltiplas interpretações.
 - **As regras de negócio estão bem definidas e compreendidas?** Devem ser descritas de forma objetiva e mensurável.
@@ -14,9 +14,8 @@ A *Definition of Ready* (DoR) é um conjunto de critérios que um item ou User S
 
 ## Definition of Done (DoD)
 
-A *Definition of Done* (DoD) é o conjunto de critérios que define quando um item do backlog está completo, garantindo qualidade, conformidade e entrega de valor. Os critérios são:
+A _Definition of Done_ (DoD) é o conjunto de critérios que define quando um item do backlog está completo, garantindo qualidade, conformidade e entrega de valor. Os critérios são:
 
-- **A interface está fiel ao protótipo validado?** Deve refletir com precisão o que foi previamente aprovado.
 - **Todos os critérios de aceitação foram atendidos?** O comportamento e resultado esperados foram entregues.
 - **O backend foi corretamente integrado ao frontend (quando aplicável)?**
 - **O código passou por revisão de pares com pelo menos dois aprovadores?** Seguindo práticas como as do ScrumXP.
@@ -29,9 +28,9 @@ A *Definition of Done* (DoD) é o conjunto de critérios que define quando um it
 
 ## Histórico de Versão
 
-| Data     | Versão | Descrição                        | Autor                |
-|----------|--------|----------------------------------|----------------------|
-| 25/05/25 | 1.0    | Criação do Documento             | Fábio Santos Araújo  |
-| 25/05/25 | 1.1    | DoR e DoD                        | Fábio Santos Araújo  |
-| 26/05/25 | 1.2    | Atualização do DoR e DoD         | Fábio Santos Araújo  |
-| 22/06/25 | 1.3    | Atualizações da issue 17         | Marcos Bezerra       |
+| Data     | Versão | Descrição                | Autor               |
+| -------- | ------ | ------------------------ | ------------------- |
+| 25/05/25 | 1.0    | Criação do Documento     | Fábio Santos Araújo |
+| 25/05/25 | 1.1    | DoR e DoD                | Fábio Santos Araújo |
+| 26/05/25 | 1.2    | Atualização do DoR e DoD | Fábio Santos Araújo |
+| 22/06/25 | 1.3    | Atualizações da issue 17 | Marcos Bezerra      |
