@@ -8,28 +8,6 @@ Estes são os protótipos de alta e baixa fidelidade, desenvolvidos no Figma, e 
 
 ## <iframe style="border: 1px solid rgba(0, 0, 0, 0.1);" width="800" height="450" src="https://embed.figma.com/design/d67drzzQmjAqaOj5iIwoUM/Bananoffee?node-id=128-288&embed-host=share" allowfullscreen></iframe>
 
-## Protótipo do pedidos
-
-![Foto do PBB canvas](PBB1.jpg)
-
-## Protótipo do pagamento
-
-## Protótipo da minha conta
-
-## Protótipo do login
-
-## Protótipo do cadastro
-
-## Protótipo do recuperar senha
-
-## Protótipo do admin estoque
-
-## Protótipo do admin pedidos
-
-## Protótipo do admin config
-
-## Histórico de Versão
-
 | Data     | Versão | Descrição            | Autor          |
 | -------- | ------ | -------------------- | -------------- |
 | 20/06/25 | 1.0    | Criação do Documento | Marcos Bezerra |
