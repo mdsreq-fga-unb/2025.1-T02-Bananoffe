@@ -1,8 +1,11 @@
 Estes são os protótipos de alta e baixa fidelidade, desenvolvidos no Figma, e utilizados para validar fluxos de navegação, interações e layout antes de iniciarmos o desenvolvimento.
 
-## Protótipo do cardápio
+## Figma
+
+[Link do Figma](https://www.figma.com/design/d67drzzQmjAqaOj5iIwoUM/Bananoffee?node-id=0-1&t=9MP9Wu8943hrZ2fc-1)
 
 <iframe style="border: 1px solid rgba(0, 0, 0, 0.1);" width="1500" height="675" src="https://embed.figma.com/proto/d67drzzQmjAqaOj5iIwoUM/Bananoffee?node-id=135-3&starting-point-node-id=135%3A3&embed-host=share" allowfullscreen></iframe>
+## Protótipo do cardápio
 
 ![Foto do protótipo do cardápio](Cardapio.png)  
 ![Foto do protótipo do cardápio - torta](Cardapio_torta.png)  
