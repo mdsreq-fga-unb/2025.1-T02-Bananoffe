@@ -44,6 +44,21 @@ Os principais benefícios do **EduConnect** incluem:
 
 > As etapas seguintes, como a definição de **Para Quem** e a **identificação dos atores**, foram realizadas colaborativamente com a equipe utilizando a ferramenta **Miro**.
 
+## USM Completo
+![Quadro USM Geral](USM.jpg)
+## USM - Aluno
+Histórias relacionadas a persona "Aluno"
+![Quadro USM](USM1.jpg)
+![Quadro aluno 1](USMAluno1.jpg)
+![Quadro aluno 2](USMAluno2.jpg)
+## USM - Professor
+Histórias relacionadas a persona "Professor"
+![Quadro Professor geral](USM2.jpg)
+![Quadro Professor 1](USMProfessor1.jpg)
+![Quadro Professor 2](USMProfessor2.jpg)
+
+## USM - Miro
+Segue o USM no miro para melhor visualização
 <div style="text-align:center; margin: 2rem 0;">
 <iframe width="768" height="432" src="https://miro.com/app/live-embed/uXjVIpB5v8g=/?embedMode=view_only_without_ui&moveToViewport=-11071,3352,28450,9054&embedId=591954963930" frameborder="0" scrolling="no" allow="fullscreen; clipboard-read; clipboard-write" allowfullscreen></iframe>
 </div>
@@ -52,3 +67,4 @@ Os principais benefícios do **EduConnect** incluem:
 | -------- | ------ | ------------------ | ----------------------------------- |
 | 14/06/25 | 1.0    | Criação da um Miro | Anne Capdeville & Guilherme Zanella |
 | 15/06/25 | 1.1    | Adição do texto    | Anne Capdeville & Guilherme Zanella |
+| 13/06/25 | 1.2    | Atualizações da Issue 23    | Marcos Bezerra |
