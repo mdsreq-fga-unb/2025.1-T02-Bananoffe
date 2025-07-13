@@ -6,7 +6,7 @@ Estes são os protótipos de alta e baixa fidelidade, desenvolvidos no Figma, e 
 
 ## Protótipo da sacola
 
-<iframe style="border: 1px solid rgba(0, 0, 0, 0.1);" width="800" height="450" src="https://embed.figma.com/design/d67drzzQmjAqaOj5iIwoUM/Bananoffee?node-id=128-288&embed-host=share" allowfullscreen></iframe>
+ <iframe style="border: 1px solid rgba(0, 0, 0, 0.1);" width="800" height="450" src="https://embed.figma.com/design/d67drzzQmjAqaOj5iIwoUM/Bananoffee?node-id=128-288&embed-host=share" allowfullscreen></iframe>
 
 | Data     | Versão | Descrição            | Autor          |
 | -------- | ------ | -------------------- | -------------- |
