@@ -54,13 +54,19 @@ nav:
       - Unidade 2: pages/entregas/unidade2.md
       - Unidade 3: pages/entregas/unidade3.md
   - Evidências de ESW e ER:
-      - Atas: 
-          - Ata 1: pages/evidencias/atas/ata01.md 
+      - Atas:
+          - Ata 1: pages/evidencias/atas/ata01.md
           - Ata 2: pages/evidencias/atas/ata02.md
           - Ata 3: pages/evidencias/atas/ata03.md
           - Ata 4: pages/evidencias/atas/ata04.md
           - Ata 5: pages/evidencias/atas/ata05.md
+          - Ata 6: pages/evidencias/atas/ata06.md
           - Retrospectiva 1: pages/evidencias/atas/ataRetrospectiva01.md
+          - Retrospectiva 2: pages/evidencias/atas/ataRetrospectiva02.md
+          - Retrospectiva 3: pages/evidencias/atas/ataRetrospectiva03.md
+          - Retrospectiva 4: pages/evidencias/atas/ataRetrospectiva04.md
+          - Retrospectiva 5: pages/evidencias/atas/ataRetrospectiva05.md
+          - Retrospectiva 6: pages/evidencias/atas/ataRetrospectiva06.md
       - Protótipos: pages/evidencias/prototipo.md
   - Estudos de caso:
       - PBB: pages/EstudosDeCaso/PBB/PBB.md
