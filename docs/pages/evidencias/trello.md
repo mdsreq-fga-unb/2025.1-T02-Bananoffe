@@ -16,6 +16,7 @@ Utilizamos o **Trello** como ferramenta de apoio ao gerenciamento das histórias
 - Valor do **Story Points** dessa US
 
 > [Link do nosso quadro no Trello](https://trello.com/b/S66Hffzm/bananoffe)
+> ![Quadro do Trello](./assets/Trello.png)
 
 ---
 
@@ -131,29 +132,29 @@ Esta seção apresenta apenas as histórias de usuário que compuseram o **MVP**
 ![Especificação Back e Front US9](./assetsUS/US9.2.png)
 ![Checklist Marcado US9](./assetsUS/CHECKLIST.png)
 
-#### US10 - Remover os produtos da sacola virtual
-
-![Critérios de Aceitação US10](./assetsUS/US10.1.png)
-![Especificação Back e Front US10](./assetsUS/US10.2.png)
-![Checklist Marcado US10](./assetsUS/CHECKLIST.png)
-
 #### US11 - Alterar os produtos da sacola virtual
 
 ![Critérios de Aceitação US11](./assetsUS/US11.1.png)
 ![Especificação Back e Front US11](./assetsUS/US11.2.png)
 ![Checklist Marcado US11](./assetsUS/CHECKLIST.png)
 
-#### US13 - Visualizar um pedido
+#### US10 - Remover os produtos da sacola virtual
 
-![Critérios de Aceitação US13](./assetsUS/US13.1.png)
-![Especificação Back e Front US13](./assetsUS/US13.2.png)
-![Checklist Marcado US13](./assetsUS/CHECKLIST.png)
+![Critérios de Aceitação US10](./assetsUS/US10.1.png)
+![Especificação Back e Front US10](./assetsUS/US10.2.png)
+![Checklist Marcado US10](./assetsUS/CHECKLIST.png)
 
 #### US16 - Realizar pedido
 
 ![Critérios de Aceitação US16](./assetsUS/US16.1.png)
 ![Especificação Back e Front US16](./assetsUS/US16.2.png)
 ![Checklist Marcado US16](./assetsUS/CHECKLIST.png)
+
+#### US13 - Visualizar um pedido
+
+![Critérios de Aceitação US13](./assetsUS/US13.1.png)
+![Especificação Back e Front US13](./assetsUS/US13.2.png)
+![Checklist Marcado US13](./assetsUS/CHECKLIST.png)
 
 #### US15 - Alterar chave pix da doceria
 
