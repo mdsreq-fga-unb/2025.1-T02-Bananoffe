@@ -92,7 +92,7 @@ export class PedidoService {
     async listarTodosPedidos() {
         return this.pedidoModel
             .find()
-            .populate('usuarioId', 'nome email')
+            .populate('usuarioId', 'nome email telefone')
             .sort({ createdAt: -1 });
     }
 
@@ -107,7 +107,7 @@ export class PedidoService {
         const userObjId = typeof usuarioId === 'string' ? new Types.ObjectId(usuarioId) : usuarioId;
         return this.pedidoModel
             .find({ usuarioId: userObjId })
-            .populate('usuarioId', 'nome email')
+            .populate('usuarioId', 'nome email telefone')
             .sort({ createdAt: -1 });
     }
 
