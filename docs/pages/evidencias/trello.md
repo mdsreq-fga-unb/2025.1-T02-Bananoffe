@@ -173,7 +173,8 @@ Esta seção apresenta apenas as histórias de usuário que compuseram o **MVP**
 
 ## Histórico de Versão
 
-| Data       | Versão | Descrição            | Autor        |
-| ---------- | ------ | -------------------- | ------------ |
-| 13/07/2025 | 1.0    | Criação do Documento | Bruno Garcia |
+| Data       | Versão | Descrição                  | Autor        |
+| ---------- | ------ | -------------------------- | ------------ |
+| 13/07/2025 | 1.0    | Criação do Documento       | Bruno Garcia |
+| 14/07/2025 | 1.1    | Ajustes de algumas imagens | Bruno Garcia |
 
