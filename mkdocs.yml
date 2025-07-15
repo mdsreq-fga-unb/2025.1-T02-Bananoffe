@@ -1,0 +1,80 @@
+site_name: Bananoffee Doceria
+site_description: Documentação oficial do projeto
+site_author: Equipe BananaTech
+repo_url: https://github.com/mdsreq-fga-unb/2025.1-T02-Bananoffe
+repo_name: 2025.1-T02-Bananoffe
+
+theme:
+  name: material
+  language: pt-BR
+  favicon: assets/logounb.svg
+  logo: assets/logoBananoffee.png
+  icon:
+    repo: fontawesome/brands/github
+  palette:
+    - scheme: default
+      primary: yellow
+      accent: brown
+      toggle:
+        icon: material/toggle-switch-off-outline
+        name: Modo escuro
+    - scheme: slate
+      primary: yellow
+      accent: brown
+      toggle:
+        icon: material/toggle-switch
+        name: Modo claro
+  features:
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+    - repo.icon
+
+nav:
+  - Início: index.md
+  - Visão do Produto e Projeto:
+      - Cenário atual do cliente e do negócio: pages/visaoDoProduto/cenarioAtual.md
+      - Solução proposta: pages/visaoDoProduto/solucaoProposta.md
+      - Estratégias de Engenharia de Software: pages/visaoDoProduto/estrategiasEngSoft.md
+      - Interação entre Equipe e Cliente: pages/visaoDoProduto/interacaoEquipeCliente.md
+      - Cronogramas e Entregas: pages/visaoDoProduto/cronogramasEntregas.md
+      - Engenharia de Requisitos: pages/visaoDoProduto/engenhariaderequisitos.md
+      - DoR e DoD: pages/visaoDoProduto/doredod.md
+      - Lições Aprendidas:
+          - Unidade 1: pages/visaoDoProduto/licoesAprendidas/unidade1.md
+          - Unidade 2: pages/visaoDoProduto/licoesAprendidas/unidade2.md
+          - Unidade 3: pages/visaoDoProduto/licoesAprendidas/unidade3.md
+      - Referências: pages/visaoDoProduto/referencias.md
+  - Backlog:
+      - Requisitos de Software: pages/backlog/requisitos.md
+      - Backlog do Produto: pages/backlog/backlog.md
+  - Entregas:
+      - Unidade 1: pages/entregas/unidade1.md
+      - Unidade 2: pages/entregas/unidade2.md
+      - Unidade 3: pages/entregas/unidade3.md
+      - Unidade 4: pages/entregas/unidade4.md
+  - Evidências de ESW e ER:
+      - Atas:
+          - Ata 1: pages/evidencias/atas/ata01.md
+          - Ata 2: pages/evidencias/atas/ata02.md
+          - Ata 3: pages/evidencias/atas/ata03.md
+          - Ata 4: pages/evidencias/atas/ata04.md
+          - Ata 5: pages/evidencias/atas/ata05.md
+          - Ata 6: pages/evidencias/atas/ata06.md
+          - Retrospectiva 1: pages/evidencias/atas/ataRetrospectiva01.md
+          - Retrospectiva 2: pages/evidencias/atas/ataRetrospectiva02.md
+          - Retrospectiva 3: pages/evidencias/atas/ataRetrospectiva03.md
+          - Retrospectiva 4: pages/evidencias/atas/ataRetrospectiva04.md
+          - Retrospectiva 5: pages/evidencias/atas/ataRetrospectiva05.md
+          - Retrospectiva 6: pages/evidencias/atas/ataRetrospectiva06.md
+      - Protótipos: pages/evidencias/prototipo.md
+      - Aplicação da ER: pages/evidencias/trello.md
+      - Site Oficial: pages/evidencias/deploy.md
+  - Estudos de caso:
+      - PBB: pages/EstudosDeCaso/PBB/PBB.md
+      - USM: pages/EstudosDeCaso/USM/USM.md
+      - Casos de Uso: pages/EstudosDeCaso/UC/UC.md
+
+extra_css:
+  - stylesheets/styles.css
