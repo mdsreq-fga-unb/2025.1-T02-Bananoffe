@@ -1,6 +1,7 @@
 # Bananoffe - Sistema de Pedidos de Tortas
 
-Sistema para pedidos de tortas desenvolvido com NestJS (backend) e Next.js (frontend).
+Sistema para pedidos de tortas desenvolvido com NestJS (backend) e Next.js (frontend).<br>
+Site da Bananoffee Doceria: https://bananoffee.netlify.app
 
 ## Pré-requisitos
 
