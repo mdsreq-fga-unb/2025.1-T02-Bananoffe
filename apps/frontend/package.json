@@ -6,11 +6,12 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "postinstall": "patch-package"
   },
   "dependencies": {
     "@chakra-ui/form-control": "^2.2.0",
-    "@chakra-ui/icons": "^2.1.1",
+    "@chakra-ui/icons": "^2.2.4",
     "@chakra-ui/pin-input": "^2.1.0",
     "@chakra-ui/react": "^3.16.1",
     "@chakra-ui/toast": "^7.0.2",
@@ -30,12 +31,15 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@netlify/plugin-nextjs": "^5.11.4",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "15.3.0",
+    "patch-package": "^8.0.0",
+    "postinstall-postinstall": "^2.1.0",
     "tailwindcss": "^4",
     "typescript": "^5.8.3"
   }
