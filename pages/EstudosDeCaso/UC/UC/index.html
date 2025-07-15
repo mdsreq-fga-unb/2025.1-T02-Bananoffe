@@ -1,0 +1,2342 @@
+
+<!doctype html>
+<html lang="pt" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Documentação oficial do projeto">
+      
+      
+        <meta name="author" content="Equipe BananaTech">
+      
+      
+      
+        <link rel="prev" href="../../USM/USM/">
+      
+      
+      
+      <link rel="icon" href="../../../../assets/logounb.svg">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.15">
+    
+    
+      
+        <title>Casos de Uso - Bananoffee Doceria</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.342714a4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../stylesheets/styles.css">
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="yellow" data-md-color-accent="brown">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#diagrama-de-casos-de-uso-connectcare" class="md-skip">
+          Pular para conteúdo
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabeçalho">
+    <a href="../../../.." title="Bananoffee Doceria" class="md-header__button md-logo" aria-label="Bananoffee Doceria" data-md-component="logo">
+      
+  <img src="../../../../assets/logoBananoffee.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Bananoffee Doceria
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Casos de Uso
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="yellow" data-md-color-accent="brown"  aria-label="Modo escuro"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Modo escuro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6m0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4M7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="yellow" data-md-color-accent="brown"  aria-label="Modo claro"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Modo claro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Buscar" placeholder="Buscar" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Pesquisar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpar" aria-label="Limpar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando busca
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/mdsreq-fga-unb/2025.1-T02-Bananoffe" title="Ir para repositório" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    2025.1-T02-Bananoffe
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegação" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="Bananoffee Doceria" class="md-nav__button md-logo" aria-label="Bananoffee Doceria" data-md-component="logo">
+      
+  <img src="../../../../assets/logoBananoffee.png" alt="logo">
+
+    </a>
+    Bananoffee Doceria
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/mdsreq-fga-unb/2025.1-T02-Bananoffe" title="Ir para repositório" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    2025.1-T02-Bananoffe
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Início
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Visão do Produto e Projeto
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Visão do Produto e Projeto
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../visaoDoProduto/cenarioAtual/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cenário atual do cliente e do negócio
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../visaoDoProduto/solucaoProposta/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Solução proposta
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../visaoDoProduto/estrategiasEngSoft/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Estratégias de Engenharia de Software
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../visaoDoProduto/interacaoEquipeCliente/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Interação entre Equipe e Cliente
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../visaoDoProduto/cronogramasEntregas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cronogramas e Entregas
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../visaoDoProduto/engenhariaderequisitos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Engenharia de Requisitos
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../visaoDoProduto/doredod/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    DoR e DoD
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_8" id="__nav_2_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Lições Aprendidas
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_8">
+            <span class="md-nav__icon md-icon"></span>
+            Lições Aprendidas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../visaoDoProduto/licoesAprendidas/unidade1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Unidade 1
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../visaoDoProduto/licoesAprendidas/unidade2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Unidade 2
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../visaoDoProduto/licoesAprendidas/unidade3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Unidade 3
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../visaoDoProduto/referencias/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Referências
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Backlog
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Backlog
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backlog/requisitos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Requisitos de Software
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backlog/backlog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Backlog do Produto
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Entregas
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Entregas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../entregas/unidade1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Unidade 1
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../entregas/unidade2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Unidade 2
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../entregas/unidade3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Unidade 3
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../entregas/unidade4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Unidade 4
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Evidências de ESW e ER
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Evidências de ESW e ER
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_1" id="__nav_5_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Atas
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_1">
+            <span class="md-nav__icon md-icon"></span>
+            Atas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../evidencias/atas/ata01/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Ata 1
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../evidencias/atas/ata02/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Ata 2
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../evidencias/atas/ata03/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Ata 3
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../evidencias/atas/ata04/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Ata 4
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../evidencias/atas/ata05/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Ata 5
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../evidencias/atas/ata06/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Ata 6
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../evidencias/atas/ataRetrospectiva01/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Retrospectiva 1
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../evidencias/atas/ataRetrospectiva02/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Retrospectiva 2
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../evidencias/atas/ataRetrospectiva03/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Retrospectiva 3
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../evidencias/atas/ataRetrospectiva04/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Retrospectiva 4
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../evidencias/atas/ataRetrospectiva05/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Retrospectiva 5
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../evidencias/atas/ataRetrospectiva06/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Retrospectiva 6
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../evidencias/prototipo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Protótipos
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../evidencias/trello/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Aplicação da ER
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../evidencias/deploy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Site Oficial
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Estudos de caso
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Estudos de caso
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../PBB/PBB/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    PBB
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../USM/USM/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    USM
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Casos de Uso
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Casos de Uso
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#diagrama-de-casos-de-uso-miro" class="md-nav__link">
+    <span class="md-ellipsis">
+      Diagrama de casos de uso - Miro
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#atores" class="md-nav__link">
+    <span class="md-ellipsis">
+      Atores
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#casos-de-uso-identificados" class="md-nav__link">
+    <span class="md-ellipsis">
+      Casos de uso identificados
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Casos de uso identificados">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#casos-de-uso-pacientes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Casos de uso - Pacientes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#casos-de-uso-administradores-do-sistema" class="md-nav__link">
+    <span class="md-ellipsis">
+      Casos de uso - Administradores do Sistema
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#casos-de-uso-organizacoes-parceiras" class="md-nav__link">
+    <span class="md-ellipsis">
+      Casos de uso - Organizações parceiras
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#casos-de-uso-profissionais-da-saude" class="md-nav__link">
+    <span class="md-ellipsis">
+      Casos de uso - Profissionais da saúde
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#casos-de-uso-agentes-comunitarios" class="md-nav__link">
+    <span class="md-ellipsis">
+      Casos de uso - Agentes comunitários
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#diagrama-de-casos-de-uso-miro" class="md-nav__link">
+    <span class="md-ellipsis">
+      Diagrama de casos de uso - Miro
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#atores" class="md-nav__link">
+    <span class="md-ellipsis">
+      Atores
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#casos-de-uso-identificados" class="md-nav__link">
+    <span class="md-ellipsis">
+      Casos de uso identificados
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Casos de uso identificados">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#casos-de-uso-pacientes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Casos de uso - Pacientes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#casos-de-uso-administradores-do-sistema" class="md-nav__link">
+    <span class="md-ellipsis">
+      Casos de uso - Administradores do Sistema
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#casos-de-uso-organizacoes-parceiras" class="md-nav__link">
+    <span class="md-ellipsis">
+      Casos de uso - Organizações parceiras
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#casos-de-uso-profissionais-da-saude" class="md-nav__link">
+    <span class="md-ellipsis">
+      Casos de uso - Profissionais da saúde
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#casos-de-uso-agentes-comunitarios" class="md-nav__link">
+    <span class="md-ellipsis">
+      Casos de uso - Agentes comunitários
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="diagrama-de-casos-de-uso-connectcare">Diagrama de casos de uso - ConnectCare</h1>
+<p><img alt="Foto do diagrama de casos de uso do connect care" src="../UC.png" /></p>
+<h2 id="diagrama-de-casos-de-uso-miro">Diagrama de casos de uso - Miro</h2>
+<p>Segue o mesmo diagrama UML, mas na plataforma Miro, para melhor visualização:</p>
+<iframe width="768" height="432" src="https://miro.com/app/live-embed/uXjVIhhQSTE=/?embedMode=view_only_without_ui&moveToViewport=-8963,-946,3383,3383&embedId=747747756137" frameborder="0" scrolling="no" allow="fullscreen; clipboard-read; clipboard-write" allowfullscreen></iframe>
+
+<h2 id="atores">Atores</h2>
+<ul>
+<li>Pacientes</li>
+<li>Administradores do Sistema</li>
+<li>Profissionais da Saúde</li>
+<li>Médicos</li>
+<li>Enfermeiros</li>
+<li>Agentes comunitários</li>
+<li>Organizações parceiras</li>
+<li>ONGs</li>
+<li>Hospitais</li>
+<li>Instituições Governamentais</li>
+</ul>
+<h2 id="casos-de-uso-identificados">Casos de uso identificados</h2>
+<p>Segue os casos de uso identificados para cada ator do sistema:</p>
+<h3 id="casos-de-uso-pacientes">Casos de uso - Pacientes</h3>
+<ul>
+<li>Criar perfil de paciente</li>
+<li>Realizar Login</li>
+<li>Localizar posto</li>
+<li>Agendar consultas</li>
+<li>Fornecer feedback</li>
+<li>Se inscrever em campanhas de saúde</li>
+</ul>
+<h3 id="casos-de-uso-administradores-do-sistema">Casos de uso - Administradores do Sistema</h3>
+<ul>
+<li>Monitorar indicadores de desempenho</li>
+<li>Gerenciar informações de parceiros</li>
+<li>Responder a dúvidas e reclamações dos usuários</li>
+</ul>
+<h3 id="casos-de-uso-organizacoes-parceiras">Casos de uso - Organizações parceiras</h3>
+<ul>
+<li>Registrar campanhas de saúde</li>
+</ul>
+<h3 id="casos-de-uso-profissionais-da-saude">Casos de uso - Profissionais da saúde</h3>
+<ul>
+<li>Criar perfil de profissional</li>
+<li>Realizar Login</li>
+<li>Gerenciar atendimentos</li>
+<li>Visualizar agenda de consultas</li>
+<li>Organizar fluxo de trabalho</li>
+<li>Visualizar histórico do paciente</li>
+<li>Gerenciar prontuário do paciente</li>
+</ul>
+<h3 id="casos-de-uso-agentes-comunitarios">Casos de uso - Agentes comunitários</h3>
+<ul>
+<li>Gerenciar visitas domiciliares</li>
+<li>Criar relatórios sobre as condições de saúde</li>
+</ul>
+<hr />
+<h1 id="especificacoes-de-casos-de-uso">Específicações de casos de uso</h1>
+<p>Específicações de alguns casos de uso identificados</p>
+<h2 id="caso-de-uso-agendar-consultas">Caso de Uso: Agendar Consultas</h2>
+<h3 id="1-breve-descricao">1. Breve Descrição</h3>
+<p>O caso de uso "Agendar Consultas" permite que um Paciente, autenticado no sistema ConnectCare, escolha um profissional de saúde, selecione data, horário e local de atendimento, e confirme o agendamento de forma simples e segura.</p>
+<h3 id="2-atores">2. Atores</h3>
+<ul>
+<li>Paciente</li>
+</ul>
+<h3 id="3-condicoes-previas">3. Condições Prévias</h3>
+<ul>
+<li>O paciente deve estar logado no sistema</li>
+<li>Devem haver profissionais de saúde disponíveis</li>
+</ul>
+<h3 id="4-fluxo-basico-fb">4. Fluxo Básico (FB)</h3>
+<ol>
+<li>O paciente escolhe a opção "Agendar Consulta"</li>
+<li>O paciente insere as informações dos sintomas [FE01]:
+   2.1. O paciente insere a descrição dos sintomas [RN02]
+   2.2. O paciente insere a duração dos sintomas [RN02]
+   2.3. O paciente insere a intensidade dos sintomas [RN02]</li>
+<li>O sistema lista os tipos de consulta disponíveis</li>
+<li>O paciente seleciona um tipo de consulta</li>
+<li>O sistema seleciona o posto e profissional de saúde, do tipo de consulta selecionado, para a consulta baseado na geolocalização do paciente, a fim de selecionar o posto mais próximo ao paciente [FA01] [FA02] [RN01]</li>
+<li>O paciente escolhe uma Data/Horário para a consulta, baseado na disponibilidade do profissional de saúde</li>
+<li>O paciente confirma o agendamento</li>
+<li>O sistema registra o agendamento e exibe confirmação</li>
+<li>O caso de uso é encerrado</li>
+</ol>
+<h3 id="5-fluxos-alternativos-fa">5. Fluxos Alternativos (FA)</h3>
+<h4 id="fa01-trocar-posto">FA01 – Trocar posto</h4>
+<ol>
+<li>No FB5, o paciente clica em "Escolher outro posto"
+   1.1. O sistema exibe uma lista de postos ordenados pela disponibilidade de profissionais de saúde para o tipo de consulta e pela distância
+   1.2. O paciente seleciona manualmente outro posto
+   1.3. O sistema seleciona o profissional de saúde adequado de acordo com a disponibilidade
+   1.4. O sistema retorna ao FB6</li>
+</ol>
+<h4 id="fa02-trocar-profissional-de-saude">FA02 – Trocar profissional de saúde</h4>
+<ol>
+<li>No FB5, o paciente clica em "Escolher outro profissional de saúde"
+   1.1. O sistema exibe uma lista de profissionais de saúde, do tipo de consulta, disponíveis naquele posto de saúde
+   1.2. O paciente seleciona manualmente outro profissional de saúde
+   1.3. O sistema retorna ao FB6</li>
+</ol>
+<h3 id="6-fluxos-de-excecao-fe">6. Fluxos de Exceção (FE)</h3>
+<h4 id="fe01-dados-invalidos">FE01 – Dados inválidos</h4>
+<p>No FB2, se o usuário inserir alguma informação incorreta de acordo com a RN02, o sistema:
+1. Exibe uma mensagem "Informações inválidas"
+2. Retorna ao FB2</p>
+<h3 id="7-regras-de-negocio-rn">7. Regras de Negócio (RN)</h3>
+<ul>
+<li>
+<p><strong>RN01 – Localização</strong><br />
+  O sistema considera um raio de 10km e seleciona o posto de saúde, com profissionais disponíveis, mais próximo ao paciente</p>
+</li>
+<li>
+<p><strong>RN02 – Validação de informações</strong><br />
+  Os dados devem seguir o seguinte formato:</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Campo</th>
+<th>Formato</th>
+<th>Obrigatoriedade</th>
+<th>Valores Válidos</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Descrição dos sintomas</td>
+<td>Texto até 500 caracteres</td>
+<td>Sim</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Duração</td>
+<td>Inteiro</td>
+<td>Sim</td>
+<td>1 &lt; dias &lt;1000</td>
+</tr>
+<tr>
+<td>Intensidade</td>
+<td>Inteiro</td>
+<td>Sim</td>
+<td>0 &lt; valor &lt; 11</td>
+</tr>
+</tbody>
+</table>
+<h3 id="8-pos-condicoes">8. Pós-Condições</h3>
+<p>O agendamento da consulta é registrado no sistema e o paciente recebe confirmação com os detalhes da consulta agendada.</p>
+<h3 id="9-ponto-de-extensao">9. Ponto de Extensão</h3>
+<ul>
+<li><strong>Local:</strong> No FB5</li>
+<li><strong>Descrição:</strong> Deve ser incluído o caso de uso "Localizar posto", com o objetivo de localizar o posto de saúde mais próximo do paciente para realizar o agendamento da consulta</li>
+</ul>
+<hr />
+<h2 id="caso-de-uso-criar-perfil-de-paciente">Caso de Uso: Criar perfil de paciente</h2>
+<h3 id="1-breve-descricao_1">1. Breve Descrição</h3>
+<p>Este caso de uso descreve o processo pelo qual um paciente cria seu perfil na plataforma ConnectCare. O objetivo é registrar informações pessoais básicas para permitir o acesso personalizado a serviços de saúde, como agendamento de consultas, recebimento de notificações e visualização de campanhas de saúde.</p>
+<h3 id="2-atores_1">2. Atores</h3>
+<ul>
+<li>Paciente</li>
+</ul>
+<h3 id="3-condicoes-previas_1">3. Condições Prévias</h3>
+<ul>
+<li>O paciente deve ter acesso à internet e a um dispositivo com navegador ou aplicativo ConnectCare instalado</li>
+<li>O sistema deve estar disponível e em pleno funcionamento, garantindo que a funcionalidade de criação de perfil esteja acessível</li>
+<li>O paciente também deve concordar com os termos de uso e com a política de privacidade da plataforma, conforme a legislação vigente de proteção de dados</li>
+</ul>
+<h3 id="4-fluxo-basico-fb_1">4. Fluxo Básico (FB)</h3>
+<ol>
+<li>O paciente acessa a plataforma ConnectCare pela primeira vez</li>
+<li>O sistema exibe a opção de "Criar Perfil"</li>
+<li>O paciente seleciona a opção e preenche os seguintes dados: nome completo, data de nascimento, CPF (opcional), endereço, telefone, e condições de saúde preexistentes [FA01] [FA02] [FA03] [FE01] [FE02] [RN01]</li>
+<li>O paciente confirma as informações e submete o formulário</li>
+<li>O sistema valida os dados e salva o perfil [FE01] [FE02] [RN01]</li>
+<li>O sistema exibe uma mensagem de sucesso e redireciona o paciente à tela principal</li>
+<li>O caso de uso é encerrado</li>
+</ol>
+<h3 id="5-fluxos-alternativos-fa_1">5. Fluxos Alternativos (FA)</h3>
+<h4 id="fa01-dados-invalidos">FA01 – Dados Inválidos</h4>
+<ol>
+<li>No FB3, o paciente insere informações com formatação incorreta (ex: telefone inválido)</li>
+<li>O sistema exibe uma mensagem de erro específica e solicita a correção</li>
+<li>O fluxo retorna ao FB3</li>
+</ol>
+<h4 id="fa02-dados-incompletos">FA02 – Dados Incompletos</h4>
+<ol>
+<li>No FB3, o paciente deixa campos obrigatórios em branco</li>
+<li>O sistema exibe uma mensagem sobre quais campos precisam ser preenchidos</li>
+<li>O fluxo retorna ao FB3</li>
+</ol>
+<h4 id="fa03-recusa-em-informar-condicao-de-saude">FA03 – Recusa em Informar Condição de Saúde</h4>
+<ol>
+<li>O paciente opta por não informar condições de saúde preexistentes</li>
+<li>O sistema permite continuar, mas exibe uma mensagem de que algumas funcionalidades podem ser limitadas</li>
+<li>O fluxo segue normalmente para o FB5</li>
+</ol>
+<h3 id="6-fluxos-de-excecao-fe_1">6. Fluxos de Exceção (FE)</h3>
+<h4 id="fe01-falha-de-conexao">FE01 – Falha de Conexão</h4>
+<ol>
+<li>Durante o envio do formulário, ocorre perda de conexão</li>
+<li>O sistema informa a falha e salva os dados localmente</li>
+<li>Ao restabelecer a conexão, o paciente pode retomar de onde parou</li>
+</ol>
+<h4 id="fe02-erro-interno-do-sistema">FE02 – Erro Interno do Sistema</h4>
+<ol>
+<li>Ocorre uma falha no servidor durante o salvamento do perfil</li>
+<li>O sistema exibe uma mensagem de erro e orienta o paciente a tentar novamente mais tarde</li>
+</ol>
+<h3 id="7-regras-de-negocio-rn_1">7. Regras de Negócio (RN)</h3>
+<ul>
+<li><strong>RN01 – Validação de Dados</strong><br />
+  Os dados devem seguir o seguinte formato:</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Campo</th>
+<th>Formato</th>
+<th>Obrigatoriedade</th>
+<th>Valores Válidos</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Nome Completo</td>
+<td>Texto até 100 caracteres</td>
+<td>Sim</td>
+<td>Apenas letras e espaços</td>
+</tr>
+<tr>
+<td>Data de Nascimento</td>
+<td>DD/MM/AAAA</td>
+<td>Sim</td>
+<td>Data válida, idade &gt;= 0</td>
+</tr>
+<tr>
+<td>CPF</td>
+<td>11 dígitos</td>
+<td>Não</td>
+<td>CPF válido quando preenchido</td>
+</tr>
+<tr>
+<td>Telefone</td>
+<td>(XX) XXXXX-XXXX</td>
+<td>Sim</td>
+<td>Formato de telefone brasileiro</td>
+</tr>
+<tr>
+<td>Endereço</td>
+<td>Texto até 200 caracteres</td>
+<td>Sim</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>
+<p><strong>RN02 – Proteção de Dados</strong><br />
+  O armazenamento e tratamento dos dados informados devem obedecer às normas da LGPD, assegurando o consentimento do usuário e a confidencialidade das informações</p>
+</li>
+<li>
+<p><strong>RN03 – Acessibilidade</strong><br />
+  O sistema deve seguir as diretrizes de acessibilidade digital (como WCAG), apresentando textos legíveis, navegação intuitiva e suporte a tecnologias assistivas</p>
+</li>
+</ul>
+<h3 id="8-pos-condicoes_1">8. Pós-Condições</h3>
+<ul>
+<li>O perfil do paciente é criado e armazenado na base de dados, permitindo personalização da experiência e acesso a funcionalidades da plataforma</li>
+<li>O sistema também poderá utilizar essas informações para sugerir serviços de saúde relevantes, enviar notificações sobre campanhas e garantir acesso seguro e contínuo ao histórico médico digital do paciente</li>
+</ul>
+<h3 id="9-ponto-de-extensao_1">9. Ponto de Extensão</h3>
+<ul>
+<li><strong>Local:</strong> Após o FB6</li>
+<li><strong>Descrição:</strong> Caso o paciente informe dados correspondentes a um histórico anterior, o sistema pode vincular automaticamente ao prontuário existente através do caso de uso "Vinculação com Prontuário Digital"</li>
+</ul>
+<hr />
+<h2 id="caso-de-uso-gerenciar-usuarios">Caso de Uso: Gerenciar Usuários</h2>
+<h3 id="1-breve-descricao_2">1. Breve Descrição</h3>
+<p>Este caso de uso permite ao Administrador do Sistema gerenciar as contas de todos os tipos de usuários da plataforma "ConnectCare" (Pacientes, Profissionais de Saúde, Organizações Parceiras). As funcionalidades incluem pesquisar, visualizar, atualizar informações, criar novas contas e desativar contas existentes, garantindo a segurança, a organização e a integridade dos dados do sistema.</p>
+<h3 id="2-atores_2">2. Atores</h3>
+<ul>
+<li>Administrador do Sistema</li>
+</ul>
+<h3 id="3-condicoes-previas_2">3. Condições Prévias</h3>
+<ul>
+<li>O Administrador do Sistema deve estar autenticado na plataforma com privilégios administrativos</li>
+</ul>
+<h3 id="4-fluxo-basico-fb_2">4. Fluxo Básico (FB)</h3>
+<ol>
+<li>O Administrador do Sistema realiza o login no painel administrativo da plataforma</li>
+<li>O sistema exibe o painel principal com diversas opções de gerenciamento</li>
+<li>O Administrador seleciona a opção "Gerenciamento de Usuários"</li>
+<li>O sistema apresenta uma interface para pesquisar e listar os usuários</li>
+<li>O Administrador utiliza os filtros de busca (ex: por nome, e-mail, tipo de usuário) para encontrar o usuário desejado [FE01]</li>
+<li>O sistema exibe uma lista com os resultados correspondentes à busca [FE01]</li>
+<li>O Administrador seleciona o usuário que deseja gerenciar na lista</li>
+<li>O sistema exibe os detalhes completos da conta do usuário selecionado</li>
+<li>O Administrador clica na opção "Desativar Conta" [FA01] [FA02] [FA03]</li>
+<li>O sistema exibe uma mensagem de confirmação para a desativação [FA01]</li>
+<li>O Administrador confirma a ação</li>
+<li>O sistema atualiza o status do usuário para "inativo", bloqueando seu acesso à plataforma, e registra a operação em um log de auditoria</li>
+<li>O sistema exibe a mensagem: "Usuário desativado com sucesso."</li>
+<li>O caso de uso é encerrado</li>
+</ol>
+<h3 id="5-fluxos-alternativos-fa_2">5. Fluxos Alternativos (FA)</h3>
+<h4 id="fa01-cancelar-operacao">FA01 – Cancelar Operação</h4>
+<ol>
+<li>Em qualquer etapa que exija confirmação (como desativar ou apagar), se o Administrador escolher "Cancelar", o sistema interrompe a operação e retorna à tela anterior sem salvar alterações</li>
+</ol>
+<h4 id="fa02-criar-novo-usuario">FA02 – Criar Novo Usuário</h4>
+<ol>
+<li>No FB4, o Administrador seleciona a opção "Criar Novo Usuário"</li>
+<li>O sistema exibe um formulário para a criação de conta</li>
+<li>O Administrador seleciona o tipo de perfil (Paciente, Profissional, Organização) e preenche os dados necessários [FE02] [RN01] [RN02]</li>
+<li>O Administrador salva o novo usuário</li>
+<li>O sistema valida os dados, cria a nova conta com status "ativo" e exibe uma mensagem de sucesso. O fluxo se encerra</li>
+</ol>
+<h4 id="fa03-atualizar-dados-de-usuario">FA03 – Atualizar Dados de Usuário</h4>
+<ol>
+<li>No FB8, o Administrador escolhe a opção "Editar Perfil"</li>
+<li>O sistema abre o formulário com os dados do usuário em modo de edição</li>
+<li>O Administrador modifica as informações desejadas (ex: alterar permissões, atualizar contato de uma organização, corrigir nome) [FE02] [RN01] [RN02]</li>
+<li>O Administrador salva as alterações</li>
+<li>O sistema valida os novos dados [FE02], atualiza o perfil do usuário e exibe uma mensagem de sucesso. O fluxo retorna ao FB8</li>
+</ol>
+<h3 id="6-fluxos-de-excecao-fe_2">6. Fluxos de Exceção (FE)</h3>
+<h4 id="fe01-usuario-nao-encontrado">FE01 – Usuário Não Encontrado</h4>
+<ol>
+<li>No FB6, se a busca não retornar nenhum resultado, o sistema exibirá a mensagem: "Nenhum usuário encontrado com os critérios informados." O fluxo retorna ao FB5</li>
+</ol>
+<h4 id="fe02-dados-invalidos-ou-incompletos">FE02 – Dados Inválidos ou Incompletos</h4>
+<ol>
+<li>Durante a criação [FA02] ou atualização [FA03] de um usuário, caso algum campo obrigatório não seja preenchido ou um dado seja inserido em formato incorreto (ex: e-mail sem "@"), o sistema exibirá uma mensagem de erro indicando o campo problemático. O fluxo retorna à tela de preenchimento do formulário</li>
+</ol>
+<h3 id="7-regras-de-negocio-rn_2">7. Regras de Negócio (RN)</h3>
+<ul>
+<li>
+<p><strong>RN01 – Restrições de Administrador</strong><br />
+  Um administrador não pode desativar a sua própria conta de usuário</p>
+</li>
+<li>
+<p><strong>RN02 – Validação de Dados Profissionais</strong><br />
+  Ao criar uma conta para um Profissional de Saúde, o sistema pode exigir um campo de identificação profissional (ex: CRM para médicos) para validação futura</p>
+</li>
+<li>
+<p><strong>RN03 – Preservação de Histórico</strong><br />
+  Contas de usuários desativadas não podem realizar login, mas seus dados devem ser mantidos no sistema para fins de histórico</p>
+</li>
+<li>
+<p><strong>RN04 – Mascaramento de Dados Sensíveis</strong><br />
+  O sistema deve garantir que dados sensíveis dos usuários (ex: CPF, dados de saúde) sejam exibidos de forma mascarada para o Administrador, exceto quando estritamente necessário</p>
+</li>
+<li>
+<p><strong>RN05 – Auditoria e Rastreabilidade</strong><br />
+  Todas as ações realizadas neste caso de uso devem ser registradas com o ID do administrador, data, hora e detalhes da ação</p>
+</li>
+</ul>
+<h3 id="8-pos-condicoes_2">8. Pós-Condições</h3>
+<ul>
+<li>A conta de usuário é criada, atualizada ou desativada com sucesso no banco de dados</li>
+<li>As permissões de acesso do usuário são aplicadas ou revogadas conforme a ação realizada</li>
+<li>Toda ação de gerenciamento é registrada em um log de auditoria para fins de segurança e rastreabilidade</li>
+</ul>
+<h3 id="9-pontos-de-extensao">9. Pontos de Extensão</h3>
+<ul>
+<li><strong>Implementar funcionalidade de gerenciamento em massa</strong> (ex: desativar múltiplos usuários de uma vez)</li>
+<li><strong>Criar perfis de administradores com diferentes níveis de permissão</strong> (ex: um administrador que só pode gerenciar pacientes)</li>
+<li><strong>Integrar com um sistema de redefinição de senha automática</strong> para os usuários</li>
+</ul>
+<h3 id="10-requisitos-especiais">10. Requisitos Especiais</h3>
+<ul>
+<li>O sistema deve garantir que dados sensíveis dos usuários (ex: CPF, dados de saúde) sejam exibidos de forma mascarada para o Administrador, exceto quando estritamente necessário</li>
+<li>Todas as ações realizadas neste caso de uso devem ser registradas com o ID do administrador, data, hora e detalhes da ação</li>
+</ul>
+<hr />
+<h2 id="caso-de-uso-responder-duvidas-e-reclamacoes">Caso de Uso: Responder Dúvidas e Reclamações</h2>
+<h3 id="1-breve-descricao_3">1. Breve Descrição</h3>
+<p>Este caso de uso descreve como o Administrador do Sistema pode gerenciar dúvidas e reclamações enviadas por usuários externos (Pacientes, Profissionais de Saúde e Agentes Comunitários) na plataforma ConnectCare. As ações possíveis incluem visualizar solicitações, responder, encaminhar para outro setor ou marcar como resolvidas.</p>
+<h3 id="2-atores_3">2. Atores</h3>
+<ul>
+<li>Usuário Externo (Paciente, Profissional de Saúde ou Agente Comunitário)</li>
+<li>Administrador do Sistema</li>
+</ul>
+<h3 id="3-condicoes-previas_3">3. Condições Prévias</h3>
+<ul>
+<li>O usuário externo deve estar autenticado no sistema.</li>
+<li>O sistema deve estar ativo e apto a receber novas solicitações.</li>
+</ul>
+<h3 id="4-fluxo-basico-fb_3">4. Fluxo Básico (FB)</h3>
+<ol>
+<li>O caso de uso inicia quando um usuário externo registra uma dúvida ou reclamação.</li>
+<li>O usuário acessa a plataforma e envia a solicitação. [FE01][RN02]</li>
+<li>O sistema armazena a solicitação e a disponibiliza ao Administrador.</li>
+<li>O Administrador acessa a área administrativa e visualiza as solicitações pendentes. [FE03][RN03]</li>
+<li>O Administrador escolhe uma das ações:</li>
+<li>Responder à solicitação [FA01];</li>
+<li>Encaminhar para outro setor [FA02];</li>
+<li>Marcar como resolvida [FA03].</li>
+<li>O sistema registra a ação realizada e notifica o usuário externo.</li>
+<li>O caso de uso é encerrado.</li>
+</ol>
+<h3 id="5-fluxos-alternativos-fa_3">5. Fluxos Alternativos (FA)</h3>
+<h4 id="fa01-responder-a-solicitacao">FA01 – Responder à Solicitação</h4>
+<ol>
+<li>O Administrador seleciona uma solicitação.</li>
+<li>O sistema exibe seus detalhes (tipo, data, usuário e descrição).</li>
+<li>O Administrador insere e confirma a resposta. [FE01][FE02][RN02]</li>
+<li>O sistema salva a resposta e envia notificação ao usuário.</li>
+</ol>
+<h4 id="fa02-encaminhar-para-outro-setor">FA02 – Encaminhar para Outro Setor</h4>
+<ol>
+<li>O Administrador opta por encaminhar a solicitação.</li>
+<li>O sistema apresenta a lista de setores disponíveis.</li>
+<li>O Administrador escolhe o setor e, se desejar, insere um comentário.</li>
+<li>Ao confirmar, o sistema redireciona a solicitação e notifica o setor responsável. [FE03][RN03]</li>
+</ol>
+<h4 id="fa03-marcar-como-resolvida">FA03 – Marcar como Resolvida</h4>
+<ol>
+<li>O Administrador escolhe marcar a solicitação como resolvida.</li>
+<li>O sistema apresenta a lista de solicitações pendentes.</li>
+<li>O Administrador revisa o histórico e, opcionalmente, insere uma justificativa.</li>
+<li>O sistema registra a ação e notifica o usuário externo.</li>
+</ol>
+<h3 id="6-fluxos-de-excecao-fe_3">6. Fluxos de Exceção (FE)</h3>
+<h4 id="fe01-resposta-invalida">FE01 – Resposta Inválida</h4>
+<p>Se a resposta estiver vazia ou contiver caracteres inválidos, o sistema bloqueia o envio e exibe mensagem de erro.</p>
+<h4 id="fe02-falha-no-envio-da-resposta">FE02 – Falha no Envio da Resposta</h4>
+<p>Em caso de erro no banco de dados ou na conexão, o sistema informa a falha ao usuário.</p>
+<h4 id="fe03-falha-no-encaminhamento">FE03 – Falha no Encaminhamento</h4>
+<p>Se o setor estiver indisponível, o sistema exibe uma mensagem de erro e retorna à etapa anterior.</p>
+<h3 id="7-regras-de-negocio-rn_3">7. Regras de Negócio (RN)</h3>
+<ul>
+<li>
+<p><strong>RN01 – Tempo Máximo de Resposta</strong><br />
+  Dúvidas devem ser respondidas em até 48h. Reclamações críticas, em até 24h.</p>
+</li>
+<li>
+<p><strong>RN02 – Validação da Resposta</strong><br />
+  A resposta deve ser válida, sem campos vazios ou caracteres inválidos. [FE01]</p>
+</li>
+<li>
+<p><strong>RN03 – Registro de Histórico</strong><br />
+  Todas as interações devem ser salvas para fins de auditoria e consulta futura.</p>
+</li>
+<li>
+<p><strong>RN04 – Acessibilidade</strong><br />
+  O sistema deve ser compatível com VLibras e leitores de tela.</p>
+</li>
+</ul>
+<h3 id="8-pos-condicoes_3">8. Pós-Condições</h3>
+<p>O usuário externo tem sua solicitação respondida, encaminhada ou marcada como resolvida, com devida notificação.</p>
+<h3 id="9-ponto-de-extensao_2">9. Ponto de Extensão</h3>
+<p>Não se aplica.</p>
+<hr />
+<h2 id="caso-de-uso-registrar-campanhas-de-saude">Caso de Uso: Registrar Campanhas de Saúde</h2>
+<h3 id="1-breve-descricao_4">1. Breve Descrição</h3>
+<p>Este caso de uso permite que o Administrador do Sistema registre campanhas de saúde na plataforma ConnectCare. A funcionalidade inclui o cadastro de informações como título, descrição, público-alvo, datas e local de realização. O objetivo é divulgar e organizar ações de promoção à saúde para a população atendida.</p>
+<h3 id="2-atores_4">2. Atores</h3>
+<ul>
+<li>Administrador do Sistema</li>
+</ul>
+<h3 id="3-condicoes-previas_4">3. Condições Prévias</h3>
+<ul>
+<li>O Administrador deve estar autenticado no sistema.</li>
+<li>O sistema deve estar funcionando corretamente e com acesso ao módulo de campanhas.</li>
+</ul>
+<h3 id="4-fluxo-basico-fb_4">4. Fluxo Básico (FB)</h3>
+<ol>
+<li>O Administrador acessa o módulo de campanhas de saúde.</li>
+<li>O sistema exibe a opção para criar nova campanha.</li>
+<li>O Administrador preenche os dados da campanha:</li>
+<li>Título</li>
+<li>Descrição</li>
+<li>Público-alvo</li>
+<li>Data de início e fim</li>
+<li>Local da campanha</li>
+<li>O Administrador confirma o cadastro.</li>
+<li>O sistema valida os dados inseridos. [FE01][RN02]</li>
+<li>Em caso de sucesso, a campanha é registrada e fica disponível para visualização.</li>
+<li>O caso de uso é encerrado.</li>
+</ol>
+<h3 id="5-fluxos-alternativos-fa_4">5. Fluxos Alternativos (FA)</h3>
+<h4 id="fa01-editar-campanha-existente">FA01 – Editar Campanha Existente</h4>
+<ol>
+<li>O Administrador seleciona uma campanha cadastrada.</li>
+<li>O sistema exibe os dados atuais.</li>
+<li>O Administrador edita os campos desejados e confirma.</li>
+<li>O sistema valida e salva as alterações. [FE01][RN02]</li>
+</ol>
+<h4 id="fa02-excluir-campanha">FA02 – Excluir Campanha</h4>
+<ol>
+<li>O Administrador acessa a lista de campanhas.</li>
+<li>Seleciona uma campanha para exclusão.</li>
+<li>O sistema solicita confirmação.</li>
+<li>Após confirmação, a campanha é removida do sistema.</li>
+<li>O sistema registra a ação para fins de histórico. [RN03]</li>
+</ol>
+<h3 id="6-fluxos-de-excecao-fe_4">6. Fluxos de Exceção (FE)</h3>
+<h4 id="fe01-dados-invalidos_1">FE01 – Dados Inválidos</h4>
+<p>Se algum campo obrigatório estiver em branco ou com dados inválidos, o sistema exibe uma mensagem de erro e impede o prosseguimento.</p>
+<h4 id="fe02-falha-no-cadastro">FE02 – Falha no Cadastro</h4>
+<p>Se ocorrer falha na conexão ou no banco de dados, o sistema exibe uma mensagem de erro e solicita nova tentativa.</p>
+<h3 id="7-regras-de-negocio-rn_4">7. Regras de Negócio (RN)</h3>
+<ul>
+<li>
+<p><strong>RN01 – Datas Válidas</strong><br />
+  A data de término da campanha não pode ser anterior à data de início.</p>
+</li>
+<li>
+<p><strong>RN02 – Campos Obrigatórios</strong><br />
+  Título, público-alvo, datas e local são campos obrigatórios. [FE01]</p>
+</li>
+<li>
+<p><strong>RN03 – Registro de Histórico</strong><br />
+  Toda campanha criada, editada ou excluída deve ser registrada para fins de auditoria.</p>
+</li>
+<li>
+<p><strong>RN04 – Acessibilidade</strong><br />
+  O sistema deve ser acessível, compatível com leitores de tela e ferramentas como VLibras.</p>
+</li>
+</ul>
+<h3 id="8-pos-condicoes_4">8. Pós-Condições</h3>
+<p>A campanha de saúde é registrada, editada ou excluída, com os dados corretamente armazenados no sistema.</p>
+<h3 id="9-ponto-de-extensao_3">9. Ponto de Extensão</h3>
+<p>Não se aplica.</p>
+<hr />
+<h2 id="caso-de-uso-visualizar-historico-do-paciente">Caso de Uso: Visualizar Histórico do Paciente</h2>
+<h3 id="1-breve-descricao_5">1. Breve Descrição</h3>
+<p>Este caso de uso permite que um paciente visualize seu histórico médico por meio da plataforma ConnectCare. O histórico inclui consultas, exames, tratamentos e demais informações relevantes. O objetivo é oferecer ao paciente acesso rápido, seguro e centralizado aos seus registros de saúde.</p>
+<h3 id="2-atores_5">2. Atores</h3>
+<ul>
+<li>Paciente</li>
+<li>Profissional de Saúde (apenas com autorização expressa do paciente)</li>
+</ul>
+<h3 id="3-condicoes-previas_5">3. Condições Prévias</h3>
+<ul>
+<li>O paciente deve estar autenticado na plataforma.</li>
+<li>O histórico médico deve estar cadastrado no sistema.</li>
+<li>Profissionais de saúde só poderão acessar o histórico mediante autorização do paciente.</li>
+</ul>
+<h3 id="4-fluxo-basico-fb_5">4. Fluxo Básico (FB)</h3>
+<ol>
+<li>O paciente acessa o menu principal e seleciona a opção "Histórico Médico".</li>
+<li>O sistema verifica se o paciente está autenticado. [FE01]</li>
+<li>Se não estiver, redireciona para a tela de login.</li>
+<li>O sistema solicita os critérios de busca (ex: período, tipo de registro).</li>
+<li>O paciente preenche os critérios. [FE03]</li>
+<li>Caso contrário, o sistema exibe mensagem de erro e solicita preenchimento.</li>
+<li>O sistema valida os critérios e aplica as regras de acesso. [RN01]</li>
+<li>O sistema exibe a lista de registros que correspondem à busca.</li>
+<li>Se nenhum registro for encontrado, segue para o fluxo alternativo [FA01].</li>
+<li>O paciente seleciona um registro para ver detalhes.</li>
+<li>O sistema apresenta as informações completas (data, diagnóstico, prescrições, anotações). [RN02]</li>
+<li>O paciente pode optar por baixar ou imprimir o registro. [RN03]</li>
+<li>O caso de uso é encerrado.</li>
+</ol>
+<h3 id="5-fluxos-alternativos-fa_5">5. Fluxos Alternativos (FA)</h3>
+<h4 id="fa01-sem-registros-encontrados">FA01 – Sem Registros Encontrados</h4>
+<p>Se não houver registros com os critérios informados, o sistema exibe mensagem e permite que novos critérios sejam inseridos.</p>
+<h4 id="fa02-acesso-negado-ao-profissional-de-saude">FA02 – Acesso Negado ao Profissional de Saúde</h4>
+<p>Se um profissional tentar acessar o histórico sem autorização, o sistema bloqueia o acesso, exibe uma mensagem de erro e retorna ao menu.</p>
+<h3 id="6-fluxos-de-excecao-fe_5">6. Fluxos de Exceção (FE)</h3>
+<h4 id="fe01-falha-na-autenticacao">FE01 – Falha na Autenticação</h4>
+<p>Se o paciente ou profissional não estiver autenticado, será redirecionado para a tela de login.<br />
+<strong>Regra relacionada:</strong> RN01</p>
+<h4 id="fe02-erro-no-carregamento-dos-registros">FE02 – Erro no Carregamento dos Registros</h4>
+<p>Em caso de falha na consulta ao banco de dados ou sistema, uma mensagem de erro será exibida, e o usuário poderá tentar novamente.<br />
+<strong>Regra relacionada:</strong> RN03</p>
+<h4 id="fe03-informacoes-obrigatorias-nao-preenchidas">FE03 – Informações Obrigatórias Não Preenchidas</h4>
+<p>Se os critérios de busca não forem preenchidos, o sistema impedirá o avanço até que os dados sejam inseridos.<br />
+<strong>Regra relacionada:</strong> RN01</p>
+<h4 id="fe04-violacao-de-seguranca-ou-acesso-nao-autorizado">FE04 – Violação de Segurança ou Acesso Não Autorizado</h4>
+<p>Se um usuário tentar acessar dados sem permissão, o sistema bloqueará a ação e informará sobre a violação.<br />
+<strong>Regra relacionada:</strong> RN02</p>
+<h3 id="7-regras-de-negocio-rn_5">7. Regras de Negócio (RN)</h3>
+<ul>
+<li>
+<p><strong>RN01 – Controle de Acesso</strong><br />
+  Apenas pacientes autenticados podem acessar seu histórico.<br />
+  Profissionais de saúde só podem visualizar com autorização do paciente.</p>
+</li>
+<li>
+<p><strong>RN02 – Segurança e Privacidade</strong><br />
+  Todos os dados devem ser protegidos conforme a LGPD, garantindo acesso apenas a usuários autorizados.</p>
+</li>
+<li>
+<p><strong>RN03 – Disponibilidade dos Registros</strong><br />
+  Os registros devem estar acessíveis e armazenados de forma segura e confiável.</p>
+</li>
+</ul>
+<h3 id="8-pos-condicoes_5">8. Pós-Condições</h3>
+<ul>
+<li>O paciente consegue visualizar seu histórico médico.</li>
+<li>Profissionais de saúde acessam os dados apenas mediante autorização do paciente.</li>
+</ul>
+<h3 id="9-ponto-de-extensao_4">9. Ponto de Extensão</h3>
+<ul>
+<li><strong>Local:</strong> Durante a visualização do histórico médico.</li>
+<li><strong>Descrição:</strong> O caso de uso "Visualizar Histórico do Paciente" pode ser estendido por "Realizar Atendimento Médico", permitindo que o profissional utilize os dados para basear a consulta e registrar novas informações no prontuário do paciente.</li>
+</ul>
+<hr />
+<table>
+<thead>
+<tr>
+<th>Data</th>
+<th>Versão</th>
+<th>Descrição</th>
+<th>Autor</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>02/07/25</td>
+<td>1.0</td>
+<td>Criação do Documento</td>
+<td>Bruno Garcia, Guilherme Zanella e Marcos Bezerra</td>
+</tr>
+<tr>
+<td>13/07/25</td>
+<td>1.1</td>
+<td>Colocando em UML</td>
+<td>Marcos Bezerra</td>
+</tr>
+<tr>
+<td>14/07/25</td>
+<td>1.2</td>
+<td>Adicionando os Casos de Uso</td>
+<td>Fábio Araújo</td>
+</tr>
+<tr>
+<td>14/07/25</td>
+<td>1.3</td>
+<td>Adicionado especificações de casos de uso</td>
+<td>Matheus Rodrigues</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Voltar para o topo
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../../..", "features": ["navigation.top", "search.suggest", "search.highlight", "content.code.copy", "repo.icon"], "search": "../../../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "mais 1 nesta p\u00e1gina", "search.result.more.other": "# mais nesta p\u00e1gina", "search.result.none": "Nenhum documento encontrado", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": null}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.56ea9cef.min.js"></script>
+      
+    
+  </body>
+</html>

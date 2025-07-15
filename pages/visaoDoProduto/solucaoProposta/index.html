@@ -1,0 +1,1832 @@
+
+<!doctype html>
+<html lang="pt" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Documentação oficial do projeto">
+      
+      
+        <meta name="author" content="Equipe BananaTech">
+      
+      
+      
+        <link rel="prev" href="../cenarioAtual/">
+      
+      
+        <link rel="next" href="../estrategiasEngSoft/">
+      
+      
+      <link rel="icon" href="../../../assets/logounb.svg">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.15">
+    
+    
+      
+        <title>Solução proposta - Bananoffee Doceria</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.342714a4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/styles.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="yellow" data-md-color-accent="brown">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#solucao-proposta" class="md-skip">
+          Pular para conteúdo
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabeçalho">
+    <a href="../../.." title="Bananoffee Doceria" class="md-header__button md-logo" aria-label="Bananoffee Doceria" data-md-component="logo">
+      
+  <img src="../../../assets/logoBananoffee.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Bananoffee Doceria
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Solução proposta
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="yellow" data-md-color-accent="brown"  aria-label="Modo escuro"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Modo escuro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6m0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4M7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="yellow" data-md-color-accent="brown"  aria-label="Modo claro"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Modo claro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Buscar" placeholder="Buscar" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Pesquisar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpar" aria-label="Limpar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando busca
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/mdsreq-fga-unb/2025.1-T02-Bananoffe" title="Ir para repositório" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    2025.1-T02-Bananoffe
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegação" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Bananoffee Doceria" class="md-nav__button md-logo" aria-label="Bananoffee Doceria" data-md-component="logo">
+      
+  <img src="../../../assets/logoBananoffee.png" alt="logo">
+
+    </a>
+    Bananoffee Doceria
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/mdsreq-fga-unb/2025.1-T02-Bananoffe" title="Ir para repositório" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    2025.1-T02-Bananoffe
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Início
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Visão do Produto e Projeto
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Visão do Produto e Projeto
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cenarioAtual/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cenário atual do cliente e do negócio
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Solução proposta
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Solução proposta
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#objetivos-do-produto" class="md-nav__link">
+    <span class="md-ellipsis">
+      Objetivos do Produto
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#caracteristicas-da-solucao" class="md-nav__link">
+    <span class="md-ellipsis">
+      Características da Solução
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tecnologias-a-serem-utilizadas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tecnologias a Serem Utilizadas
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pesquisa-de-mercado-e-analise-competitiva" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pesquisa de Mercado e Análise Competitiva
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#concorrencia-local" class="md-nav__link">
+    <span class="md-ellipsis">
+      Concorrência Local
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#concorrencia-digital" class="md-nav__link">
+    <span class="md-ellipsis">
+      Concorrência Digital
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#diferenciais-da-solucao-proposta" class="md-nav__link">
+    <span class="md-ellipsis">
+      Diferenciais da Solução Proposta
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#analise-de-viabilidade" class="md-nav__link">
+    <span class="md-ellipsis">
+      Análise de Viabilidade
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#impacto-da-solucao" class="md-nav__link">
+    <span class="md-ellipsis">
+      Impacto da Solução
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#historico-de-versao" class="md-nav__link">
+    <span class="md-ellipsis">
+      Histórico de Versão
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../estrategiasEngSoft/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Estratégias de Engenharia de Software
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../interacaoEquipeCliente/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Interação entre Equipe e Cliente
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cronogramasEntregas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cronogramas e Entregas
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../engenhariaderequisitos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Engenharia de Requisitos
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../doredod/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    DoR e DoD
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_8" id="__nav_2_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Lições Aprendidas
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_8">
+            <span class="md-nav__icon md-icon"></span>
+            Lições Aprendidas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../licoesAprendidas/unidade1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Unidade 1
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../licoesAprendidas/unidade2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Unidade 2
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../licoesAprendidas/unidade3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Unidade 3
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../referencias/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Referências
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Backlog
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Backlog
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../backlog/requisitos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Requisitos de Software
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../backlog/backlog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Backlog do Produto
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Entregas
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Entregas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../entregas/unidade1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Unidade 1
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../entregas/unidade2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Unidade 2
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../entregas/unidade3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Unidade 3
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../entregas/unidade4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Unidade 4
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Evidências de ESW e ER
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Evidências de ESW e ER
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_1" id="__nav_5_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Atas
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_1">
+            <span class="md-nav__icon md-icon"></span>
+            Atas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../evidencias/atas/ata01/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Ata 1
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../evidencias/atas/ata02/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Ata 2
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../evidencias/atas/ata03/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Ata 3
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../evidencias/atas/ata04/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Ata 4
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../evidencias/atas/ata05/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Ata 5
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../evidencias/atas/ata06/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Ata 6
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../evidencias/atas/ataRetrospectiva01/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Retrospectiva 1
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../evidencias/atas/ataRetrospectiva02/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Retrospectiva 2
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../evidencias/atas/ataRetrospectiva03/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Retrospectiva 3
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../evidencias/atas/ataRetrospectiva04/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Retrospectiva 4
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../evidencias/atas/ataRetrospectiva05/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Retrospectiva 5
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../evidencias/atas/ataRetrospectiva06/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Retrospectiva 6
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../evidencias/prototipo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Protótipos
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../evidencias/trello/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Aplicação da ER
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../evidencias/deploy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Site Oficial
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Estudos de caso
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Estudos de caso
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../EstudosDeCaso/PBB/PBB/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    PBB
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../EstudosDeCaso/USM/USM/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    USM
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../EstudosDeCaso/UC/UC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Casos de Uso
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#objetivos-do-produto" class="md-nav__link">
+    <span class="md-ellipsis">
+      Objetivos do Produto
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#caracteristicas-da-solucao" class="md-nav__link">
+    <span class="md-ellipsis">
+      Características da Solução
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tecnologias-a-serem-utilizadas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tecnologias a Serem Utilizadas
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pesquisa-de-mercado-e-analise-competitiva" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pesquisa de Mercado e Análise Competitiva
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#concorrencia-local" class="md-nav__link">
+    <span class="md-ellipsis">
+      Concorrência Local
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#concorrencia-digital" class="md-nav__link">
+    <span class="md-ellipsis">
+      Concorrência Digital
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#diferenciais-da-solucao-proposta" class="md-nav__link">
+    <span class="md-ellipsis">
+      Diferenciais da Solução Proposta
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#analise-de-viabilidade" class="md-nav__link">
+    <span class="md-ellipsis">
+      Análise de Viabilidade
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#impacto-da-solucao" class="md-nav__link">
+    <span class="md-ellipsis">
+      Impacto da Solução
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#historico-de-versao" class="md-nav__link">
+    <span class="md-ellipsis">
+      Histórico de Versão
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="solucao-proposta">SOLUÇÃO PROPOSTA</h1>
+<h3 id="objetivos-do-produto">Objetivos do Produto</h3>
+<p>O objetivo do produto é automatizar partes do processo de venda dos produtos da empresa Bananoffee Doceria, visando agilizar e organizar o atendimento e os pedidos, além de reduzir o tempo e o esforço gastos com a comunicação manual via WhatsApp. Com a plataforma proposta, etapas como a exibição do cardápio, a seleção dos produtos e o envio do pedido serão realizadas diretamente pelo cliente, sem a necessidade de um colaborador intermediar esse atendimento inicial. Além disso, o pagamento via Pix também poderá ser realizado de forma automática através do site, eliminando a necessidade de troca de mensagens para envio de dados bancários ou confirmação de valores.</p>
+<p>Com a implementação de uma plataforma própria de delivery, espera-se automatizar esse fluxo e alavancar a quantidade de vendas.</p>
+<h3 id="caracteristicas-da-solucao">Características da Solução</h3>
+<p>Como o principal conjunto de características iniciais para solucionar o problema da empresa, temos:</p>
+<ul>
+<li>Haverá um menu digital interativo atualizado em tempo real, com os produtos disponíveis para que o cliente possa escolher.</li>
+<li>O site contará com um sistema de reserva, onde o usuário poderá reservar fatias ou tortas para a retirada ou entrega no dia seguinte.</li>
+<li>O site apresentará um sistema inteligente de personalização de pedidos, no qual o cliente poderá saber quais produtos já foram selecionados para o pedido final no momento.</li>
+<li>O site deverá contar com um cadastro de clientes, para gestão interna da empresa e contato com o cliente.</li>
+<li>Integração com método Pix de pagamento online, incluindo geração de QR Code Pix, ou escolha de pagamento no momento da retirada.</li>
+<li>Painel administrativo na qual a equipe de gestão administrativa da empresa poderá acompanhar pedidos, controlar estoque e gerenciar a produção de forma mais eficiente.</li>
+<li>O site terá um design simples e intuitivo para facilitar a navegação do usuário e do gestor da empresa.</li>
+<li>Notificações e confirmações automáticas, reduzindo a dependência de respostas via WhatsApp.</li>
+</ul>
+<h3 id="tecnologias-a-serem-utilizadas">Tecnologias a Serem Utilizadas</h3>
+<p>A solução será desenvolvida com base em tecnologias modernas e consolidadas no mercado, garantindo desempenho, escalabilidade e facilidade de manutenção.</p>
+<p>As principais tecnologias a serem utilizadas são:</p>
+<ul>
+<li><strong>Next.js</strong>: Framework React para a construção da interface do usuário (frontend), proporcionando uma navegação rápida, responsiva e com excelente experiência ao cliente.</li>
+<li><strong>NestJS</strong>: Framework Node.js para o desenvolvimento da API e da lógica de negócios (backend), com arquitetura modular e robusta, ideal para aplicações escaláveis.</li>
+<li><strong>MongoDB</strong>: banco de dados NoSQL, que oferece flexibilidade no armazenamento de dados e facilidade de integração.</li>
+</ul>
+<h3 id="pesquisa-de-mercado-e-analise-competitiva">Pesquisa de Mercado e Análise Competitiva</h3>
+<p>A solução digital proposta para a Bananoffee Doceria — um sistema de pedidos online com catálogo digital, gestão de estoque e suporte a pronta-entrega — insere-se em um cenário competitivo que vai além da confeitaria local. Nesse contexto, é essencial considerar tanto os concorrentes diretos (outras docerias artesanais) quanto os concorrentes funcionais (plataformas e sistemas que oferecem soluções similares à que será desenvolvida).</p>
+<h3 id="concorrencia-local">Concorrência Local</h3>
+<p>A Bananoffee atua em um mercado de confeitaria artesanal dentro de um condomínio, onde diversas iniciativas similares compartilham o mesmo público-alvo. A maioria dessas docerias opera de forma enxuta e artesanal, utilizando o grupo de WhatsApp do condomínio como canal principal de divulgação e captação de pedidos. Dentre os concorrentes diretos, destaca-se a Tem Delícia, que mantém presença ativa no Instagram e trabalha com encomendas de bolos personalizados, brigadeiros e cupcakes. No entanto, não oferece pronta-entrega e exige pedidos com antecedência.</p>
+<p>As principais fragilidades observadas nessas concorrentes locais são:</p>
+<ul>
+<li>Ausência de presença digital estruturada: não possuem site ou catálogo online, limitando o alcance a novos clientes fora do grupo do condomínio.</li>
+<li>Falta de pronta-entrega: trabalham apenas com encomendas, o que dificulta compras por impulso.</li>
+<li>Processos manuais: os pedidos são gerenciados via WhatsApp, o que gera riscos de erro, lentidão no atendimento e perda de oportunidades de venda.</li>
+</ul>
+<h3 id="concorrencia-digital">Concorrência Digital</h3>
+<p>No universo digital, a solução proposta compete com plataformas e sistemas já consolidados, que oferecem funcionalidades semelhantes. O principal entre todos é:</p>
+<ul>
+<li><strong>iFood</strong>: plataforma amplamente conhecida que permite pedidos online, entrega e pagamentos digitais. No entanto, cobra altas taxas de comissão, o que reduz a margem de lucro dos pequenos negócios.</li>
+</ul>
+<p>Esse sistema oferece funcionalidades que, muitas vezes, não estão alinhadas com a realidade de pequenos negócios artesanais que buscam soluções mais simples, personalizadas e de baixo custo.</p>
+<h3 id="diferenciais-da-solucao-proposta">Diferenciais da Solução Proposta</h3>
+<p>A solução da Bananoffee se destaca por:</p>
+<ul>
+<li>Oferecer um catálogo digital acessível por link, facilitando a visualização dos produtos e ampliando a divulgação fora do grupo do condomínio.</li>
+<li>Permitir controle de estoque em tempo real, com destaque para a disponibilidade de produtos para pronta-entrega.</li>
+<li>Automatizar parte do processo de pedidos, reduzindo o tempo gasto com atendimento manual via WhatsApp e aumentando a eficiência da operação.</li>
+</ul>
+<h3 id="analise-de-viabilidade">Análise de Viabilidade</h3>
+<p>A viabilidade técnica do projeto é alta, considerando que a equipe já possui experiência comprovada nas tecnologias que serão utilizadas, como Next.js para o frontend, NestJS para o backend e MongoDB para o banco de dados.</p>
+<p>O prazo estimado para o desenvolvimento é de três meses, considerado viável para o escopo inicial do site de delivery. O projeto seguirá uma abordagem híbrida, combinando práticas de planejamento tradicional com entregas iterativas e incrementais. A definição de requisitos será feita de forma mais estruturada no início do projeto, com base em uma reunião inicial com o cliente. A partir disso, serão realizadas sprints internas quinzenais, permitindo evoluções constantes e entregas frequentes das funcionalidades, mesmo com baixa frequência de reuniões com o cliente.</p>
+<p>A equipe já participou de projetos similares e possui autonomia para tomar decisões técnicas. O uso de frameworks modernos e conhecidos também contribui para a viabilidade do projeto, reduzindo riscos técnicos. Além disso, o fato de o projeto não depender de muitas integrações externas complexas neste primeiro momento favorece a execução dentro do prazo.</p>
+<h3 id="impacto-da-solucao">Impacto da Solução</h3>
+<p>A implementação da nova plataforma de pedidos online para a Bananoffee Doceria deverá gerar uma série de impactos positivos, tanto operacionais quanto estratégicos.</p>
+<ul>
+<li>
+<p><strong>Agilidade no atendimento:</strong> A automatização do processo de pedidos elimina a necessidade de interações manuais constantes via WhatsApp, permitindo que o cliente finalize seu pedido de forma autônoma, escolhendo produtos, horário de retirada e método de pagamento em poucos cliques. Isso reduz o tempo médio de atendimento, elimina gargalos de comunicação e libera os funcionários para ficarem na produção e entrega.</p>
+</li>
+<li>
+<p><strong>Agilidade na produção:</strong> Com o sistema de reserva, o planejamento de produção se torna muito mais ágil e organizado. Atualmente, é necessário buscar manualmente, entre anotações e conversas no WhatsApp, quem havia reservado fatias para determinado dia, o que consumia tempo e gerava risco de erros. Através do sistema de reserva, todas as reservas do dia ficam centralizadas e visíveis em um único lugar, facilitando a tomada de decisão sobre a produção. Além disso, como cada torta possui 10 fatias, a quantidade de tortas disponíveis para pronta entrega passa a ser diretamente influenciada pelas reservas realizadas. Por exemplo, se 4 fatias de um sabor específico forem reservadas, a produção já considera que será necessário fazer pelo menos uma torta daquele sabor, e as fatias restantes poderão ser vendidas à pronta entrega no dia. Isso traz mais controle, evita desperdício e melhora o aproveitamento da produção diária.</p>
+</li>
+<li>
+<p><strong>Melhora na Experiência do Cliente:</strong> Com um site responsivo, intuitivo e acessível por qualquer dispositivo, o cliente poderá navegar pelo cardápio digital, conferir os produtos disponíveis em tempo real e realizar pedidos sem depender da disponibilidade de atendimento humano. Além disso, as notificações automáticas sobre status do pedido, confirmação de pagamento e instruções de retirada aumentam a previsibilidade e confiança no serviço.</p>
+</li>
+<li>
+<p><strong>Melhor controle de estoque e redução de erros:</strong> O sistema administrativo permitirá registrar e acompanhar a disponibilidade de tortas e fatias conforme a produção diária. Isso evita vendas de produtos esgotados, reduz inconsistências no atendimento e minimiza o risco de erros como pedidos duplicados, esquecidos ou registrados incorretamente — problemas comuns no processo atual baseado em mensagens manuais.</p>
+</li>
+<li>
+<p><strong>Aumento do Volume de pedidos e escalabilidade da empresa:</strong> A automação do processo torna possível atender a um número maior de pedidos simultâneos, especialmente em datas comemorativas como Natal, Páscoa e aniversários, sem comprometer a organização. O sistema pode escalar de forma proporcional à demanda, sem depender do aumento da equipe ou comprometer a qualidade do serviço.</p>
+</li>
+<li>
+<p><strong>Redução de custos com pessoas intermediárias:</strong> Com a nova plataforma, a dependência de plataformas terceirizadas como iFood e Uber Flash pode ser reduzida significativamente, assim como os custos com taxas e comissões. A venda direta pelo site permite repassar melhores preços ao consumidor final e preservar maior margem de lucro para a empresa.</p>
+</li>
+<li>
+<p><strong>Fortalecimento da Marca e Fidelização de Clientes:</strong> A criação de um canal próprio de vendas aumenta a percepção de profissionalismo e credibilidade da marca. Com o cadastro de clientes e registros de compras, torna-se possível desenvolver ações de fidelização, como promoções direcionadas, ofertas personalizadas e campanhas sazonais — fortalecendo o vínculo com os consumidores e incentivando recompras.</p>
+</li>
+</ul>
+<hr />
+<h2 id="historico-de-versao">Histórico de Versão</h2>
+<table>
+<thead>
+<tr>
+<th>Data</th>
+<th>Versão</th>
+<th>Descrição</th>
+<th>Autor</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>17/04/25</td>
+<td>1.0</td>
+<td>Criação do Documento</td>
+<td>Marcos Bezerra</td>
+</tr>
+<tr>
+<td>19/04/25</td>
+<td>1.1</td>
+<td>Ajustes e estilização</td>
+<td>Bruno Cruz</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Voltar para o topo
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.top", "search.suggest", "search.highlight", "content.code.copy", "repo.icon"], "search": "../../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "mais 1 nesta p\u00e1gina", "search.result.more.other": "# mais nesta p\u00e1gina", "search.result.none": "Nenhum documento encontrado", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.56ea9cef.min.js"></script>
+      
+    
+  </body>
+</html>
