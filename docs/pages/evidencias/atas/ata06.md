@@ -42,4 +42,4 @@ Iniciar a Sprint 6 com foco na finalização do fluxo de pagamento via Pix, conf
 
 | Data     | Versão | Descrição            | Autor              |
 | -------- | ------ | -------------------- | ------------------ |
-| 20/06/25 | 1.0    | Criação do Documento | Anne de Capdeville |
+| 13/07/25 | 1.0    | Criação do Documento | Anne de Capdeville |

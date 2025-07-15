@@ -37,4 +37,4 @@ Durante a última aula com o professor George, o grupo realizou uma revisão do 
 
 | Data     | Versão | Descrição            | Autor              |
 | -------- | ------ | -------------------- | ------------------ |
-| 20/06/25 | 1.0    | Criação do Documento | Anne de Capdeville |
+| 13/07/25 | 1.0    | Criação do Documento | Anne de Capdeville |
